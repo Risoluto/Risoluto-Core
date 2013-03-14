@@ -1,0 +1,297 @@
+@charset "UTF-8";
+/*******************************************************************************
+ *                       RISOLUTO Cascading Style Sheet                        *
+ *******************************************************************************
+
+/* BODY tag */
+body {
+    color               : #000000;
+    font-size           : 100%;
+    font-weight         : normal;
+    font-style          : normal;
+    background-color    : #ffffff;
+    width               : 1000px;
+    margin              : 10px auto;
+    word-break          : break-all;
+    overflow            : auto;
+}
+
+/* H1 tag */
+h1 {
+    color               : #0033CC;
+    font-weight         : bolder;
+    font-style          : italic;
+    border-left         : #3333FF 30px solid;
+    border-bottom       : #3333FF thick solid;
+}
+
+/* H2 tag */
+h2 {
+    color               : #0033CC;
+    font-weight         : normal;
+    font-style          : italic;
+    border-left         : #3333FF 30px solid;
+    border-bottom       : #3333FF thin solid;
+}
+
+/* H3 tag */
+h3 {
+    color               : #0033CC;
+    font-weight         : normal;
+    font-style          : normal;
+    border-left         : #3333FF 30px solid;
+}
+
+/* H4 tag */
+h4 {
+    color               : #0033CC;
+    font-weight         : normal;
+    font-style          : normal;
+    border-bottom       : #3333FF medium double;
+}
+
+/* H5,H6 tags */
+h5,h6 {
+    color               : #0033CC;
+    font-weight         : normal;
+    font-style          : normal;
+    border-bottom       : #3333FF medium solid;
+}
+
+/* TABLE tag */
+table {
+    width               : 100%;
+    margin-top          : 1%;
+    margin-bottom       : 1%;
+    border              : #000000 thin solid;
+}
+
+/* TH tag */
+th {
+    color               : #000000;
+    font-size           : 100%;
+    font-weight         : bolder;
+    font-style          : italic;
+    background-color    : #ccccff;
+    border              : #000000 thin solid;
+}
+
+/* TD tag */
+td {
+    color               : #000000;
+    font-size           : 100%;
+    font-weight         : normal;
+    font-style          : normal;
+    background-color    : #dcdcdc;
+    border              : #000000 thin solid;
+}
+
+/* PRE tag */
+pre {
+    white-space         : pre-wrap;
+    margin-left         : 5%;
+    width               : 90%;
+}
+
+/* BLOCKQUOTE tag */
+blockquote {
+    color               : #000000;
+    text-align          : left;
+    font-size           : medium;
+    font-weight         : lighter;
+    font-style          : normal;
+    border              : #808080 thick dotted;
+    background-color    : #dcdcdc;
+}
+
+/* link(Never visit) tag */
+a:link {
+    color               : #ff0000;
+    font-size           : 100%;
+    font-weight         : bold;
+    font-style          : normal;
+}
+
+/* link(Cursor on) tag */
+a:hover {
+    color               : #ff0000;
+    font-size           : 100%;
+    font-weight         : bold;
+    font-style          : normal;
+    background-color    : #ffffff;
+}
+
+/* link(Loading) tag */
+a:active {
+    color               : #ff0000;
+    font-size           : 100%;
+    font-weight         : bold;
+    font-style          : normal;
+    background-color    : #ffc0cb;
+}
+
+/* link(Visited) tag */
+a:visited {
+    color               : #ff4500;
+    font-size           : 100%;
+    font-weight         : lighter;
+    font-style          : normal;
+}
+
+/* list(not serial) tag */
+ul li {
+    list-style-type     : disc;
+    list-style-position : inside;
+}
+
+/* list(serial) tag */
+ol li {
+    list-style-type     : decimal;
+    list-style-position : inside;
+}
+
+/* For defined lists(title) */
+dl dt {
+    text-align          : left;
+    font-size           : 100%;
+    font-weight         : bold;
+    font-style          : normal;
+}
+
+/* For defined lists(body) */
+dl dd {
+    text-align          : left;
+    font-size           : 100%;
+    font-weight         : normal;
+    margin-left         : 10%;
+}
+
+/* For images which is inner <a> tag */
+a img {
+    border              : #ffffff thin none;
+}
+
+/* For separater(no line) */
+br.clear {
+    clear               : both;
+}
+
+/* For copyrights */
+.copyright {
+    text-align          : center;
+    color               : #808080;
+    font-size           : 80%;
+    font-weight         : lighter;
+    font-style          : normal;
+}
+
+/* For important notice */
+.warning {
+    color               : #ff0000;
+    font-weight         : bold;
+    font-style          : normal;
+}
+
+/* For 'ok' strings */
+.ok {
+    color               : #00ff00;
+    font-weight         : bold;
+}
+
+/* For 'ng' strings */
+.ng {
+    color               : #ff0000;
+    font-weight         : bold;
+}
+
+/* For header of left side */
+.header_left {
+    float               : left;
+    width               : 400px; /* image width */
+}
+
+/* For header of right side */
+.header_right {
+    margin-left         : 410px; /* image width + 10px */
+}
+
+/* For admin header of left side */
+.admin_header_left {
+    float               : left;
+    width               : 400px; /* image width */
+}
+
+/* For admin header of right side */
+.admin_header_right {
+    margin-left         : 410px; /* image width + 10px */
+}
+
+/* For body contents of left */
+.content_left {
+    width               : 640px;
+    padding             : 5px 5px 5px 5px;
+    float               : left;
+}
+
+/* For body contents of right */
+.content_right {
+    width               : 300px;
+    padding             : 5px 5px;
+    float               : left;
+}
+
+/* For admin body contents of left */
+.admin_content_left {
+    width               : 800px;
+    padding             : 5px 5px 5px 5px;
+    float               : left;
+}
+
+/* For admin body contents of right */
+.admin_content_right {
+    width               : 150px;
+    padding             : 5px 5px;
+    float               : left;
+}
+
+/* For left menu(header) */
+.content_header {
+    text-align          : center;
+    vertical-align      : middle;
+    color               : #000000;
+    font-style          : italic;
+    font-weight         : bolder;
+    background-color    : #ccccff;
+    border              : #0000ff thin solid;
+    padding-top         : 1px;
+    padding-bottom      : 1px;
+}
+
+/* For left contents(content) */
+.content_content {
+    padding             : 0% 5% 0% 5%;
+    border              : #0000ff thin solid;
+    padding-top         : 10px;
+    padding-bottom      : 10px;
+}
+
+/* For admin left menu(header) */
+.admin_content_header {
+    text-align          : center;
+    vertical-align      : middle;
+    color               : #000000;
+    font-style          : italic;
+    font-weight         : bolder;
+    background-color    : #ccccff;
+    border              : #0000ff thin solid;
+    padding-top         : 1px;
+    padding-bottom      : 1px;
+}
+
+/* For admin_left contents(content) */
+.admin_content_content {
+    padding             : 0% 5% 0% 5%;
+    border              : #0000ff thin solid;
+    padding-top         : 10px;
+    padding-bottom      : 10px;
+}
