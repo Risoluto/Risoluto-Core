@@ -64,7 +64,7 @@ set_include_path(RISOLUTO_LIB_USR    . PATH_SEPARATOR
 //------------------------------------------------------//
 // Risolutoコアクラスの読み込み
 //------------------------------------------------------//
-require_once(RISOLUTO_LIB_VENDOR . 'RisolutoCore.php');
+require_once(RISOLUTO_LIB_VENDOR . 'Risoluto/Core.php');
 
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行
