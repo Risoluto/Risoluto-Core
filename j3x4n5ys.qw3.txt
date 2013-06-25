@@ -1,0 +1,46 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	renamed:    welcome/welcome.php -> Default/welcome.php
+#	renamed:    welcome/welcome.tpl -> Default/welcome.tpl
+#	renamed:    welcome/welcome_base.inc -> Default/welcome_base.inc
+#
+# Changes not staged for commit:
+#   (use "git add/rm <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   ../../public_html/index.php
+#	deleted:    Default/welcome.php
+#	deleted:    Default/welcome.tpl
+#	deleted:    Default/welcome_base.inc
+#	deleted:    common/copyrights.tpl
+#	deleted:    common/footer.tpl
+#	deleted:    common/header.tpl
+#	deleted:    common/ignore
+#	deleted:    error/error.php
+#	deleted:    error/error.tpl
+#	deleted:    error/error_base.inc
+#	deleted:    servicestop/servicestop.php
+#	deleted:    servicestop/servicestop.tpl
+#	deleted:    servicestop/servicestop_base.inc
+#	deleted:    upgrade/.gitkeep
+#	modified:   ../lib/vendor/Risoluto/Core.php
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	Base.inc
+#	Default.php
+#	Default.tpl
+#	Error.php
+#	Error.tpl
+#	ServiceStop.php
+#	ServiceStop.tpl
+#	copyrights.tpl
+#	footer.tpl
+#	header.tpl
+

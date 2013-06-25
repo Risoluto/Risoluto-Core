@@ -56,18 +56,48 @@ define('RISOLUTO_LIB_VENDOR', RISOLUTO_LIB . 'vendor/');
 //------------------------------------------------------//
 // インクルードパスの変更
 //------------------------------------------------------//
-set_include_path(RISOLUTO_LIB_USR    . PATH_SEPARATOR
-               . RISOLUTO_LIB_3RD    . PATH_SEPARATOR
+set_include_path(RISOLUTO_LIB_3RD    . PATH_SEPARATOR
+               . RISOLUTO_LIB_USR    . PATH_SEPARATOR
                . RISOLUTO_LIB_VENDOR . PATH_SEPARATOR
+               . RISOLUTO_APPS       . PATH_SEPARATOR
                . get_include_path());
 
 //------------------------------------------------------//
-// Risolutoコアクラスの読み込み
+// オートローダ読み込みと設定
 //------------------------------------------------------//
-require_once(RISOLUTO_LIB_VENDOR . 'Risoluto/Core.php');
+$autoloader = RISOLUTO_LIB_3RD . 'SplClassLoader.php';
+
+clearstatcache(true);
+if(file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader)) {
+    // オートローダが存在すれば読み込む
+    require_once($autoloader);
+} else {
+    // 存在しなければ強制終了
+    die('[Risoluto:FATAL ERROR]Cannot find and/or load auto loader.');
+}
+
+// 3rd Partyライブラリの読み込み設定
+$cl_3rd = new SplClassLoader('', RISOLUTO_LIB_3RD);
+$cl_3rd->register();
+
+// ユーザライブラリの読み込み設定
+$cl_usr = new SplClassLoader('RisolutoUsrLib', RISOLUTO_LIB_USR);
+$cl_usr->register();
+
+// Vendorライブラリの読み込み設定
+$cl_vendor = new SplClassLoader('Vendor', RISOLUTO_LIB_VENDOR);
+$cl_vendor->register();
+
+// Risolutoライブラリの読み込み設定
+$cl_risoluto = new SplClassLoader('Risoluto', RISOLUTO_LIB_VENDOR . 'Risoluto');
+$cl_risoluto->register();
+
+// Risolutoアプリケーションの読み込み設定
+$cl_apps = new SplClassLoader('RisolutoApps', RISOLUTO_APPS);
+$cl_apps->register();
 
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行
 //------------------------------------------------------//
-$risoluto_instance = new RisolutoCore;
-$risoluto_instance->run();
+$risoluto_instance = new Risoluto\Core;
+$risoluto_instance->Perform();

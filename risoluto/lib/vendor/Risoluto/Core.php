@@ -13,380 +13,255 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace Risoluto\RisolutoCore;
+namespace Risoluto\Core;
 
-  class RisolutoCore extends RisolutoHooks
-  {
-    //------------------------------------------------------//
-    // クラス変数定義
-    //------------------------------------------------------//
-    /**
-     * クラスインスタンスを保持する変数
-     * @access private
-     * @var    object
-     */
-    private static $obj_instance;
-    /**
-     * コンフィグクラスインスタンスを保持する変数
-     * @access private
-     * @var    object
-     */
-    private $obj_conf;
-    /**
-     * ログクラスインスタンスを保持する変数
-     * @access private
-     * @var    object
-     */
-    private $obj_log;
-    /**
-     * セッションクラスインスタンスを保持する変数
-     * @access private
-     * @var    object
-     */
-    private $obj_sess;
-    /**
-     * ユーティリティクラスインスタンスを保持する変数
-     * @access private
-     * @var    object
-     */
-    private $obj_util;
-
+//------------------------------------------------------//
+// クラス定義
+//------------------------------------------------------//
+class Core
+{
     //------------------------------------------------------//
     // クラスメソッド定義
     //------------------------------------------------------//
     /**
-     * コンストラクタメソッド
+     * Perform()
      *
-     * コントローラのコンストラクタメソッド
+     * 指定されたアプリケーションを呼び出す
      *
-     * @param     void なし
-     * @return    void なし
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
      */
-    private function __construct()
+    public function Perform()
     {
-    } // end of function:__construct()
+        //------------------------------------------------------//
+        // アプリケーションクラスをロードし実行する
+        //------------------------------------------------------//
+        // クラスインスタンスを生成し、実行する
+        try {
+            // 呼び出すクラスを決定する
+            $call = $this->FindCallClass();
 
-    /**
-     * クローンメソッド
-     *
-     * コントローラのクローンメソッド
-     *
-     * @param     void なし
-     * @return    void なし
-     */
-    public function __clone()
-    {
-    } // end of function:__clone()
+            // インスタンスの生成
+            $targetInstance = new $call['load'];
 
-    /**
-     * シングルトンメソッド
-     *
-     * コントローラのインスタンスをシングルトンパターンで生成する
-     *
-     * @param     void なし
-     * @return    object インスタンス
-     */
-    public static function singleton()
-    {
-        if ( ! isset( self::$obj_instance ) )
-        {
-            $tmp_myself = __CLASS__;
-            self::$obj_instance = new $tmp_myself;
-        } // end of if
+            // イニシャライズメソッドをコール
+            if(method_exists($targetInstance, 'Init')) {
+                $targetInstance->Init($call['param']);
+            } else {
+                // メソッドが存在しなければ例外をThrow
+                throw new Exception($this->coreError('notfound_init'));
+            }
 
-        return self::$obj_instance;
-    }
+            // HTTPのメソッドに応じて適切なコントローラをコール
+            switch($_SERVER['REQUEST_METHOD']) {
+                // GETの場合
+                case 'GET':
+                    if(method_exists($targetInstance, 'PlayGet')) {
+                        $targetInstance->PlayGet();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-    /**
-     * run()
-     *
-     * コントローラメインロジック
-     *
-     * @param     void なし
-     * @return    void なし
-     */
-    public function run()
-    {
+                // POSTの場合
+                case 'POST':
+                    if(method_exists($targetInstance, 'PlayPost')) {
+                        $targetInstance->PlayPost();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      // フックの呼び出し
-      $this->hook_first();
+                // PUTの場合
+                case 'PUT':
+                    if(method_exists($targetInstance, 'PlayPut')) {
+                        $targetInstance->PlayPut();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      //------------------------------------------------------//
-      // コントローラを初期化する
-      //------------------------------------------------------//
-      // フックの呼び出し
-      $this->hook_beforeInitController();
+                // DELETEの場合
+                case 'DELETE':
+                    if(method_exists($targetInstance, 'PlayDelete')) {
+                        $targetInstance->PlayDelete();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      // コンフィグオブジェクトの生成
-      $this->obj_conf = new RisolutoConf();
-      $this->obj_conf->parse( RISOLUTO_CONF . 'risoluto.ini' );
-      // ログオブジェクトの生成
-      $this->obj_log  = RisolutoLog::singleton();
-      // セッションオブジェクトの生成
-      $this->obj_sess = RisolutoSession::singleton();
-      // ユーティリティオブジェクトの生成
-      $this->obj_util = RisolutoUtils::singleton();
+                // OPTIONの場合
+                case 'OPTION':
+                    if(method_exists($targetInstance, 'PlayOption')) {
+                        $targetInstance->PlayOption();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      // 現在のload averageを取得し、設定された値以上であれば503を返す
-      $tmp_loadavg = sys_getloadavg();
-      if ( $tmp_loadavg[ 0 ] > $this->obj_conf->get( 'LIMITS', 'max_loadavg' ) )
-      {
-        header( 'HTTP/1.1 503 Service Unavailable', true, 503 );
-        exit( '503 Service Unavailable' );
-      } // end of if
+                // HEADの場合
+                case 'HEAD':
+                    if(method_exists($targetInstance, 'PlayHead')) {
+                        $targetInstance->PlayHead();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      // フックの呼び出し
-      $this->hook_afterInitController();
+                // TRACEの場合
+                case 'TRACE':
+                    if(method_exists($targetInstance, 'PlayTrace')) {
+                        $targetInstance->PlayTrace();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      //------------------------------------------------------//
-      // セッションをスタートする
-      //------------------------------------------------------//
-      // フックの呼び出し
-      $this->hook_beforeStartSession();
+                // CONNECTの場合
+                case 'CONNECT':
+                    if(method_exists($targetInstance, 'PlayConnect')) {
+                        $targetInstance->PlayConnect();
+                    } elseif(method_exists($targetInstance, 'Play') {
+                        $targetInstance->Play();
+                    } else{
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
 
-      // セッションをスタートする
-      $this->obj_sess->sessStart();
-
-      // セッションタイムアウトの処理
-      // セッション中に最終アクセス時間の情報があるかを判定
-      if ( $this->obj_sess->sessIsThere( 'lastaccess' ) )
-      {
-        // 現在の時刻とセッション中の時刻情報を比較し、
-        // コンフィグファイル中の時間を超過していた場合はタイムアウトしたものとみなす
-        if ( $this->obj_conf->get( 'SESSION', 'timeout' ) > 0
-             and ( time() - $this->obj_sess->sessLoad( 'lastaccess' ) ) > $this->obj_conf->get( 'SESSION', 'timeout' )
-           )
-        {
-          // 一度セッションを切った後、再度スタートさせる（情報も忘れずセット）
-          $this->obj_sess->sessRevoke( 'login_userid'  );
-          $this->obj_sess->sessRevoke( 'login_groupid' );
-          $this->obj_sess->sessEnd();
-          $this->obj_sess->sessStart();
-          $this->obj_sess->sessStore( 'lastaccess', time()  );
-          $this->obj_sess->sessStore( 'lastact',    'reset' );
-          $this->obj_sess->sessStore( 'lastcage',   'reset' );
-        } // end of if
-        // 超過していなければ情報を更新して終了
-        else
-        {
-          $this->obj_sess->sessStore( 'lastaccess', time() );
-          if ( $this->obj_sess->sessIsThere( 'currentact' ) )
-          {
-            $this->obj_sess->sessStore( 'lastact',    $this->obj_sess->sessLoad( 'currentact'  ) );
-          } // end of if
-          else
-          {
-            $this->obj_sess->sessStore( 'lastact',    'unknown' );
-          } // end of if
-
-          if ( $this->obj_sess->sessIsThere( 'currentcage' ) )
-          {
-            $this->obj_sess->sessStore( 'lastcage',   $this->obj_sess->sessLoad( 'currentcage' ) );
-          } // end of if
-          else
-          {
-            $this->obj_sess->sessStore( 'lastcage',   'unknown' );
-          } // end of else
-        } // end of else
-      } // end of if
-      // 最終アクセス時間の情報がなければ情報をセッションにセットする
-      else
-      {
-        $this->obj_sess->sessStore( 'lastaccess', time() );
-        $this->obj_sess->sessStore( 'lastact',    'firsttime' );
-        $this->obj_sess->sessStore( 'lastcage',   'firsttime' );
-      } // end of else
-
-      // フックの呼び出し
-      $this->hook_afterStartSession();
-
-      //------------------------------------------------------//
-      // 各画面のクラスをロードする
-      //------------------------------------------------------//
-      // フックの呼び出し
-      $this->hook_beforeLoadClass();
-
-      // 呼び出し対象の決定
-      $callTarget = $this->decide();
-      // クラスファイルをロードする
-      if ( empty( $callTarget[ 'cage' ] ) )
-      {
-        $execClassFile = RISOLUTO_USERLAND . $callTarget[ 'act' ] . '.php';
-      } // end of if
-      else
-      {
-        $execClassFile = RISOLUTO_USERLAND . $callTarget[ 'cage' ] . DIRECTORY_SEPARATOR . $callTarget[ 'act' ] . '.php';
-      } // end of else
-      require_once( $execClassFile );
-
-      // 現在のCageとActをセッションに格納する
-      $this->obj_sess->sessStore( 'currentcage', $callTarget[ 'cage' ] );
-      $this->obj_sess->sessStore( 'currentact',  $callTarget[ 'act'  ] );
-
-      // フックの呼び出し
-      $this->hook_afterLoadClass();
-
-      //------------------------------------------------------//
-      // 各画面のクラスを実行する
-      //------------------------------------------------------//
-      // フックの呼び出し
-      $this->hook_beforeExecuteClass();
-
-      // クラスインスタンスを生成し、実行する
-      try
-      {
-        // インスタンスの生成
-        $targetInstance = new $callTarget[ 'act' ];
-
-        // インスタンス中の各メソッドを所定の順番で実行
-        // これらのメソッドは異常終了時例外をThrowする必要がある
-
-        // イニシャライズメソッド
-        $targetInstance->init();
-        // モデルメソッド
-        $targetInstance->model();
-        // ビューメソッド
-        $targetInstance->view();
-
-      } // end of try:Call Class
-      // 例外が発生したらインスタンス中のエラーハンドリングメソッドをコールする
-      // エラーハンドリングメソッドは例外を発生させてはならない
-      catch( Exception $e)
-      {
-        $this->obj_log->logging( 'error', "[RisolutoCore::run]Error occured : " . print_r( $e, true) );
-        $targetInstance->errHandler();
-      } // end of catch:Call Class
-
-      // エラーの有無によらず、インスタンス中のクリーニングメソッドをコールする
-      // クリーニングメソッドは例外を発生させてはならない
-      $targetInstance->clean();
-
-      // フックの呼び出し
-      $this->hook_afterExecuteClass();
-
-      //------------------------------------------------------//
-      // コントローラのクリーニングを行う
-      //------------------------------------------------------//
-      // フックの呼び出し
-      $this->hook_beforeCleanController();
-
-      // クラス変数をunset()
-      unset( $this->obj_conf );
-      unset( $this->obj_log  );
-      unset( $this->obj_sess );
-      unset( $this->obj_util );
-
-      // フックの呼び出し
-      $this->hook_afterCleanController();
-
-      // フックの呼び出し
-      $this->hook_end();
-
+                // デフォルトの場合
+                default:
+                    if(method_exists($targetInstance, 'Play')) {
+                        $targetInstance->Play();
+                    } else {
+                        // メソッドが存在しなければ例外をThrow
+                        throw new Exception($this->coreError('notfound_play'));
+                    }
+                    break;
+            }
+        } catch( Exception $e) {
+            // エラーハンドリングメソッドをコール
+            if(method_exists($targetInstance, 'Error')) {
+                $targetInstance->Error($e);
+            } else {
+                // メソッドが存在しなければ強制終了
+                die($this->coreError('notfound_error'));
+            }
+        } finally {
+            // クリーニングメソッドをコール
+            if(method_exists($targetInstance, 'Clean')) {
+                $targetInstance->Clean();
+            } else {
+                // メソッドが存在しなければ強制終了
+                die($this->coreError('notfound_clean'));
+            }
+        }
     } // end of function:run()
 
     /**
-     * decide()
+     * FindCallClass()
      *
-     * ロードするCageとActを決定する
+     * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
-     * @param     void なし
-     * @return    array(連想配列： 'cage'=>ロードするCage、NullならCage無し / 'act'=>ロードするAct)
+     * @access    private
+     * @param     void    なし
+     * @return    array   呼び出すクラスの情報等
      */
-    private function decide()
+    private function FindCallClass()
     {
-      //-- ローカル変数 --//
-      $retval      = array();
-      $cage        = $this->obj_conf->get( 'ACTIONS', 'defaultCAGE' );
-      $act         = $this->obj_conf->get( 'ACTIONS', 'defaultACT'  );
-      $currentStat = $this->obj_util->serviceStatus();
+        // デフォルトの情報をセット
+        $load  = 'RisolutoApps\\Default';
+        $param = '';
 
-      // GETで指定されたCageとActを取得する
-      if ( !empty( $_GET[ 'cage' ] ) )
-      {
-        $cage = strip_tags( trim( $_GET[ 'cage' ] ) );
-        $cage = str_replace( '../', '', $cage );
-      } // end of if
-      if ( !empty( $_GET[ 'act' ] ) )
-      {
-        $act  = strip_tags( trim( $_GET[ 'act' ] ) );
-        $act  = str_replace( '../', '', $act );
-      } // end of if
+        // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
+        if(isset($_GET['seq']) and !empty($_GET['seq'])) {
+            // 「.」が付いていたらそこで分割
+            $sep  = explode('.', $_GET['seq']);
 
-      // サービス状態をチェックする
-      switch( $currentStat )
-      {
-        // スーパバイザセッションのみの時
-        case 4:
-          if ( ! $this->obj_util->is_Supervisor() )
-          {
-            $cage = $this->obj_conf->get( 'ACTIONS', 'servicestopCAGE' );
-            $act  = $this->obj_conf->get( 'ACTIONS', 'servicestopACT'  );
-          } // end of if
-          break;
+            // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
+            $load  = 'RisolutoApps\\' . $sep[0];
+            $param = (isset($sep[1]) ? $sep[1] : '');
 
-        // 管理者セッションのみの時
-        case 3:
-          if ( ! $this->obj_util->is_Admin() )
-          {
-            $cage = $this->obj_conf->get( 'ACTIONS', 'servicestopCAGE' );
-            $act  = $this->obj_conf->get( 'ACTIONS', 'servicestopACT'  );
-          } // end of if
-          break;
+            // 指定されたアプリケーションが存在していなければエラーとする
+            $target = str_replace('RisolutoApps\\', RISOLUTO_APPS, str_replace('_', DIRECTORY_SEPARATOR, $load));
+            clearstatcache(true);
+            if(!file_exists($target) or !is_file($target) or !is_readable($target)) {
+                $load  = 'RisolutoApps\\Error';
+                $param = '';
+            }
+        }
 
-        // ユーザセッションのみ許可の時
-        case 2:
-          if ( ! $this->obj_util->is_User() )
-          {
-            $cage = $this->obj_conf->get( 'ACTIONS', 'servicestopCAGE' );
-            $act  = $this->obj_conf->get( 'ACTIONS', 'servicestopACT'  );
-          } // end of if
-          break;
+        // 決定した情報を返却する
+        $retval = array('load'  => $load
+                       ,'param' => $param);
+        return $retval;
+    }
 
-        // 既存セッションのみ許可の時
-        case 1:
-          if ( ! $this->obj_util->is_Guest() )
-          {
-            $cage = $this->obj_conf->get( 'ACTIONS', 'servicestopCAGE' );
-            $act  = $this->obj_conf->get( 'ACTIONS', 'servicestopACT'  );
-          } // end of if
-          break;
-      } // end of switch
+    /**
+     * CoreError()
+     *
+     * クラス内で発生したエラーに対するエラーメッセージを生成する
+     *
+     * @access    private
+     * @param     string    $key    なし
+     * @return    string    エラーメッセージ
+     */
+    private function CoreError($key = '')
+    {
+        // エラーメッセージ本体の共通部分を初期値としてセット
+        $msg = '[Risoluto:FATAL ERROR]';
 
-      // 対象が存在するかをチェック
-      if ( empty( $cage ) )
-      {
-        // Actのみの指定で、所定の位置にActと同一名称のファイルがなければ、エラーとする
-        // 「ignore」というファイルがある場合もエラーとする
-        clearstatcache();
-        if (  ! file_exists( RISOLUTO_USERLAND . $act . '.php' )
-             or file_exists( RISOLUTO_USERLAND . 'ignore' )
-           )
-        {
-          $cage = $this->obj_conf->get( 'ACTIONS', 'errorCAGE' );
-          $act  = $this->obj_conf->get( 'ACTIONS', 'errorACT'  );
-        } // end of if
-      } // end of if
-      else
-      {
-        // はじめに指定されたCage中の「.」をDIRECTORY_SEPARATORに変換する
-        $cage = str_replace( '.', DIRECTORY_SEPARATOR, $cage );
+        // 引数の値に応じてエラーメッセージをセットする
+        switch($key) {
+            // イニシャライズメソッド未定義エラーの場合
+            case 'notfound_init':
+                $msg .= 'Required method is not exists - Init()';
+                break;
 
-        // 所定の位置にActと同一名称のファイルがなければ、エラーとする
-        // 「ignore」というファイルがある場合もエラーとする
-        clearstatcache();
-        if (  ! file_exists( RISOLUTO_USERLAND . $cage . DIRECTORY_SEPARATOR . $act . '.php' )
-             or file_exists( RISOLUTO_USERLAND . $cage . DIRECTORY_SEPARATOR . 'ignore' )
-           )
-        {
-          $cage = $this->obj_conf->get( 'ACTIONS', 'errorCAGE' );
-          $act  = $this->obj_conf->get( 'ACTIONS', 'errorACT'  );
-        } // end of if
-      } // end of else
+            // コントローラメソッド未定義エラーの場合
+            case 'notfound_play':
+                $msg .= 'Required method is not exists - Play*()';
+                break;
 
-      // 呼び出し元に呼び出すべきCageとActを返却する
-      return array( 'cage' => $cage, 'act' => $act );
+            // エラーハンドリングメソッド未定義エラーの場合
+            case 'notfound_error':
+                $msg .= 'Required method is not exists - Error()';
+                break;
 
-    } // end of function:decide()
+            // クリーニングメソッド未定義エラーの場合
+            case 'notfound_clean':
+                $msg .= 'Required method is not exists - Clean()';
+                break;
 
-  } // end of class:RisolutoCore
-?>
+            // 未定義のエラーの場合
+            default:
+                $msg .= 'Unknown Error occurred';
+                break;
+        }
+
+        // エラーメッセージを返却
+        return $msg;
+    }
+}
