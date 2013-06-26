@@ -50,14 +50,12 @@ define('RISOLUTO_SESS',   RISOLUTO_DATA . 'sess/');
 define('RISOLUTO_UPLOAD', RISOLUTO_DATA . 'upload/');
 
 define('RISOLUTO_LIB_USR',    RISOLUTO_LIB . 'usr/');
-define('RISOLUTO_LIB_3RD',    RISOLUTO_LIB . '3rd/');
 define('RISOLUTO_LIB_VENDOR', RISOLUTO_LIB . 'vendor/');
 
 //------------------------------------------------------//
 // インクルードパスの変更
 //------------------------------------------------------//
-set_include_path(RISOLUTO_LIB_3RD    . PATH_SEPARATOR
-               . RISOLUTO_LIB_USR    . PATH_SEPARATOR
+set_include_path(RISOLUTO_LIB_USR    . PATH_SEPARATOR
                . RISOLUTO_LIB_VENDOR . PATH_SEPARATOR
                . RISOLUTO_APPS       . PATH_SEPARATOR
                . get_include_path());
@@ -65,7 +63,7 @@ set_include_path(RISOLUTO_LIB_3RD    . PATH_SEPARATOR
 //------------------------------------------------------//
 // オートローダ読み込みと設定
 //------------------------------------------------------//
-$autoloader = RISOLUTO_LIB_3RD . 'SplClassLoader.php';
+$autoloader = RISOLUTO_LIB_VENDOR . 'autoload.php';
 
 clearstatcache(true);
 if(file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader)) {
@@ -73,28 +71,8 @@ if(file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader
     require_once($autoloader);
 } else {
     // 存在しなければ強制終了
-    die('[Risoluto:FATAL ERROR]Cannot find and/or load auto loader.');
+    die('[Risoluto:FATAL ERROR]Cannot find and/or load ' . $autoloader . 'Get composer.phar and/or Run "php ./composer.phar install"');
 }
-
-// 3rd Partyライブラリの読み込み設定
-$cl_3rd = new SplClassLoader('', RISOLUTO_LIB_3RD);
-$cl_3rd->register();
-
-// ユーザライブラリの読み込み設定
-$cl_usr = new SplClassLoader('RisolutoUsrLib', RISOLUTO_LIB_USR);
-$cl_usr->register();
-
-// Vendorライブラリの読み込み設定
-$cl_vendor = new SplClassLoader('Vendor', RISOLUTO_LIB_VENDOR);
-$cl_vendor->register();
-
-// Risolutoライブラリの読み込み設定
-$cl_risoluto = new SplClassLoader('Risoluto', RISOLUTO_LIB_VENDOR . 'Risoluto');
-$cl_risoluto->register();
-
-// Risolutoアプリケーションの読み込み設定
-$cl_apps = new SplClassLoader('RisolutoApps', RISOLUTO_APPS);
-$cl_apps->register();
 
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行

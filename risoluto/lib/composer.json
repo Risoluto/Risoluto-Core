@@ -1,0 +1,16 @@
+{
+    "autoload":{
+        "psr-0":{
+                    "RisolutoUsrLib\\": "usr/",
+                    "Risoluto\\": "vendor/Risoluto/",
+                    "RisolutoApps\\": "../apps/"
+                }
+    },
+    "require":{
+                   "mobiledetect/mobiledetectlib": "2.6.2",
+                   "smarty/smarty": "v3.1.13",
+                   "rsky/pear-core-min": "dev-master",
+                   "rsky/pear-pager": "v2.4.9beta2",
+                   "phpunit/phpunit": "3.7.21"
+              }
+}
