@@ -8,6 +8,7 @@
     },
     "require":{
                    "mobiledetect/mobiledetectlib": "2.6.2",
+                   "lusitanian/oauth": "v0.1.4",
                    "smarty/smarty": "v3.1.13",
                    "rsky/pear-core-min": "dev-master",
                    "rsky/pear-pager": "v2.4.9beta2",
