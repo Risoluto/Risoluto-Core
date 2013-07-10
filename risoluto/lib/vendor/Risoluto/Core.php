@@ -1,6 +1,6 @@
 <?php
 /**
- * Risolutoコアクラス
+ * Risoluto\Core
  *
  * Risolutoの中核部分に関するメソッドが含まれているクラス
  *
