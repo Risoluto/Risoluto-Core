@@ -1,6 +1,6 @@
 <?php
 /**
- * RisolutoApps\ServiceStop
+ * ServiceStop
  *
  * サービスストップ画面を実現するためのクラス
  *
@@ -13,7 +13,7 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace RisolutoApps\ServiceStop;
+namespace RisolutoApps;
 
 Use RisolutoApps\Base;
 Use Smarty;

@@ -1,6 +1,6 @@
 <?php
 /**
- * RisolutoApps\Default
+ * Top
  *
  * デフォルト画面を実現するためのクラス
  *
@@ -13,7 +13,7 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace RisolutoApps\Default;
+namespace RisolutoApps;
 
 Use RisolutoApps\Base;
 Use Smarty;
@@ -21,7 +21,7 @@ Use Smarty;
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class Default extends Base
+class Top extends Base
 {
     /**
      * Play()
@@ -43,7 +43,7 @@ class Default extends Base
         $smarty->debugging     = false;
         $smarty->force_compile = true;
         $smarty->compile_check = true;
-        $smarty->display( 'Default.tpl' );
+        $smarty->display( 'Top.tpl' );
         return true;
     }
 }

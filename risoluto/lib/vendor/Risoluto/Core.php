@@ -1,6 +1,6 @@
 <?php
 /**
- * Risoluto\Core
+ * Core
  *
  * Risolutoの中核部分に関するメソッドが含まれているクラス
  *
@@ -13,7 +13,7 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace Risoluto\Core;
+namespace Risoluto;
 
 use Risoluto\Conf;
 use Risoluto\Log;
@@ -62,7 +62,7 @@ class Core
                 case 'GET':
                     if(method_exists($targetInstance, 'PlayGet')) {
                         $targetInstance->PlayGet();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -74,7 +74,7 @@ class Core
                 case 'POST':
                     if(method_exists($targetInstance, 'PlayPost')) {
                         $targetInstance->PlayPost();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -86,7 +86,7 @@ class Core
                 case 'PUT':
                     if(method_exists($targetInstance, 'PlayPut')) {
                         $targetInstance->PlayPut();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -98,7 +98,7 @@ class Core
                 case 'DELETE':
                     if(method_exists($targetInstance, 'PlayDelete')) {
                         $targetInstance->PlayDelete();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -110,7 +110,7 @@ class Core
                 case 'OPTION':
                     if(method_exists($targetInstance, 'PlayOption')) {
                         $targetInstance->PlayOption();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -122,7 +122,7 @@ class Core
                 case 'HEAD':
                     if(method_exists($targetInstance, 'PlayHead')) {
                         $targetInstance->PlayHead();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -134,7 +134,7 @@ class Core
                 case 'TRACE':
                     if(method_exists($targetInstance, 'PlayTrace')) {
                         $targetInstance->PlayTrace();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -146,7 +146,7 @@ class Core
                 case 'CONNECT':
                     if(method_exists($targetInstance, 'PlayConnect')) {
                         $targetInstance->PlayConnect();
-                    } elseif(method_exists($targetInstance, 'Play') {
+                    } elseif(method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else{
                         // メソッドが存在しなければ例外をThrow
@@ -195,7 +195,7 @@ class Core
     private function FindCallClass()
     {
         // コンフィグファイルの読み込み
-        $conf = new Risoluto\Conf;
+        $conf = new Conf;
         $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
         // デフォルトの情報をセット
@@ -208,11 +208,11 @@ class Core
             $sep  = explode('.', $_GET['seq']);
 
             // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
-            $load  = "RisolutoApps\\" . $sep[0];
+            $load  = $sep[0];
             $param = (isset($sep[1]) ? $sep[1] : '');
 
             // 指定されたアプリケーションが存在していなければエラーとする
-            $target = str_replace("RisolutoApps\\", RISOLUTO_APPS, str_replace('_', DIRECTORY_SEPARATOR, $load));
+            $target = RISOLUTO_APPS . str_replace('_', DIRECTORY_SEPARATOR, $load);
             clearstatcache(true);
             if(!file_exists($target) or !is_file($target) or !is_readable($target)) {
                 $load  = $conf->GetIni('SEQ', 'error');
@@ -274,10 +274,10 @@ class Core
         }
 
         // ログ出力しエラーメッセージを返却
-        $conf = new Risoluto\Conf;
+        $conf = new Conf;
         $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
-        $log = new Risoluto\Log;
+        $log = new Log;
         $log->SetCurrentLogLevel($conf->GetIni('LOGGING', 'loglevel'));
         $log->Log('error', $msg);
 

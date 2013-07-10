@@ -1,6 +1,6 @@
 <?php
 /**
- * RisolutoApps\Error
+ * Error
  *
  * エラー画面を実現するためのクラス
  *
@@ -13,7 +13,7 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace RisolutoApps\Error;
+namespace RisolutoApps;
 
 Use RisolutoApps\Base;
 Use Smarty;

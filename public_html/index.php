@@ -71,11 +71,11 @@ if(file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader
     require_once($autoloader);
 } else {
     // 存在しなければ強制終了
-    die('[Risoluto:FATAL ERROR]Cannot find and/or load ' . $autoloader . 'Get composer.phar and/or Run "php ./composer.phar install"');
+    die('[Risoluto:FATAL ERROR]Cannot find and/or load ' . $autoloader . '<br>Get composer.phar and/or Run "php ./composer.phar install"');
 }
 
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行
 //------------------------------------------------------//
-$risoluto_instance = new Risoluto\Core;
+$risoluto_instance = new Core;
 $risoluto_instance->Perform();

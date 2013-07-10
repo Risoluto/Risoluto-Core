@@ -2,7 +2,7 @@
     "autoload":{
         "psr-0":{
                     "RisolutoUsrLib\\": "usr/",
-                    "Risoluto\\": "vendor/Risoluto/",
+                    "Risoluto\\": "vendor/",
                     "RisolutoApps\\": "../apps/"
                 }
     },
