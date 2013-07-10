@@ -10,406 +10,347 @@
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
-  /**
-   * PEAR::MDB2クラス
-   */
-  require_once( 'MDB2.php' );
+//------------------------------------------------------//
+// 名前空間の定義
+//------------------------------------------------------//
+namespace Risoluto\Db;
 
-  class RisolutoDb
-  {
+//------------------------------------------------------//
+// クラス定義
+//------------------------------------------------------//
+class Db
+{
     //------------------------------------------------------//
     // クラス変数定義
     //------------------------------------------------------//
     /**
-     * クラスインスタンスを保持する変数
+     * $dbobj
      * @access private
-     * @var    array
+     * @var    object    DB接続オブジェクト
      */
-    private static $obj_instance;
-
-    /**
-     * MDB2_Driver_Common情報を保持する変数
-     * @access private
-     * @var    object
-     */
-    private static $obj_db;
+    private $conn;
 
     //------------------------------------------------------//
     // クラスメソッド定義
     //------------------------------------------------------//
     /**
-     * コンストラクタメソッド
+     * Open($dbinfo)
      *
-     * コンストラクタメソッド
+     * DBに接続する
      *
-     * @param     void なし
-     * @return    void なし
+     * @param     string     DB接続情報（書式は「{USER};{PASSWORD};{DBNAME};{HOST};{PORT};{SOCKET}」）
+     * @return    boolean    実行結果（true:正常終了/false:異常終了）
      */
-    public function __construct()
+    public function Open($dbinfo)
     {
-    } // end of function:__construct()
+        // 接続情報の取得
+        $dbs = explode( ";", $dbinfo)
+        if (count($dbs) == 6) {
+            return false;
+        } else {
+            $user = $dbs[0];
+            $pass = $dbs[1];
+            $dbnm = $dbs[2];
+            $host = $dbs[3];
+            $post = $dbs[4];
+            $sock = $dbs[5];
+        }
+
+        // 接続を試みる
+        $this->conn = new mysqli($host, $user, $pass, $dbnm, $port, $sock);
+
+        // 接続の状況に応じて戻り値をセット
+        if ($this->conn->connect_error) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     /**
-     * クローンメソッド
+     * ConnectErrorInfo()
      *
-     * クローンメソッド
+     * 接続エラー情報を取得する
      *
-     * @param     void なし
-     * @return    void なし
+     * @param     void      なし
+     * @return    string    エラー情報（取得できないときはfalseを返却）
      */
-    public function __clone()
+    public function ConnectErrorInfo()
     {
-    } // end of function:__clone()
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // エラー情報を取得し返却する
+        } else {
+            return 'No:' . $this->conn->connect_errno . ' / Msg:' . $this->conn->connect_error;
+        }
+    }
 
     /**
-     * DB接続メソッド
+     * ErrorInfo()
      *
-     * 引数で与えられたdsnのDBに接続する
+     * エラー情報を取得する
      *
-     * @param     string    $dsnid  iniファイル中に記述したdsnid
-     * @return    boolean ファンクション実行結果（ true：正常終了 / false: 異常終了 ）
+     * @param     void      なし
+     * @return    string    エラー情報（取得できないときはfalseを返却）
      */
-    public function dbConnect( $dsnid )
+    public function ErrorInfo()
     {
-
-      //-- ローカル変数 --//
-      $retval = false;
-
-      // 引数が指定されている場合のみ、DBへのコネクション確立を試みる
-      if ( !empty( $dsnid ) )
-      {
-
-        // 最大で5回分接続のリトライを試みる
-        for ( $cnt = 0 ; $cnt < 5 ; $cnt ++ )
-        {
-
-          $this->obj_db =& MDB2::singleton( $dsnid );
-          if ( !PEAR::isError( $this->obj_db ) )
-          {
-
-            // 必要なMDB2モジュールをロードする
-            $this->obj_db->loadModule( 'Extended', null, false );
-            // オートマジカルにオプションの設定を行う
-            $this->dbSetOptions();
-
-            $retval = true;
-            break;
-          } // end of if
-          else
-          {
-            // 接続に失敗したときは300マイクロ秒待つ
-            usleep( 300 );
-          } // end of else
-        } // end of for
-
-      } // end of if
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of function:dbConnect
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // エラー情報を取得し返却する
+        } else {
+            return 'No:' . $this->conn->errno . ' / Msg:' . $this->conn->error;
+        }
+    }
 
     /**
-     * DB接続解除メソッド
+     * Close()
      *
      * DB接続の解除を行う
      * 
      *
-     * @param     void なし
-     * @return    boolean ファンクション実行結果（ true：正常終了 / false: 異常終了 ）
+     * @param     void       なし
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbDisConnect( )
+    public function Close()
     {
-
-      // 呼び出し元に戻る
-      return $this->obj_db->disconnect();
-
-    } // end of function:dbDisConnect
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // DB接続を解除する
+        } else {
+            return $this->conn->close();
+        }
+    }
 
     /**
-     * Commitメソッド
+     * AutoCommit($mode = false)
      *
-     * Commitを行う
+     * オートコミットの設定を行う
+     * 
      *
-     * @param     void なし
-     * @return    boolean ファンクション実行結果（ true：正常終了 / false: 異常終了 ）
+     * @param     boolean    オートコミット状態（true:有効、false:無効）
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbCommit()
+    public function AutoCommit($mode = false)
     {
-
-      //-- ローカル変数 --//
-      $retval = false;
-
-      if ( !PEAR::isError( $this->obj_db->commit() ) )
-      {
-        $retval = true;
-      } // end of if
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of function:dbCommit
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // オートコミットを設定する
+        } else {
+            return $this->conn->autocommit($mode);
+        }
+    }
 
     /**
-     * Rollbackメソッド
+     * Commit()
+     * コミットを行う
      *
-     * Rollbackを行う
-     *
-     * @param     void なし
-     * @return    boolean ファンクション実行結果（ true：正常終了 / false: 異常終了 ）
+     * @param     void       なし
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbRollback()
+    public function Commit()
     {
-
-      //-- ローカル変数 --//
-      $retval = false;
-
-      if ( !PEAR::isError( $this->obj_db->rollback() ) )
-      {
-        $retval = true;
-      }
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of function:dbRollback
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // コミットする
+        } else {
+            return $this->conn->commit();
+        }
+    }
 
     /**
-     * dbBeginTransactionメソッド
+     * RollBack()
      *
-     * トランザクションを開始する
+     * ロールバックを行う
      *
-     * @param     void なし
-     * @return    boolean ファンクション実行結果（ true：正常終了 / false: 異常終了 ）
+     * @param     void       なし
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbBeginTransaction()
+    public function RollBack()
     {
-
-      //-- ローカル変数 --//
-      $retval = false;
-
-      // トランザクションがすでに開始されているか、サポートされていなければ戻る
-      if ( $this->obj_db->inTransaction() and !$this->obj_db->supports( 'transactions' ) )
-      {
-        return false;
-      } // end of if
-
-      // トランザクションを開始する
-      if ( !PEAR::isError( $this->obj_db->beginTransaction() ) )
-      {
-        $retval = true;
-      } // end of if
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of function:dbBeginTransaction
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // ロールバックする
+        } else {
+            return $this->conn->rollback();
+        }
+    }
 
     /**
-     * オプション設定メソッド
+     * SetCharset($charset = 'utf8')
      *
-     * オプション設定を行う
+     * クライアントのデフォルトキャラクタセットを設定する
      *
-     * @param     void なし
-     * @return    boolean ファンクション実行結果（ 常にtrue ）
+     * @param     string     キャラクタセット
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbSetOptions( )
+    public function SetCharset($charset = 'utf8')
     {
-
-      //-- ローカル変数 --//
-      $retval = true;
-
-      $this->dbExecSQL( 'SET NAMES utf8'         );
-      $this->dbExecSQL( 'SET CHARACTER SET utf8' );
-      $this->obj_db->setFetchMode( MDB2_FETCHMODE_ASSOC, 'Query_Result' );
-
-      $this->obj_db->setOption( 'ssl',              false                 );
-      $this->obj_db->setOption( 'field_case',       CASE_UPPER            );
-      $this->obj_db->setOption( 'result_buffering', false                 );
-      $this->obj_db->setOption( 'persistent',       true                  );
-      $this->obj_db->setOption( 'debug',            0                     );
-      $this->obj_db->setOption( 'use_transactions', true                  );
-      $this->obj_db->setOption( 'portability',      MDB2_PORTABILITY_NONE );
-
-      // 呼び出し元に戻る
-      return true;
-
-    } // end of function:dbSetOptions
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // クライアントのデフォルトキャラクタセットを設定する
+        } else {
+            return $this->conn->set_charset($charset);
+        }
+    }
 
     /**
-     * エラーメッセージ取得メソッド
+     * GetLastId()
      *
-     * DB関連エラー発生時、エラーメッセージの取得を行う
-     * エラーが発生した直後に実行されなければならない
+     * 最新のAUTO_INCREMENT属性カラム値を取得する
      *
-     * @param     object $obj_err DB:ERRORオブジェクト（任意）
-     * @return    string エラーメッセージ
+     * @param     void       なし
+     * @return    boolean    実行結果（整数値：正常終了/false:異常終了）
      */
-    public function dbGetErrMsg( $obj_err = null )
+    public function GetLastId()
     {
-
-      //-- ローカル変数 --//
-      $retval = "";
-
-      // 引数が与えられていればそちらからエラーメッセージを取得する
-      if ( !empty( $obj_err ) )
-      {
-        $retval = $obj_err->getMessage();
-      } // end of if
-      else
-      {
-        $retval = $this->obj_db->getMessage();
-      } // end of else
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of dbGetErrMsg
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // 値を取得する
+        } else {
+            return ($this->conn->insert_id ? $this->conn->insert_id:false);
+        }
+    }
 
     /**
-     * DBデータ取得メソッド（全データ）
+     * GetAffectedRows()
+     *
+     * 変更された行数を取得する
+     *
+     * @param     void       なし
+     * @return    boolean    実行結果（整数値：正常終了/false:異常終了）
+     */
+    public function GetAffectedRows()
+    {
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // 値を取得する
+        } else {
+            return ($this->conn->affected_rows >= 0? $this->conn->affected_rows:false);
+        }
+    }
+
+    /**
+     * Get($query, $param = array())
      *
      * 引数で与えられたクエリを実行し全データを取得する
      * 取得した値は配列で返却される
      * 
-     * @param     string    $query  実行するSQLクエリ（クエリ中の?はプレースホルダ）
-     * @param     string    $param  プレースホルダを置換する値が格納された配列
-     * @return    array クエリ実行結果（エラーの場合、DB:ERRORオブジェクト）
+     * @param     string    実行するSQLクエリ（クエリ中の?はプレースホルダ）
+     * @param     array     プレースホルダを置換する値が格納された配列
+     * @return    array     クエリ実行結果（エラーの場合false）
      */
-    public function dbGetAll( $query, $param = array() )
+    public function Get($query, $param = array())
     {
+        // 接続オブジェクトがなければそのまま戻る
+        if ($this->conn) {
+            return false;
+        // クエリを実行する
+        } else {
+            // クエリにパラメタをバインドする
+            $stmt = $this->conn->prepare($query);
+            if (count($param)) {
+                foreach($param as $dat) {
+                    // パラメータの書式に併せてバインドをする
+                    if (is_bool($dat) or is_int($dat)) {
+                        $stmt->bind_param('i', $dat);
+                    } elseif (is_float($dat)) {
+                        $stmt->bind_param('d', $dat);
+                    } elseif (is_string($dat)) {
+                        $stmt->bind_param('s', $dat);
+                    } else {
+                        $stmt->bind_param('b', $dat);
+                    }
+                }
+            }
 
-      // 呼び出し元に戻る
-      return $this->obj_db->extended->getAll( $query, null, $param, null, MDB2_FETCHMODE_ASSOC, false );
-
-    } // end of function:dbGetAll
+            // プリペアドステートメントの実行と実行結果の取得
+            $rslt = $stmt->get_result();
+            return ($rslt->mysqli_fetch_all(MYSQLI_ASSOC));
+        }
+    }
 
     /**
-     * DBデータ取得メソッド（最初の行の値）
+     * ExecSQL($query)
      *
-     * 引数で与えられたクエリを実行し結果セットの最初の行の値を取得する
-     * 取得した値は配列で返却される
+     * 引数で与えられたクエリを実行する
      * 
-     * @param     string    $query  実行するSQLクエリ（クエリ中の?はプレースホルダ）
-     * @param     string    $param  プレースホルダを置換する値が格納された配列
-     * @return    array クエリ実行結果（エラーの場合、DB:ERRORオブジェクト）
+     * @param     string     実行するSQLクエリ（適切なエスケープがなされていること）
+     * @return    boolean    実行結果（true：正常終了/false:異常終了）
      */
-    public function dbGetRow( $query, $param = array() )
+    public function ExecSQL($query)
     {
+        // 接続オブジェクトがなければそのまま戻る
+        if (!$this->conn) {
+            return false;
+        // クエリを実行する
+        } else {
+            $result = $this->conn->query($query);
 
-      // 呼び出し元に戻る
-      return $this->obj_db->extended->getRow( $query, null, $param, null, MDB2_FETCHMODE_ASSOC );
-
-    } // end of function:dbGetRow
+            // クエリ実行に失敗した場合
+            if ($result === false) {
+                return false;
+            // クエリ実行に成功した場合
+            } else {
+                return true;
+            }
+        }
+    }
 
     /**
-     * SQL発行メソッド
+     * FileSQLExec($path, $replace = null)
      *
-     * 引数で与えられたクエリ及びバインド変数へ指定する値を使用し、任意のSQLを発行する
-     * 取得した値は配列で返却される
+     * 引数で与えられたファイル内のSQL（各SQLは「;」区切り）を一括実行する
      * 
-     * @param     string    $query    実行するSQLクエリ（クエリ中の?はプレースホルダ）
-     * @param     string    $param    プレースホルダを置換する値が格納された配列
-     * @return    mixed     クエリ実行結果（エラーの場合、DB:ERRORオブジェクト）
+     * @param     string     対象となるファイルのパス
+     * @param     string     SQL文中の「[[[_PREFIX]]]」を置換する文字列
+     * @return    boolean    実行結果（true: 全て正常に実行された/false: 一部又は全部が失敗）
      */
-    public function dbExecSQL( $query, $param = array() )
+    public function FileSQLExec($path, $replace = null)
     {
+        //-- ローカル変数 --//
+        $retval = true;
 
-      //-- ローカル変数 --//
-      $retval = false;
+        // ファイルが存在しない場合は、即時return
+        if (!file_exists($path)) {
+            return false;
+        }
 
-      // 指定されたクエリを実行し、結果をチェックする
-      $readySQL = $this->obj_db->prepare( $query );
-      if ( !PEAR::isError( $readySQL ) )
-      {
-        $retval = $readySQL->execute( $param );
-        $readySQL->free();
-      } // end of if
-      else
-      {
-        $retval = $readySQL;
-      } // end of else
+        // ファイルの内容を取得する
+        $tmp_sql  = @file_get_contents($path);
+        // ファイル中の改行コードとタブコードは、半角スペース1つに置換する
+        $tmp_sql  = preg_replace('/[\r\n\t]/', ' ', $tmp_sql);
+        // 「;」で分割する
+        $exec_sql = explode(';', $tmp_sql);
 
-      // 呼び出し元に戻る
-      return $retval;
+        // 順番に実行する
+        foreach($exec_sql as $sqldat) {
+            // 実行すべきものがある場合のみ
+            $do_it = trim($sqldat);
+            if (!empty($do_it)) {
+                // $prefixがセットされていたら置換処理を実施
+                if (!empty($prefix)) {
+                    $do_it = str_replace('[[[_PREFIX]]]', $prefix, $do_it);
+                }
 
-    } // end of function:dbExecSQL
+                // SQLを実行し、失敗したらエラーフラグをfalseにセット
+                $exec_result = $this->dbExecSQL($do_it);
+                if ($exec_result === false) {
+                    $retval = false;
+                }
+            }
+        }
 
-    /**
-     * SQL発行メソッド
-     *
-     * 引数で与えられたファイル内のSQL（各SQLは「;」区切り）を実行する
-     * 
-     * @param     string    $path   対象となるファイルのパス
-     * @param     string    $prefix SQL文中の「[[[_PREFIX]]]」を置換する文字列
-     * @return    boolean   実行結果（true: 全て正常に実行された/false: 一部又は全部が失敗）
-     */
-    public function fileSQLExec( $path, $prefix = null )
-    {
-
-      //-- ローカル変数 --//
-      $retval = true;
-
-      // ファイルが存在しない場合は、即時return
-      if ( ! file_exists( $path ) )
-      {
-        return false;
-      } // end of if
-
-      // ファイルの内容を取得する
-      $tmp_sql  = @file_get_contents( $path );
-      // ファイル中の改行コードとタブコードは、半角スペース1つに置換する
-      $tmp_sql  = preg_replace( '/[\r\n\t]/', ' ', $tmp_sql );
-      // 「;」で分割する
-      $exec_sql = explode( ';', $tmp_sql );
-
-      // 順番に実行する
-      foreach( $exec_sql as $sqldat )
-      {
-        // 実行すべきものがある場合のみ
-        $do_it = trim( $sqldat );
-        if ( ! empty( $do_it ) )
-        {
-          // $prefixがセットされていたら置換処理を実施
-          if ( !empty( $prefix ) )
-          {
-            $do_it = str_replace( '[[[_PREFIX]]]', $prefix, $do_it );
-          } // end of if
-
-          // SQLを実行し、失敗したらエラーフラグをfalseにセット
-          $exec_result = $this->dbExecSQL( $do_it );
-          if ( PEAR::isError( $exec_result ) or $exec_result == false )
-          {
-            $retval = false;
-          } // end of if
-        } // end of if
-      } // end of foreach
-
-      // 呼び出し元に戻る
-      return $retval;
-
-    } // end of function:fileSQLExec
-
-  }  // end of class:RisolutoDb
-
-  /*
-    [!!!!WARNING!!!!]This class is defined for keep compatibility. This will be erased in future release. Please use "RisolutoDb".
-  */
-  class RisoluteDb extends RisolutoDb
-  {
-    //------------------------------------------------------//
-    // クラスメソッド定義
-    //------------------------------------------------------//
-    /**
-     * コンストラクタメソッド
-     *
-     * コンストラクタメソッド
-     *
-     * @param     void なし
-     * @return    void なし
-     */
-    public function __construct()
-    {
-      error_log( '[RisoluteDb]This class is defined for keep compatibility. This will be erased in future release. Please use "RisolutoDb". -> ' . RISOLUTODIR );
-    } // end of function:__construct()
-  } // end of class:RisolutoDb
+        // 呼び出し元に戻る
+        return $retval;
+    }
+}

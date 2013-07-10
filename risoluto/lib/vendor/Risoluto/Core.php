@@ -15,6 +15,9 @@
 //------------------------------------------------------//
 namespace Risoluto\Core;
 
+use Risoluto\Conf;
+use Risoluto\Log;
+
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
@@ -178,7 +181,7 @@ class Core
                 die($this->coreError('notfound_clean'));
             }
         }
-    } // end of function:run()
+    }
 
     /**
      * FindCallClass()
@@ -191,8 +194,12 @@ class Core
      */
     private function FindCallClass()
     {
+        // コンフィグファイルの読み込み
+        $conf = new Risoluto\Conf;
+        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+
         // デフォルトの情報をセット
-        $load  = 'RisolutoApps\\Default';
+        $load  = $conf->GetIni('SEQ', 'default');
         $param = '';
 
         // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
@@ -201,16 +208,24 @@ class Core
             $sep  = explode('.', $_GET['seq']);
 
             // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
-            $load  = 'RisolutoApps\\' . $sep[0];
+            $load  = "RisolutoApps\\" . $sep[0];
             $param = (isset($sep[1]) ? $sep[1] : '');
 
             // 指定されたアプリケーションが存在していなければエラーとする
-            $target = str_replace('RisolutoApps\\', RISOLUTO_APPS, str_replace('_', DIRECTORY_SEPARATOR, $load));
+            $target = str_replace("RisolutoApps\\", RISOLUTO_APPS, str_replace('_', DIRECTORY_SEPARATOR, $load));
             clearstatcache(true);
             if(!file_exists($target) or !is_file($target) or !is_readable($target)) {
-                $load  = 'RisolutoApps\\Error';
+                $load  = $conf->GetIni('SEQ', 'error');
                 $param = '';
             }
+        }
+
+        // サービスストップファイルが存在するかロードアベレージが一定値以上ならサービスストップ
+        $loadavg = sys_getloadavg();
+        clearstatcache(true);
+        if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or $loadavg[0] > $conf->GetIni('LIMITS', 'max_loadavg')) {
+            $load  = $conf->GetIni('SEQ', 'servicestop');
+            $param = '';
         }
 
         // 決定した情報を返却する
@@ -220,7 +235,7 @@ class Core
     }
 
     /**
-     * CoreError()
+     * CoreError($key = '')
      *
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
@@ -230,38 +245,42 @@ class Core
      */
     private function CoreError($key = '')
     {
-        // エラーメッセージ本体の共通部分を初期値としてセット
-        $msg = '[Risoluto:FATAL ERROR]';
-
         // 引数の値に応じてエラーメッセージをセットする
         switch($key) {
             // イニシャライズメソッド未定義エラーの場合
             case 'notfound_init':
-                $msg .= 'Required method is not exists - Init()';
+                $msg = 'Required method is not exists - Init()';
                 break;
 
             // コントローラメソッド未定義エラーの場合
             case 'notfound_play':
-                $msg .= 'Required method is not exists - Play*()';
+                $msg = 'Required method is not exists - Play*()';
                 break;
 
             // エラーハンドリングメソッド未定義エラーの場合
             case 'notfound_error':
-                $msg .= 'Required method is not exists - Error()';
+                $msg = 'Required method is not exists - Error()';
                 break;
 
             // クリーニングメソッド未定義エラーの場合
             case 'notfound_clean':
-                $msg .= 'Required method is not exists - Clean()';
+                $msg = 'Required method is not exists - Clean()';
                 break;
 
             // 未定義のエラーの場合
             default:
-                $msg .= 'Unknown Error occurred';
+                $msg = 'Unknown Error occurred';
                 break;
         }
 
-        // エラーメッセージを返却
+        // ログ出力しエラーメッセージを返却
+        $conf = new Risoluto\Conf;
+        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+
+        $log = new Risoluto\Log;
+        $log->SetCurrentLogLevel($conf->GetIni('LOGGING', 'loglevel'));
+        $log->Log('error', $msg);
+
         return $msg;
     }
 }

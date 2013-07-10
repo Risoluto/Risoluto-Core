@@ -38,11 +38,11 @@ define('RISOLUTODIR', dirname(dirname(__FILE__)));
 define('RISOLUTO_DOCROOT', dirname(__FILE__));
 define('RISOLUTO_SYSROOT', RISOLUTODIR . '/risoluto/');
 
-define('RISOLUTO_APPS', RISOLUTODIR . '/risoluto/apps/');
-define('RISOLUTO_CLI',  RISOLUTODIR . '/risoluto/cli/');
-define('RISOLUTO_CONF', RISOLUTODIR . '/risoluto/conf/');
-define('RISOLUTO_DATA', RISOLUTODIR . '/risoluto/data/');
-define('RISOLUTO_LIB',  RISOLUTODIR . '/risoluto/lib/');
+define('RISOLUTO_APPS', RISOLUTO_SYSROOT . 'apps/');
+define('RISOLUTO_CLI',  RISOLUTO_SYSROOT . 'cli/');
+define('RISOLUTO_CONF', RISOLUTO_SYSROOT . 'conf/');
+define('RISOLUTO_DATA', RISOLUTO_SYSROOT . 'data/');
+define('RISOLUTO_LIB',  RISOLUTO_SYSROOT . 'lib/');
 
 define('RISOLUTO_CACHE',  RISOLUTO_DATA . 'cache/');
 define('RISOLUTO_LOGS',   RISOLUTO_DATA . 'logs/');
