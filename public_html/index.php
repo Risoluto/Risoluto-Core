@@ -26,7 +26,7 @@ if (version_compare(PHP_VERSION, '5.5.0', '<')) {
 // // OPTIONAL: URLの正規化
 // if (isset($_SERVER['SERVER_NAME']) and !preg_match('/^www.*/i', $_SERVER['SERVER_NAME'])) {
 //     header('Location: ' . ((isset($_SERVER['HTTPS']) and !empty($_SERVER['HTTPS'])) ? 'https' : 'http')
-//                         . '://www.' $_SERVER[ 'SERVER_NAME' ] . $_SERVER[ 'REQUEST_URI' ], true, 301);
+//                         . '://www.' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'], true, 301);
 //     exit;
 // }
 
