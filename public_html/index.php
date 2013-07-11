@@ -71,11 +71,33 @@ if(file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader
     require_once($autoloader);
 } else {
     // 存在しなければ強制終了
-    die('[Risoluto:FATAL ERROR]Cannot find and/or load ' . $autoloader . '<br>Get composer.phar and/or Run "php ./composer.phar install"');
+    $path_lib = RISOLUTO_LIB;
+    $path_dat = RISOLUTO_DATA;
+    die(<<<"EOD"
+<html>
+    <head>
+        <meta name = 'robots' content = 'NOINDEX,NOFOLLOW'>
+        <link href = 'outboards/vendor/css/common.css' rel = 'stylesheet' type = 'text/css'>
+        <title>Risolutoが動くまでもう少し！</title>
+    </head>
+    <body>
+        <p>この必須ファイルが存在しないかロードできません： $autoloader</p>
+        <p>下記の手順でセットアップしてください。環境によってはいくつかのソフトウェアをインストールしたり、設定を変更する必要があるかもしれません。</p>
+        <ol>
+            <li>cd $path_lib</li>
+            <li>curl -sS https://getcomposer.org/installer | php</li>
+            <li>php composer.phar install</li>
+            <li>chown -R {Webサーバの実行ユーザ}.{Webサーバの実行グループ} $path_dat</li>
+        </ol>
+        <p>セットアップが終了したら、この画面を再読込してください。</p>
+    </body>
+</html>
+EOD
+);
 }
 
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行
 //------------------------------------------------------//
-$risoluto_instance = new Core;
+$risoluto_instance = new \Risoluto\Core;
 $risoluto_instance->Perform();

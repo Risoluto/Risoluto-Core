@@ -13,10 +13,8 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-namespace RisolutoApps;
-
-Use RisolutoApps\Base;
-Use Smarty;
+Use \Base;
+Use \Smarty;
 
 //------------------------------------------------------//
 // クラス定義
@@ -34,6 +32,7 @@ class Top extends Base
      */
     public function Play()
     {
+        // Smartyオブジェクトの作成と初期設定
         $smarty                = new Smarty;
         $smarty->template_dir  = RISOLUTO_APPS . '';
         $smarty->config_dir    = RISOLUTO_APPS . '';
@@ -43,6 +42,42 @@ class Top extends Base
         $smarty->debugging     = false;
         $smarty->force_compile = true;
         $smarty->compile_check = true;
+
+        // ヘッダ情報のセットとアサイン
+        $header = array(
+                           // ROBOTS
+                           'robots' => 'NOINDEX,NOFOLLOW',
+
+                           // Description
+                           'Description' => 'Risolutoのデフォルトページです',
+
+                           // Keywords
+                           'keywords' => 'Risoluto',
+
+                           // Author
+                           'author' => 'Risoluto',
+
+                           // CSS
+                           'css' => array(
+                                             'outboards/vendor/css/common.css'
+//                                         ,   'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css'
+                                         ),
+
+                           // JavaScript
+                           'js' => array(
+                                            'outboards/vendor/js/common.js'
+//                                        ,   'http://code.jquery.com/jquery-2.0.3.min.js'
+//                                        ,   'http://code.jquery.com/ui/1.10.3/jquery-ui.min.js'
+//                                        ,   'http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js'
+                                        ),
+
+                           // タイトル
+                           'title' => 'ようこそ！Risolutoの世界へ！'
+                       );
+
+        $smarty->assign( 'header', $header );
+
+        // 画面の表示
         $smarty->display( 'Top.tpl' );
         return true;
     }

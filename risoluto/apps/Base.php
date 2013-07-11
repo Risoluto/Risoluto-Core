@@ -11,14 +11,9 @@
  */
 
 //------------------------------------------------------//
-// 名前空間の定義
-//------------------------------------------------------//
-namespace RisolutoApps;
-
-//------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class Base
+abstract class Base
 {
     //------------------------------------------------------//
     // クラスメソッド定義
@@ -46,7 +41,130 @@ class Base
      * @param     void    なし
      * @return    void    なし
      */
-    abstract function Pray();
+    public function Play()
+    {
+        return true;
+    }
+
+    /**
+     * PlayGet()
+     *
+     * GETメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayGet()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayPost()
+     *
+     * POSTメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayPost()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayPut()
+     *
+     * PUTメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayPut()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayDelete()
+     *
+     * DELETEメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayDelete()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayOption()
+     *
+     * OPTIONメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayOption()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayHead()
+     *
+     * HEADメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayHead()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayTrace()
+     *
+     * TRACEメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayTrace()
+    {
+        $this->Play();
+        return true;
+    }
+
+    /**
+     * PlayConnect()
+     *
+     * CONNECTメソッドでアクセスされた際の主処理を行う
+     *
+     * @access    public
+     * @param     void    なし
+     * @return    void    なし
+     */
+    public function PlayConnect()
+    {
+        $this->Play();
+        return true;
+    }
 
     /**
      * Error()

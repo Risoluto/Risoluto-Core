@@ -15,8 +15,8 @@
 //------------------------------------------------------//
 namespace Risoluto;
 
-use Risoluto\Conf;
-use Risoluto\Log;
+use \Risoluto\Conf;
+use \Risoluto\Log;
 
 //------------------------------------------------------//
 // クラス定義
@@ -205,14 +205,20 @@ class Core
         // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
         if(isset($_GET['seq']) and !empty($_GET['seq'])) {
             // 「.」が付いていたらそこで分割
-            $sep  = explode('.', $_GET['seq']);
+            if (strpos('.',$_GET['seq']) === false) {
+                $sep  = explode('.', $_GET['seq']);
 
-            // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
-            $load  = $sep[0];
-            $param = (isset($sep[1]) ? $sep[1] : '');
+                // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
+                $load  = $sep[0];
+                $param = (isset($sep[1]) ? $sep[1] : '');
+            // 「.」が付いていなければそのまま採用する
+            } else {
+                $load  = $_GET['seq'];
+                $param = '';
+            }
 
             // 指定されたアプリケーションが存在していなければエラーとする
-            $target = RISOLUTO_APPS . str_replace('_', DIRECTORY_SEPARATOR, $load);
+            $target = RISOLUTO_APPS . str_replace('_', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
             if(!file_exists($target) or !is_file($target) or !is_readable($target)) {
                 $load  = $conf->GetIni('SEQ', 'error');

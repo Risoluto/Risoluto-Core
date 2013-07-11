@@ -1,9 +1,9 @@
 {
     "autoload":{
         "psr-0":{
-                    "RisolutoUsrLib\\": "usr/",
-                    "Risoluto\\": "vendor/",
-                    "RisolutoApps\\": "../apps/"
+                    "RisolutoUsrLib": "usr/",
+                    "Risoluto": "vendor/",
+                    "": "../apps/"
                 }
     },
     "require":{
