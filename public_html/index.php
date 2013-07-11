@@ -49,14 +49,12 @@ define('RISOLUTO_LOGS',   RISOLUTO_DATA . 'logs/');
 define('RISOLUTO_SESS',   RISOLUTO_DATA . 'sess/');
 define('RISOLUTO_UPLOAD', RISOLUTO_DATA . 'upload/');
 
-define('RISOLUTO_LIB_USR',    RISOLUTO_LIB . 'usr/');
 define('RISOLUTO_LIB_VENDOR', RISOLUTO_LIB . 'vendor/');
 
 //------------------------------------------------------//
 // インクルードパスの変更
 //------------------------------------------------------//
-set_include_path(RISOLUTO_LIB_USR    . PATH_SEPARATOR
-               . RISOLUTO_LIB_VENDOR . PATH_SEPARATOR
+set_include_path(RISOLUTO_LIB_VENDOR . PATH_SEPARATOR
                . RISOLUTO_APPS       . PATH_SEPARATOR
                . get_include_path());
 
