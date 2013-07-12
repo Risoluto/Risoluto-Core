@@ -9,6 +9,7 @@
             <a href="http://mobiledetect.net/" target="_blank">Mobile-Detect</a> /
             <a href="https://github.com/Lusitanian/PHPoAuthLib" target="_blank">PHPoAuthLib</a> /
             <a href="http://michelf.ca/projects/php-markdown/" target="_blank">PHP Markdown Lib</a> /
+            <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> /
             <a href="http://www.smarty.net/" target="_blank">Smarty</a> /
             <a href="https://github.com/rsky/pear-core-min" target="_blank">pear-core-min</a> /
             <a href="https://github.com/rsky/pear-pager" target="_blank">pear-pager</a> /
