@@ -28,7 +28,7 @@ class CoreTest extends PHPUnit_Framework_TestCase
      * @access protected
      * @var    object    テスト対象インスタンスを保持
      */
-    protected static $instance;
+    protected $instance;
 
     //------------------------------------------------------//
     // テストメソッド定義
