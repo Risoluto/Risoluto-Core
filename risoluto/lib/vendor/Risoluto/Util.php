@@ -321,7 +321,7 @@ class Util
      */
     function IsHalfWidth($value)
     {
-        return (strlen($value) == mb_strlen($value)) ? (true):(false);
+        return (strlen($value) == mb_strlen($value, 'UTF-8')) ? (true):(false);
     }
 
     /**
