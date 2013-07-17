@@ -1,0 +1,16 @@
+language: php
+
+php:
+    - "5.5"
+
+env:
+    - DB=mysql
+
+before_script:
+    - cd ./risoluto/lib/
+    - curl -s http://getcomposer.org/installer | php
+    - php composer.phar install --no-interaction
+    - chmod -R 777 ../../risoluto/data/
+
+script:
+    - sh ./phpunit_run.sh

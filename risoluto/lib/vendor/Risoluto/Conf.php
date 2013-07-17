@@ -28,14 +28,14 @@ class Conf
      * @access private
      * @var    array    パース済みコンフィグ情報
      */
-    private static $parsedconf = array();
+    private $parsedconf = array();
 
     /**
      * $parsestatus
      * @access private
      * @var    boolean    パース状況
      */
-    private static $parsestatus = false;
+    private $parsestatus = false;
 
     //------------------------------------------------------//
     // クラスメソッド定義
@@ -47,7 +47,7 @@ class Conf
      *
      * @access    public
      * @param     void    なし
-     * @return    boolean パース状況（ true：パース済み / false: 未パース ）
+     * @return    boolean パース状況（true：パース済み/false:未パース）
      */
     public function GetParseStatus()
     {
@@ -61,7 +61,7 @@ class Conf
      *
      * @access    public
      * @param     string     $path    iniファイルのパス
-     * @return    boolean    パース結果（ true：正常終了 / false: 異常終了 ）
+     * @return    boolean    パース結果（true：正常終了/false:異常終了）
      */
     public function Parse($path)
     {

@@ -21,30 +21,52 @@ class Util
     // クラスメソッド定義
     //------------------------------------------------------//
     /**
-     * GetBaseUrl()
+     * GetBaseUrl($target = array('SERVER_PORT' => '80', 'HTTP_HOST' => 'localhost', 'PHP_SELF' => 'index.php'))
      *
      * ベースURLを取得する
      *
      * @access    public
-     * @param     void      なし
+     * @param     array     $_SERVER相当の情報が格納された配列
      * @return    string    自身のベースURL
      */
-    public function GetBaseUrl()
+    public function GetBaseUrl($target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
     {
         //---スキーマ
-        if($_SERVER['SERVER_PORT'] == '80') {
-            $schema = 'http://';
-        } else {
-            $schema = 'https://';
+        switch ($target['SERVER_PORT']) {
+            // スタンダードなHTTP
+            case '80':
+                $schema = 'http://';
+                $port   = '';
+                break;
+
+            // スタンダードなHTTPS
+            case '443':
+                $schema = 'https://';
+                $port   = '';
+                break;
+
+            // イレギュラーなHTTPS
+            case '8443':
+                $schema = 'https://';
+                $port   = ':' . $target['SERVER_PORT'];
+                break;
+
+            // イレギュラーなHTTP
+            case '8080': // FALL THRU
+            // デフォルト
+            default:
+                $schema = 'http://';
+                $port   = ':' . $target['SERVER_PORT'];
+                break;
         }
 
         //---ホスト名
-        $host = $_SERVER['HTTP_HOST'];
+        $host = $target['HTTP_HOST'];
 
         //---実行ファイル名（デフォルトの「index.php」が付いている場合は消す）
-        $self = str_replace('index.php', '', $_SERVER['PHP_SELF']);
+        $self = str_replace('index.php', '', $target['PHP_SELF']);
 
-        return $schema . $host . $self;
+        return $schema . $host . $port . $self;
     }
 
     /**
@@ -259,9 +281,9 @@ class Util
         $tmp_target = $target;
 
         // リンクタグのベースを組み立てる
-        $tmp_replace_text = "<a href='$0' "
-                          . ($newwindow ? "target='_blank'":"")
-                          . (!empty($extra) ? $extra:"")
+        $tmp_replace_text = "<a href='$0'"
+                          . ($newwindow ? " target='_blank'":"")
+                          . (!empty($extra) ? " " . $extra:"")
                           . ">$0</a>";
 
         // 文字列中の「http」又は「https」で始まる部分を、<a>タグに変換する
@@ -270,9 +292,6 @@ class Util
         // タグの途中で改行が入っている場合、取り除く
         $tmp_target = preg_replace("/(\r|\n|\r\n)'>/i",    "'>",   $tmp_target);
         $tmp_target = preg_replace("/(\r|\n|\r\n)<\/a>/i", "</a>", $tmp_target);
-
-        // <a>タグ以外のタグを消し去る
-        $tmp_target = strip_tags($tmp_target, "<a>");
 
         return $tmp_target;
     }
@@ -317,12 +336,12 @@ class Util
     public function IsLeapYear($value)
     {
         // 引数が4桁の整数値でなければ無条件でfalseを返却する
-        if ((strlen($value) != 4) and (!is_numeric($value))) {
+        if ((strlen($value) != 4) or (!is_numeric($value))) {
             return false;
         }
 
-        // 4で割り切れ、100で割り切れず、400で割り切れる場合のみうるう年とみなす
-        if (($value % 4) == 0 and ($value % 100) != 0 and ($value % 400) == 0) {
+        // 4で割り切れる年は閏年、100で割り切れる年は閏年じゃないが400で割り切れれば閏年
+        if (($value % 4) == 0 and ($value % 100) != 0 or ($value % 400) == 0) {
             return true;
         } else {
             return false;
@@ -372,7 +391,7 @@ class Util
         // 明治（1868年1月25日〜1912年7月29日、明治45年まで）
         if ($this->IsBetween($year, 1868, 1912)) {
             // 算出する
-            $tmp_val = ($year - 1869) + 1;
+            $tmp_val = ($year - 1868) + 1;
 
             // 1年の場合は元年として表示する
             if ($tmp_val == '1') {
@@ -383,7 +402,7 @@ class Util
 
                 // 境界年の場合は、両方の年号を併記する
                 if ($tmp_val == '45') {
-                    $retval .= '/ 大正元年';
+                    $retval .= ' / 大正元年';
                 }
             }
         // 大正（1912年7月30日〜1926年12月24日、大正15年まで）
@@ -400,7 +419,7 @@ class Util
 
                 // 境界年の場合は、両方の年号を併記する
                 if ($tmp_val == '15') {
-                    $retval .= '/ 明治元年';
+                    $retval .= ' / 昭和元年';
                 }
             }
         // 昭和（1926年12月25日〜1989年1月7日、昭和64年まで）
@@ -417,7 +436,7 @@ class Util
 
                 // 境界年の場合は、両方の年号を併記する
                 if ($tmp_val == '64') {
-                    $retval .= '/ 平成元年';
+                    $retval .= ' / 平成元年';
                 }
             }
         // 平成（1989年1月8日〜）

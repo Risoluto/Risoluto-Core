@@ -19,21 +19,18 @@ Risoluto2は下記の環境で動作します
 * GNU/Linux
 * PHP5.5.0以降
 
-また、下記の外部プロダクトを利用しているため、それらの動作環境を満たす必要があります。ただし、下記の一部は必須ではありませんし、将来使用する事が想定されているものや他のRisoluto関連プロジェクトで使用を予定しているものが含まれています。貴方のプロジェクトで不要なのであれば使用せずに済ますことができます。また、貴方のプロジェクトで必要なものが他にある場合は、それを追加することもできます。
-
-#### 必須の外部プロダクト
+また、下記の外部プロダクトを利用しているため、それらの動作環境を満たす必要があります。ただし、下記の一部は将来使用する事が想定されているものや他のRisoluto関連プロジェクトで使用を予定しているものが含まれています。貴方のプロジェクトで不要なのであれば使用せずに済ますことができます。また、貴方のプロジェクトで必要なものが他にある場合は、それを追加することもできます。
 
 * Composer（ http://getcomposer.org/ ）
 * Smarty（ http://www.smarty.net/ ）
-
-#### 任意の外部プロダクト
-
+* PEAR（ http://pear.php.net/ ）
+* MDB2（ http://pear.php.net/package/MDB2 ）
+* MDB2_Driver_mysqli（ http://pear.php.net/package/MDB2_Driver_mysqli/ ）
+* Pager（ http://pear.php.net/package/Pager ）
 * Mobile-Detect（ http://mobiledetect.net/ ）
 * PHPoAuthLib（ https://github.com/Lusitanian/PHPoAuthLib ）
 * PHP Markdown Lib（ http://michelf.ca/projects/php-markdown/ ）
 * PHPMailer（ https://github.com/PHPMailer/PHPMailer ）
-* pear-core-min（ https://github.com/rsky/pear-core-min ）
-* pear-pager（ https://github.com/rsky/pear-pager ）
 * PHPUnit（ http://www.phpunit.de/ ）
 * jQuery（ http://jquery.com/ ）
 * jQuery UI（ http://jqueryui.com/ ）

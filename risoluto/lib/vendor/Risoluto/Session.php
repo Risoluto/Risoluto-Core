@@ -63,7 +63,6 @@ class Session
 
         // セッション保存ディレクトリをセット
         if (!empty($this->sesspath) and is_writable($this->sesspath)) {
-        {
             session_save_path($this->sesspath);
         // 指定されていないか書き込めないならfalseを返す
         } else {

@@ -11,8 +11,10 @@
             <a href="http://michelf.ca/projects/php-markdown/" target="_blank">PHP Markdown Lib</a> /
             <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> /
             <a href="http://www.smarty.net/" target="_blank">Smarty</a> /
-            <a href="https://github.com/rsky/pear-core-min" target="_blank">pear-core-min</a> /
-            <a href="https://github.com/rsky/pear-pager" target="_blank">pear-pager</a> /
+            <a href="http://pear.php.net/" target="_blank">PEAR</a> /
+            <a href="http://pear.php.net/package/MDB2" target="_blank">MDB2</a> /
+            <a href="http://pear.php.net/package/MDB2_Driver_mysqli/" target="_blank">MDB2_Driver_mysqli</a> /
+            <a href="http://pear.php.net/package/Pager" target="_blank">Pager</a> /
             <a href="http://www.phpunit.de/" target="_blank">PHPUnit</a> /
             <a href="http://jquery.com/" target="_blank">jQuery</a> /
             <a href="http://jqueryui.com/" target="_blank">jQuery UI</a> /

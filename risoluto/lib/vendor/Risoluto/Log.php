@@ -28,7 +28,7 @@ class Log
      * @access private
      * @var    string    ログの出力パス
      */
-    private $logfile = RISOLUTO_LOGS . 'risoluto-[[[REPLACED]]].log';
+    private $logfile = '';
 
     /**
      * $currentloglevel
@@ -57,6 +57,19 @@ class Log
     //------------------------------------------------------//
     // クラスメソッド定義
     //------------------------------------------------------//
+    /**
+     * __construct()
+     *
+     * コンストラクタ
+     *
+     * @access    public
+     * @return    void
+     */
+     public function __construct()
+     {
+         $this->logfile = RISOLUTO_LOGS . "risoluto-[[[REPLACED]]].log";
+     }
+
     /**
      * SetLogFile($path)
      *
@@ -98,7 +111,6 @@ class Log
     {
         //-- ローカル変数 --//
         $retval      = false;
-        $logfile     = "";
         $currentdate = date('Y-m-d H:i:s');
         $outfile     = str_replace('[[[REPLACED]]]', date( 'Ymd' ), $this->logfile);
 
