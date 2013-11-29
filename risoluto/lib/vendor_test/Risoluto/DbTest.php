@@ -4,9 +4,9 @@
  *
  * Db()用テストケース
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 

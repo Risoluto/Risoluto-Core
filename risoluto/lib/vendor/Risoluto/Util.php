@@ -4,9 +4,9 @@
  *
  * ユーティリティファンクション群
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
@@ -26,7 +26,9 @@ class Util
      * ベースURLを取得する
      *
      * @access    public
-     * @param     array     $_SERVER相当の情報が格納された配列
+     *
+     * @param     array $_SERVER 相当の情報が格納された配列
+     *
      * @return    string    自身のベースURL
      */
     public function GetBaseUrl($target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
@@ -53,7 +55,7 @@ class Util
 
             // イレギュラーなHTTP
             case '8080': // FALL THRU
-            // デフォルト
+                // デフォルト
             default:
                 $schema = 'http://';
                 $port   = ':' . $target['SERVER_PORT'];
@@ -75,15 +77,17 @@ class Util
      * 指定された画面へリダイレクトする
      *
      * @access    public
-     * @param     string    リダイレクト先の画面識別子
-     * @param     array     リダイレクト時に付与するGETパラメタのキー部（配列指定）
-     * @param     array     リダイレクト時に付与するGETパラメタのバリュー部（配列指定）
+     *
+     * @param     string リダイレクト先の画面識別子
+     * @param     array  リダイレクト時に付与するGETパラメタのキー部（配列指定）
+     * @param     array  リダイレクト時に付与するGETパラメタのバリュー部（配列指定）
+     *
      * @return    void      なし
      */
     public function RedirectTo($target = null, $getkey = null, $getval = null)
     {
         // ベースURLを取得する
-        $baseurl = $this->GetBaseUrl() . '?seq=' . $target;
+        $baseurl    = $this->GetBaseUrl() . '?seq=' . $target;
         $otherparam = null;
 
         // 他のパラメタが指定されていたら、それをGetパラメタの形に生成
@@ -93,9 +97,9 @@ class Util
 
             // 両方の要素数が合致しない場合は処理を行わない
             if (count($tmp_keys) == count($tmp_vals)) {
-              for ($i = 0; $i < count($tmp_keys); $i++) {
-                $otherParam .= '&' . $tmp_keys[$i] . '=' . $tmp_vals[$i];
-              }
+                for ($i = 0; $i < count($tmp_keys); $i++) {
+                    $otherParam .= '&' . $tmp_keys[$i] . '=' . $tmp_vals[$i];
+                }
             }
         }
 
@@ -109,18 +113,20 @@ class Util
      * 指定されたファイルやディレクトリのステータスをチェックする
      *
      * @access    public
-     * @param     array    チェック対象の情報が格納された連想配列
+     *
+     * @param     array チェック対象の情報が格納された連想配列
+     *
      * @return    array    チェック結果が格納された連想配列
      */
     public function StatChecker($target)
     {
         // ローカル変数の初期化
         $result = array(
-                         'path'     => 'unknown'
-                       , 'required' => 'unknown'
-                       , 'real'     => 'unknown'
-                       , 'result'   => 'unknown'
-                       );
+            'path'   => 'unknown'
+        , 'required' => 'unknown'
+        , 'real'     => 'unknown'
+        , 'result'   => 'unknown'
+        );
 
         // 引数が配列でない場合は即時return
         if (!is_array($target)) {
@@ -145,7 +151,7 @@ class Util
         clearstatcache();
         // 判定を実施（defaultは書かない）
         // 評価項目を増やすにはここにcaseを追加してください
-        switch($target['stat']) {
+        switch ($target['stat']) {
             // 読込可
             case 'readable':
                 if (is_readable($target['path']) and !is_writable($target['path'])) {
@@ -182,10 +188,12 @@ class Util
      * 指定されたファイルやディレクトリに対し、作成/コピー/移動/削除等を行う
      *
      * @access    public
-     * @param     string    処理内容を示す文字列(make/copy/move/unlink/mkdir/rmdir/symlink)
-     * @param     string    対象となるパス
-     * @param     string    コピー又は移動先となるパス
-     * @param     string    ファイル中の「[[[_PREFIX]]]」を置換する文字列
+     *
+     * @param     string 処理内容を示す文字列(make/copy/move/unlink/mkdir/rmdir/symlink)
+     * @param     string 対象となるパス
+     * @param     string コピー又は移動先となるパス
+     * @param     string ファイル中の「[[[_PREFIX]]]」を置換する文字列
+     *
      * @return    boolean   処理結果（true:成功/false:失敗）
      */
     public function FileOperator($operation, $target, $destination = null, $prefix = null)
@@ -194,7 +202,7 @@ class Util
         $result = false;
 
         // operationの内容によって、処理を分ける
-        switch($operation) {
+        switch ($operation) {
             // make
             case 'make':
                 if (@touch($target)) {
@@ -270,27 +278,29 @@ class Util
      * 引数で指定された文字列中の特定部分をリンクに変換する
      *
      * @access    public
-     * @param     string    対象となる文字列
-     * @param     boolean   新規ウィンドウモード:true(新規ウィンドウでオープン))
-     * @param     string    リンクタグに付与するアトリビュート（デフォルト:null）
+     *
+     * @param     string  対象となる文字列
+     * @param     boolean 新規ウィンドウモード:true(新規ウィンドウでオープン))
+     * @param     string  リンクタグに付与するアトリビュート（デフォルト:null）
+     *
      * @return    string    変換後の文字列
      */
-    public function AutoUrlLink($target, $newwindow = true, $extra=null)
+    public function AutoUrlLink($target, $newwindow = true, $extra = null)
     {
         // 一度、一時変数へ格納する
         $tmp_target = $target;
 
         // リンクタグのベースを組み立てる
         $tmp_replace_text = "<a href='$0'"
-                          . ($newwindow ? " target='_blank'":"")
-                          . (!empty($extra) ? " " . $extra:"")
-                          . ">$0</a>";
+            . ($newwindow ? " target='_blank'" : "")
+            . (!empty($extra) ? " " . $extra : "")
+            . ">$0</a>";
 
         // 文字列中の「http」又は「https」で始まる部分を、<a>タグに変換する
         $tmp_target = preg_replace("/(http|https)\:\/\/[[:alnum:]-_.!~*'();\/?:@&=+$,%#]+/i", $tmp_replace_text, $tmp_target);
 
         // タグの途中で改行が入っている場合、取り除く
-        $tmp_target = preg_replace("/(\r|\n|\r\n)'>/i",    "'>",   $tmp_target);
+        $tmp_target = preg_replace("/(\r|\n|\r\n)'>/i", "'>", $tmp_target);
         $tmp_target = preg_replace("/(\r|\n|\r\n)<\/a>/i", "</a>", $tmp_target);
 
         return $tmp_target;
@@ -302,12 +312,14 @@ class Util
      * 引数で指定された値がメールアドレスのフォーマットと合致しているか判定する
      *
      * @access    public
-     * @param     string     検査対象となる値
+     *
+     * @param     string 検査対象となる値
+     *
      * @return    boolean    判定結果（true/false）
      */
     public function IsEmailAddr($value)
     {
-        return (preg_match('/^([a-z0-9_]|\-|\.|\+)+@(([a-z0-9_]|\-)+\.)+[a-z]{2,6}$/i', $value)) ? (true):(false);
+        return (preg_match('/^([a-z0-9_]|\-|\.|\+)+@(([a-z0-9_]|\-)+\.)+[a-z]{2,6}$/i', $value)) ? (true) : (false);
     }
 
     /**
@@ -316,12 +328,14 @@ class Util
      * 引数で指定された値が半角文字列のみで構成されているか判定する
      *
      * @access    public
-     * @param     string     検査対象となる値
+     *
+     * @param     string 検査対象となる値
+     *
      * @return    boolean    判定結果（true/false）
      */
     function IsHalfWidth($value)
     {
-        return (strlen($value) == mb_strlen($value, 'UTF-8')) ? (true):(false);
+        return (strlen($value) == mb_strlen($value, 'UTF-8')) ? (true) : (false);
     }
 
     /**
@@ -330,7 +344,9 @@ class Util
      * 引数で指定された値が閏年であるか判定する
      *
      * @access    public
-     * @param     string     検査対象となる値
+     *
+     * @param     string 検査対象となる値
+     *
      * @return    boolean    判定結果（true/false）
      */
     public function IsLeapYear($value)
@@ -354,9 +370,11 @@ class Util
      * 引数で指定された値が引数で指定された下限値及び上限値の範囲内にあるかを判定する
      *
      * @access    public
-     * @param     string     検査対象となる値
-     * @param     string     下限値
-     * @param     string     上限値
+     *
+     * @param     string 検査対象となる値
+     * @param     string 下限値
+     * @param     string 上限値
+     *
      * @return    boolean    判定結果（true/false）
      */
     public function IsBetween($value, $lowerval, $upperval)
@@ -375,7 +393,9 @@ class Util
      * 西暦に対応する和暦を取得する
      *
      * @access    public
-     * @param     integer    対象となる西暦年（4桁）
+     *
+     * @param     integer 対象となる西暦年（4桁）
+     *
      * @return    string     引数に指定された西暦年に対応する和暦年（変換に失敗した場合はnullを返却）
      */
     public function CnvYear($year)
@@ -405,7 +425,7 @@ class Util
                     $retval .= ' / 大正元年';
                 }
             }
-        // 大正（1912年7月30日〜1926年12月24日、大正15年まで）
+            // 大正（1912年7月30日〜1926年12月24日、大正15年まで）
         } elseif ($this->IsBetween($year, 1912, 1926)) {
             // 算出する
             $tmp_val = ($year - 1912) + 1;
@@ -413,7 +433,7 @@ class Util
             // 1年の場合は元年として表示する
             if ($tmp_val == '1') {
                 $retval = '大正元年';
-            // 年号を生成する
+                // 年号を生成する
             } else {
                 $retval = '大正' . $tmp_val . '年';
 
@@ -422,7 +442,7 @@ class Util
                     $retval .= ' / 昭和元年';
                 }
             }
-        // 昭和（1926年12月25日〜1989年1月7日、昭和64年まで）
+            // 昭和（1926年12月25日〜1989年1月7日、昭和64年まで）
         } elseif ($this->IsBetween($year, 1926, 1989)) {
             // 算出する
             $tmp_val = ($year - 1926) + 1;
@@ -430,7 +450,7 @@ class Util
             // 1年の場合は元年として表示する
             if ($tmp_val == '1') {
                 $retval = '昭和元年';
-            // 年号を生成する
+                // 年号を生成する
             } else {
                 $retval = '昭和' . $tmp_val . '年';
 
@@ -439,7 +459,7 @@ class Util
                     $retval .= ' / 平成元年';
                 }
             }
-        // 平成（1989年1月8日〜）
+            // 平成（1989年1月8日〜）
         } else {
             // 算出する
             $tmp_val = ($year - 1989) + 1;
@@ -447,7 +467,7 @@ class Util
             // 1年の場合は元年として表示する
             if ($tmp_val == '1') {
                 $retval = '平成元年';
-            // 年号を生成する
+                // 年号を生成する
             } else {
                 $retval = '平成' . $tmp_val . '年';
             }
@@ -462,10 +482,12 @@ class Util
      * 「年」の情報が格納された配列を生成する
      *
      * @access    public
-     * @param     boolean    配列の先頭を「----」にするかどうか（デフォルトfalse、true:----をセットする/false:----をセットしない）
-     * @param     integer    生成開始年（西暦指定、デフォルトは現在年 - 5）
-     * @param     integer    生成年数（デフォルトは10）
-     * @param     integer    返却する配列のタイプ(デフォルト西暦のみ、0:西暦のみ/1:和暦のみ/2:両方)
+     *
+     * @param     boolean 配列の先頭を「----」にするかどうか（デフォルトfalse、true:----をセットする/false:----をセットしない）
+     * @param     integer 生成開始年（西暦指定、デフォルトは現在年 - 5）
+     * @param     integer 生成年数（デフォルトは10）
+     * @param     integer 返却する配列のタイプ(デフォルト西暦のみ、0:西暦のみ/1:和暦のみ/2:両方)
+     *
      * @return    array     「年」の情報が格納された配列
      */
     public function GenYear($firsttype = false, $base = null, $limit = null, $mode = 0)
@@ -491,7 +513,7 @@ class Util
         // 配列を生成する
         for ($cnt = 0; $cnt <= $endYearCnt; $cnt++) {
             // 引数で指定された配列のタイプに合わせて値を作成する
-            switch($mode) {
+            switch ($mode) {
                 // 両方の場合
                 case 2:
                     $tmp_value = sprintf("%04d", $beginYear + $cnt) . '(' . $this->CnvYear(sprintf("%04d", $beginYear + $cnt)) . ')';
@@ -522,7 +544,9 @@ class Util
      * 「月」の情報が格納された配列を生成する
      *
      * @access    public
-     * @param     boolean    配列の先頭を「--」にするかどうか（デフォルトfalse、true: --をセットする / false: --をセットしない ）
+     *
+     * @param     boolean 配列の先頭を「--」にするかどうか（デフォルトfalse、true: --をセットする / false: --をセットしない ）
+     *
      * @return    array     「月」の情報が格納された配列
      */
     public function GenMonth($firsttype = false)
@@ -547,9 +571,11 @@ class Util
      * 「日」の情報が格納された配列を生成する
      *
      * @access    public
-     * @param     boolean    配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
-     * @param     integer    生成対象となる月（値を指定するとその月の日数に基づいた内容が返却される）
-     * @param     integer    生成対象となる年（値を指定するとその年がうるう年かどうかを考慮する）
+     *
+     * @param     boolean 配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
+     * @param     integer 生成対象となる月（値を指定するとその月の日数に基づいた内容が返却される）
+     * @param     integer 生成対象となる年（値を指定するとその年がうるう年かどうかを考慮する）
+     *
      * @return    array     「日」の情報が格納された配列
      */
     public function GenDay($firsttype = false, $targetmonth = null, $targetyear = null)
@@ -561,17 +587,17 @@ class Util
         }
 
         // 月ごとに日数を決定する
-        switch($targetmonth) {
+        switch ($targetmonth) {
 
             // 2月はうるう年考慮し、28又は29日まで生成
             case 2:
-                $end_day = ($this->IsLeapYear($targetyear) ? 29:28);
+                $end_day = ($this->IsLeapYear($targetyear) ? 29 : 28);
                 break;
 
             // 4,6,9,11月は30日まで生成
-            case 4:  // FALL THRU
-            case 6:  // FALL THRU
-            case 9:  // FALL THRU
+            case 4: // FALL THRU
+            case 6: // FALL THRU
+            case 9: // FALL THRU
             case 11: // FALL THRU
                 $end_day = 30;
                 break;
@@ -596,8 +622,10 @@ class Util
      * 「時」の情報が格納された配列を生成する
      *
      * @access    public
-     * @param     boolean    配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
-     * @param     boolean    表示を24時制にするかどうか（デフォルトtrue、true:24時制/false:12時制、数字の前に「午前」または「午後」がつく）
+     *
+     * @param     boolean 配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
+     * @param     boolean 表示を24時制にするかどうか（デフォルトtrue、true:24時制/false:12時制、数字の前に「午前」または「午後」がつく）
+     *
      * @return    array     「時」の情報が格納された配列
      */
     public function GenHour($firsttype = false, $hourtype = true)
@@ -631,7 +659,9 @@ class Util
      * 「分」または「秒」の情報が格納された配列を生成する
      *
      * @access    public
-     * @param     boolean    配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
+     *
+     * @param     boolean 配列の先頭を「--」にするかどうか（デフォルトfalse、true:--をセットする/false:--をセットしない）
+     *
      * @return    array     「分」の情報が格納された配列
      */
     public function GenMinSec($firsttype = false)

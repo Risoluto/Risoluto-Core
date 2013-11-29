@@ -4,9 +4,9 @@
  *
  * ログ操作のためのファンクション群
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
@@ -43,16 +43,16 @@ class Log
      * @var    array    ログレベル閾値情報を保持
      */
     private $loglevel = array(
-                                 "stop"   => 0
-                             ,   "emerg"  => 1
-                             ,   "alert"  => 2
-                             ,   "crit"   => 3
-                             ,   "error"  => 4
-                             ,   "warn"   => 5
-                             ,   "notice" => 6
-                             ,   "info"   => 7
-                             ,   "debug"  => 8
-                             );
+        "stop" => 0
+    , "emerg"  => 1
+    , "alert"  => 2
+    , "crit"   => 3
+    , "error"  => 4
+    , "warn"   => 5
+    , "notice" => 6
+    , "info"   => 7
+    , "debug"  => 8
+    );
 
     //------------------------------------------------------//
     // クラスメソッド定義
@@ -65,10 +65,10 @@ class Log
      * @access    public
      * @return    void
      */
-     public function __construct()
-     {
-         $this->logfile = RISOLUTO_LOGS . "risoluto-[[[REPLACED]]].log";
-     }
+    public function __construct()
+    {
+        $this->logfile = RISOLUTO_LOGS . "risoluto-[[[REPLACED]]].log";
+    }
 
     /**
      * SetLogFile($path)
@@ -76,7 +76,9 @@ class Log
      * ログ出力パスをセットする
      *
      * @access    public
-     * @param     string    ログ出力パス
+     *
+     * @param     string ログ出力パス
+     *
      * @return    void
      */
     public function SetLogFile($path)
@@ -90,7 +92,9 @@ class Log
      * ログレベルをセットする
      *
      * @access    public
-     * @param     string    ログレベル
+     *
+     * @param     string ログレベル
+     *
      * @return    void
      */
     public function SetCurrentLogLevel($loglevel)
@@ -103,8 +107,9 @@ class Log
      *
      * 指定されたログレベルで指定された文字列を出力する
      *
-     * @param     string     ログレベル（stop|emerg|alert|crit|error|warn|notice|info|debug）
-     * @param     string     出力するメッセージ
+     * @param     string ログレベル（stop|emerg|alert|crit|error|warn|notice|info|debug）
+     * @param     string 出力するメッセージ
+     *
      * @return    boolean    出力結果（{書き込んだバイト数}：正常終了/false:異常終了）
      */
     public function Log($loglvl, $logmes)
@@ -112,7 +117,7 @@ class Log
         //-- ローカル変数 --//
         $retval      = false;
         $currentdate = date('Y-m-d H:i:s');
-        $outfile     = str_replace('[[[REPLACED]]]', date( 'Ymd' ), $this->logfile);
+        $outfile     = str_replace('[[[REPLACED]]]', date('Ymd'), $this->logfile);
 
         // 現在のログレベル以下の場合は出力しない
         if ($this->loglevel[$this->currentloglevel] < $this->loglevel[$loglvl]) {

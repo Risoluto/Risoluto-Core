@@ -1,12 +1,12 @@
 <phpunit>
-  <testsuites>
-    <testsuite name="Risoluto">
-      <file>vendor_test/Risoluto/ConfTest.php</file>
-      <file>vendor_test/Risoluto/CoreTest.php</file>
-      <file>vendor_test/Risoluto/DbTest.php</file>
-      <file>vendor_test/Risoluto/LogTest.php</file>
-      <file>vendor_test/Risoluto/SessionTest.php</file>
-      <file>vendor_test/Risoluto/UtilTest.php</file>
-    </testsuite>
-  </testsuites>
+    <testsuites>
+        <testsuite name="Risoluto">
+            <file>vendor_test/Risoluto/ConfTest.php</file>
+            <file>vendor_test/Risoluto/CoreTest.php</file>
+            <file>vendor_test/Risoluto/DbTest.php</file>
+            <file>vendor_test/Risoluto/LogTest.php</file>
+            <file>vendor_test/Risoluto/SessionTest.php</file>
+            <file>vendor_test/Risoluto/UtilTest.php</file>
+        </testsuite>
+    </testsuites>
 </phpunit>

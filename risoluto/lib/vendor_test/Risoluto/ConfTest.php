@@ -4,9 +4,9 @@
  *
  * Conf()用テストケース
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 //------------------------------------------------------//
@@ -86,6 +86,7 @@ class ConfTest extends PHPUnit_Framework_TestCase
      * test_GetParseStatus_AfterParsed()
      *
      * パース後のGetParseStatus()の挙動をテストする
+     *
      * @depends test_ParseSet_ValidFile
      */
     public function test_GetParseStatus_AfterParsed()
@@ -99,34 +100,35 @@ class ConfTest extends PHPUnit_Framework_TestCase
      * test_GetIni_NoArgs()
      *
      * パース後のGetIni()の挙動をテストする（引数なし）
+     *
      * @depends test_ParseSet_ValidFile
      */
     public function test_GetIni_NoArgs()
     {
         $want = array(
-                         "SEQ" => array(
-                                           "default" => "\\Top",
-                                           "error"   => "\\Error",
-                                           "servicestop" => "\\ServiceStop"
-                                       ),
+            "SEQ"     => array(
+                "default"     => "\\Top",
+                "error"       => "\\Error",
+                "servicestop" => "\\ServiceStop"
+            ),
 
-                         "LOGGING" => array(
-                                               "loglevel" => "warn"
-                                           ),
+            "LOGGING" => array(
+                "loglevel" => "warn"
+            ),
 
-                         "SESSION" => array(
-                                               "timeout" => 3600
-                                           ),
+            "SESSION" => array(
+                "timeout" => 3600
+            ),
 
-                         "LIMITS" => array(
-                                              "max_loadavg" => 3
-                                          ),
+            "LIMITS"  => array(
+                "max_loadavg" => 3
+            ),
 
 
-                         "DB" => array(
-                                          "default" => "{DBTYPE}://{USER}:{PASSWORD}@{HOST}/{DBNAME}"
-                                      )
-                     );
+            "DB"      => array(
+                "default" => "{DBTYPE}://{USER}:{PASSWORD}@{HOST}/{DBNAME}"
+            )
+        );
         $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
         $this->assertEquals($this->instance->GetIni(), $want);
@@ -136,15 +138,16 @@ class ConfTest extends PHPUnit_Framework_TestCase
      * test_GetIni_WithOneArgs()
      *
      * パース後のGetIni()の挙動をテストする（セクションのみ指定）
+     *
      * @depends test_GetIni_NoArgs
      */
     public function test_GetIni_WithOneArgs()
     {
         $want = array(
-                         "default" => "\\Top",
-                         "error"   => "\\Error",
-                         "servicestop" => "\\ServiceStop"
-                     );
+            "default"     => "\\Top",
+            "error"       => "\\Error",
+            "servicestop" => "\\ServiceStop"
+        );
         $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
         $this->assertEquals($this->instance->GetIni('SEQ'), $want);
@@ -154,6 +157,7 @@ class ConfTest extends PHPUnit_Framework_TestCase
      * test_GetIni_WithTwoArgs()
      *
      * パース後のGetIni()の挙動をテストする（セクションのみ指定）
+     *
      * @depends test_GetIni_WithOneArgs
      */
     public function test_GetIni_WithTwoArgs()

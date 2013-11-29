@@ -4,9 +4,9 @@
  *
  * Util()用テストケース
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
@@ -64,10 +64,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNormalPart1()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '80',
-                         'PHP_SELF' => '/index.html'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '80',
+            'PHP_SELF'    => '/index.html'
+        );
         $want = 'http://example.com/index.html';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -81,10 +81,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNormalPart2()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '80',
-                         'PHP_SELF' => '/test.php'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '80',
+            'PHP_SELF'    => '/test.php'
+        );
         $want = 'http://example.com/test.php';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -98,10 +98,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNormalPart3()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '80',
-                         'PHP_SELF' => '/index.php'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '80',
+            'PHP_SELF'    => '/index.php'
+        );
         $want = 'http://example.com/';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -115,10 +115,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithSslPart1()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '443',
-                         'PHP_SELF' => '/index.html'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '443',
+            'PHP_SELF'    => '/index.html'
+        );
         $want = 'https://example.com/index.html';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -132,10 +132,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithSslPart2()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '443',
-                         'PHP_SELF' => '/test.php'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '443',
+            'PHP_SELF'    => '/test.php'
+        );
         $want = 'https://example.com/test.php';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -149,10 +149,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNotStdPortPart1()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '8080',
-                         'PHP_SELF' => '/index.html'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '8080',
+            'PHP_SELF'    => '/index.html'
+        );
         $want = 'http://example.com:8080/index.html';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -166,10 +166,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNotStdPortPart2()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '8443',
-                         'PHP_SELF' => '/index.html'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '8443',
+            'PHP_SELF'    => '/index.html'
+        );
         $want = 'https://example.com:8443/index.html';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);
@@ -183,10 +183,10 @@ class UtilTest extends PHPUnit_Framework_TestCase
     public function test_GetBaseUrl_WithNotStdPortPart3()
     {
         $test = array(
-                         'HTTP_HOST' => 'example.com',
-                         'SERVER_PORT' => '8888',
-                         'PHP_SELF' => '/index.html'
-                     );
+            'HTTP_HOST'   => 'example.com',
+            'SERVER_PORT' => '8888',
+            'PHP_SELF'    => '/index.html'
+        );
         $want = 'http://example.com:8888/index.html';
 
         $this->assertEquals($this->instance->GetBaseUrl($test), $want);

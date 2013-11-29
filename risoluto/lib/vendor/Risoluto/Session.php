@@ -4,9 +4,9 @@
  *
  * セッション操作のためのファンクション群
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
@@ -46,8 +46,10 @@ class Session
      * セッションが存在しない場合は新規にセッションを生成し、スタートする
      *
      * @access    public
-     * @param     string     セッションファイル保存ディレクトリ
-     * @param     string     セッション名
+     *
+     * @param     string セッションファイル保存ディレクトリ
+     * @param     string セッション名
+     *
      * @return    boolean    セッション開始結果（true：正常終了/false:異常終了）
      */
     public function Start($path = '', $name = '')
@@ -64,7 +66,7 @@ class Session
         // セッション保存ディレクトリをセット
         if (!empty($this->sesspath) and is_writable($this->sesspath)) {
             session_save_path($this->sesspath);
-        // 指定されていないか書き込めないならfalseを返す
+            // 指定されていないか書き込めないならfalseを返す
         } else {
             return false;
         }
@@ -77,7 +79,7 @@ class Session
             // システムよりマイクロセコンドの精度で時刻情報を取得し
             // 乱数のシード（種）にする
             list($usec, $sec) = explode(" ", microtime());
-            $seed         = (double)$sec + ((double)$usec * 100000);
+            $seed = (double)$sec + ((double)$usec * 100000);
 
             // 生成したシードを元に乱数を生成し、セッションIDを合成
             mt_srand($seed);
@@ -97,14 +99,17 @@ class Session
      * セッションを再スタートする（）
      *
      * @access    public
-     * @param     string     セッションファイル保存ディレクトリ
-     * @param     string     セッション名
+     *
+     * @param     string セッションファイル保存ディレクトリ
+     * @param     string セッション名
+     *
      * @return    boolean    セッション再開始結果（true：正常終了/false:異常終了）
      */
     public function Restart($path = '', $name = '')
     {
         // セッションを終了してスタートさせる
         $this->End();
+
         return $this->Start($path, $name);
     }
 
@@ -114,7 +119,9 @@ class Session
      * セッションを終了する
      *
      * @access    public
+     *
      * @param     void なし
+     *
      * @return    boolean セッション終了結果（true：正常終了/false:異常終了）
      */
     public function End()
@@ -124,13 +131,13 @@ class Session
 
         // スーパーグローバルな$_COOKIEと$_SESSIONをクリア
         $_COOKIE[$this->sessname] = array();
-        $_SESSION = array();
+        $_SESSION                 = array();
 
         // セッションファイルを削除
         $target = $this->sesspath . 'sess_' . session_id();
 
         clearstatcache(true);
-        if(file_exists($target) and is_file($target) and is_writeable($target)) {
+        if (file_exists($target) and is_file($target) and is_writeable($target)) {
             unlink($target);
         }
 
@@ -144,8 +151,10 @@ class Session
      * 引数で指定された名称の変数へ、同じく引数で指定された値を格納する
      *
      * @access    public
-     * @param     string     格納先セッション変数名
-     * @param     mixed      格納する値（number or string）
+     *
+     * @param     string 格納先セッション変数名
+     * @param     mixed  格納する値（number or string）
+     *
      * @return    boolean    常にtrue
      */
     public function Store($destination, $val)
@@ -164,12 +173,14 @@ class Session
      * 引数で指定された名称のセッション変数から値を取得する
      *
      * @access    public
-     * @param     string    取得元セッション変数名
+     *
+     * @param     string 取得元セッション変数名
+     *
      * @return    mixed     取得した値
      */
     public function Load($from)
     {
-        if ( isset($from) and isset($_SESSION[$from])) {
+        if (isset($from) and isset($_SESSION[$from])) {
             return $_SESSION[$from];
         } else {
             return null;
@@ -182,12 +193,14 @@ class Session
      * セッション中に引数で指定された名称を持つ値が存在するかをチェックする
      *
      * @access    public
-     * @param     string     判定対象セッション変数名
+     *
+     * @param     string 判定対象セッション変数名
+     *
      * @return    boolean    存在状況(true:存在する/false:存在しない)
      */
     public function IsThere($chkName)
     {
-      return isset($_SESSION[$chkName]);
+        return isset($_SESSION[$chkName]);
     }
 
     /**
@@ -196,7 +209,9 @@ class Session
      * セッション中の引数で指定された名称を持つ値を抹消する
      *
      * @access    public
-     * @param     string     抹消対象セッション変数名
+     *
+     * @param     string 抹消対象セッション変数名
+     *
      * @return    boolean    常にtrue
      */
     public function Revoke($chkName)
@@ -214,7 +229,9 @@ class Session
      * セッション中のすべての値を抹消する
      *
      * @access    public
-     * @param     void       なし
+     *
+     * @param     void なし
+     *
      * @return    boolean    常にtrue
      */
     public function RevokeAll()

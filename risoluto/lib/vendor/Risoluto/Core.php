@@ -4,9 +4,9 @@
  *
  * Risolutoの中核部分に関するメソッドが含まれているクラス
  *
- * @package   risoluto
- * @author    Risoluto Developers
- * @license   http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package       risoluto
+ * @author        Risoluto Developers
+ * @license       http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
  */
 
@@ -32,7 +32,9 @@ class Core
      * 指定されたアプリケーションを呼び出す
      *
      * @access    public
-     * @param     void    なし
+     *
+     * @param     void なし
+     *
      * @return    void    なし
      */
     public function Perform()
@@ -49,7 +51,7 @@ class Core
             $targetInstance = new $call['load'];
 
             // イニシャライズメソッドをコール
-            if(method_exists($targetInstance, 'Init')) {
+            if (method_exists($targetInstance, 'Init')) {
                 $targetInstance->Init($call['param']);
             } else {
                 // メソッドが存在しなければ例外をThrow
@@ -57,14 +59,14 @@ class Core
             }
 
             // HTTPのメソッドに応じて適切なコントローラをコール
-            switch($_SERVER['REQUEST_METHOD']) {
+            switch ($_SERVER['REQUEST_METHOD']) {
                 // GETの場合
                 case 'GET':
-                    if(method_exists($targetInstance, 'PlayGet')) {
+                    if (method_exists($targetInstance, 'PlayGet')) {
                         $targetInstance->PlayGet();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -72,11 +74,11 @@ class Core
 
                 // POSTの場合
                 case 'POST':
-                    if(method_exists($targetInstance, 'PlayPost')) {
+                    if (method_exists($targetInstance, 'PlayPost')) {
                         $targetInstance->PlayPost();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -84,11 +86,11 @@ class Core
 
                 // PUTの場合
                 case 'PUT':
-                    if(method_exists($targetInstance, 'PlayPut')) {
+                    if (method_exists($targetInstance, 'PlayPut')) {
                         $targetInstance->PlayPut();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -96,11 +98,11 @@ class Core
 
                 // DELETEの場合
                 case 'DELETE':
-                    if(method_exists($targetInstance, 'PlayDelete')) {
+                    if (method_exists($targetInstance, 'PlayDelete')) {
                         $targetInstance->PlayDelete();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -108,11 +110,11 @@ class Core
 
                 // OPTIONの場合
                 case 'OPTION':
-                    if(method_exists($targetInstance, 'PlayOption')) {
+                    if (method_exists($targetInstance, 'PlayOption')) {
                         $targetInstance->PlayOption();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -120,11 +122,11 @@ class Core
 
                 // HEADの場合
                 case 'HEAD':
-                    if(method_exists($targetInstance, 'PlayHead')) {
+                    if (method_exists($targetInstance, 'PlayHead')) {
                         $targetInstance->PlayHead();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -132,11 +134,11 @@ class Core
 
                 // TRACEの場合
                 case 'TRACE':
-                    if(method_exists($targetInstance, 'PlayTrace')) {
+                    if (method_exists($targetInstance, 'PlayTrace')) {
                         $targetInstance->PlayTrace();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -144,11 +146,11 @@ class Core
 
                 // CONNECTの場合
                 case 'CONNECT':
-                    if(method_exists($targetInstance, 'PlayConnect')) {
+                    if (method_exists($targetInstance, 'PlayConnect')) {
                         $targetInstance->PlayConnect();
-                    } elseif(method_exists($targetInstance, 'Play')) {
+                    } elseif (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
-                    } else{
+                    } else {
                         // メソッドが存在しなければ例外をThrow
                         throw new Exception($this->coreError('notfound_play'));
                     }
@@ -156,7 +158,7 @@ class Core
 
                 // デフォルトの場合
                 default:
-                    if(method_exists($targetInstance, 'Play')) {
+                    if (method_exists($targetInstance, 'Play')) {
                         $targetInstance->Play();
                     } else {
                         // メソッドが存在しなければ例外をThrow
@@ -164,9 +166,9 @@ class Core
                     }
                     break;
             }
-        } catch( Exception $e) {
+        } catch (Exception $e) {
             // エラーハンドリングメソッドをコール
-            if(method_exists($targetInstance, 'Error')) {
+            if (method_exists($targetInstance, 'Error')) {
                 $targetInstance->Error($e);
             } else {
                 // メソッドが存在しなければ強制終了
@@ -174,7 +176,7 @@ class Core
             }
         } finally {
             // クリーニングメソッドをコール
-            if(method_exists($targetInstance, 'Clean')) {
+            if (method_exists($targetInstance, 'Clean')) {
                 $targetInstance->Clean();
             } else {
                 // メソッドが存在しなければ強制終了
@@ -189,7 +191,9 @@ class Core
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
      * @access    private
-     * @param     void    なし
+     *
+     * @param     void なし
+     *
      * @return    array   呼び出すクラスの情報等
      */
     private function FindCallClass()
@@ -203,15 +207,19 @@ class Core
         $param = '';
 
         // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
-        if(isset($_GET['seq']) and !empty($_GET['seq'])) {
+        if (isset($_GET['seq']) and !empty($_GET['seq'])) {
             // 「.」が付いていたらそこで分割
-            if (strpos('.',$_GET['seq']) === false) {
-                $sep  = explode('.', $_GET['seq']);
+            if (strpos('.', $_GET['seq']) === false) {
+                $sep = explode('.', $_GET['seq']);
 
-                // 分割後、1つめの要素は画面指定とみなし、2つめの要素はパラメタと見なす
-                $load  = $sep[0];
-                $param = (isset($sep[1]) ? $sep[1] : '');
-            // 「.」が付いていなければそのまま採用する
+                // 分割後、1つめの要素は画面指定とみなし、2つめ以降の要素はパラメタと見なす
+                $load = $sep[0];
+
+                unset($sep[0]);
+                foreach ($sep as $dat) {
+                    $param[] = $dat;
+                }
+                // 「.」が付いていなければそのまま採用する
             } else {
                 $load  = $_GET['seq'];
                 $param = '';
@@ -220,7 +228,7 @@ class Core
             // 指定されたアプリケーションが存在していなければエラーとする
             $target = RISOLUTO_APPS . str_replace('_', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
-            if(!file_exists($target) or !is_file($target) or !is_readable($target)) {
+            if (!file_exists($target) or !is_file($target) or !is_readable($target)) {
                 $load  = $conf->GetIni('SEQ', 'error');
                 $param = '';
             }
@@ -235,8 +243,9 @@ class Core
         }
 
         // 決定した情報を返却する
-        $retval = array('load'  => $load
-                       ,'param' => $param);
+        $retval = array('load' => $load
+        , 'param'              => $param);
+
         return $retval;
     }
 
@@ -246,13 +255,15 @@ class Core
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
      * @access    private
-     * @param     string    $key    なし
+     *
+     * @param     string $key なし
+     *
      * @return    string    エラーメッセージ
      */
     private function CoreError($key = '')
     {
         // 引数の値に応じてエラーメッセージをセットする
-        switch($key) {
+        switch ($key) {
             // イニシャライズメソッド未定義エラーの場合
             case 'notfound_init':
                 $msg = 'Required method is not exists - Init()';
