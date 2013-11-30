@@ -27,7 +27,6 @@
 
 <hr/>
 
-{assign var="tpl_dir" value=$smarty.const.RISOLUTO_APPS}
-{include file="$tpl_dir/copyrights.tpl"}
+{include file="$__RISOLUTO_APPS/common/copyrights.tpl"}
 </body>
 </html>

@@ -13,6 +13,8 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
+namespace RisolutoApps;
+
 Use \Smarty;
 
 //------------------------------------------------------//
@@ -42,7 +44,7 @@ class ServiceStop extends \Risoluto\RisolutoControllerBase
         // テンプレートエンジン関連の処理
         $smarty = $this->InitTemplate();
         $this->AssignTemplate($smarty, array('header' => $header));
-        $this->DispTemplate($smarty, 'ServiceStop.tpl');
+        $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
 
         return true;
     }

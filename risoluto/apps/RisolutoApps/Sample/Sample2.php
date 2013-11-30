@@ -1,8 +1,8 @@
 <?php
 /**
- * Error
+ * Sample2
  *
- * エラー画面を実現するためのクラス
+ * Sample2画面を実現するためのクラス
  *
  * @package       risoluto
  * @author        Risoluto Developers
@@ -13,12 +13,14 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
+namespace RisolutoApps\Sample;
+
 Use \Smarty;
 
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class Error extends \Risoluto\RisolutoControllerBase
+class sample2 extends \Risoluto\RisolutoControllerBase
 {
     /**
      * Play()
@@ -37,12 +39,11 @@ class Error extends \Risoluto\RisolutoControllerBase
         $header = $this->GetDefaultHeader();
 
         $header['robots'] = 'noindex,nofollow';
-        $header['title']  = 'エラーが発生しました';
 
         // テンプレートエンジン関連の処理
-        $smarty = $this->InitTemplate();
-        $this->AssignTemplate($smarty, array('header' => $header));
-        $this->DispTemplate($smarty, 'Error.tpl');
+        $smarty = $this->InitTemplate('Sample/');
+        $this->AssignTemplate($smarty, array('header' => $header, 'param' => $this->GetParam(), 'get' => $_GET, 'post' => $_POST, 'server' => $_SERVER));
+        $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
 
         return true;
     }

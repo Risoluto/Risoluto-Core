@@ -1,8 +1,8 @@
 {
     "autoload": {
         "psr-0": {
-            "Risoluto": "vendor/",
-            "": "../apps/"
+            "Risoluto\\": "vendor/",
+            "RisolutoApps\\": "../apps/"
         }
     },
     "repositories": [
@@ -20,7 +20,7 @@
     "require": {
         "mobiledetect/mobiledetectlib": "2.6.*",
         "lusitanian/oauth": "0.1.*",
-        "michelf/php-markdown": "1.*",
+        "michelf/php-markdown": "1.4.*",
         "phpmailer/phpmailer": "5.2.*",
         "smarty/smarty": "3.1.*",
         "pear/MDB2": "2.4.*",

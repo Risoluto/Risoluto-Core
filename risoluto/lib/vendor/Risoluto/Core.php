@@ -213,7 +213,7 @@ class Core
                 $sep = explode('.', $_GET['seq']);
 
                 // 分割後、1つめの要素は画面指定とみなし、2つめ以降の要素はパラメタと見なす
-                $load = $sep[0];
+                $load = 'RisolutoApps\\' . $sep[0];
 
                 unset($sep[0]);
                 foreach ($sep as $dat) {
@@ -221,12 +221,15 @@ class Core
                 }
                 // 「.」が付いていなければそのまま採用する
             } else {
-                $load  = $_GET['seq'];
+                $load  = 'RisolutoApps\\' . $_GET['seq'];
                 $param = '';
             }
 
-            // 指定されたアプリケーションが存在していなければエラーとする
-            $target = RISOLUTO_APPS . str_replace('_', DIRECTORY_SEPARATOR, $load) . '.php';
+            // $load中の「_」を「\」に置換
+            $load = str_replace('_', '\\', $load);
+
+                    // 指定されたアプリケーションが存在していなければエラーとする
+            $target = RISOLUTO_APPS . str_replace('\\', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
             if (!file_exists($target) or !is_file($target) or !is_readable($target)) {
                 $load  = $conf->GetIni('SEQ', 'error');

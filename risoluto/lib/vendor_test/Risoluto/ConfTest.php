@@ -107,9 +107,9 @@ class ConfTest extends PHPUnit_Framework_TestCase
     {
         $want = array(
             "SEQ"     => array(
-                "default"     => "\\Top",
-                "error"       => "\\Error",
-                "servicestop" => "\\ServiceStop"
+                "default"     => "RisolutoApps\\Top",
+                "error"       => "RisolutoApps\\Error",
+                "servicestop" => "RisolutoApps\\ServiceStop"
             ),
 
             "LOGGING" => array(
@@ -144,9 +144,9 @@ class ConfTest extends PHPUnit_Framework_TestCase
     public function test_GetIni_WithOneArgs()
     {
         $want = array(
-            "default"     => "\\Top",
-            "error"       => "\\Error",
-            "servicestop" => "\\ServiceStop"
+            "default"     => "RisolutoApps\\Top",
+            "error"       => "RisolutoApps\\Error",
+            "servicestop" => "RisolutoApps\\ServiceStop"
         );
         $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
@@ -162,7 +162,7 @@ class ConfTest extends PHPUnit_Framework_TestCase
      */
     public function test_GetIni_WithTwoArgs()
     {
-        $want = "\\Top";
+        $want = "RisolutoApps\\Top";
         $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
         $this->assertEquals($this->instance->GetIni('SEQ', 'default'), $want);

@@ -70,13 +70,11 @@ abstract class RisolutoControllerBase
      */
     protected function InitTemplate($tmpl_path = '')
     {
+        // テンプレートパスをアプリケーション格納フォルダ配下に限定
+        $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace('../', '', $tmpl_path);
+
         // テンプレートエンジン関連定義（Smartyを使用）
         $tmpl = new Smarty;
-
-        // テンプレートパスが指定されていなければ、定数RISOLUTO_APPSをセット
-        if (!$tmpl_path) {
-            $tmpl_path = RISOLUTO_APPS;
-        }
 
         //--- テンプレートキャッシュの設定
         $tmpl->caching              = Smarty::CACHING_OFF;
@@ -116,6 +114,9 @@ abstract class RisolutoControllerBase
      */
     protected function AssignTemplate($tmpl_instance, $values)
     {
+        // デフォルトでテンプレートに引き渡す情報
+        $tmpl_instance->assign('__RISOLUTO_APPS', RISOLUTO_APPS);
+
         // 与えられた引数の内容をテンプレートにアサインする
         foreach ($values as $key => $val) {
             $tmpl_instance->assign($key, $val);

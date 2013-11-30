@@ -13,6 +13,8 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
+namespace RisolutoApps;
+
 Use \Smarty;
 
 //------------------------------------------------------//
@@ -41,7 +43,7 @@ class Top extends \Risoluto\RisolutoControllerBase
         // テンプレートエンジン関連の処理
         $smarty = $this->InitTemplate();
         $this->AssignTemplate($smarty, array('header' => $header));
-        $this->DispTemplate($smarty, 'Top.tpl');
+        $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
 
         return true;
     }

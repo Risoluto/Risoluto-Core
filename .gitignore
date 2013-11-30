@@ -162,5 +162,5 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-# For PhpStome
+# For PhpStorm
 .idea/
