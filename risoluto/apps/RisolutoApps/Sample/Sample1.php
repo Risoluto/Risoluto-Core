@@ -40,7 +40,7 @@ class Sample1 extends \Risoluto\RisolutoControllerBase
 
         // テンプレートエンジン関連の処理
         $smarty = $this->InitTemplate('Sample/');
-        $this->AssignTemplate($smarty, array('header' => $header, 'param' => $this->GetParam(), 'get' => $_GET, 'post' => $_POST, 'server' => $_SERVER));
+        $this->AssignTemplate($smarty, array('header' => $header));
         $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
 
         return true;
