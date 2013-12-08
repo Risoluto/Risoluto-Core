@@ -15,12 +15,10 @@
 //------------------------------------------------------//
 namespace RisolutoApps\Sample;
 
-Use \Smarty;
-
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class sample2 extends \Risoluto\RisolutoControllerBase
+class Sample2 extends \Risoluto\RisolutoControllerBase
 {
     /**
      * Play()
