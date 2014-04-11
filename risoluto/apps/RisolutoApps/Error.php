@@ -36,7 +36,7 @@ class Error extends \Risoluto\RisolutoControllerBase
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
 
-        $header['robots'] = 'noindex,nofollow';
+        $header['robots'] = 'NOINDEX,NOFOLLOW';
         $header['title']  = 'エラーが発生しました';
 
         // テンプレートエンジン関連の処理

@@ -120,9 +120,6 @@ ul.risoluto_menu li a:hover, ul.risoluto_menu li a:active {
     color: #5a49d9;
     background-color: #a39cd6;
 
-    border-right: 1px solid #a39cd6;
-    border-left: 1px solid #a39cd6;
-
     text-decoration: none;
 }
 
@@ -138,8 +135,6 @@ ul.risoluto_menu ul {
 
     top: 36px;
     left: -1px;
-
-    zoom: 1;
 }
 
 ul.risoluto_menu ul li {
@@ -160,15 +155,11 @@ ul.risoluto_menu ul a, ul.risoluto_menu ul a:link, ul.risoluto_menu ul a:visited
     padding: 6px 5px 3px 5px;
 
     display: block;
-
-    zoom: 1;
 }
 
 ul.risoluto_menu ul a:hover, ul.risoluto_menu ul a:active {
     color: #5a49d9;
     background-color: #a39cd6;
-
-    border: 1px solid #a39cd6;
 
     text-decoration: none;
 
@@ -329,8 +320,6 @@ th {
     font: italic bolder 100%;
 
     padding: 1% 1% 1% 1%;
-
-    border: solid thin #5a49d9;
 }
 
 td {

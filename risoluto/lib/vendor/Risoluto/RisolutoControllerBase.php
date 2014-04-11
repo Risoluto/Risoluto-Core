@@ -184,7 +184,7 @@ abstract class RisolutoControllerBase
 
         return array(
             // ROBOTS
-            'robots'      => 'index,follow',
+            'robots'      => 'INDEX,FOLLOW',
 
             // Description
             'Description' => 'Risoluto',

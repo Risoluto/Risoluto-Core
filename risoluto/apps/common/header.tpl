@@ -8,7 +8,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <!-- Begin Head Section -->
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="{$header.robots|strip_tags|escape|default:'INDEX,FOLLOW'}">
+    <meta name="robots" content="{$header.robots|strip_tags|escape|upper|default:'INDEX,FOLLOW'}">
     <meta name="Description" content="{$header.description|strip_tags|escape|default:'Risoluto'}">
     <meta name="Keywords" content="{$header.keywords|strip_tags|escape|default:'Risoluto'}">
     <meta name="Author" content="{$header.author|strip_tags|escape|default:'Risoluto User'}">
@@ -19,7 +19,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     {/if}
     {if count($header.js)}
         {foreach from=$header.js item=js_item}
-            <script language="JavaScript" src="{$js_item|strip_tags|escape}"></script>
+            <script src="{$js_item|strip_tags|escape}"></script>
         {/foreach}
     {/if}
     <link rel="icon" href="{$header.favicon|strip_tags|escape|default:'outboards/vendor/img/favicon.ico'}"/>

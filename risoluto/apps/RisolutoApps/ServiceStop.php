@@ -36,7 +36,7 @@ class ServiceStop extends \Risoluto\RisolutoControllerBase
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
 
-        $header['robots'] = 'noindex,nofollow';
+        $header['robots'] = 'NOINDEX,NOFOLLOW';
         $header['title']  = '現在サービスを停止しています';
 
         // テンプレートエンジン関連の処理

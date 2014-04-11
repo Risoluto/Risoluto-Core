@@ -9,7 +9,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <!-- Begin Body Right Side -->
 <div class="content_right">
     {if isset($menubar) and !empty($menubar)}
-    {$menubar}
+        {$menubar}
     {/if}
     <div class="content_header">
         LINK

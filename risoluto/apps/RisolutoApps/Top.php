@@ -36,7 +36,7 @@ class Top extends \Risoluto\RisolutoControllerBase
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
 
-        $header['robots'] = 'noindex,nofollow';
+        $header['robots'] = 'NOINDEX,NOFOLLOW';
 
         // テンプレートエンジン関連の処理
         $smarty = $this->InitTemplate();
