@@ -10,15 +10,18 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 </p>
 
 <blockquote>
-    Risolutoはこれらのプロダクトを使用させていただいています：
-    <a href="http://getcomposer.org/" target="_blank">Composer</a> /
-    <a href="http://mobiledetect.net/" target="_blank">Mobile-Detect</a> /
-    <a href="https://github.com/Lusitanian/PHPoAuthLib" target="_blank">PHPoAuthLib</a> /
-    <a href="http://michelf.ca/projects/php-markdown/" target="_blank">PHP Markdown Lib</a> /
-    <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> /
-    <a href="http://www.smarty.net/" target="_blank">Smarty</a> /
-    <a href="http://www.phpunit.de/" target="_blank">PHPUnit</a> /
-    <a href="http://jquery.com/" target="_blank">jQuery</a> /
-    <a href="http://jqueryui.com/" target="_blank">jQuery UI</a> /
-    <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>
+    <p>Risolutoはこれらのプロダクトを使用させていただいています。これらはRisolutoの成果物ではありません。</p>
+
+    <p>
+        <a href="http://getcomposer.org/" target="_blank">Composer</a> /
+        <a href="http://mobiledetect.net/" target="_blank">Mobile-Detect</a> /
+        <a href="https://github.com/Lusitanian/PHPoAuthLib" target="_blank">PHPoAuthLib</a> /
+        <a href="http://michelf.ca/projects/php-markdown/" target="_blank">PHP Markdown Lib</a> /
+        <a href="https://github.com/PHPMailer/PHPMailer" target="_blank">PHPMailer</a> /
+        <a href="http://www.smarty.net/" target="_blank">Smarty</a> /
+        <a href="http://www.phpunit.de/" target="_blank">PHPUnit</a> /
+        <a href="http://jquery.com/" target="_blank">jQuery</a> /
+        <a href="http://jqueryui.com/" target="_blank">jQuery UI</a> /
+        <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>
+    </p>
 </blockquote>

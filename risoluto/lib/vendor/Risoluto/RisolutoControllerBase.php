@@ -196,6 +196,8 @@ abstract class RisolutoControllerBase
 
             // JavaScript
             'js'          => array(
+                '//code.jquery.com/jquery-2.1.0.min.js',
+                '//code.jquery.com/ui/1.10.4/jquery-ui.min.js',
                 'outboards/vendor/js/common.js'
             ),
 
