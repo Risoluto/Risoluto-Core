@@ -1,0 +1,261 @@
+@charset "UTF-8";
+/*
+ * This file is part of Risoluto( http://www.risoluto.org/ )
+ * Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
+ * (C) 2008-2014 Risoluto Developers / All Rights Reserved.
+ */
+body {
+    color: #000000;
+    font-size: 100%;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ffffff;
+    width: 1050px;
+    margin: 10px auto;
+    word-break: break-all;
+    overflow: auto;
+}
+
+h1 {
+    color: #000091;
+    font-weight: bolder;
+    font-style: italic;
+    background-color: #eaeaea;
+    border: inset thick #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+h2 {
+    color: #000091;
+    font-weight: normal;
+    font-style: italic;
+    background-color: #eaeaea;
+    border: ridge medium #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+h3 {
+    color: #000091;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #eaeaea;
+    border-bottom: double medium #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+h4 {
+    color: #000091;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #eaeaea;
+    border-bottom: dashed thin #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+h5 {
+    color: #000091;
+    font-weight: lighter;
+    font-style: normal;
+    border-bottom: dotted thin #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+h6 {
+    color: #000091;
+    font-weight: lighter;
+    font-style: normal;
+    border-bottom: solid thin #3333ff;
+    margin: 0% 1% 1% 0%;
+    padding: 1% 1% 1% 1%;
+}
+
+table {
+    width: 95%;
+    margin: 5% auto 5% auto;
+    border: solid thin #000091;
+}
+
+th {
+    color: #000091;
+    font-size: 100%;
+    font-weight: bolder;
+    font-style: italic;
+    background-color: #eaeaea;
+    border: solid thin #000091;
+    padding: 1% 1% 1% 1%;
+}
+
+td {
+    color: #000000;
+    font-size: 100%;
+    font-weight: normal;
+    font-style: normal;
+    background-color: #f9f9f9;
+    border: solid thin #000091;
+    padding: 1% 1% 1% 1%;
+}
+
+a:link {
+    color: #000091;
+    font-size: 100%;
+    font-weight: bold;
+    font-style: normal;
+}
+
+a:hover {
+    color: #ef2121;
+    font-size: 100%;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+a:active {
+    color: #ef2121;
+    font-size: 100%;
+    font-weight: bolder;
+    font-style: italic;
+}
+
+a:visited {
+    color: #000091;
+    font-size: 100%;
+    font-weight: lighter;
+    font-style: normal;
+}
+
+a img {
+    border: #ffffff thin none;
+}
+
+ul li {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+ol li {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+dl dt {
+    color: #000055;
+    text-align: left;
+    font-size: 100%;
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 5%;
+}
+
+dl dd {
+    text-align: left;
+    font-size: 100%;
+    font-weight: normal;
+    margin-left: 10%;
+    margin-bottom: 5%;
+}
+
+blockquote {
+    color: #000000;
+    text-align: left;
+    font-size: medium;
+    font-weight: lighter;
+    font-style: normal;
+    border: #3333ff thick double;
+    background-color: #eaeaea;
+    margin: 1% 1% 1% 1%;
+    padding: 1% 1% 1% 1%;
+}
+
+br.clear {
+    clear: both;
+}
+
+.copyright {
+    text-align: center;
+    color: #808080;
+    font-size: 80%;
+    font-weight: lighter;
+    font-style: normal;
+}
+
+.header_left {
+    float: left;
+    width: 200px;
+}
+
+.header_right {
+    margin-left: 250px;
+}
+
+.content_left {
+    width: 730px;
+    padding: 5px 5px 5px 5px;
+    float: left;
+}
+
+.content_right {
+    width: 300px;
+    padding: 5px 5px;
+    float: left;
+}
+
+.content_header {
+    text-align: center;
+    vertical-align: middle;
+    color: #000091;
+    font-style: italic;
+    font-weight: bolder;
+    background-color: #eaeaea;
+    border: #3333ff thin solid;
+    margin: 1% 0% 0% 0%;
+    padding: 5% 1% 5% 1%;
+}
+
+.content_content {
+    padding: 0% 5% 0% 5%;
+    border: #3333ff thin solid;
+}
+
+.green {
+    color: #77ef07;
+    font-weight: bold;
+}
+
+.yellow {
+    color: #f3d202;
+    font-weight: bold;
+}
+
+.red {
+    color: #ef2121;
+    font-weight: bold;
+}
+
+.fs_xx-small {
+    font-size: xx-small;
+}
+
+.fs_x-small {
+    font-size: x-small;
+}
+
+.fs_small {
+    font-size: small;
+}
+
+.fs_xx-large {
+    font-size: xx-large;
+}
+
+.fs_x-large {
+    font-size: x-large;
+}
+
+.fs_large {
+    font-size: large;
+}
