@@ -4,9 +4,9 @@
  *
  * ユーザアプリ向けコントローラ用基底クラス
  *
- * @package       risoluto
- * @author        Risoluto Developers
- * @license       http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package           risoluto
+ * @author            Risoluto Developers
+ * @license           http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
@@ -16,6 +16,7 @@
 namespace Risoluto;
 
 use \Smarty;
+use \Risoluto\Conf;
 
 abstract class RisolutoControllerBase
 {
@@ -170,12 +171,17 @@ abstract class RisolutoControllerBase
      *
      * @access    protected
      *
-     * @param     void なし
+     * @param     void    なし
      *
      * @return    array   デフォルトのヘッダ
      */
     public function GetDefaultHeader()
     {
+        // Risolutoのコンフィグからテーマの情報を取得する
+        $conf = new Conf();
+        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
+        $outboards = $conf->GetIni('THEME', 'outboards');
+
         return array(
             // ROBOTS
             'robots'      => 'index,follow',
@@ -191,18 +197,24 @@ abstract class RisolutoControllerBase
 
             // CSS
             'css'         => array(
-                'outboards/vendor/css/common.css'
+                'outboards/' . $outboards . '/css/common.css'
             ),
 
             // JavaScript
             'js'          => array(
                 '//code.jquery.com/jquery-2.1.0.min.js',
                 '//code.jquery.com/ui/1.10.4/jquery-ui.min.js',
-                'outboards/vendor/js/common.js'
+                'outboards/' . $outboards . '/js/common.js'
             ),
 
+            // テーマが格納されたディレクトリ名
+            'favicon'     => 'outboards/' . $outboards . '/img/favicon.ico',
+
             // タイトル
-            'title'       => 'ようこそ！Risolutoの世界へ！'
+            'title'       => 'ようこそ！Risolutoの世界へ！',
+
+            // テーマが格納されたディレクトリ名
+            'outboards'   => $outboards
         );
     }
 

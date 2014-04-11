@@ -19,7 +19,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
             <dt>Powered by Risoluto</dt>
             <dd>
                 <a href="http://www.risoluto.org" target="_blank">
-                    <img src="outboards/vendor/img/risoluto_banner.png"
+                    <img src="outboards/{$header.outboards}/img/risoluto_banner.png"
                          alt="Build on Risoluto"
                          width="81" height="31">
                 </a>

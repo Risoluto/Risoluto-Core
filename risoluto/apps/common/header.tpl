@@ -31,7 +31,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <!-- Begin Body -->
 <div class="header_left">
     <a href="/">
-        <img src="outboards/vendor/img/risoluto_logo.png" alt="Logo Image" width="467" height="128"
+        <img src="outboards/{$header.outboards}/img/risoluto_logo.png" alt="Logo Image" width="467" height="128"
              style="padding-top: 15px; padding-left: 15px;">
     </a>
 </div>
