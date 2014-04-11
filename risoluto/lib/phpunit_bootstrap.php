@@ -1,13 +1,13 @@
 <?php
 /**
- * Risoluto起動ルーチン
+ * phpunit_bootstrap.php
  *
- * Risolutoコアクラスインスタンスを作成し、実行する
+ * PHPUnitによるテストを実行する
  *
  * @package       risoluto
  * @author        Risoluto Developers
  * @license       http://opensource.org/licenses/bsd-license.php new BSD license
- * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
+ * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
 //------------------------------------------------------//

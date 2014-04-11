@@ -9,7 +9,7 @@ env:
 before_script:
     - cd ./risoluto/lib/
     - curl -s http://getcomposer.org/installer | php
-    - php composer.phar install --no-interaction
+    - php composer.phar install --no-interaction --dev
     - chmod -R 777 ../../risoluto/data/
 
 script:

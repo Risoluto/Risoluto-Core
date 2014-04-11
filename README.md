@@ -23,10 +23,6 @@ Risoluto2は下記の環境で動作します
 
 * Composer（ http://getcomposer.org/ ）
 * Smarty（ http://www.smarty.net/ ）
-* PEAR（ http://pear.php.net/ ）
-* MDB2（ http://pear.php.net/package/MDB2 ）
-* MDB2_Driver_mysqli（ http://pear.php.net/package/MDB2_Driver_mysqli/ ）
-* Pager（ http://pear.php.net/package/Pager ）
 * Mobile-Detect（ http://mobiledetect.net/ ）
 * PHPoAuthLib（ https://github.com/Lusitanian/PHPoAuthLib ）
 * PHP Markdown Lib（ http://michelf.ca/projects/php-markdown/ ）
@@ -52,8 +48,8 @@ Risoluto2は下記の環境で動作します
 
 ### アップデート／アップグレード手順
 
-現在、これを楽に行う方法は提供されていません。
+現在、これを簡単に行う方法は提供されていません。
 
 はじめに、コンフィグ、ヘッダやフッタ、CSSなど、個別に用意したものやカスタマイズを加えたファイルをバックアップしてください。続いて、最新のリリースパッケージを取得し、更新のあったファイルを入れ替えてください。更新があったファイルの一覧は、git（GitHub）で確認できますが、分からなければ全ファイルが更新されたものとして扱ってください。その後、バックアップしておいたファイルを必要に応じて再配置してください。
 
-もし、カスタマイズされたファイルが最新のリリースパッケージで修正されている場合は、修正箇所を確認した上で何らかの方法でマージする必要があります。また、composer.jsonが更新されている場合は、「php composer.phar update」（「php composer.phar self-update」も同時にしておくと安心です）を実行して環境を更新する必要があります。
+もし、カスタマイズされたファイルが最新のリリースパッケージで修正されている場合は、修正箇所を確認した上で何らかの方法でマージする必要があります。また、composer.jsonが更新されている場合は、「php composer.phar update  -o --no-dev」（「php composer.phar self-update」も同時にしておくと安心です）を実行して環境を更新する必要があります。

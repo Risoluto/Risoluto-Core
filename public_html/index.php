@@ -1,13 +1,13 @@
 <?php
 /**
- * Risoluto起動ルーチン
+ * index.php
  *
  * Risolutoコアクラスインスタンスを作成し、実行する
  *
  * @package       risoluto
  * @author        Risoluto Developers
  * @license       http://opensource.org/licenses/bsd-license.php new BSD license
- * @copyright (C) 2008-2013 Risoluto Developers / All Rights Reserved.
+ * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
 //------------------------------------------------------//
@@ -85,7 +85,7 @@ if (file_exists($autoloader) and is_file($autoloader) and is_readable($autoloade
         <ol>
             <li>cd $path_lib</li>
             <li>curl -sS https://getcomposer.org/installer | php</li>
-            <li>php composer.phar install</li>
+            <li>php composer.phar install -o --no-dev</li>
             <li>sudo chown -R {Webサーバの実行ユーザ}:{Webサーバの実行グループ} $path_dat</li>
         </ol>
         <p>セットアップが終了したら、この画面を再読込してください。</p>

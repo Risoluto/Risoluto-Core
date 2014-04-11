@@ -1,3 +1,8 @@
+{*
+This file is part of Risoluto( http://www.risoluto.org/ )
+Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
+(C) 2008-2014 Risoluto Developers / All Rights Reserved.
+*}
 {include file="$__RISOLUTO_APPS/common/header.tpl"}
 <h1>Risolutoサンプル #2</h1>
 <h2>アプリケーションへの値の受け渡し方法について</h2>
