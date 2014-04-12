@@ -6,17 +6,18 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {include file="$__RISOLUTO_APPS/common/header.tpl"}
 <script type="application/javascript">
     $(function () {
-        $("#risoluto_menu").menu(
+        $("#risoluto_menuarea").menu(
                 {
                     position: {
                         my: "center",
-                        at: "right+4 bottom+45"
+                        at: "bottom+45",
+                        of: "risoluto_menuarea"
                     }
                 }
         );
     });
 </script>
-<ul id="risoluto_menu" class="risoluto_menu">
+<ul id="risoluto_menuarea" class="risoluto_menu">
     <li class="ui-state-disabled"><a href="#">メニュー1</a></li>
     <li><a href="#">メニュー2</a></li>
     <li><a href="#">メニュー3</a></li>

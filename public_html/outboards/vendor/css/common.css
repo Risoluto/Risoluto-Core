@@ -80,6 +80,8 @@ ul.risoluto_menu {
 
     font-weight: bold;
     height: 36px;
+
+    z-index: -1;
 }
 
 ul.risoluto_menu li {
@@ -170,7 +172,7 @@ ul.risoluto_menu ul a:hover, ul.risoluto_menu ul a:active {
 .ui-icon:after {
     font-size: xx-small;
 
-    content: '>';
+    content: "\0021d3";
 
     position: absolute;
     right: 0.5em;
