@@ -4,9 +4,9 @@
  *
  * Conf()用テストケース
  *
- * @package       risoluto
- * @author        Risoluto Developers
- * @license       http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package           risoluto
+ * @author            Risoluto Developers
+ * @license           http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 //------------------------------------------------------//
@@ -125,8 +125,8 @@ class ConfTest extends PHPUnit_Framework_TestCase
             ),
 
 
-            "DB"      => array(
-                "default" => "{DBTYPE}://{USER}:{PASSWORD}@{HOST}/{DBNAME}"
+            "THEME"   => array(
+                "outboards" => "vendor"
             )
         );
         $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
