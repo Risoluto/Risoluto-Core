@@ -1,6 +1,7 @@
 # Risoluto-Core
 
 [![Build Status](https://travis-ci.org/hayakawa/Risoluto-Core.svg?branch=master)](https://travis-ci.org/hayakawa/Risoluto-Core)
+[![Code Climate](https://codeclimate.com/github/hayakawa/Risoluto-Core.png)](https://codeclimate.com/github/hayakawa/Risoluto-Core)
 
 ## Risolutoとは
 
