@@ -1,5 +1,7 @@
 # Risoluto-Core
 
+[![Build Status](https://travis-ci.org/hayakawa/Risoluto-Core.svg?branch=master)](https://travis-ci.org/hayakawa/Risoluto-Core)
+
 ## Risolutoとは
 
 Risolutoは「シンプルで軽い」をコンセプトに開発されたPHPフレームワークです。既存のフレームワークは、その言語自体に加え、フレームワーク 自体について理解しなければいけないことが多くありますが、Risolutoは、極力「PHPを理解していればつかえる」ように作られていますので、初め てフレームワークを使う方や既存のフレームワークほどの機能が不要な方に最適です。
