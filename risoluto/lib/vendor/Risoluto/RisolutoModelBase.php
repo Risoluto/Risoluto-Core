@@ -4,9 +4,9 @@
  *
  * ユーザアプリ向けモデル用基底クラス
  *
- * @package       risoluto
- * @author        Risoluto Developers
- * @license       http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package           risoluto
+ * @author            Risoluto Developers
+ * @license           http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 

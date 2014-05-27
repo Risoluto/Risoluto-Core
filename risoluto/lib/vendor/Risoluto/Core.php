@@ -4,9 +4,9 @@
  *
  * Risolutoの中核部分に関するメソッドが含まれているクラス
  *
- * @package       risoluto
- * @author        Risoluto Developers
- * @license       http://opensource.org/licenses/bsd-license.php new BSD license
+ * @package           risoluto
+ * @author            Risoluto Developers
+ * @license           http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
@@ -228,7 +228,7 @@ class Core
             // $load中の「_」を「\」に置換
             $load = str_replace('_', '\\', $load);
 
-                    // 指定されたアプリケーションが存在していなければエラーとする
+            // 指定されたアプリケーションが存在していなければエラーとする
             $target = RISOLUTO_APPS . str_replace('\\', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
             if (!file_exists($target) or !is_file($target) or !is_readable($target)) {

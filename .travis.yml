@@ -14,3 +14,10 @@ before_script:
 
 script:
     - sh ./phpunit_run.sh
+
+notifications:
+  email:
+    recipients:
+      - dev@risoluto.org
+    on_success: always
+    on_failure: always
