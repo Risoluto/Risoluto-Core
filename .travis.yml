@@ -19,5 +19,3 @@ notifications:
   email:
     recipients:
       - dev@risoluto.org
-    on_success: always
-    on_failure: always

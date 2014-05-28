@@ -15,12 +15,6 @@
 //------------------------------------------------------//
 namespace Risoluto;
 
-use \Risoluto\Conf;
-use \Risoluto\Log;
-
-//------------------------------------------------------//
-// クラス定義
-//------------------------------------------------------//
 class Core
 {
     //------------------------------------------------------//
@@ -33,9 +27,9 @@ class Core
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
-     * @return    void    なし
+     * @return    void
      */
     public function Perform()
     {
@@ -55,7 +49,7 @@ class Core
                 $targetInstance->Init($call['param']);
             } else {
                 // メソッドが存在しなければ例外をThrow
-                throw new Exception($this->coreError('notfound_init'));
+                throw new \Exception($this->coreError('notfound_init'));
             }
 
             // HTTPのメソッドに応じて適切なコントローラをコール
@@ -64,11 +58,8 @@ class Core
                 case 'GET':
                     if (method_exists($targetInstance, 'PlayGet')) {
                         $targetInstance->PlayGet();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -76,11 +67,8 @@ class Core
                 case 'POST':
                     if (method_exists($targetInstance, 'PlayPost')) {
                         $targetInstance->PlayPost();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -88,11 +76,8 @@ class Core
                 case 'PUT':
                     if (method_exists($targetInstance, 'PlayPut')) {
                         $targetInstance->PlayPut();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -100,11 +85,8 @@ class Core
                 case 'DELETE':
                     if (method_exists($targetInstance, 'PlayDelete')) {
                         $targetInstance->PlayDelete();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -112,11 +94,8 @@ class Core
                 case 'OPTION':
                     if (method_exists($targetInstance, 'PlayOption')) {
                         $targetInstance->PlayOption();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -124,11 +103,8 @@ class Core
                 case 'HEAD':
                     if (method_exists($targetInstance, 'PlayHead')) {
                         $targetInstance->PlayHead();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -136,11 +112,8 @@ class Core
                 case 'TRACE':
                     if (method_exists($targetInstance, 'PlayTrace')) {
                         $targetInstance->PlayTrace();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
@@ -148,40 +121,59 @@ class Core
                 case 'CONNECT':
                     if (method_exists($targetInstance, 'PlayConnect')) {
                         $targetInstance->PlayConnect();
-                    } elseif (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
                     } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
+                        $this->PlayFuncCall($targetInstance);
                     }
                     break;
 
                 // デフォルトの場合
                 default:
-                    if (method_exists($targetInstance, 'Play')) {
-                        $targetInstance->Play();
-                    } else {
-                        // メソッドが存在しなければ例外をThrow
-                        throw new Exception($this->coreError('notfound_play'));
-                    }
+                    $this->PlayFuncCall($targetInstance);
                     break;
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             // エラーハンドリングメソッドをコール
-            if (method_exists($targetInstance, 'Error')) {
-                $targetInstance->Error($e);
-            } else {
-                // メソッドが存在しなければ強制終了
-                die($this->coreError('notfound_error'));
+            if (!empty($targetInstance)) {
+                if (method_exists($targetInstance, 'Error')) {
+                    $targetInstance->Error($e);
+                } else {
+                    // メソッドが存在しなければ強制終了
+                    die($this->coreError('notfound_error'));
+                }
             }
         } finally {
             // クリーニングメソッドをコール
-            if (method_exists($targetInstance, 'Clean')) {
-                $targetInstance->Clean();
-            } else {
-                // メソッドが存在しなければ強制終了
-                die($this->coreError('notfound_clean'));
+            if (!empty($targetInstance)) {
+                if (method_exists($targetInstance, 'Clean')) {
+                    $targetInstance->Clean();
+                } else {
+                    // メソッドが存在しなければ強制終了
+                    die($this->coreError('notfound_clean'));
+                }
             }
+        }
+    }
+
+    /**
+     * PlayFuncCall()
+     *
+     * Play()メソッドをコールする（存在しない場合は例外をThrow）
+     *
+     * @access private
+     *
+     * @param object $targetInstance クラスインスタンス
+     *
+     * @return void
+     *
+     * @throws \Exception
+     */
+    private function PlayFuncCall($targetInstance)
+    {
+        if (method_exists($targetInstance, 'Play')) {
+            $targetInstance->Play();
+        } else {
+            // メソッドが存在しなければ例外をThrow
+            throw new \Exception($this->coreError('notfound_play'));
         }
     }
 
@@ -192,7 +184,7 @@ class Core
      *
      * @access    private
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    array   呼び出すクラスの情報等
      */
