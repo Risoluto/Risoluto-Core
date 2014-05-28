@@ -47,7 +47,7 @@ class Conf
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    boolean パース状況（true：パース済み/false:未パース）
      */

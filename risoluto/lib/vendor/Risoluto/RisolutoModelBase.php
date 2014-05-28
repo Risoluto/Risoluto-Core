@@ -10,12 +10,12 @@
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
+// ToDo: \Risoluto\Dbクラス作成後にいい感じにする
+
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
 namespace Risoluto;
-
-Use \Risoluto\Db;
 
 abstract class RisolutoModelBase
 {
@@ -25,7 +25,7 @@ abstract class RisolutoModelBase
     /**
      * $obj_db
      * @access private
-     * @var    object    \Risoluto\Dbのオブジェクト
+     * @var    object    Dbクラスのオブジェクト
      */
     private $__obj_db;
 

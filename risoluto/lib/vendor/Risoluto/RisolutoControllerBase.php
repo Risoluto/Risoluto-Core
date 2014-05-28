@@ -15,9 +15,6 @@
 //------------------------------------------------------//
 namespace Risoluto;
 
-use \Smarty;
-use \Risoluto\Conf;
-
 abstract class RisolutoControllerBase
 {
     //------------------------------------------------------//
@@ -49,7 +46,7 @@ abstract class RisolutoControllerBase
      *
      * @access    protected
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    array    パラメタ情報
      */
@@ -75,10 +72,10 @@ abstract class RisolutoControllerBase
         $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace('../', '', $tmpl_path);
 
         // テンプレートエンジン関連定義（Smartyを使用）
-        $tmpl = new Smarty;
+        $tmpl = new \Smarty;
 
         //--- テンプレートキャッシュの設定
-        $tmpl->caching              = Smarty::CACHING_OFF;
+        $tmpl->caching              = \Smarty::CACHING_OFF;
         $tmpl->cache_dir            = RISOLUTO_CACHE;
         $tmpl->cache_modified_check = true;
         $tmpl->cache_lifetime       = 0;
@@ -142,9 +139,6 @@ abstract class RisolutoControllerBase
      */
     protected function DispTemplate($tmpl_instance, $tmpl_name, $mode = 'view')
     {
-        // 戻り値を保持する変数
-        $retval = false;
-
         // $modeに応じて呼び出すメソッドを変更する
         switch ($mode) {
             // 変数格納時の時
@@ -233,8 +227,6 @@ abstract class RisolutoControllerBase
     {
         // 取得したパラメタをクラス変数にセットする
         $this->__param = $param;
-
-        return true;
     }
 
     /**
@@ -250,7 +242,6 @@ abstract class RisolutoControllerBase
      */
     public function Play()
     {
-        return true;
     }
 
     /**
@@ -267,8 +258,6 @@ abstract class RisolutoControllerBase
     public function PlayGet()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -285,8 +274,6 @@ abstract class RisolutoControllerBase
     public function PlayPost()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -303,8 +290,6 @@ abstract class RisolutoControllerBase
     public function PlayPut()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -321,8 +306,6 @@ abstract class RisolutoControllerBase
     public function PlayDelete()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -339,8 +322,6 @@ abstract class RisolutoControllerBase
     public function PlayOption()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -357,8 +338,6 @@ abstract class RisolutoControllerBase
     public function PlayHead()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -375,8 +354,6 @@ abstract class RisolutoControllerBase
     public function PlayTrace()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -393,8 +370,6 @@ abstract class RisolutoControllerBase
     public function PlayConnect()
     {
         $this->Play();
-
-        return true;
     }
 
     /**
@@ -410,7 +385,6 @@ abstract class RisolutoControllerBase
      */
     public function Error($errobj = null)
     {
-        return true;
     }
 
     /**
@@ -426,6 +400,5 @@ abstract class RisolutoControllerBase
      */
     public function Clean()
     {
-        return true;
     }
 }
