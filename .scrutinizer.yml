@@ -1,0 +1,2 @@
+filter:
+    excluded_paths: [risoluto/conf/*, risoluto/data/*, risoluto/lib/vender_text/*]
