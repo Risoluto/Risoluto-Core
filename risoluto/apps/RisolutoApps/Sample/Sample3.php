@@ -42,7 +42,5 @@ class Sample3 extends \Risoluto\RisolutoControllerBase
         $smarty = $this->InitTemplate('Sample/');
         $this->AssignTemplate($smarty, array('header' => $header));
         $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
-
-        return true;
     }
 }

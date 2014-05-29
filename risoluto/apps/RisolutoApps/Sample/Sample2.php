@@ -42,7 +42,5 @@ class Sample2 extends \Risoluto\RisolutoControllerBase
         $smarty = $this->InitTemplate('Sample/');
         $this->AssignTemplate($smarty, array('header' => $header, 'param' => $this->GetParam(), 'get' => $_GET, 'post' => $_POST, 'server' => $_SERVER));
         $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
-
-        return true;
     }
 }

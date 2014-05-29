@@ -48,12 +48,12 @@
 
     border-bottom: #5a49d9 thick solid;
 
-    margin: 1% 0% 0% 0%;
+    margin: 1% 0 0 0;
     padding: 1% 1% 1% 1%;
 }
 
 .content_content {
-    padding: 0px 6px;
+    padding: 0 6px;
 }
 
 .clear {
@@ -226,8 +226,7 @@ a:hover, a:active {
 }
 
 a img {
-    border-style: none;
-    border-width: 0px;
+    border: 0 none;
     text-decoration: none;
 }
 
@@ -251,7 +250,7 @@ h2 {
 
     font-size: 180%;
 
-    margin: 10px 0px;
+    margin: 10px 0;
     padding: 10px 5px 10px 5px;
 
     box-shadow: 1px 3px 7px 1px #666666;
@@ -335,13 +334,11 @@ td {
 }
 
 ul li {
-    list-style-type: square;
-    list-style-position: inside;
+    list-style: square inside;
 }
 
 ol li {
-    list-style-type: decimal-leading-zero;
-    list-style-position: inside;
+    list-style: decimal-leading-zero inside;
 }
 
 dl dt {

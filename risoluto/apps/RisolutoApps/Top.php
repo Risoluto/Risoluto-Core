@@ -42,7 +42,5 @@ class Top extends \Risoluto\RisolutoControllerBase
         $smarty = $this->InitTemplate();
         $this->AssignTemplate($smarty, array('header' => $header));
         $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
-
-        return true;
     }
 }

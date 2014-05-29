@@ -44,20 +44,21 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {/if}
 
 <h3>POSTで渡された値の表示</h3>
+<p>
+    下のフォームからこのアプリケーションにPOSTすると、ここにその内容が表示されます。
+</p>
+<form action="?seq=Sample_Sample2" method="post">
+    <label>
+        <input type="text" name="post_sample" value="ここに好きな値を入力してください">
+    </label>
+    <input type="submit" value="POSTする">
+</form>
 {if !empty($post)}
     <ol>
         {foreach $post as $key => $val}
             <li>{$key|escape:'htmlall':'UTF-8'} -> {$val|escape:'htmlall':'UTF-8'}</li>
         {/foreach}
     </ol>
-{else}
-    <p>
-        下のフォームからこのアプリケーションにPOSTすると、ここにその内容が表示されます。
-    <form action="?seq=Sample_Sample2" method="post">
-        <input type="text" name="post_sample" value="ここに好きな値を入力してください">
-        <input type="submit" value="POSTする">
-    </form>
-    </p>
 {/if}
 
 
