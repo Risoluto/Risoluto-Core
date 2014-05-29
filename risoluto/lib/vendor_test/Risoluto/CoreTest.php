@@ -13,12 +13,12 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-use Risoluto\Core;
+namespace Risoluto;
 
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class CoreTest extends PHPUnit_Framework_TestCase
+class CoreTest extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -40,7 +40,7 @@ class CoreTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Risoluto\Core;
+        $this->instance = new Core;
     }
 
     /**

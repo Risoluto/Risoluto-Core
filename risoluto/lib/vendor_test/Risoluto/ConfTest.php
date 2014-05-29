@@ -12,12 +12,12 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-use Risoluto\Conf;
+namespace Risoluto;
 
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class ConfTest extends PHPUnit_Framework_TestCase
+class ConfTest extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -39,7 +39,7 @@ class ConfTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Risoluto\Conf;
+        $this->instance = new Conf;
     }
 
     /**

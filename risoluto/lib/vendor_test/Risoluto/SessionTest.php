@@ -13,12 +13,12 @@
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
-use Risoluto\Session;
+namespace Risoluto;
 
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class SessionTest extends PHPUnit_Framework_TestCase
+class SessionTest extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -40,7 +40,7 @@ class SessionTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Risoluto\Session;
+        $this->instance = new Session;
     }
 
     /**
