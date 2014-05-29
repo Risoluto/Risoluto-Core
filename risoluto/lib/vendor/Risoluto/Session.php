@@ -232,7 +232,7 @@ class Session
      *
      * @param     void なし
      *
-     * @return    boolean    常にtrue
+     * @return    boolean|null    常にtrue
      */
     public function RevokeAll()
     {

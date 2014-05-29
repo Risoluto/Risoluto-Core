@@ -634,7 +634,7 @@ class Util
      * @param boolean $firstType      配列の先頭に未選択状態を示す要素をセットするか（デフォルト：false）
      * @param string  $nonSelectedVal 未選択状態を示す要素の要素値（デフォルト：''）
      * @param string  $nonSelectedStr 未選択状態を示す要素の配列値（デフォルト：''）
-     * @param string  $start          生成する数字の最小値（デフォルト：1）
+     * @param integer  $start          生成する数字の最小値（デフォルト：1）
      * @param string  $format         生成する数字のフォーマット（デフォルト：'$02d'）
      *
      * @return array 数値の配列
