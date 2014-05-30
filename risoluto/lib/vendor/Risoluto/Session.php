@@ -240,7 +240,7 @@ class Session
         if (isset($_SESSION)) {
             // すべての値を抹消する
             foreach ($_SESSION as $key => $val) {
-                $this->sessRevoke($key);
+                $this->Revoke($key);
             }
         }
     }
