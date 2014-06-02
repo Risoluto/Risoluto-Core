@@ -72,10 +72,10 @@ abstract class RisolutoControllerBase
         $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace('../', '', $tmpl_path);
 
         // テンプレートエンジン関連定義（Smartyを使用）
-        $tmpl = new Smarty;
+        $tmpl = new \Smarty;
 
         //--- テンプレートキャッシュの設定
-        $tmpl->caching              = Smarty::CACHING_OFF;
+        $tmpl->caching              = \Smarty::CACHING_OFF;
         $tmpl->cache_dir            = RISOLUTO_CACHE;
         $tmpl->cache_modified_check = true;
         $tmpl->cache_lifetime       = 0;
