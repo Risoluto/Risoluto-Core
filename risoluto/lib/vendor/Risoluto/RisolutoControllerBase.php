@@ -72,10 +72,10 @@ abstract class RisolutoControllerBase
         $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace('../', '', $tmpl_path);
 
         // テンプレートエンジン関連定義（Smartyを使用）
-        $tmpl = new \Smarty;
+        $tmpl = new Smarty;
 
         //--- テンプレートキャッシュの設定
-        $tmpl->caching              = \Smarty::CACHING_OFF;
+        $tmpl->caching              = Smarty::CACHING_OFF;
         $tmpl->cache_dir            = RISOLUTO_CACHE;
         $tmpl->cache_modified_check = true;
         $tmpl->cache_lifetime       = 0;
@@ -191,18 +191,18 @@ abstract class RisolutoControllerBase
 
             // CSS
             'css'         => array(
-                'outboards/' . $outboards . '/css/common.css'
+                '/outboards/' . $outboards . '/css/common.css'
             ),
 
             // JavaScript
             'js'          => array(
                 '//code.jquery.com/jquery-2.1.0.min.js',
                 '//code.jquery.com/ui/1.10.4/jquery-ui.min.js',
-                'outboards/' . $outboards . '/js/common.js'
+                '/outboards/' . $outboards . '/js/common.js'
             ),
 
             // テーマが格納されたディレクトリ名
-            'favicon'     => 'outboards/' . $outboards . '/img/favicon.ico',
+            'favicon'     => '/outboards/' . $outboards . '/img/favicon.ico',
 
             // タイトル
             'title'       => 'ようこそ！Risolutoの世界へ！',
