@@ -75,25 +75,25 @@ abstract class RisolutoControllerBase
         $tmpl = new \Smarty;
 
         //--- テンプレートキャッシュの設定
-        $tmpl->caching              = \Smarty::CACHING_OFF;
-        $tmpl->cache_dir            = RISOLUTO_CACHE;
+        $tmpl->caching = \Smarty::CACHING_OFF;
+        $tmpl->setCacheDir(RISOLUTO_CACHE);
         $tmpl->cache_modified_check = true;
         $tmpl->cache_lifetime       = 0;
 
         //--- コンパイル済みテンプレートの設定
         $tmpl->compile_check = true;
-        $tmpl->compile_dir   = RISOLUTO_CACHE;
+        $tmpl->setCompileDir(RISOLUTO_CACHE);
         $tmpl->force_compile = true;
 
         //--- テンプレート用コンフィグファイルの設定
-        $tmpl->config_dir = $tmpl_path;
+        $tmpl->setConfigDir($tmpl_path);
 
         //--- テンプレートのデバッグ設定
         $tmpl->debugging      = false;
         $tmpl->debugging_ctrl = 'NONE';
 
         //--- テンプレートファイルのパス
-        $tmpl->template_dir = $tmpl_path;
+        $tmpl->setTemplateDir($tmpl_path);
 
         return $tmpl;
     }
@@ -165,7 +165,7 @@ abstract class RisolutoControllerBase
      *
      * @access    protected
      *
-     * @param     void    なし
+     * @param     void
      *
      * @return    array   デフォルトのヘッダ
      */
@@ -219,7 +219,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     array 当該クラスに関するパラメタ情報
+     * @param     array $param 当該クラスに関するパラメタ情報
      *
      * @return    void     なし
      */
@@ -236,7 +236,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -251,7 +251,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -267,7 +267,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -283,7 +283,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -299,7 +299,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -315,7 +315,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -331,7 +331,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -347,7 +347,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -363,7 +363,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
@@ -379,7 +379,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     object エラーオブジェクト
+     * @param     object $errobj エラーオブジェクト
      *
      * @return    void      なし
      */
@@ -394,7 +394,7 @@ abstract class RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
