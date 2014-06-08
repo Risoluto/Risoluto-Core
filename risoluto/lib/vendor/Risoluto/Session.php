@@ -236,12 +236,14 @@ class Session
      */
     public function RevokeAll()
     {
-        // セッション変数が存在するかをチェック
-        if (isset($_SESSION)) {
-            // すべての値を抹消する
-            foreach ($_SESSION as $key => $val) {
-                $this->Revoke($key);
-            }
+        $_SESSION = array();
+
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 42000, '/');
         }
+
+        session_destroy();
+
+        return true;
     }
 }
