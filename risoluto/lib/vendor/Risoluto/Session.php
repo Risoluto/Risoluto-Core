@@ -127,7 +127,9 @@ class Session
     public function End()
     {
         // クッキーを削除
-        setcookie($this->sessname, "");
+        if (isset($_COOKIE[$this->sessname])) {
+            setcookie($this->sessname, '', time() - 42000, '/');
+        }
 
         // スーパーグローバルな$_COOKIEと$_SESSIONをクリア
         $_COOKIE[$this->sessname] = array();
@@ -236,14 +238,12 @@ class Session
      */
     public function RevokeAll()
     {
-        $_SESSION = array();
-
-        if (isset($_COOKIE[session_name()])) {
-            setcookie(session_name(), '', time() - 42000, '/');
+        // セッション変数が存在するかをチェック
+        if (isset($_SESSION)) {
+            // すべての値を抹消する
+            foreach ($_SESSION as $key) {
+                $this->Revoke($key);
+            }
         }
-
-        session_destroy();
-
-        return true;
     }
 }
