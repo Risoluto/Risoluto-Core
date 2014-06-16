@@ -15,6 +15,10 @@ Risoluto2の中核部分です。Risoluto2のブートストラップといく�
 
 ## Risoluto2をつかうには
 
+### ドキュメント
+
+Risoluto2に関するドキュメントは[GitHubのWiki](https://github.com/Risoluto/Risoluto-Core/wiki)にまとめてあります
+
 ### 動作環境
 
 Risoluto2は下記の環境で動作します
