@@ -47,8 +47,8 @@ class Session
      *
      * @access    public
      *
-     * @param     string セッションファイル保存ディレクトリ
-     * @param     string セッション名
+     * @param     string $path セッションファイル保存ディレクトリ
+     * @param     string $name セッション名
      *
      * @return    boolean    セッション開始結果（true：正常終了/false:異常終了）
      */
@@ -100,8 +100,8 @@ class Session
      *
      * @access    public
      *
-     * @param     string セッションファイル保存ディレクトリ
-     * @param     string セッション名
+     * @param     string $path セッションファイル保存ディレクトリ
+     * @param     string $name セッション名
      *
      * @return    boolean    セッション再開始結果（true：正常終了/false:異常終了）
      */
@@ -120,7 +120,7 @@ class Session
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    boolean セッション終了結果（true：正常終了/false:異常終了）
      */
@@ -154,8 +154,8 @@ class Session
      *
      * @access    public
      *
-     * @param     string 格納先セッション変数名
-     * @param     mixed  格納する値（number or string）
+     * @param     string $destination 格納先セッション変数名
+     * @param     mixed  $val         格納する値（number or string）
      *
      * @return    boolean    常にtrue
      */
@@ -176,7 +176,7 @@ class Session
      *
      * @access    public
      *
-     * @param     string 取得元セッション変数名
+     * @param     string $from 取得元セッション変数名
      *
      * @return    mixed     取得した値
      */
@@ -196,7 +196,7 @@ class Session
      *
      * @access    public
      *
-     * @param     string 判定対象セッション変数名
+     * @param     string $chkName 判定対象セッション変数名
      *
      * @return    boolean    存在状況(true:存在する/false:存在しない)
      */
@@ -212,7 +212,7 @@ class Session
      *
      * @access    public
      *
-     * @param     string 抹消対象セッション変数名
+     * @param     string $chkName 抹消対象セッション変数名
      *
      * @return    boolean    常にtrue
      */
@@ -232,7 +232,7 @@ class Session
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    boolean    常にtrue
      */
