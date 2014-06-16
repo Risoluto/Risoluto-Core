@@ -251,7 +251,7 @@ class Core
      *
      * @access    private
      *
-     * @param     string $key なし
+     * @param     string $key エラーを示すキー文字列
      *
      * @return    string    エラーメッセージ
      */
