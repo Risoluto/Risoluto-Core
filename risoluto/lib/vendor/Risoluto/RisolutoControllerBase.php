@@ -385,6 +385,9 @@ abstract class RisolutoControllerBase
      */
     public function Error($errobj = null)
     {
+        if ($errobj) {
+            trigger_error($errobj->getMessage(), E_USER_ERROR);
+        }
     }
 
     /**
