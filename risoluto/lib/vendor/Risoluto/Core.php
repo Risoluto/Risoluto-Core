@@ -180,7 +180,7 @@ class Core
     /**
      * FindCallClass()
      *
-     * クラス内で発生したエラーに対するエラーメッセージを生成する
+     * 呼び出すクラスを決定する
      *
      * @access    private
      *
