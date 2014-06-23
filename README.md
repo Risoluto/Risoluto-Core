@@ -1,6 +1,6 @@
 # Risoluto-Core
 
-[![Build Status](https://travis-ci.org/hayakawa/Risoluto-Core.svg?branch=master)](https://travis-ci.org/hayakawa/Risoluto-Core)
+[![Build Status](https://travis-ci.org/Risoluto/Risoluto-Core.svg?branch=master)](https://travis-ci.org/Risoluto/Risoluto-Core)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Risoluto/Risoluto-Core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Risoluto/Risoluto-Core/?branch=master)
 
 ## Risolutoとは
