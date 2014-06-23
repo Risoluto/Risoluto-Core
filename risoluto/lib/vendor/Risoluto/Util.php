@@ -35,7 +35,7 @@ class Util
      */
     public function GetBaseUrl($target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
     {
-        Url::GetBaseUrl($target);
+        return Url::GetBaseUrl($target);
     }
 
     /**
@@ -69,7 +69,7 @@ class Util
      */
     public function StatChecker($target)
     {
-        File::StatChecker($target);
+        return File::StatChecker($target);
     }
 
     /**
@@ -88,7 +88,7 @@ class Util
      */
     public function FileOperator($operation, $target, $destination = null, $prefix = null)
     {
-        File::FileOperator($operation, $target, $destination, $prefix);
+        return File::FileOperator($operation, $target, $destination, $prefix);
     }
 
     /**
@@ -106,7 +106,7 @@ class Util
      */
     public function AutoUrlLink($target, $newWindow = true, $extra = null)
     {
-        Text::AutoUrlLink($target, $newWindow, $extra);
+        return Text::AutoUrlLink($target, $newWindow, $extra);
     }
 
     /**
@@ -122,7 +122,7 @@ class Util
      */
     public function IsEmailAddr($value)
     {
-        Validate::IsEmailAddr($value);
+        return Validate::IsEmailAddr($value);
     }
 
     /**
@@ -138,7 +138,7 @@ class Util
      */
     function IsHalfWidth($value)
     {
-        Validate::IsHalfWidth($value);
+        return Validate::IsHalfWidth($value);
     }
 
     /**
@@ -154,7 +154,7 @@ class Util
      */
     public function IsLeapYear($value)
     {
-        Validate::IsLeapYear($value);
+        return Validate::IsLeapYear($value);
     }
 
     /**
@@ -172,7 +172,7 @@ class Util
      */
     public function IsBetween($value, $lowerval, $upperval)
     {
-        Validate::IsBetween($value, $lowerval, $upperval);
+        return Validate::IsBetween($value, $lowerval, $upperval);
     }
 
     /**
@@ -188,7 +188,7 @@ class Util
      */
     public function CnvYear($year)
     {
-        Date::CnvYear($year);
+        return Date::CnvYear($year);
     }
 
     /**
@@ -209,7 +209,7 @@ class Util
      */
     public function GenYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
     {
-        Date::GenYear($firstType, $nonSelectedVal, $nonSelectedStr, $base, $limit, $mode);
+        return Date::GenYear($firstType, $nonSelectedVal, $nonSelectedStr, $base, $limit, $mode);
     }
 
     /**
@@ -227,7 +227,7 @@ class Util
      */
     public function GenMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
     {
-        Date::GenMonth($firstType, $nonSelectedVal, $nonSelectedStr);
+        return Date::GenMonth($firstType, $nonSelectedVal, $nonSelectedStr);
     }
 
     /**
@@ -246,7 +246,7 @@ class Util
      */
     public function GenDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
     {
-        Date::GenDay($firstType, $nonSelectedVal, $nonSelectedStr, $target);
+        return Date::GenDay($firstType, $nonSelectedVal, $nonSelectedStr, $target);
     }
 
     /**
@@ -265,7 +265,7 @@ class Util
      */
     public function GenHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
     {
-        Date::GenHour($firstType, $nonSelectedVal, $nonSelectedStr, $hourType);
+        return Date::GenHour($firstType, $nonSelectedVal, $nonSelectedStr, $hourType);
     }
 
     /**
@@ -283,6 +283,6 @@ class Util
      */
     public function GenMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
     {
-        Date::GenMinSec($firstType, $nonSelectedVal, $nonSelectedStr);
+        return Date::GenMinSec($firstType, $nonSelectedVal, $nonSelectedStr);
     }
 }
