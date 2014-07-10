@@ -245,5 +245,7 @@ class Session
                 $this->Revoke($key);
             }
         }
+
+        return true;
     }
 }
