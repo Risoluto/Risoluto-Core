@@ -178,6 +178,31 @@ class Core
     }
 
     /**
+     * FixSeqParam()
+     *
+     * $_GET['seq']の値から不適切な文字を排除する
+     *
+     * @access    private
+     *
+     * @param     String $value $_GET['seq']の値
+     *
+     * @return    String 適切な状態に加工した$_GET['seq']
+     */
+    private function FixSeqParam($value = '')
+    {
+        // 検出対象のリスト
+        $searches = array('/\.+/', '/_+/', '/\//', '/\¥/', '/\\\\/', '/[[:space:]]/', '/[[:cntrl:]]/');
+
+        // 対応する置換文字のリスト
+        $replacement = array('.', '_', '', '', '', '', '');
+
+        // 不正な値を除去
+        $retval = preg_replace($searches, $replacement, $value);
+
+        return $retval;
+    }
+
+    /**
      * FindCallClass()
      *
      * 呼び出すクラスを決定する
@@ -198,11 +223,14 @@ class Core
         $load  = $conf->GetIni('SEQ', 'default');
         $param = '';
 
+        // $_GET['seq']の値をチェックする
+        $seq = $this->FixSeqParam((isset($_GET['seq'])) ? $_GET['seq'] : '');
+
         // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
-        if (isset($_GET['seq']) and !empty($_GET['seq'])) {
+        if (isset($seq) and !empty($seq)) {
             // 「.」が付いていたらそこで分割
-            if (strpos('.', $_GET['seq']) === false) {
-                $sep = explode('.', $_GET['seq']);
+            if (strpos('.', $seq) === false) {
+                $sep = explode('.', $seq);
 
                 // 分割後、1つめの要素は画面指定とみなし、2つめ以降の要素はパラメタと見なす
                 $load = 'RisolutoApps\\' . $sep[0];
@@ -213,7 +241,7 @@ class Core
                 }
                 // 「.」が付いていなければそのまま採用する
             } else {
-                $load  = 'RisolutoApps\\' . $_GET['seq'];
+                $load  = 'RisolutoApps\\' . $seq;
                 $param = '';
             }
 
