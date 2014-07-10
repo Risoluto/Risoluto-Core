@@ -1,8 +1,8 @@
 <?php
 /**
- * CoreTest
+ * FileTest4FileOperator
  *
- * Core()用テストケース
+ * File::FileOperator用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,18 +18,8 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class CoreTest extends \PHPUnit_Framework_TestCase
+class FileTest4FileOperator extends \PHPUnit_Framework_TestCase
 {
-    //------------------------------------------------------//
-    // テストクラス変数定義
-    //------------------------------------------------------//
-    /**
-     * $instance
-     * @access protected
-     * @var    object    テスト対象インスタンスを保持
-     */
-    protected $instance;
-
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -40,15 +30,14 @@ class CoreTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Core;
     }
 
     /**
-     * testDummy()
+     * test_FileOperator()
      *
-     * ダミー【FIXME】
+     * FileOperator()の挙動をテストする【FIXME】
      */
-    public function testDummy()
+    public function test_FileOperator()
     {
         $this->markTestIncomplete('We have no idea for this test... I need your help...');
     }

@@ -1,8 +1,8 @@
 <?php
 /**
- * TextTest
+ * TextTest4AutoUrlLink
  *
- * Text()用テストケース
+ * Text::AutoUrlLink用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class TextTest extends \PHPUnit_Framework_TestCase
+class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストメソッド定義

@@ -46,7 +46,7 @@ class SessionTest extends \PHPUnit_Framework_TestCase
     /**
      * testDummy()
      *
-     * ダミー
+     * ダミー[FIXME]
      */
     public function testDummy()
     {

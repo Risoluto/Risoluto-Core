@@ -1,15 +1,14 @@
 <?php
 /**
- * CoreTest
+ * ConfTest4Parse
  *
- * Core()用テストケース
+ * Conf::Parse用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
  * @license           http://opensource.org/licenses/bsd-license.php new BSD license
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
-
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
@@ -18,18 +17,8 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class CoreTest extends \PHPUnit_Framework_TestCase
+class ConfTest4Parse extends \PHPUnit_Framework_TestCase
 {
-    //------------------------------------------------------//
-    // テストクラス変数定義
-    //------------------------------------------------------//
-    /**
-     * $instance
-     * @access protected
-     * @var    object    テスト対象インスタンスを保持
-     */
-    protected $instance;
-
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -40,16 +29,29 @@ class CoreTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Core;
     }
 
     /**
-     * testDummy()
+     * test_ParseSet_InvalidFile()
      *
-     * ダミー【FIXME】
+     * Iniファイル形式ではないファイルが指定された場合のParse()の挙動をテストする
      */
-    public function testDummy()
+    public function test_ParseSet_InvalidFile()
     {
-        $this->markTestIncomplete('We have no idea for this test... I need your help...');
+        $instance = new Conf;
+        $this->assertFalse($instance->Parse('/dev/null'));
+        unset($instance);
+    }
+
+    /**
+     * test_ParseSet_ValidFile()
+     *
+     * Iniファイル形式のファイルが指定された場合のParse()の挙動をテストする
+     */
+    public function test_ParseSet_ValidFile()
+    {
+        $instance = new Conf;
+        $this->assertTrue($instance->Parse(RISOLUTO_CONF . 'risoluto.ini'));
+        unset($instance);
     }
 }

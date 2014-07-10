@@ -1,8 +1,8 @@
 <?php
 /**
- * ValidateTest
+ * ValidateTest4IsBetween
  *
- * Validate()用テストケース
+ * Validate::IsBetween用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class ValidateTest extends \PHPUnit_Framework_TestCase
+class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストメソッド定義
@@ -30,174 +30,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-    }
-
-    /**
-     * test_IsEmailAddr_InvalidTextPart1()
-     *
-     * IsEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その1）
-     */
-    public function test_IsEmailAddr_InvalidTextPart1()
-    {
-        $test = '@risoluto This is test!';
-
-        $this->assertFalse(Validate::IsEmailAddr($test));
-    }
-
-    /**
-     * test_IsEmailAddr_InvalidText()
-     *
-     * IsEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その2）
-     */
-    public function test_IsEmailAddr_InvalidTextPart2()
-    {
-        $test = 'test+test-test.test@risoluto_test-test+test.jp';
-
-        $this->assertFalse(Validate::IsEmailAddr($test));
-    }
-
-    /**
-     * test_IsEmailAddr_ValidTextPart1()
-     *
-     * IsEmailAddr()の挙動をテストする（メールアドレスな文字列その1）
-     */
-    public function test_IsEmailAddr_ValidTextPart1()
-    {
-        $test = 'webmaster@example.net';
-
-        $this->assertTrue(Validate::IsEmailAddr($test));
-    }
-
-    /**
-     * test_IsEmailAddr_ValidTextPart2()
-     *
-     * IsEmailAddr()の挙動をテストする（メールアドレスな文字列その2）
-     */
-    public function test_IsEmailAddr_ValidTextPart2()
-    {
-        $test = 'web_master+test-test.test@example.gr.jp';
-
-        $this->assertTrue(Validate::IsEmailAddr($test));
-    }
-
-    /**
-     * test_IsHalfWidth_HalfNumeric()
-     *
-     * IsHalfWidth()の挙動をテストする（半角数字）
-     */
-    public function test_IsHalfWidth_HalfNumeric()
-    {
-        $test = '0';
-
-        $this->assertTrue(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsHalfWidth_HalfAlphabet()
-     *
-     * IsHalfWidth()の挙動をテストする（半角英字）
-     */
-    public function test_IsHalfWidth_HalfAlphabet()
-    {
-        $test = 'A';
-
-        $this->assertTrue(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsHalfWidth_HalfSymbol()
-     *
-     * IsHalfWidth()の挙動をテストする（半角記号）
-     */
-    public function test_IsHalfWidth_HalfSymbol()
-    {
-        $test = '+';
-
-        $this->assertTrue(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsHalfWidth_FullNumeric()
-     *
-     * IsHalfWidth()の挙動をテストする（全角数字）
-     */
-    public function test_IsHalfWidth_FullNumeric()
-    {
-        $test = '０';
-
-        $this->assertFalse(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsHalfWidth_FullAlphabet()
-     *
-     * IsHalfWidth()の挙動をテストする（全角英字）
-     */
-    public function test_IsHalfWidth_FullAlphabet()
-    {
-        $test = 'Ａ';
-
-        $this->assertFalse(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsHalfWidth_FullSymbol()
-     *
-     * IsHalfWidth()の挙動をテストする（全角記号）
-     */
-    public function test_IsHalfWidth_FullSymbol()
-    {
-        $test = '＋';
-
-        $this->assertFalse(Validate::IsHalfWidth($test));
-    }
-
-    /**
-     * test_IsLeapYear_InvalidArgPart1()
-     *
-     * IsLeapYear()の挙動をテストする（数字2桁）
-     */
-    public function test_IsLeapYear_InvalidArgPart1()
-    {
-        $test = '13';
-
-        $this->assertFalse(Validate::IsLeapYear($test));
-    }
-
-    /**
-     * test_IsLeapYear_InvalidArgPart2()
-     *
-     * IsLeapYear()の挙動をテストする（英字4桁）
-     */
-    public function test_IsLeapYear_InvalidArgPart2()
-    {
-        $test = 'AAAA';
-
-        $this->assertFalse(Validate::IsLeapYear($test));
-    }
-
-    /**
-     * test_IsLeapYear_ValidArgPart1()
-     *
-     * IsLeapYear()の挙動をテストする（閏年である）
-     */
-    public function test_IsLeapYear_ValidArgPart1()
-    {
-        $test = '2000';
-
-        $this->assertTrue(Validate::IsLeapYear($test));
-    }
-
-    /**
-     * test_IsLeapYear_ValidArgPart2()
-     *
-     * IsLeapYear()の挙動をテストする（閏年でない）
-     */
-    public function test_IsLeapYear_ValidArgPart2()
-    {
-        $test = '2013';
-
-        $this->assertFalse(Validate::IsLeapYear($test));
     }
 
     /**

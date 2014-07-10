@@ -1,8 +1,8 @@
 <?php
 /**
- * CoreTest
+ * UrlTest4RedirectTo
  *
- * Core()用テストケース
+ * Url::RedirectTo用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,18 +18,8 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class CoreTest extends \PHPUnit_Framework_TestCase
+class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
 {
-    //------------------------------------------------------//
-    // テストクラス変数定義
-    //------------------------------------------------------//
-    /**
-     * $instance
-     * @access protected
-     * @var    object    テスト対象インスタンスを保持
-     */
-    protected $instance;
-
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -40,15 +30,14 @@ class CoreTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Core;
     }
 
     /**
-     * testDummy()
+     * test_RedirectTo()
      *
-     * ダミー【FIXME】
+     * RedirectTo()の挙動をテストする【FIXME】
      */
-    public function testDummy()
+    public function test_RedirectTo()
     {
         $this->markTestIncomplete('We have no idea for this test... I need your help...');
     }

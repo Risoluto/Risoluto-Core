@@ -5,16 +5,44 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 -->
 <phpunit>
     <testsuites>
-        <testsuite name="Risoluto">
-            <file>vendor_test/Risoluto/ConfTest.php</file>
+        <testsuite name="RisolutoConf">
+            <file>vendor_test/Risoluto/ConfTest4GetParseStatus.php</file>
+            <file>vendor_test/Risoluto/ConfTest4Parse.php</file>
+            <file>vendor_test/Risoluto/ConfTest4GetIni.php</file>
+        </testsuite>
+        <testsuite name="RisolutoCore">
             <file>vendor_test/Risoluto/CoreTest.php</file>
-            <file>vendor_test/Risoluto/DateTest.php</file>
-            <file>vendor_test/Risoluto/FileTest.php</file>
+        </testsuite>
+        <testsuite name="RisolutoDate">
+            <file>vendor_test/Risoluto/DateTest4CnvYear.php</file>
+            <file>vendor_test/Risoluto/DateTest4GenYear.php</file>
+            <file>vendor_test/Risoluto/DateTest4GenMonth.php</file>
+            <file>vendor_test/Risoluto/DateTest4GenDay.php</file>
+            <file>vendor_test/Risoluto/DateTest4GenHour.php</file>
+            <file>vendor_test/Risoluto/DateTest4GenMinSec.php</file>
+        </testsuite>
+        <testsuite name="RisolutoFile">
+            <file>vendor_test/Risoluto/FileTest4StatChecker.php</file>
+            <file>vendor_test/Risoluto/FileTest4FileOperator.php</file>
+        </testsuite>
+        <testsuite name="RisolutoLog">
             <file>vendor_test/Risoluto/LogTest.php</file>
+        </testsuite>
+        <testsuite name="RisolutoSession">
             <file>vendor_test/Risoluto/SessionTest.php</file>
-            <file>vendor_test/Risoluto/TextTest.php</file>
-            <file>vendor_test/Risoluto/UrlTest.php</file>
-            <file>vendor_test/Risoluto/ValidateTest.php</file>
+        </testsuite>
+        <testsuite name="RisolutoText">
+            <file>vendor_test/Risoluto/TextTest4AutoUrlLink.php</file>
+        </testsuite>
+        <testsuite name="RisolutoUrl">
+            <file>vendor_test/Risoluto/UrlTest4GetBaseUrl.php</file>
+            <file>vendor_test/Risoluto/UrlTest4RedirectTo.php</file>
+        </testsuite>
+        <testsuite name="RisolutoValidate">
+            <file>vendor_test/Risoluto/ValidateTest4IsEmailAddr.php</file>
+            <file>vendor_test/Risoluto/ValidateTest4IsHalfWidth.php</file>
+            <file>vendor_test/Risoluto/ValidateTest4IsLeapYear.php</file>
+            <file>vendor_test/Risoluto/ValidateTest4IsBetween.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

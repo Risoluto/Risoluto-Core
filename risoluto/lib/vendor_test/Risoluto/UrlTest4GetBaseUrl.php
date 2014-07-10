@@ -1,8 +1,8 @@
 <?php
 /**
- * UrlTest
+ * UrlTest4GetBaseUrl
  *
- * Url()用テストケース
+ * Url::GetBaseUrl用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class UrlTest extends \PHPUnit_Framework_TestCase
+class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストメソッド定義
@@ -178,15 +178,5 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         $want = 'http://example.com:8888/index.html';
 
         $this->assertEquals(Url::GetBaseUrl($test), $want);
-    }
-
-    /**
-     * test_RedirectTo()
-     *
-     * RedirectTo()の挙動をテストする【FIXME】
-     */
-    public function test_RedirectTo()
-    {
-        $this->markTestIncomplete();
     }
 }

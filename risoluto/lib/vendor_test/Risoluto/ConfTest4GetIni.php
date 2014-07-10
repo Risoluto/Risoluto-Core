@@ -1,8 +1,8 @@
 <?php
 /**
- * ConfTest
+ * ConfTest4GetIni
  *
- * Conf()用テストケース
+ * Conf::GetIni用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -17,18 +17,8 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class ConfTest extends \PHPUnit_Framework_TestCase
+class ConfTest4GetIni extends \PHPUnit_Framework_TestCase
 {
-    //------------------------------------------------------//
-    // テストクラス変数定義
-    //------------------------------------------------------//
-    /**
-     * $instance
-     * @access protected
-     * @var    object    テスト対象インスタンスを保持
-     */
-    protected $instance;
-
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -39,17 +29,6 @@ class ConfTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Conf;
-    }
-
-    /**
-     * test_GetParseStatus_BeforeParsed()
-     *
-     * 未パース時のGetParseStatus()の挙動をテストする
-     */
-    public function test_GetParseStatus_BeforeParsed()
-    {
-        $this->assertFalse($this->instance->GetParseStatus());
     }
 
     /**
@@ -59,49 +38,15 @@ class ConfTest extends \PHPUnit_Framework_TestCase
      */
     public function test_GetIni_BeforeParsed()
     {
-        $this->assertNull($this->instance->GetIni());
-    }
-
-    /**
-     * test_ParseSet_InvalidFile()
-     *
-     * Iniファイル形式ではないファイルが指定された場合のParse()の挙動をテストする
-     */
-    public function test_ParseSet_InvalidFile()
-    {
-        $this->assertFalse($this->instance->Parse('/dev/null'));
-    }
-
-    /**
-     * test_ParseSet_ValidFile()
-     *
-     * Iniファイル形式のファイルが指定された場合のParse()の挙動をテストする
-     */
-    public function test_ParseSet_ValidFile()
-    {
-        $this->assertTrue($this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini'));
-    }
-
-    /**
-     * test_GetParseStatus_AfterParsed()
-     *
-     * パース後のGetParseStatus()の挙動をテストする
-     *
-     * @depends test_ParseSet_ValidFile
-     */
-    public function test_GetParseStatus_AfterParsed()
-    {
-        $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
-
-        $this->assertTrue($this->instance->GetParseStatus());
+        $instance = new Conf;
+        $this->assertNull($instance->GetIni());
+        unset($instance);
     }
 
     /**
      * test_GetIni_NoArgs()
      *
      * パース後のGetIni()の挙動をテストする（引数なし）
-     *
-     * @depends test_ParseSet_ValidFile
      */
     public function test_GetIni_NoArgs()
     {
@@ -129,17 +74,17 @@ class ConfTest extends \PHPUnit_Framework_TestCase
                 "outboards" => "vendor"
             )
         );
-        $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
-        $this->assertEquals($this->instance->GetIni(), $want);
+        $instance = new Conf;
+        $instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $this->assertEquals($instance->GetIni(), $want);
+        unset($instance);
     }
 
     /**
      * test_GetIni_WithOneArgs()
      *
      * パース後のGetIni()の挙動をテストする（セクションのみ指定）
-     *
-     * @depends test_GetIni_NoArgs
      */
     public function test_GetIni_WithOneArgs()
     {
@@ -148,23 +93,25 @@ class ConfTest extends \PHPUnit_Framework_TestCase
             "error"       => "RisolutoApps\\Error",
             "servicestop" => "RisolutoApps\\ServiceStop"
         );
-        $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
-        $this->assertEquals($this->instance->GetIni('SEQ'), $want);
+        $instance = new Conf;
+        $instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $this->assertEquals($instance->GetIni('SEQ'), $want);
+        unset($instance);
     }
 
     /**
      * test_GetIni_WithTwoArgs()
      *
      * パース後のGetIni()の挙動をテストする（セクションのみ指定）
-     *
-     * @depends test_GetIni_WithOneArgs
      */
     public function test_GetIni_WithTwoArgs()
     {
         $want = "RisolutoApps\\Top";
-        $this->instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
 
-        $this->assertEquals($this->instance->GetIni('SEQ', 'default'), $want);
+        $instance = new Conf;
+        $instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $this->assertEquals($instance->GetIni('SEQ', 'default'), $want);
+        unset($instance);
     }
 }

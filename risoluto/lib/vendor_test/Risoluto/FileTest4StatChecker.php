@@ -1,8 +1,8 @@
 <?php
 /**
- * FileTest
+ * FileTest4StatChecker
  *
- * File()用テストケース
+ * File::StatChecker用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest4StatChecker extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストメソッド定義
@@ -39,16 +39,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function test_StatChecker()
     {
-        $this->markTestIncomplete();
-    }
-
-    /**
-     * test_FileOperator()
-     *
-     * FileOperator()の挙動をテストする【FIXME】
-     */
-    public function test_FileOperator()
-    {
-        $this->markTestIncomplete();
+        $this->markTestIncomplete('We have no idea for this test... I need your help...');
     }
 }
