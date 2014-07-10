@@ -191,7 +191,7 @@ class Core
     private function FixSeqParam($value = '')
     {
         // 検出対象のリスト
-        $searches = array('/\.+/', '/_+/', '/\//', '/\¥/', '/\\\\/', '/[[:space:]]/', '/[[:cntrl:]]/');
+        $searches = array('/\.+/', '/_+/', '/\//', '/\¥/', '/\\\\/', '/[[:blank:]]/', '/[[:cntrl:]]/');
 
         // 対応する置換文字のリスト
         $replacement = array('.', '_', '', '', '', '', '');
