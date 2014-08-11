@@ -164,3 +164,6 @@ pip-log.txt
 
 # For PhpStorm
 .idea/
+
+# For Vagrant
+.vagrant/
