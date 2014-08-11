@@ -1,8 +1,8 @@
 <?php
 /**
- * LogTest
+ * DbTest
  *
- * Log()用テストケース
+ * Db()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class LogTest extends \PHPUnit_Framework_TestCase
+class DbTest extends \PHPUnit_Framework_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -40,13 +40,12 @@ class LogTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Log;
     }
 
     /**
      * testDummy()
      *
-     * ダミー[FIXME]
+     * ダミー【FIXME】
      */
     public function testDummy()
     {

@@ -5,44 +5,43 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 -->
 <phpunit>
     <testsuites>
-        <testsuite name="RisolutoConf">
-            <file>vendor_test/Risoluto/ConfTest4GetParseStatus.php</file>
-            <file>vendor_test/Risoluto/ConfTest4Parse.php</file>
-            <file>vendor_test/Risoluto/ConfTest4GetIni.php</file>
+        <testsuite name="RisolutoConfTest">
+            <file>vendor_test/Risoluto/ConfTest/ConfTest4GetParseStatus.php</file>
+            <file>vendor_test/Risoluto/ConfTest/ConfTest4Parse.php</file>
+            <file>vendor_test/Risoluto/ConfTest/ConfTest4GetIni.php</file>
         </testsuite>
-        <testsuite name="RisolutoCore">
-            <file>vendor_test/Risoluto/CoreTest.php</file>
+        <testsuite name="RisolutoCoreTest">
+            <file>vendor_test/Risoluto/CoreTest/CoreTest.php</file>
         </testsuite>
-        <testsuite name="RisolutoDate">
-            <file>vendor_test/Risoluto/DateTest4CnvYear.php</file>
-            <file>vendor_test/Risoluto/DateTest4GenYear.php</file>
-            <file>vendor_test/Risoluto/DateTest4GenMonth.php</file>
-            <file>vendor_test/Risoluto/DateTest4GenDay.php</file>
-            <file>vendor_test/Risoluto/DateTest4GenHour.php</file>
-            <file>vendor_test/Risoluto/DateTest4GenMinSec.php</file>
+        <testsuite name="RisolutoDateTest">
+            <file>vendor_test/Risoluto/DateTest/DateTest4CnvYear.php</file>
+            <file>vendor_test/Risoluto/DateTest/DateTest4GenYear.php</file>
+            <file>vendor_test/Risoluto/DateTest/DateTest4GenMonth.php</file>
+            <file>vendor_test/Risoluto/DateTest/DateTest4GenDay.php</file>
+            <file>vendor_test/Risoluto/DateTest/DateTest4GenHour.php</file>
+            <file>vendor_test/Risoluto/DateTest/DateTest4GenMinSec.php</file>
         </testsuite>
-        <testsuite name="RisolutoFile">
-            <file>vendor_test/Risoluto/FileTest4StatChecker.php</file>
-            <file>vendor_test/Risoluto/FileTest4FileOperator.php</file>
+        <testsuite name="RisolutoFileTest">
+            <file>vendor_test/Risoluto/FileTest/FileTest.php</file>
         </testsuite>
-        <testsuite name="RisolutoLog">
-            <file>vendor_test/Risoluto/LogTest.php</file>
+        <testsuite name="RisolutoLogTest">
+            <file>vendor_test/Risoluto/LogTest/LogTest.php</file>
         </testsuite>
-        <testsuite name="RisolutoSession">
-            <file>vendor_test/Risoluto/SessionTest.php</file>
+        <testsuite name="RisolutoSessionTest">
+            <file>vendor_test/Risoluto/SessionTest/SessionTest.php</file>
         </testsuite>
-        <testsuite name="RisolutoText">
-            <file>vendor_test/Risoluto/TextTest4AutoUrlLink.php</file>
+        <testsuite name="RisolutoTextTest">
+            <file>vendor_test/Risoluto/TextTest/TextTest4AutoUrlLink.php</file>
         </testsuite>
-        <testsuite name="RisolutoUrl">
-            <file>vendor_test/Risoluto/UrlTest4GetBaseUrl.php</file>
-            <file>vendor_test/Risoluto/UrlTest4RedirectTo.php</file>
+        <testsuite name="RisolutoUrlTest">
+            <file>vendor_test/Risoluto/UrlTest/UrlTest4GetBaseUrl.php</file>
+            <file>vendor_test/Risoluto/UrlTest/UrlTest4RedirectTo.php</file>
         </testsuite>
-        <testsuite name="RisolutoValidate">
-            <file>vendor_test/Risoluto/ValidateTest4IsEmailAddr.php</file>
-            <file>vendor_test/Risoluto/ValidateTest4IsHalfWidth.php</file>
-            <file>vendor_test/Risoluto/ValidateTest4IsLeapYear.php</file>
-            <file>vendor_test/Risoluto/ValidateTest4IsBetween.php</file>
+        <testsuite name="RisolutoValidateTest">
+            <file>vendor_test/Risoluto/ValidateTest/ValidateTest4IsEmailAddr.php</file>
+            <file>vendor_test/Risoluto/ValidateTest/ValidateTest4IsHalfWidth.php</file>
+            <file>vendor_test/Risoluto/ValidateTest/ValidateTest4IsLeapYear.php</file>
+            <file>vendor_test/Risoluto/ValidateTest/ValidateTest4IsBetween.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

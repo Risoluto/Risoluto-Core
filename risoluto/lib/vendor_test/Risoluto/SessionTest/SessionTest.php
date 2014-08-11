@@ -40,7 +40,6 @@ class SessionTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->instance = new Session;
     }
 
     /**

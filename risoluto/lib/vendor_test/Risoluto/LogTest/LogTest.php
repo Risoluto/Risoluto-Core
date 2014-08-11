@@ -1,8 +1,8 @@
 <?php
 /**
- * FileTest4StatChecker
+ * LogTest
  *
- * File::StatChecker用テストケース
+ * Log()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,8 +18,18 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class FileTest4StatChecker extends \PHPUnit_Framework_TestCase
+class LogTest extends \PHPUnit_Framework_TestCase
 {
+    //------------------------------------------------------//
+    // テストクラス変数定義
+    //------------------------------------------------------//
+    /**
+     * $instance
+     * @access protected
+     * @var    object    テスト対象インスタンスを保持
+     */
+    protected $instance;
+
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -33,11 +43,11 @@ class FileTest4StatChecker extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test_StatChecker()
+     * testDummy()
      *
-     * StatChecker()の挙動をテストする【FIXME】
+     * ダミー[FIXME]
      */
-    public function test_StatChecker()
+    public function testDummy()
     {
         $this->markTestIncomplete('We have no idea for this test... I need your help...');
     }

@@ -1,8 +1,8 @@
 <?php
 /**
- * FileTest4FileOperator
+ * FileTest
  *
- * File::FileOperator用テストケース
+ * File()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,8 +18,18 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class FileTest4FileOperator extends \PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit_Framework_TestCase
 {
+    //------------------------------------------------------//
+    // テストクラス変数定義
+    //------------------------------------------------------//
+    /**
+     * $instance
+     * @access protected
+     * @var    object    テスト対象インスタンスを保持
+     */
+    protected $instance;
+
     //------------------------------------------------------//
     // テストメソッド定義
     //------------------------------------------------------//
@@ -33,11 +43,11 @@ class FileTest4FileOperator extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * test_FileOperator()
+     * testDummy()
      *
-     * FileOperator()の挙動をテストする【FIXME】
+     * ダミー【FIXME】
      */
-    public function test_FileOperator()
+    public function testDummy()
     {
         $this->markTestIncomplete('We have no idea for this test... I need your help...');
     }
