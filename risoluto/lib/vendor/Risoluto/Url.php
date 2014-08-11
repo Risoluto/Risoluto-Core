@@ -30,7 +30,7 @@ class Url
     }
 
     /**
-     * GetBaseUrl
+     * GetBaseUrlGetBaseUrl(array $target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
      *
      * ベースURLを取得する
      *
@@ -42,7 +42,7 @@ class Url
      *
      * @return    string    自身のベースURL
      */
-    public static function GetBaseUrl($target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
+    public static function GetBaseUrl(array $target = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'))
     {
         //---スキーマ（ポートの値でHTTP/HTTPSのどちらかを判定）
         switch ($target['SERVER_PORT']) {
@@ -74,7 +74,7 @@ class Url
     }
 
     /**
-     * RedirectTo
+     * RedirectTo($target = null,array $getKey = null,array $getVal = null)
      *
      * 指定された画面へリダイレクトする
      *
@@ -86,7 +86,7 @@ class Url
      *
      * @return    void      なし
      */
-    public static function RedirectTo($target = null, $getKey = null, $getVal = null)
+    public static function RedirectTo($target = null,array $getKey = null,array $getVal = null)
     {
         // ベースURLを取得する
         $baseUrl    = self::GetBaseUrl() . '?seq=' . $target;

@@ -100,7 +100,7 @@ class Conf
      * @param     string $section 検索対象のセクション
      * @param     string $key     検索対象のキー
      *
-     * @return    string    セクションに対応する配列、またはキーに対応する値。どちらも存在しない場合はnull
+     * @return    mixed    セクションに対応する配列、またはキーに対応する値。どちらも存在しない場合はnull
      */
     public function GetIni($section = '', $key = '')
     {

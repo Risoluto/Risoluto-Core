@@ -49,7 +49,7 @@ class Core
                 $targetInstance->Init($call['param']);
             } else {
                 // メソッドが存在しなければ例外をThrow
-                throw new \Exception($this->coreError('notfound_init'));
+                throw new \Exception($this->coreError('notfound', 'Init()'));
             }
 
             // HTTPのメソッドに応じて適切なコントローラをコール
@@ -138,7 +138,7 @@ class Core
                     $targetInstance->Error($e);
                 } else {
                     // メソッドが存在しなければ強制終了
-                    die($this->coreError('notfound_error'));
+                    die($this->coreError('notfound', 'Error()'));
                 }
             }
         } finally {
@@ -148,14 +148,14 @@ class Core
                     $targetInstance->Clean();
                 } else {
                     // メソッドが存在しなければ強制終了
-                    die($this->coreError('notfound_clean'));
+                    die($this->coreError('notfound', 'Clean()'));
                 }
             }
         }
     }
 
     /**
-     * PlayFuncCall()
+     * PlayFuncCall($targetInstance)
      *
      * Play()メソッドをコールする（存在しない場合は例外をThrow）
      *
@@ -173,12 +173,12 @@ class Core
             $targetInstance->Play();
         } else {
             // メソッドが存在しなければ例外をThrow
-            throw new \Exception($this->coreError('notfound_play'));
+            throw new \Exception($this->coreError('notfound', 'Play*()'));
         }
     }
 
     /**
-     * FixSeqParam()
+     * FixSeqParam($value = '')
      *
      * $_GET['seq']の値から不適切な文字を排除する
      *
@@ -221,7 +221,7 @@ class Core
 
         // デフォルトの情報をセット
         $load  = $conf->GetIni('SEQ', 'default');
-        $param = '';
+        $param = array();
 
         // $_GET['seq']の値をチェックする
         $seq = $this->FixSeqParam((isset($_GET['seq'])) ? $_GET['seq'] : '');
@@ -242,7 +242,7 @@ class Core
                 // 「.」が付いていなければそのまま採用する
             } else {
                 $load  = 'RisolutoApps\\' . $seq;
-                $param = '';
+                $param = array();
             }
 
             // $load中の「_」を「\」に置換
@@ -253,7 +253,7 @@ class Core
             clearstatcache(true);
             if (!file_exists($target) or !is_file($target) or !is_readable($target)) {
                 $load  = $conf->GetIni('SEQ', 'error');
-                $param = '';
+                $param = array();
             }
         }
 
@@ -262,7 +262,7 @@ class Core
         clearstatcache(true);
         if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or $loadavg[0] > $conf->GetIni('LIMITS', 'max_loadavg')) {
             $load  = $conf->GetIni('SEQ', 'servicestop');
-            $param = '';
+            $param = array();
         }
 
         // 決定した情報を返却する
@@ -279,32 +279,18 @@ class Core
      *
      * @access    private
      *
-     * @param     string $key エラーを示すキー文字列
+     * @param     string $key           エラーを示すキー文字列
+     * @param     string $optional_text オプションの文字列
      *
      * @return    string    エラーメッセージ
      */
-    private function CoreError($key = '')
+    private function CoreError($key = '', $optional_text = '')
     {
         // 引数の値に応じてエラーメッセージをセットする
         switch ($key) {
-            // イニシャライズメソッド未定義エラーの場合
-            case 'notfound_init':
-                $msg = 'Required method is not exists - Init()';
-                break;
-
-            // コントローラメソッド未定義エラーの場合
-            case 'notfound_play':
-                $msg = 'Required method is not exists - Play*()';
-                break;
-
-            // エラーハンドリングメソッド未定義エラーの場合
-            case 'notfound_error':
-                $msg = 'Required method is not exists - Error()';
-                break;
-
-            // クリーニングメソッド未定義エラーの場合
-            case 'notfound_clean':
-                $msg = 'Required method is not exists - Clean()';
+            // 未定義エラーの場合
+            case 'notfound':
+                $msg = 'Required method is not exists - ' . (isset($optional_text) and empty($optional_text) ? $optional_text : 'unknown');
                 break;
 
             // 未定義のエラーの場合

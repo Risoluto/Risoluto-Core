@@ -63,7 +63,7 @@ class Log
      * コンストラクタ
      *
      * @access    public
-     * @return    void
+     * @return \Risoluto\Log
      */
     public function __construct()
     {
@@ -77,7 +77,7 @@ class Log
      *
      * @access    public
      *
-     * @param     string ログ出力パス
+     * @param     string $path ログ出力パス
      *
      * @return    void
      */
@@ -93,7 +93,7 @@ class Log
      *
      * @access    public
      *
-     * @param     string ログレベル
+     * @param     string $loglevel ログレベル
      *
      * @return    void
      */
@@ -107,8 +107,8 @@ class Log
      *
      * 指定されたログレベルで指定された文字列を出力する
      *
-     * @param     string ログレベル（stop|emerg|alert|crit|error|warn|notice|info|debug）
-     * @param     string 出力するメッセージ
+     * @param     string $loglvl ログレベル（stop|emerg|alert|crit|error|warn|notice|info|debug）
+     * @param     string $logmes 出力するメッセージ
      *
      * @return    boolean    出力結果（{書き込んだバイト数}：正常終了/false:異常終了）
      */

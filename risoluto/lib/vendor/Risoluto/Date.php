@@ -30,7 +30,7 @@ class Date
     }
 
     /**
-     * CnvYear
+     * CnvYear($year)
      *
      * 西暦に対応する和暦を取得する
      *
@@ -72,7 +72,7 @@ class Date
     }
 
     /**
-     * GenEraName
+     * GenEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
      *
      * @access private
      *
@@ -83,7 +83,7 @@ class Date
      *
      * @return string 生成された和暦年号表記
      */
-    private static function GenEraName($year, $currentEraName, $nextEraName = "", $borderYear = "")
+    private static function GenEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
     {
         // 1年の場合は元年として表示する
         if ($year == '1') {
@@ -102,7 +102,7 @@ class Date
     }
 
     /**
-     * GenYear
+     * GenYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
      *
      * 「年」の情報が格納された配列を生成する
      *
@@ -164,7 +164,7 @@ class Date
     }
 
     /**
-     * GenMonth
+     * GenMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
      *
      * 「月」の情報が格納された配列を生成する
      *
@@ -185,7 +185,7 @@ class Date
     }
 
     /**
-     * GenDay
+     * GenDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
      *
      * 「日」の情報が格納された配列を生成する
      *
@@ -235,7 +235,7 @@ class Date
     }
 
     /**
-     * GenHour
+     * GenHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
      *
      * 「時」の情報が格納された配列を生成する
      *
@@ -266,7 +266,7 @@ class Date
     }
 
     /**
-     * GenMinSec
+     * GenMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
      *
      * 「分」または「秒」の情報が格納された配列を生成する
      *
@@ -287,7 +287,7 @@ class Date
     }
 
     /**
-     * GenNumberList
+     * GenNumberList($limit, $firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $start = 1, $format = '%02d')
      *
      * 月、日、時、分、秒用の数字のリストを生成する
      *

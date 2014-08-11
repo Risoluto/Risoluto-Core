@@ -30,7 +30,7 @@ class File
     }
 
     /**
-     * StatChecker
+     * StatChecker(array $target)
      *
      * 指定されたファイルやディレクトリのステータスをチェックする
      *
@@ -40,7 +40,7 @@ class File
      *
      * @return    array    チェック結果が格納された連想配列
      */
-    public static function StatChecker($target)
+    public static function StatChecker(array $target)
     {
         // ローカル変数の初期化
         $result = array(
@@ -91,7 +91,7 @@ class File
     }
 
     /**
-     * FileOperator
+     * FileOperator($operation, $target, $destination = null, $prefix = null)
      *
      * 指定されたファイルやディレクトリに対し、作成/コピー/移動/削除等を行う
      *

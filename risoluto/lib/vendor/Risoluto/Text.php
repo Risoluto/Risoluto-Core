@@ -30,7 +30,7 @@ class Text
     }
 
     /**
-     * AutoUrlLink
+     * AutoUrlLink($target, $newWindow = true, $extra = null)
      *
      * 引数で指定された文字列中の特定部分をリンクに変換する
      *

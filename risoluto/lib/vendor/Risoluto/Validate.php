@@ -30,7 +30,7 @@ class Validate
     }
 
     /**
-     * IsEmailAddr
+     * IsEmailAddr($value)
      *
      * 引数で指定された値がメールアドレスのフォーマットと合致しているか判定する
      *
@@ -46,7 +46,7 @@ class Validate
     }
 
     /**
-     * IsHalfWidth
+     * IsHalfWidth($value)
      *
      * 引数で指定された値が半角文字列のみで構成されているか判定する
      *
@@ -62,7 +62,7 @@ class Validate
     }
 
     /**
-     * IsLeapYear
+     * IsLeapYear($value)
      *
      * 引数で指定された値が閏年であるか判定する
      *
@@ -88,7 +88,7 @@ class Validate
     }
 
     /**
-     * IsBetween
+     * IsBetween($value, $lowerval, $upperval)
      *
      * 引数で指定された値が引数で指定された下限値及び上限値の範囲内にあるかを判定する
      *
