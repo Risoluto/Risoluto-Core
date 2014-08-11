@@ -56,7 +56,7 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * InitTemplate()
+     * InitTemplate($tmpl_path = '')
      *
      * テンプレートエンジンのインスタンスを生成する
      *
@@ -99,7 +99,7 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * AssignTemplate()
+     * AssignTemplate(\Smarty $tmpl_instance,array $values)
      *
      * テンプレートに表示内容をアサインする
      *
@@ -110,7 +110,7 @@ abstract class RisolutoControllerBase
      *
      * @return    boolean   常にtrue
      */
-    protected function AssignTemplate($tmpl_instance, $values)
+    protected function AssignTemplate(\Smarty $tmpl_instance,array $values)
     {
         // デフォルトでテンプレートに引き渡す情報
         $tmpl_instance->assign('__RISOLUTO_APPS', RISOLUTO_APPS);
@@ -125,7 +125,7 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * DispTemplate()
+     * DispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
      *
      * テンプレートを表示または表示内容を取得する
      *
@@ -137,7 +137,7 @@ abstract class RisolutoControllerBase
      *
      * @return    mixed     $mode=view:常にtrue / $mode=fetch:表示内容/想定外の場合：false
      */
-    protected function DispTemplate($tmpl_instance, $tmpl_name, $mode = 'view')
+    protected function DispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
     {
         // $modeに応じて呼び出すメソッドを変更する
         switch ($mode) {
@@ -169,7 +169,7 @@ abstract class RisolutoControllerBase
      *
      * @return    array   デフォルトのヘッダ
      */
-    public function GetDefaultHeader()
+    protected function GetDefaultHeader()
     {
         // Risolutoのコンフィグからテーマの情報を取得する
         $conf = new Conf();
@@ -223,7 +223,7 @@ abstract class RisolutoControllerBase
      *
      * @return    void     なし
      */
-    public function Init($param = array())
+    public function Init(array $param = array())
     {
         // 取得したパラメタをクラス変数にセットする
         $this->__param = $param;
@@ -373,17 +373,17 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * Error()
+     * Error(\Exception $errobj = null)
      *
      * エラー処理を行う
      *
      * @access    public
      *
-     * @param     object $errobj エラーオブジェクト
+     * @param     object $errobj 例外オブジェクト
      *
      * @return    void      なし
      */
-    public function Error($errobj = null)
+    public function Error(\Exception $errobj = null)
     {
         if ($errobj) {
             trigger_error($errobj->getMessage(), E_USER_ERROR);

@@ -18,7 +18,7 @@ namespace RisolutoApps\Sample;
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class Sample2 extends \Risoluto\RisolutoControllerBase
+class Sample2 extends \Risoluto\RisolutoControllerBase implements \Risoluto\RisolutoControllerInterface
 {
     /**
      * Play()
@@ -27,12 +27,15 @@ class Sample2 extends \Risoluto\RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
     public function Play()
     {
+        // ユーザ定義のライブラリコール例
+        \RisolutoUserLibs\SampleLibs::SampleMethod();
+
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
 

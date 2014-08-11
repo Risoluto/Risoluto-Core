@@ -18,7 +18,7 @@ namespace RisolutoApps;
 //------------------------------------------------------//
 // クラス定義
 //------------------------------------------------------//
-class Error extends \Risoluto\RisolutoControllerBase
+class Error extends \Risoluto\RisolutoControllerBase implements \Risoluto\RisolutoControllerInterface
 {
     /**
      * Play()
@@ -27,7 +27,7 @@ class Error extends \Risoluto\RisolutoControllerBase
      *
      * @access    public
      *
-     * @param     void なし
+     * @param     void
      *
      * @return    void    なし
      */
