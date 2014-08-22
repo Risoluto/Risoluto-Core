@@ -4,6 +4,14 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 (C) 2008-2014 Risoluto Developers / All Rights Reserved.
 -->
 <phpunit>
+    <php>
+        <var name="DB_DSN" value="mysql:host=127.0.0.1;port=3306;dbname=risoluto_db_test;charset=utf8"/>
+        <var name="DB_DRIVER" value="mysql"/>
+        <var name="DB_USER" value="root"/>
+        <var name="DB_PASSWORD" value=""/>
+        <var name="DB_DBNAME" value="risoluto_db_test"/>
+        <var name="DB_HOST" value="localhost"/>
+    </php>
     <testsuites>
         <testsuite name="RisolutoConfTest">
             <file>vendor_test/Risoluto/ConfTest/ConfTest4GetParseStatus.php</file>
@@ -20,6 +28,14 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
             <file>vendor_test/Risoluto/DateTest/DateTest4GenDay.php</file>
             <file>vendor_test/Risoluto/DateTest/DateTest4GenHour.php</file>
             <file>vendor_test/Risoluto/DateTest/DateTest4GenMinSec.php</file>
+        </testsuite>
+        <testsuite name="RisolutoDbTest">
+            <file>vendor_test/Risoluto/DbTest/DbTest4Connect.php</file>
+            <file>vendor_test/Risoluto/DbTest/DbTest4DisConnect.php</file>
+            <file>vendor_test/Risoluto/DbTest/DbTest4GetAttribute.php</file>
+            <file>vendor_test/Risoluto/DbTest/DbTest4SetAttribute.php</file>
+            <file>vendor_test/Risoluto/DbTest/DbTest4ExecAndTransactions.php</file>
+            <file>vendor_test/Risoluto/DbTest/DbTest4DoQuery.php</file>
         </testsuite>
         <testsuite name="RisolutoFileTest">
             <file>vendor_test/Risoluto/FileTest/FileTest.php</file>

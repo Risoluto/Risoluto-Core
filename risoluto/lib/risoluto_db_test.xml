@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!--
+This file is part of Risoluto( http://www.risoluto.org/ )
+Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
+(C) 2008-2014 Risoluto Developers / All Rights Reserved.
+-->
+<dataset>
+    <table name="risoluto_db_test">
+        <column>id</column>
+        <column>column1</column>
+        <column>column2</column>
+        <row>
+            <value>1</value>
+            <value>id1:column1</value>
+            <value>id1:column2</value>
+        </row>
+        <row>
+            <value>2</value>
+            <null />
+            <null />
+        </row>
+    </table>
+</dataset>

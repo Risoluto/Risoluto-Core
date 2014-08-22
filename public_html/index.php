@@ -86,7 +86,7 @@ if (file_exists($autoloader) and is_file($autoloader) and is_readable($autoloade
             <li>cd $path_lib</li>
             <li>curl -sS https://getcomposer.org/installer | php</li>
             <li>php composer.phar install -o --no-dev</li>
-            <li>sudo chown -R {Webサーバの実行ユーザ}:{Webサーバの実行グループ} $path_dat</li>
+            <li>sudo chmod -R 777 $path_dat</li>
         </ol>
         <p>セットアップが終了したら、この画面を再読込してください。</p>
     </body>

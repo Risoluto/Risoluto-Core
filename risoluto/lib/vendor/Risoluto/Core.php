@@ -20,6 +20,8 @@ class Core
     //------------------------------------------------------//
     // クラスメソッド定義
     //------------------------------------------------------//
+    use RisolutoErrorLogTrait;
+
     /**
      * Perform()
      *
@@ -300,12 +302,7 @@ class Core
         }
 
         // ログ出力しエラーメッセージを返却
-        $conf = new Conf;
-        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
-
-        $log = new Log;
-        $log->SetCurrentLogLevel($conf->GetIni('LOGGING', 'loglevel'));
-        $log->Log('error', $msg);
+        $this->RisolutoErrorLog('error', $msg);
 
         return $msg;
     }
