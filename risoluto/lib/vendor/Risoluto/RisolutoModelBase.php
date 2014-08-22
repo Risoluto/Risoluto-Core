@@ -10,8 +10,6 @@
  * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
  */
 
-// ToDo: \Risoluto\Dbクラス作成後にいい感じにする
-
 //------------------------------------------------------//
 // 名前空間の定義
 //------------------------------------------------------//
@@ -24,10 +22,10 @@ abstract class RisolutoModelBase
     //------------------------------------------------------//
     /**
      * $obj_db
-     * @access private
+     * @access protected
      * @var    object    Dbクラスのオブジェクト
      */
-    private $__obj_db;
+    protected  $db;
 
     /**
      * __construct()
@@ -36,7 +34,7 @@ abstract class RisolutoModelBase
      */
     public function __construct()
     {
-        $this->__obj_db = new Db();
+        $this->db = new Db();
     }
 
     /**
@@ -46,6 +44,6 @@ abstract class RisolutoModelBase
      */
     public function __destruct()
     {
-        unset($this->__obj_db);
+        unset($this->db);
     }
 }

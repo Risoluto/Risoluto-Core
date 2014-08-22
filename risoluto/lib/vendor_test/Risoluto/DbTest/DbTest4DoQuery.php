@@ -184,7 +184,7 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
         $instance = new Db;
         $instance->Connect($params);
 
-        // First, $sql and $param sets.
+        // Begin, $sql and $param sets.
         $tmp_result = $instance->DoQuery($sql, $param1);
         $this->assertEquals($want1, $tmp_result);
 

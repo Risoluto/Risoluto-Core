@@ -19,5 +19,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     <li><a href="?seq=Sample_Sample1">URLの指定方法について</a></li>
     <li><a href="?seq=Sample_Sample2">アプリケーションへの値の受け渡し方法について</a></li>
     <li><a href="?seq=Sample_Sample3">RisolutoのCSSを確認する</a></li>
+    <li><a href="?seq=Sample_Sample4">Dbクラスを使ったモデルの作成</a></li>
 </ul>
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}
