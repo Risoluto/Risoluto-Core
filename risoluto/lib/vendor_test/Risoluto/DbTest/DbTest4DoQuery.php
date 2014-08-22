@@ -56,6 +56,9 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
         } elseif (!isset($GLOBALS['DB_HOST'])) {
             $this->markTestSkipped('DB_HOST was not defined. Check phpunit.xml');
         }
+
+        // DB周りの初期化を行う為に元々のsetUp()をコールする
+        parent::setUp();
     }
 
     /**
