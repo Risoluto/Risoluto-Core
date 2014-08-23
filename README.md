@@ -43,7 +43,7 @@ Risoluto2は下記の環境で動作します
 
 下記の手順でインストールできます。
 
-1. Risoluto-Coreのリリースパッケージを取得する（ https://github.com/hayakawa/Risoluto-Core/releases ）
+1. Risoluto-Coreのリリースパッケージを取得する（ https://github.com/Risoluto/Risoluto-Core/releases ）
 2. 「1.」を展開する
 3. 展開して出来た「public_html」ディレクトリがドキュメントルートとなるよう、Webサーバを設定する
 4. 「3.」で設定したURLにアクセスする
