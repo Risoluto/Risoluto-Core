@@ -11,6 +11,15 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         {if isset($menubar) and !empty($menubar)}
             {$menubar}
         {/if}
+        <div class="panel panel-default">
+            <div class="panel-heading">Blog(s) written about Risoluto</div>
+            <div class="panel-body">
+                <ul>
+                    <li><a href="http://blog.hyec.jp/search/label/Risoluto" target="_blank">Yuta Hayakawa(Project Manager)</a></li>
+                </ul>
+            </div>
+            <div class="panel-footer">Notice: Written in Japanese.</div>
+        </div>
 
         <div class="panel panel-default">
             <div class="panel-heading">Link</div>
