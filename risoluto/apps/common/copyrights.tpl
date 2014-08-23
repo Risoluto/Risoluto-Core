@@ -21,7 +21,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <a href="http://www.smarty.net/" target="_blank">Smarty</a> /
         <a href="http://www.phpunit.de/" target="_blank">PHPUnit</a> /
         <a href="http://jquery.com/" target="_blank">jQuery</a> /
-        <a href="http://jqueryui.com/" target="_blank">jQuery UI</a> /
-        <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a>
+        <a href="http://getbootstrap.com//" target="_blank">Bootstrap</a>
     </p>
 </blockquote>

@@ -37,8 +37,7 @@ Risoluto2は下記の環境で動作します
 * PHPMailer（ https://github.com/PHPMailer/PHPMailer ）
 * PHPUnit（ http://www.phpunit.de/ ）
 * jQuery（ http://jquery.com/ ）
-* jQuery UI（ http://jqueryui.com/ ）
-* jQuery Mobile（ http://jquerymobile.com/ ）
+* Bootstrap( http://getbootstrap.com/ )
 
 ### インストール手順
 

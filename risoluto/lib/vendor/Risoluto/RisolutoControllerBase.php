@@ -110,7 +110,7 @@ abstract class RisolutoControllerBase
      *
      * @return    boolean   常にtrue
      */
-    protected function AssignTemplate(\Smarty $tmpl_instance,array $values)
+    protected function AssignTemplate(\Smarty $tmpl_instance, array $values)
     {
         // デフォルトでテンプレートに引き渡す情報
         $tmpl_instance->assign('__RISOLUTO_APPS', RISOLUTO_APPS);
@@ -176,6 +176,9 @@ abstract class RisolutoControllerBase
         $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
         $outboards = $conf->GetIni('THEME', 'outboards');
 
+        // Mobile Detectのインスタンスを作成
+        $mb = new \Mobile_Detect;
+
         return array(
             // ROBOTS
             'robots'      => 'INDEX,FOLLOW',
@@ -191,13 +194,14 @@ abstract class RisolutoControllerBase
 
             // CSS
             'css'         => array(
+                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
                 '/outboards/' . $outboards . '/css/common.css'
             ),
 
             // JavaScript
             'js'          => array(
-                '//code.jquery.com/jquery-2.1.0.min.js',
-                '//code.jquery.com/ui/1.10.4/jquery-ui.min.js',
+                '//code.jquery.com/jquery-2.1.1.min.js',
+                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
                 '/outboards/' . $outboards . '/js/common.js'
             ),
 
@@ -208,7 +212,13 @@ abstract class RisolutoControllerBase
             'title'       => 'ようこそ！Risolutoの世界へ！',
 
             // テーマが格納されたディレクトリ名
-            'outboards'   => $outboards
+            'outboards'   => $outboards,
+
+            // アクセス元のデバイス
+            'mobile'      => array(
+                'isMobile' => $mb->isMobile(),
+                'isTablet' => $mb->isTablet()
+            )
         );
     }
 

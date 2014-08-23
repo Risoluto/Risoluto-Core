@@ -47,11 +47,12 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <p>
     下のフォームからこのアプリケーションにPOSTすると、ここにその内容が表示されます。
 </p>
-<form action="?seq=Sample_Sample2" method="post">
-    <label>
-        <input type="text" name="post_sample" value="ここに好きな値を入力してください">
-    </label>
-    <input type="submit" value="POSTする">
+<form action="?seq=Sample_Sample2" method="POST" class="form-inline" role="form">
+    <div class="form-group">
+        <label for="form_1">アプリケーションに渡す文字列の指定</label>
+        <input type="text" class="form-control" id="post_sample" name="post_sample" placeholder="POSTしたい値を入力">
+        <button type="submit" class="btn btn-default">Postする</button>
+    </div>
 </form>
 {if !empty($post)}
     <ol>

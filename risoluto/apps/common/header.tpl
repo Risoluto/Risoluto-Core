@@ -8,6 +8,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <!-- Begin Head Section -->
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="{$header.robots|strip_tags|escape|upper|default:'INDEX,FOLLOW'}">
     <meta name="Description" content="{$header.description|strip_tags|escape|default:'Risoluto'}">
     <meta name="Keywords" content="{$header.keywords|strip_tags|escape|default:'Risoluto'}">
@@ -17,6 +19,10 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
             <link href="{$css_item|strip_tags|escape}" rel="stylesheet" type="text/css">
         {/foreach}
     {/if}
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     {if count($header.js)}
         {foreach from=$header.js item=js_item}
             <script src="{$js_item|strip_tags|escape}"></script>
@@ -29,16 +35,17 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <!-- Begin Body Section -->
 <body>
 <!-- Begin Body -->
-<div class="header_left">
-    <a href="/">
-        <img src="/outboards/{$header.outboards}/img/risoluto_logo.png" alt="Logo Image" width="467" height="128"
-             style="padding-top: 15px; padding-left: 15px;">
-    </a>
-</div>
-<div class="header_right">
-    &nbsp;
-</div>
-<br class="clear">
+<header class="container-fluid">
+    <div class="col-sm-8">
+        <a href="/">
+            <img src="/outboards/{$header.outboards}/img/risoluto_logo.png" alt="Logo Image" class="img-responsive">
+        </a>
+    </div>
+    <div class="col-sm-4">
+        &nbsp;
+    </div>
+</header>
 
 <!-- Begin Body Left Side -->
-<div class="content_left">
+<section class="container-fluid">
+    <div class="col-sm-8">

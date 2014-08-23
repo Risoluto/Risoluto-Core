@@ -7,189 +7,91 @@
 /****************************************
  Classes
  ****************************************/
-.ok {
-    color: #77ef07;
-}
-
-.warning {
-    color: #ffd900;
-}
-
-.critical {
-    color: #ef2121;
-}
-
-.header_left {
-    float: left;
-    width: 467px;
-}
-
-.header_right {
-    margin-left: 467px;
-}
-
-.content_left {
-    width: 730px;
-    padding: 5px 5px 5px 5px;
-    float: left;
-}
-
-.content_right {
-    width: 300px;
-
-    padding: 5px 5px;
-
-    float: left;
-}
-
-.content_header {
-    font-style: italic;
-    font-weight: bolder;
-
-    border-bottom: #5a49d9 thick solid;
-
-    margin: 1% 0 0 0;
-    padding: 1% 1% 1% 1%;
-}
-
-.content_content {
-    padding: 0 6px;
-}
-
-.clear {
-    clear: both;
-}
-
 .copyright {
     color: #808080;
 
     text-align: center;
 
-    font-size: 80%;
-    font-weight: lighter;
+    font-weight: bold;
     font-style: normal;
 }
 
-/****************************************
- Menu styles
- ****************************************/
-/* Root menus */
-ul.risoluto_menu {
-    color: #ffffff;
-    background: #5a49d9;
+.blockquote-reverse, blockquote.pull-right {
+    text-align: right;
 
-    font-weight: bold;
-    height: 36px;
+    background-color: #f3f3f3;
 
-    z-index: -1;
+    border-left: 0;
+    border-right: #5a49d9 thick double;
+
+    margin: 1% 1% 1% 1%;
+    padding: 1% 1% 1% 1%;
 }
 
-ul.risoluto_menu li {
-    font-size: 90%;
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #ffffff;
+    background-color: #5a49d9;
+}
 
-    list-style-type: none;
+.btn-link {
+    font-weight: 400;
+    color: #5a49d9;
+    cursor: pointer;
+    border-radius: 0;
+}
 
-    margin: 0;
-    padding: 0;
+.jumbotron {
+    padding: 30px;
+    margin-bottom: 30px;
+    color: #ffffff;
+    background-color: #5a49d9;
+}
 
-    background: none;
+.jumbotron h1, .jumbotron .h1 {
+    color: inherit;
+    background-color: inherit;
+    border: none;
+    box-shadow: none;
+}
 
+.progress-bar {
     float: left;
-    position: relative;
-}
-
-ul.risoluto_menu li a {
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
     color: #ffffff;
-
-    display: inline-block;
-
-    height: 30px;
-    padding: 6px 15px 0;
-
-    outline: none;
+    text-align: center;
+    background-color: #5a49d9;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
 }
 
-ul.risoluto_menu li a:link, ul.risoluto_menu li a:visited {
-    color: #ffffff;
-
-    border-right: 1px solid #a39cd6;
-    border-left: 1px solid #a39cd6;
-
-    text-decoration: none;
-}
-
-ul.risoluto_menu li a:hover, ul.risoluto_menu li a:active {
-    color: #5a49d9;
-    background-color: #a39cd6;
-
-    text-decoration: none;
-}
-
-/* Sub menus */
-ul.risoluto_menu ul {
-    width: 200px;
-
-    margin: 0;
-    padding: 0;
-
-    display: none;
-    position: absolute;
-
-    top: 36px;
-    left: -1px;
-}
-
-ul.risoluto_menu ul li {
-    float: none;
-}
-
-ul.risoluto_menu ul a, ul.risoluto_menu ul a:link, ul.risoluto_menu ul a:visited {
+.panel-default > .panel-heading {
     color: #ffffff;
     background-color: #5a49d9;
-
-    font-size: 90%;
-    font-weight: normal;
-
-    border: 1px solid #a39cd6;
-
-    height: 20px;
-
-    padding: 6px 5px 3px 5px;
-
-    display: block;
+    border-color: #a39cd6;
+    font-weight: bold;
+    text-align: center;
 }
 
-ul.risoluto_menu ul a:hover, ul.risoluto_menu ul a:active {
-    color: #5a49d9;
+.panel-body {
+    padding: 15px;
+    border-color: #ffffff;
+}
+
+.panel-footer {
+    color: #ffffff;
+    text-align: right;
+    padding: 10px 15px;
     background-color: #a39cd6;
-
-    text-decoration: none;
-
-    outline: none;
+    border-top: 1px solid #a39cd6;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
-
-/* For JQuery UI/Menu widget(Based on default CSS of JQuery UI):BEGIN */
-.ui-icon:after {
-    font-size: xx-small;
-
-    content: "\0021d3";
-
-    position: absolute;
-    right: 0.5em;
-}
-
-.ui-menu .ui-state-disabled a,
-.ui-menu .ui-state-disabled a:link,
-.ui-menu .ui-state-disabled a:visited,
-.ui-menu .ui-state-disabled a:hover,
-.ui-menu .ui-state-disabled a:active {
-    cursor: default !important;
-    font-weight: normal;
-    color: #b9b9b9;
-    background-color: #5a49d9;
-}
-
-/* For JQuery UI/Menu widget(Based on default CSS of JQuery UI):E N D */
 
 /****************************************
  Tag styles
@@ -198,21 +100,13 @@ body {
     color: #666666;
     background-color: #ffffff;
 
-    font-size: 100%;
     font-weight: normal;
     font-style: normal;
-
-    line-height: 170%;
-
-    width: 1050px;
-
-    margin: 10px auto;
 
     word-break: break-all;
     overflow: auto;
 }
 
-/* Links */
 a {
     text-decoration: none;
 }
@@ -306,25 +200,52 @@ h6 {
     border-bottom: 3px dotted #5a49d9;
 }
 
-table {
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
+.h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small,
+h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small,
+.h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+    color: #a39cd6;
+}
+
+mark, .mark {
+    padding: .2em;
+    background-color: #5a49d9;
+}
+
+mark {
+    color: #ffffff;
+    background: #5a49d9;
+}
+
+s, strike, del {
+    color: #808080;
+    font-weight: lighter;
+}
+
+ins, u {
+    color: #808080;
+    font-weight: bolder;
+}
+
+table, .table {
     width: 100%;
 
     margin: 5% auto 5% auto;
-
     border: solid thin #5a49d9;
 }
 
 th {
     color: #ffffff;
-    background-color: #5a49d9;
+    text-align: center;
 
+    background-color: #5a49d9;
     font: italic bolder 100%;
 
     padding: 1% 1% 1% 1%;
 }
 
 td {
-    background-color: #fcfcfc;
+    background-color: #ffffff;
 
     font: normal 100%;
 
@@ -365,11 +286,9 @@ pre {
 }
 
 blockquote {
-    background-color: #fcfcfc;
+    background-color: #f3f3f3;
 
-    font: lighter medium;
-
-    border: #5a49d9 thick double;
+    border-left: #5a49d9 thick double;
 
     margin: 1% 1% 1% 1%;
     padding: 1% 1% 1% 1%;
