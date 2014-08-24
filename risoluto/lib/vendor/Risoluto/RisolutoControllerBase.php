@@ -30,6 +30,8 @@ abstract class RisolutoControllerBase
     //------------------------------------------------------//
     // クラスメソッド定義
     //------------------------------------------------------//
+    use RisolutoErrorLogTrait;
+
     /**
      * __construct()
      *
@@ -395,9 +397,16 @@ abstract class RisolutoControllerBase
      */
     public function Error(\Exception $errobj = null)
     {
+        // エラー情報をログに出力
         if ($errobj) {
-            trigger_error($errobj->getMessage(), E_USER_ERROR);
+            $msg = $errobj->getMessage();
+        } else {
+            $msg = 'Unknown error occurred.';
         }
+        $this->RisolutoErrorLog('error', 'Class => ' . get_class($this) . ' / Error Message => ' . $msg);
+
+        // エラー画面に遷移する
+        Url::RedirectTo('Error');
     }
 
     /**
