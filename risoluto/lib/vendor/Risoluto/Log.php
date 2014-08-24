@@ -115,7 +115,7 @@ class Log
     public function Log($loglvl, $logmes)
     {
         //-- ローカル変数 --//
-        $currentdate = date('Y-m-d H:i:s');
+        $currentdate = date(\DateTime::W3C);
         $outfile     = str_replace('[[[REPLACED]]]', date('Ymd'), $this->logfile);
 
         // 現在のログレベル以下の場合は出力しない
