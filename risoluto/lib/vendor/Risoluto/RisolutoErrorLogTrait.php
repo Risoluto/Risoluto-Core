@@ -22,7 +22,7 @@ trait RisolutoErrorLogTrait
     //------------------------------------------------------//
 
     /**
-     * RisolutoErrorLog()
+     * RisolutoErrorLog($loglevel, $msg)
      *
      * エラーログを出力する
      *
