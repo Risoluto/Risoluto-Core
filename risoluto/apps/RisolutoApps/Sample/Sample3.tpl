@@ -9,32 +9,32 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
 <h1>h1.
     <small>h1. small</small>
-    <span class="label label-default">Lavel</span>
+    <span class="label label-default">Label</span>
 </h1>
 
 <h2>h2.
     <small>h2. small</small>
-    <span class="label label-primary">Lavel</span>
+    <span class="label label-primary">Label</span>
 </h2>
 
 <h3>h3.
     <small>h3. small</small>
-    <span class="label label-success">Lavel</span>
+    <span class="label label-success">Label</span>
 </h3>
 
 <h4>h4.
     <small>h4. small</small>
-    <span class="label label-info">Lavel</span>
+    <span class="label label-info">Label</span>
 </h4>
 
 <h5>h5.
     <small>h5. small</small>
-    <span class="label label-warning">Lavel</span>
+    <span class="label label-warning">Label</span>
 </h5>
 
 <h6>h6.
     <small>h6. small</small>
-    <span class="label label-danger">Lavel</span>
+    <span class="label label-danger">Label</span>
 </h6>
 
 <hr>
