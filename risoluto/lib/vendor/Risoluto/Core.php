@@ -51,7 +51,7 @@ class Core
                 $targetInstance->Init($call['param']);
             } else {
                 // メソッドが存在しなければ例外をThrow
-                throw new \Exception($this->coreError('notfound', 'Init()'));
+                throw new \Exception($this->coreError('error', 'notfound', 'Init()'));
             }
 
             // HTTPのメソッドに応じて適切なコントローラをコール
@@ -140,7 +140,7 @@ class Core
                     $targetInstance->Error($e);
                 } else {
                     // メソッドが存在しなければ強制終了
-                    die($this->coreError('notfound', 'Error()'));
+                    die($this->coreError('error', 'notfound', 'Error()'));
                 }
             }
         } finally {
@@ -150,7 +150,7 @@ class Core
                     $targetInstance->Clean();
                 } else {
                     // メソッドが存在しなければ強制終了
-                    die($this->coreError('notfound', 'Clean()'));
+                    die($this->coreError('error', 'notfound', 'Clean()'));
                 }
             }
         }
@@ -175,7 +175,7 @@ class Core
             $targetInstance->Play();
         } else {
             // メソッドが存在しなければ例外をThrow
-            throw new \Exception($this->coreError('notfound', 'Play*()'));
+            throw new \Exception($this->coreError('error', 'notfound', 'Play*()'));
         }
     }
 
@@ -254,16 +254,22 @@ class Core
             $target = RISOLUTO_APPS . str_replace('\\', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
             if (!file_exists($target) or !is_file($target) or !is_readable($target)) {
+                // ログにも記録しておく
+                $this->CoreError('warn', 'classnotfound', $load . ' (Path: ' . $target . ' ) / Go to Error page.');
+
                 $load  = $conf->GetIni('SEQ', 'error');
                 $param = array();
             }
         }
 
         // サービスストップファイルが存在するかロードアベレージが一定値以上ならサービスストップ
-        $loadavg = sys_getloadavg();
+        $loadavg     = sys_getloadavg();
         $max_loadavg = $conf->GetIni('LIMITS', 'max_loadavg');
         clearstatcache(true);
         if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or (!empty($max_loadavg) and $loadavg[0] > $max_loadavg)) {
+            // ログにも記録しておく
+            $this->CoreError('warn', 'servicestop', 'Current Loadavg: ' . $loadavg[0] . ' / Setting: ' . $max_loadavg);
+
             $load  = $conf->GetIni('SEQ', 'servicestop');
             $param = array();
         }
@@ -276,25 +282,37 @@ class Core
     }
 
     /**
-     * CoreError($key = '')
+     * CoreError($error_level = 'error', $key = '', $optional_text = 'unknown')
      *
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
      * @access    private
      *
+     * @param     string $error_level   エラーレベル
      * @param     string $key           エラーを示すキー文字列
      * @param     string $optional_text オプションの文字列
      *
      * @return    string    エラーメッセージ
      */
-    private function CoreError($key = '', $optional_text = '')
+    private function CoreError($error_level = 'error', $key = '', $optional_text = 'unknown')
     {
         // 引数の値に応じてエラーメッセージをセットする
         switch ($key) {
             // 未定義エラーの場合
             case 'notfound':
-                $msg = 'Required method is not exists - ' . (isset($optional_text) and empty($optional_text) ? $optional_text : 'unknown');
+                $msg = 'Required method is not exists - ' . $optional_text;
                 break;
+
+            // URLで指定されたアプリケーションが存在しない場合
+            case 'classnotfound':
+                $msg = 'Class not found - ' . $optional_text;
+                break;
+
+            // サービスストップが発生した場合
+            case 'servicestop':
+                $msg = 'Auto Service Stop - ' . $optional_text;
+                break;
+
 
             // 未定義のエラーの場合
             default:
@@ -303,7 +321,7 @@ class Core
         }
 
         // ログ出力しエラーメッセージを返却
-        $this->RisolutoErrorLog('error', $msg);
+        $this->RisolutoErrorLog($error_level, '[' . __CLASS__ . '/]' . $msg);
 
         return $msg;
     }
