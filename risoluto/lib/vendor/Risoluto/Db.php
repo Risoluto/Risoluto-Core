@@ -249,7 +249,7 @@ class Db
     /**
      * RollBack()
      *
-     * トランザクションを開始する
+     * トランザクションをロールバックする
      *
      * @param     void
      *
@@ -310,7 +310,7 @@ class Db
     }
 
     /**
-     * DoQuery($sql, $param)
+     * DoQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
      *
      * SQLを実行する
      *
