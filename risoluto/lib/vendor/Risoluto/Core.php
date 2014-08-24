@@ -261,8 +261,9 @@ class Core
 
         // サービスストップファイルが存在するかロードアベレージが一定値以上ならサービスストップ
         $loadavg = sys_getloadavg();
+        $max_loadavg = $conf->GetIni('LIMITS', 'max_loadavg');
         clearstatcache(true);
-        if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or $loadavg[0] > $conf->GetIni('LIMITS', 'max_loadavg')) {
+        if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or (!empty($max_loadavg) and $loadavg[0] > $max_loadavg)) {
             $load  = $conf->GetIni('SEQ', 'servicestop');
             $param = array();
         }
