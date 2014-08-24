@@ -205,6 +205,39 @@ class Core
     }
 
     /**
+     * IsDisabled($dirpath, $target)
+     *
+     * 無効指定されているかを判定する
+     *
+     * @access    private
+     *
+     * @param     String $dirpath 無効指定ファイルの存在チェックを行うパス
+     * @param     String $target  無効指定チェック対象となるクラス（RisolutoApps\からのフル指定）
+     *
+     * @return    Boolean true：無効指定されている／false：無効指定されていない
+     */
+    private function IsDisabled($dirpath, $target)
+    {
+        // 変数の初期化
+        $retval     = false;
+        $ignorefile = $dirpath . '/RisolutoIgnore';
+
+        // 無効指定ファイルが存在するかをチェック
+        clearstatcache(true);
+        if (file_exists($ignorefile) and is_file($ignorefile) and is_readable($ignorefile)) {
+            // ファイルの内容を読み込む
+            $ignorelist = file($ignorefile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+            // 無効指定されているかを判定（空の場合は全指定されているとみなす）
+            if (empty($ignorelist) or in_array($target, $ignorelist)) {
+                $retval = true;
+            }
+        }
+
+        return $retval;
+    }
+
+    /**
      * FindCallClass()
      *
      * 呼び出すクラスを決定する
@@ -250,10 +283,10 @@ class Core
             // $load中の「_」を「\」に置換
             $load = str_replace('_', '\\', $load);
 
-            // 指定されたアプリケーションが存在していなければエラーとする
+            // 指定されたアプリケーションが存在していないか無効指定されていたらエラーとする
             $target = RISOLUTO_APPS . str_replace('\\', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
-            if (!file_exists($target) or !is_file($target) or !is_readable($target)) {
+            if (!file_exists($target) or !is_file($target) or !is_readable($target) or $this->IsDisabled(dirname($target), $load)) {
                 // ログにも記録しておく
                 $this->CoreError('warn', 'classnotfound', $load . ' (Path: ' . $target . ' ) / Go to Error page.');
 
@@ -303,9 +336,9 @@ class Core
                 $msg = 'Required method is not exists - ' . $optional_text;
                 break;
 
-            // URLで指定されたアプリケーションが存在しない場合
+            // URLで指定されたアプリケーションが存在しないか無効指定されている場合
             case 'classnotfound':
-                $msg = 'Class not found - ' . $optional_text;
+                $msg = 'Class not found or disabled - ' . $optional_text;
                 break;
 
             // サービスストップが発生した場合
