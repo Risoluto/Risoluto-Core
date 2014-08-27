@@ -16,21 +16,6 @@
 namespace Risoluto;
 
 //------------------------------------------------------//
-// 動作環境チェック
-//------------------------------------------------------//
-// PHPバージョンが指定された以前のものであれば強制終了
-if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    exit('Risoluto requires PHP 5.5.0 or later...');
-}
-
-// // OPTIONAL: URLの正規化
-// if (isset($_SERVER['SERVER_NAME']) and !preg_match('/^www.*/i', $_SERVER['SERVER_NAME'])) {
-//     header('Location: ' . ((isset($_SERVER['HTTPS']) and !empty($_SERVER['HTTPS'])) ? 'https' : 'http')
-//                         . '://www.' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'], true, 301);
-//     exit;
-// }
-
-//------------------------------------------------------//
 // 定数定義
 //------------------------------------------------------//
 define('RISOLUTODIR', dirname(dirname(__FILE__)));
@@ -50,6 +35,30 @@ define('RISOLUTO_SESS', RISOLUTO_DATA . 'sess/');
 define('RISOLUTO_UPLOAD', RISOLUTO_DATA . 'upload/');
 
 define('RISOLUTO_LIB_VENDOR', RISOLUTO_LIB . 'vendor/');
+
+//------------------------------------------------------//
+// 動作環境チェック
+//------------------------------------------------------//
+// PHPバージョンが指定された以前のものであれば強制終了
+if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+    exit('Risoluto requires PHP 5.5.0 or later...');
+}
+
+// URL正規化指示ファイルが存在するときのみURLを正規化する
+clearstatcache(true);
+$url_canonical_file = RISOLUTO_SYSROOT . 'URL_CANONICAL';
+if (file_exists($url_canonical_file) and is_file($url_canonical_file) and is_readable($url_canonical_file)) {
+    // URL正規化指示ファイルの中身を取得する（取得できなければデフォルトの「www」をセット）
+    if (!($host = trim(file_get_contents($url_canonical_file)))) {
+        $host = 'www';
+    }
+
+    if (isset($_SERVER['SERVER_NAME']) and !preg_match('/^' . $host . '.*/i', $_SERVER['SERVER_NAME'])) {
+        header('Location: ' . ((isset($_SERVER['HTTPS']) and !empty($_SERVER['HTTPS'])) ? 'https' : 'http')
+            . '://' . $host . '.' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'], true, 301);
+        exit;
+    }
+}
 
 //------------------------------------------------------//
 // インクルードパスの変更
