@@ -44,13 +44,15 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
         $model = new Sample4Model();
 
         // モデルの初期処理を実行
-        $model->Begin();
+        $dat = '';
+        if ($model->Begin()) {
 
-        // 全データを取得する
-        $dat = $model->GetAll();
+            // 全データを取得する
+            $dat = $model->GetAll();
 
-        // モデルの最終処理を実行
-        $model->End();
+            // モデルの最終処理を実行
+            $model->End();
+        }
         //--- DB関連の操作（ここまで）
 
         // ヘッダ情報のセット

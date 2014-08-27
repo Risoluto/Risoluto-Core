@@ -29,7 +29,7 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
      *
      * @param     void
      *
-     * @return    void    なし
+     * @return    処理結果（true: 成功 / false: 失敗）
      */
     public function Begin()
     {
@@ -38,7 +38,7 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
         $db_conf->Parse(RISOLUTO_CONF . 'risoluto_db.ini');
 
         // DBへ接続する
-        $this->db->Connect($db_conf->GetIni('DB'));
+        return $this->db->Connect($db_conf->GetIni('DB'));
     }
 
     /**
