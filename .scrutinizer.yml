@@ -1,0 +1,2 @@
+filter:
+    excluded_paths: [risoluto/lib/vendor_test/*]
