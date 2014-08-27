@@ -20,6 +20,9 @@ namespace RisolutoApps\Sample;
 //------------------------------------------------------//
 class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\RisolutoControllerInterface
 {
+    // View関連の処理を使用する
+    use \Risoluto\RisolutoViewTrait;
+
     /**
      * Play()
      *
@@ -52,12 +55,10 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
 
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
-
-        $header['robots'] = 'NOINDEX,NOFOLLOW';
+        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
 
         // テンプレートエンジン関連の処理
-        $smarty = $this->InitTemplate('Sample/');
-        $this->AssignTemplate($smarty, array('header' => $header, 'dat' => $dat));
-        $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
+        $assign_value = array('header' => $header, 'dat' => $dat);
+        $this->RisolutoView($assign_value);
     }
 }

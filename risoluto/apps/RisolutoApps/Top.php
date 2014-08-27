@@ -20,6 +20,9 @@ namespace RisolutoApps;
 //------------------------------------------------------//
 class Top extends \Risoluto\RisolutoControllerBase implements \Risoluto\RisolutoControllerInterface
 {
+    // View関連の処理を使用する
+    use \Risoluto\RisolutoViewTrait;
+
     /**
      * Play()
      *
@@ -35,12 +38,10 @@ class Top extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risoluto
     {
         // ヘッダ情報のセット
         $header = $this->GetDefaultHeader();
-
-        $header['robots'] = 'NOINDEX,NOFOLLOW';
+        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
 
         // テンプレートエンジン関連の処理
-        $smarty = $this->InitTemplate();
-        $this->AssignTemplate($smarty, array('header' => $header));
-        $this->DispTemplate($smarty, str_replace(array(__NAMESPACE__, '\\'), '', __CLASS__) . '.tpl');
+        $assign_value = array('header' => $header);
+        $this->RisolutoView($assign_value);
     }
 }
