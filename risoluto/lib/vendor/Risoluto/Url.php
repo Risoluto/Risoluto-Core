@@ -74,7 +74,7 @@ class Url
     }
 
     /**
-     * RedirectTo($target = null,array $getKey = null,array $getVal = null)
+     * RedirectTo
      *
      * 指定された画面へリダイレクトする
      *
@@ -86,7 +86,7 @@ class Url
      *
      * @return    void      なし
      */
-    public static function RedirectTo($target = null,array $getKey = null,array $getVal = null)
+    public static function RedirectTo($target = null, $getKey = null, $getVal = null)
     {
         // ベースURLを取得する
         $baseUrl    = self::GetBaseUrl() . '?seq=' . $target;
@@ -94,13 +94,10 @@ class Url
 
         // 他のパラメタが指定されていたら、それをGETパラメタの形に生成
         if (!empty($getKey) and !empty($getVal)) {
-            $tmp_keys = explode(',', $getKey);
-            $tmp_vals = explode(',', $getVal);
-
             // 両方の要素数が合致する場合のみGETパラメタの形式に編集する
-            if (count($tmp_keys) == count($tmp_vals)) {
-                for ($i = 0; $i < count($tmp_keys); $i++) {
-                    $otherParam .= '&' . $tmp_keys[$i] . '=' . $tmp_vals[$i];
+            if (count($getKey) == count($getVal)) {
+                for ($i = 0; $i < count($getKey); $i++) {
+                    $otherParam .= '&' . $getKey[$i] . '=' . $getVal[$i];
                 }
             }
         }
