@@ -43,15 +43,15 @@ class Log
      * @var    array    ログレベル閾値情報を保持
      */
     private $loglevel = array(
-        "stop" => 0
-    , "emerg"  => 1
-    , "alert"  => 2
-    , "crit"   => 3
-    , "error"  => 4
-    , "warn"   => 5
-    , "notice" => 6
-    , "info"   => 7
-    , "debug"  => 8
+        "stop"   => 0,
+        "emerg"  => 1,
+        "alert"  => 2,
+        "crit"   => 3,
+        "error"  => 4,
+        "warn"   => 5,
+        "notice" => 6,
+        "info"   => 7,
+        "debug"  => 8
     );
 
     //------------------------------------------------------//
