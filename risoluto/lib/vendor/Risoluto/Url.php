@@ -80,29 +80,28 @@ class Url
      *
      * @access    public
      *
-     * @param     string $target リダイレクト先の画面識別子
-     * @param     array  $getKey リダイレクト時に付与するGETパラメタのキー部（配列指定）
-     * @param     array  $getVal リダイレクト時に付与するGETパラメタのバリュー部（配列指定）
+     * @param     string $target   リダイレクト先の画面識別子
+     * @param     array  $param    リダイレクト時に付与するパラメタ（連想配列指定）
+     * @param     string $status   リダイレクト時に付与するHTTPステータスコード
+     * @param     array  $servinfo GetBaseUrlに引き渡すサーバ情報が格納された配列（$_SERVER相当）
      *
      * @return    void      なし
      */
-    public static function RedirectTo($target = null, $getKey = null, $getVal = null)
+    public static function RedirectTo($target = '', array $param = array(), $status = '302', array $servinfo = array())
     {
         // ベースURLを取得する
-        $baseUrl    = self::GetBaseUrl() . '?seq=' . $target;
-        $otherParam = null;
+        $baseUrl = self::GetBaseUrl((!empty($servinfo) and is_array($servinfo)) ? $servinfo : $_SERVER) . (!empty($target) ? '?seq=' . $target : '');
 
         // 他のパラメタが指定されていたら、それをGETパラメタの形に生成
-        if (!empty($getKey) and !empty($getVal)) {
-            // 両方の要素数が合致する場合のみGETパラメタの形式に編集する
-            if (count($getKey) == count($getVal)) {
-                for ($i = 0; $i < count($getKey); $i++) {
-                    $otherParam .= '&' . $getKey[$i] . '=' . $getVal[$i];
-                }
+        $otherParam = '';
+        if (!empty($param)) {
+            ksort($param);
+            foreach ($param as $key => $val) {
+                $otherParam .= '.' . $key . (!empty($val) ? '=' . $val : '');
             }
         }
 
         // ヘッダを出力する
-        header("Location: $baseUrl$otherParam");
+        header("Location: $baseUrl$otherParam", true, $status);
     }
 }
