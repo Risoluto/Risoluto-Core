@@ -1,6 +1,7 @@
 {
     "autoload": {
         "psr-0": {
+            "RisolutoCli\\": "../cli/",
             "Risoluto\\": "vendor/",
             "RisolutoUserLibs\\": "vendor/",
             "RisolutoApps\\": "../apps/"
