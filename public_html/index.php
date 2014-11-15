@@ -75,6 +75,7 @@ $autoloader = RISOLUTO_LIB_VENDOR . 'autoload.php';
 clearstatcache(true);
 if (file_exists($autoloader) and is_file($autoloader) and is_readable($autoloader)) {
     // オートローダが存在すれば読み込む
+    /** @noinspection PhpIncludeInspection */
     require_once($autoloader);
 } else {
     // 存在しなければ強制終了
@@ -107,5 +108,6 @@ EOD
 //------------------------------------------------------//
 // Risolutoコアクラスインスタンスの生成と実行
 //------------------------------------------------------//
+/** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 $risoluto_instance = new \Risoluto\Core;
 $risoluto_instance->Perform();

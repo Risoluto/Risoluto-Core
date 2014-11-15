@@ -29,7 +29,7 @@ trait RisolutoErrorLogTrait
      * @access    private
      *
      * @param     string $loglevel 出力するメッセージのログレベル
-     * @param     string $msg 出力するメッセージ
+     * @param     string $msg      出力するメッセージ
      *
      * @return    boolean 常にTrue
      */

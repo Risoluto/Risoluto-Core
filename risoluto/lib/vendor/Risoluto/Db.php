@@ -160,20 +160,20 @@ class Db
             case 'ALL': // FALL THRU
             default:
                 $retval = array(
-                    'AUTOCOMMIT'          => $this->pdo_instance->getAttribute(constant($prefix . 'AUTOCOMMIT')),
-                    'PREFETCH'            => ($this->dbinfo['driver'] == 'mysql') ? 'Not Supported' : $this->pdo_instance->getAttribute(constant($prefix . 'PREFETCH')),
-                    'TIMEOUT'             => ($this->dbinfo['driver'] == 'mysql') ? 'Not Supported' : $this->pdo_instance->getAttribute(constant($prefix . 'TIMEOUT')),
-                    'ERRMODE'             => $this->pdo_instance->getAttribute(constant($prefix . 'ERRMODE')),
-                    'SERVER_VERSION'      => $this->pdo_instance->getAttribute(constant($prefix . 'SERVER_VERSION')),
-                    'CLIENT_VERSION'      => $this->pdo_instance->getAttribute(constant($prefix . 'CLIENT_VERSION')),
-                    'SERVER_INFO'         => $this->pdo_instance->getAttribute(constant($prefix . 'SERVER_INFO')),
-                    'CONNECTION_STATUS'   => $this->pdo_instance->getAttribute(constant($prefix . 'CONNECTION_STATUS')),
-                    'CASE'                => $this->pdo_instance->getAttribute(constant($prefix . 'CASE')),
-                    'DRIVER_NAME'         => $this->pdo_instance->getAttribute(constant($prefix . 'DRIVER_NAME')),
-                    'ORACLE_NULLS'        => $this->pdo_instance->getAttribute(constant($prefix . 'ORACLE_NULLS')),
-                    'PERSISTENT'          => $this->pdo_instance->getAttribute(constant($prefix . 'PERSISTENT')),
-                    'STATEMENT_CLASS'     => $this->pdo_instance->getAttribute(constant($prefix . 'STATEMENT_CLASS')),
-                    'DEFAULT_FETCH_MODE'  => $this->pdo_instance->getAttribute(constant($prefix . 'DEFAULT_FETCH_MODE')),
+                    'AUTOCOMMIT'         => $this->pdo_instance->getAttribute(constant($prefix . 'AUTOCOMMIT')),
+                    'PREFETCH'           => ($this->dbinfo['driver'] == 'mysql') ? 'Not Supported' : $this->pdo_instance->getAttribute(constant($prefix . 'PREFETCH')),
+                    'TIMEOUT'            => ($this->dbinfo['driver'] == 'mysql') ? 'Not Supported' : $this->pdo_instance->getAttribute(constant($prefix . 'TIMEOUT')),
+                    'ERRMODE'            => $this->pdo_instance->getAttribute(constant($prefix . 'ERRMODE')),
+                    'SERVER_VERSION'     => $this->pdo_instance->getAttribute(constant($prefix . 'SERVER_VERSION')),
+                    'CLIENT_VERSION'     => $this->pdo_instance->getAttribute(constant($prefix . 'CLIENT_VERSION')),
+                    'SERVER_INFO'        => $this->pdo_instance->getAttribute(constant($prefix . 'SERVER_INFO')),
+                    'CONNECTION_STATUS'  => $this->pdo_instance->getAttribute(constant($prefix . 'CONNECTION_STATUS')),
+                    'CASE'               => $this->pdo_instance->getAttribute(constant($prefix . 'CASE')),
+                    'DRIVER_NAME'        => $this->pdo_instance->getAttribute(constant($prefix . 'DRIVER_NAME')),
+                    'ORACLE_NULLS'       => $this->pdo_instance->getAttribute(constant($prefix . 'ORACLE_NULLS')),
+                    'PERSISTENT'         => $this->pdo_instance->getAttribute(constant($prefix . 'PERSISTENT')),
+                    'STATEMENT_CLASS'    => $this->pdo_instance->getAttribute(constant($prefix . 'STATEMENT_CLASS')),
+                    'DEFAULT_FETCH_MODE' => $this->pdo_instance->getAttribute(constant($prefix . 'DEFAULT_FETCH_MODE')),
                 );
                 break;
         }
@@ -303,7 +303,7 @@ class Db
     public function Exec($sql)
     {
         if (!empty($sql)) {
-            return $this->pdo_instance->exec($sql);
+            return ($this->pdo_instance->exec($sql) === false ? false : true);
         } else {
             return false;
         }
@@ -357,9 +357,12 @@ class Db
 
             // SQLを実行し結果を取得する
             /** @noinspection PhpUndefinedMethodInspection */
-            $this->pdostatement_instance->execute();
+            $retval_execute = $this->pdostatement_instance->execute();
             /** @noinspection PhpUndefinedMethodInspection */
-            $retval = $this->pdostatement_instance->fetchAll($fetch_style);
+            $retval_fetch = (($fetch_dat = $this->pdostatement_instance->fetchAll($fetch_style)) === false ? false : true);
+
+            $retval = (($retval_execute and $retval_fetch) ? $fetch_dat : false);
+            return $retval;
         } else {
             $retval = false;
         }
@@ -399,9 +402,16 @@ class Db
 
         // ホスト名のセット
         if (isset($this->dbinfo['host']) and !empty($this->dbinfo['host'])) {
-            $retval .= 'hostname=' . $this->dbinfo['host'];
+            $retval .= 'hostname=' . $this->dbinfo['host'] . ';';
         } else {
             $this->ErrorGen("undefined", 'host');
+        }
+
+        // キャラクタセットのセット
+        if (isset($this->dbinfo['charset']) and !empty($this->dbinfo['charset'])) {
+            $retval .= 'charset=' . $this->dbinfo['charset'];
+        } else {
+            $this->ErrorGen("undefined", 'charset');
         }
 
         return $retval;
@@ -425,12 +435,12 @@ class Db
         switch ($key) {
             // 未定義エラーの場合
             case 'undefined':
-                $msg = 'Value not set - ' . (isset($optional_text) and empty($optional_text) ? $optional_text : 'unknown');
+                $msg = 'Value not set - ' . ((isset($optional_text) and !empty($optional_text)) ? $optional_text : 'unknown');
                 break;
 
             // PDO関連エラーの場合
             case 'pdo':
-                $msg = 'PDO error happened - ' . (isset($optional_text) and empty($optional_text) ? $optional_text : 'unknown');
+                $msg = 'PDO error happened - ' . ((isset($optional_text) and !empty($optional_text)) ? $optional_text : 'unknown');
                 break;
 
 
