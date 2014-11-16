@@ -24,7 +24,7 @@ class Error extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risolu
     use \Risoluto\RisolutoViewTrait;
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *

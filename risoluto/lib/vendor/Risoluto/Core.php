@@ -159,7 +159,7 @@ class Core
     /**
      * playFuncCall($targetInstance)
      *
-     * Play()メソッドをコールする（存在しない場合は例外をThrow）
+     * play()メソッドをコールする（存在しない場合は例外をThrow）
      *
      * @access private
      *
@@ -171,11 +171,11 @@ class Core
      */
     private function playFuncCall($targetInstance)
     {
-        if (method_exists($targetInstance, 'Play')) {
-            $targetInstance->Play();
+        if (method_exists($targetInstance, 'play')) {
+            $targetInstance->play();
         } else {
             // メソッドが存在しなければ例外をThrow
-            throw new \Exception($this->coreError('error', 'notfound', 'Play*()'));
+            throw new \Exception($this->coreError('error', 'notfound', 'play*()'));
         }
     }
 

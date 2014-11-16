@@ -24,7 +24,7 @@ class ServiceStop extends \Risoluto\RisolutoControllerBase implements \Risoluto\
     use \Risoluto\RisolutoViewTrait;
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *
