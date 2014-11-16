@@ -67,7 +67,7 @@ class Auth
 
         // プロバイダ情報を取得
         $tmp_provider = $conf->getIni('AUTH', 'provider');
-        $provider     = !empty($tmp_provider) ? $tmp_provider : 'Risoluto\\AuthFile';
+        $provider     = !empty($tmp_provider) ? $tmp_provider : 'Risoluto\\AuthDb';
 
         // 取得したプロバイダのインスタンスを生成し返却する
         return ($provider);
