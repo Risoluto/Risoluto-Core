@@ -166,8 +166,7 @@ class Auth
             case 'doAuth':
                 /** @noinspection PhpUndefinedMethodInspection */
                 if (isset($option['userid']) and isset($option['password'])) {
-                    // パスワードをハッシュ化したのちメソッドをコール
-                    $option['password'] = self::getEncPass($option['password']);
+                    // メソッドをコール
                     /** @noinspection PhpUndefinedMethodInspection */
                     $retval = $provider->doAuth($option['userid'], $option['password'], $option);
                 } else {

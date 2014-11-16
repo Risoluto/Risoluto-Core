@@ -535,7 +535,7 @@ END_OF_SQL;
         $get_user = $this->doOperation('showUser', array('userid' => $user));
 
         // DBから取得したユーザ情報のパスワードと引数で与えられたパスワードを比較する
-        if ($pass == $get_user[0]['password']) {
+        if (password_verify($pass, $get_user[0]['password'])) {
             return true;
         } else {
             return false;
