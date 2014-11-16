@@ -38,7 +38,7 @@ class Session
     // クラスメソッド定義
     //------------------------------------------------------//
     /**
-     * Start($path = '', $name = '')
+     * start($path = '', $name = '')
      *
      * セッションを開始する
      * もし、すでにセッションが存在している場合は
@@ -52,7 +52,7 @@ class Session
      *
      * @return    boolean    セッション開始結果（true：正常終了/false:異常終了）
      */
-    public function Start($path = '', $name = '')
+    public function start($path = '', $name = '')
     {
         // セッション保存ディレクトリが指定されていたらその値を採用
         if (!empty($path)) {
@@ -94,7 +94,7 @@ class Session
     }
 
     /**
-     * Restart($path = '', $name = '')
+     * restart($path = '', $name = '')
      *
      * セッションを再スタートする（）
      *
@@ -105,16 +105,16 @@ class Session
      *
      * @return    boolean    セッション再開始結果（true：正常終了/false:異常終了）
      */
-    public function Restart($path = '', $name = '')
+    public function restart($path = '', $name = '')
     {
         // セッションを終了してスタートさせる
-        $this->End();
+        $this->end();
 
-        return $this->Start($path, $name);
+        return $this->start($path, $name);
     }
 
     /**
-     * End()
+     * end()
      *
      * セッションを終了する
      *
@@ -124,7 +124,7 @@ class Session
      *
      * @return    boolean セッション終了結果（true：正常終了/false:異常終了）
      */
-    public function End()
+    public function end()
     {
         // クッキーを削除
         if (isset($_COOKIE[$this->sessname])) {
@@ -147,7 +147,7 @@ class Session
     }
 
     /**
-     * Store($destination, $val)
+     * store($destination, $val)
      *
      * セッションへ値を格納する
      * 引数で指定された名称の変数へ、同じく引数で指定された値を格納する
@@ -159,7 +159,7 @@ class Session
      *
      * @return    boolean    常にtrue
      */
-    public function Store($destination, $val)
+    public function store($destination, $val)
     {
         if (isset($destination) and isset($val)) {
             $_SESSION[$destination] = $val;
@@ -169,7 +169,7 @@ class Session
     }
 
     /**
-     * Load($from)
+     * load($from)
      *
      * セッションから値を取得する
      * 引数で指定された名称のセッション変数から値を取得する
@@ -180,7 +180,7 @@ class Session
      *
      * @return    mixed     取得した値
      */
-    public function Load($from)
+    public function load($from)
     {
         if (isset($from) and isset($_SESSION[$from])) {
             return $_SESSION[$from];
@@ -190,7 +190,7 @@ class Session
     }
 
     /**
-     * IsThere($chkName)
+     * isThere($chkName)
      *
      * セッション中に引数で指定された名称を持つ値が存在するかをチェックする
      *
@@ -200,13 +200,13 @@ class Session
      *
      * @return    boolean    存在状況(true:存在する/false:存在しない)
      */
-    public function IsThere($chkName)
+    public function isThere($chkName)
     {
         return isset($_SESSION[$chkName]);
     }
 
     /**
-     * Revoke($chkName)
+     * revoke($chkName)
      *
      * セッション中の引数で指定された名称を持つ値を抹消する
      *
@@ -216,7 +216,7 @@ class Session
      *
      * @return    boolean    常にtrue
      */
-    public function Revoke($chkName)
+    public function revoke($chkName)
     {
         if (isset($_SESSION[$chkName])) {
             unset($_SESSION[$chkName]);
@@ -226,7 +226,7 @@ class Session
     }
 
     /**
-     * RevokeAll()
+     * revokeAll()
      *
      * セッション中のすべての値を抹消する
      *
@@ -236,13 +236,13 @@ class Session
      *
      * @return    boolean    常にtrue
      */
-    public function RevokeAll()
+    public function revokeAll()
     {
         // セッション変数が存在するかをチェック
         if (isset($_SESSION)) {
             // すべての値を抹消する
             foreach ($_SESSION as $key) {
-                $this->Revoke($key);
+                $this->revoke($key);
             }
         }
 

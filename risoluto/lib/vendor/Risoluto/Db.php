@@ -51,7 +51,7 @@ class Db
     use RisolutoErrorLogTrait;
 
     /**
-     * Connect(array $param)
+     * connect(array $param)
      *
      * DBへの接続を開始する
      *
@@ -61,7 +61,7 @@ class Db
      * @return    boolean 実行結果（true: 成功 / false: 失敗）
      *
      */
-    public function Connect(array $param, array $option = array())
+    public function connect(array $param, array $option = array())
     {
         // 戻り値を初期化
         $retval = true;
@@ -71,7 +71,7 @@ class Db
 
         // DSNを生成しクラス変数へセット
         if (!array_key_exists('dsn', $this->dbinfo) or empty($this->dbinfo['dsn'])) {
-            $this->dbinfo['dsn'] = $this->GenDSN();
+            $this->dbinfo['dsn'] = $this->genDSN();
         }
 
         // DBへの接続を試みる
@@ -87,7 +87,7 @@ class Db
             }
         } catch (\PDOException $e) {
             // 接続に失敗したらエラーメッセージを生成
-            $this->ErrorGen('pdo', $e->getMessage());
+            $this->genErrorMsg('pdo', $e->getMessage());
             $retval = false;
         }
 
@@ -95,7 +95,7 @@ class Db
     }
 
     /**
-     * DisConnect($force = false)
+     * disConnect($force = false)
      *
      * DBへの接続を終了する
      *
@@ -104,7 +104,7 @@ class Db
      * @return    boolean 常にtrue
      *
      */
-    public function DisConnect($force = false)
+    public function disConnect($force = false)
     {
         // 持続的接続が無効か強制切断が有効なときのみ接続を解除
         if (!$this->dbinfo['persistent'] or $force) {
@@ -115,7 +115,7 @@ class Db
     }
 
     /**
-     * GetAttribute($attribute)
+     * getAttribute($attribute)
      *
      * DB接続に関する属性値を取得する
      *
@@ -124,7 +124,7 @@ class Db
      * @return    array 属性値が格納された連想配列
      *
      */
-    public function GetAttribute($attribute = 'ALL')
+    public function getAttribute($attribute = 'ALL')
     {
         // 接頭語をセット
         $prefix = 'PDO::ATTR_';
@@ -182,7 +182,7 @@ class Db
     }
 
     /**
-     * SetAttribute($attribute, $value)
+     * setAttribute($attribute, $value)
      *
      * DB接続に関する属性値をセットする
      *
@@ -192,7 +192,7 @@ class Db
      * @return    boolean true：正常終了／false:異常終了
      *
      */
-    public function SetAttribute($attribute, $value)
+    public function setAttribute($attribute, $value)
     {
         if (!empty($attribute) and !empty($value)) {
             return $this->pdo_instance->setAttribute($attribute, $value);
@@ -202,7 +202,7 @@ class Db
     }
 
     /**
-     * BeginTransaction()
+     * beginTransaction()
      *
      * トランザクションを開始する
      *
@@ -211,13 +211,13 @@ class Db
      * @return    boolean true：正常終了／false:異常終了
      *
      */
-    public function BeginTransaction()
+    public function beginTransaction()
     {
         return $this->pdo_instance->beginTransaction();
     }
 
     /**
-     * InTransaction()
+     * inTransaction()
      *
      * トランザクションが開始しているかを判定する
      *
@@ -226,13 +226,13 @@ class Db
      * @return    boolean true：トランザクションが開始している／false:トランザクションが開始していない
      *
      */
-    public function InTransaction()
+    public function inTransaction()
     {
         return $this->pdo_instance->InTransaction();
     }
 
     /**
-     * Commit()
+     * commit()
      *
      * トランザクションをコミットする
      *
@@ -241,13 +241,13 @@ class Db
      * @return    boolean true：正常終了／false:異常終了
      *
      */
-    public function Commit()
+    public function commit()
     {
         return $this->pdo_instance->commit();
     }
 
     /**
-     * RollBack()
+     * rollBack()
      *
      * トランザクションをロールバックする
      *
@@ -256,20 +256,20 @@ class Db
      * @return    boolean true：正常終了／false:異常終了
      *
      */
-    public function RollBack()
+    public function rollBack()
     {
         try {
             return $this->pdo_instance->rollBack();
         } catch (\PDOException $e) {
             // ロールバックに失敗したらエラーメッセージを生成
-            $this->ErrorGen('pdo', $e->getMessage());
+            $this->genErrorMsg('pdo', $e->getMessage());
 
             return false;
         }
     }
 
     /**
-     * LastInsertId($name)
+     * lastInsertId($name)
      *
      * 最後に挿入されたID値を取得する
      *
@@ -278,20 +278,20 @@ class Db
      * @return    string 取得したID値
      *
      */
-    public function LastInsertId($name = null)
+    public function lastInsertId($name = null)
     {
         try {
             return $this->pdo_instance->lastInsertId($name);
         } catch (\PDOException $e) {
             // 取得に失敗したらエラーメッセージを生成
-            $this->ErrorGen('pdo', $e->getMessage());
+            $this->genErrorMsg('pdo', $e->getMessage());
 
             return false;
         }
     }
 
     /**
-     * Exec($sql)
+     * exec($sql)
      *
      * SQLを実行する
      *
@@ -300,7 +300,7 @@ class Db
      * @return    boolean true:正常終了／false:異常終了
      *
      */
-    public function Exec($sql)
+    public function exec($sql)
     {
         if (!empty($sql)) {
             return ($this->pdo_instance->exec($sql) === false ? false : true);
@@ -310,7 +310,7 @@ class Db
     }
 
     /**
-     * DoQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
+     * doQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
      *
      * SQLを実行する
      *
@@ -322,7 +322,7 @@ class Db
      * @return    mixed   SQLの実行結果／false:異常終了
      *
      */
-    public function DoQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
+    public function doQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
     {
         // SQLが渡されたときはPDOStatementのインスタンスを更新する（既存のインスタンスがなくSQL未指定の場合はfalseを返す）
         try {
@@ -334,7 +334,7 @@ class Db
             }
         } catch (\PDOException $e) {
             // 取得に失敗したらエラーメッセージを生成
-            $this->ErrorGen('pdo', $e->getMessage());
+            $this->genErrorMsg('pdo', $e->getMessage());
 
             return false;
         }
@@ -371,7 +371,7 @@ class Db
     }
 
     /**
-     * GenDSN()
+     * genDSN()
      *
      * DSN文字列を生成する
      *
@@ -381,7 +381,7 @@ class Db
      *
      * @return    string DSN文字列
      */
-    private function GenDSN()
+    private function genDSN()
     {
         // 変数の初期化
         $retval = '';
@@ -390,35 +390,35 @@ class Db
         if (isset($this->dbinfo['driver']) and !empty($this->dbinfo['driver']) and in_array($this->dbinfo['driver'], \PDO::getAvailableDrivers())) {
             $retval .= $this->dbinfo['driver'] . ':';
         } else {
-            $this->ErrorGen("undefined", 'driver');
+            $this->genErrorMsg("undefined", 'driver');
         }
 
         // DB名のセット
         if (isset($this->dbinfo['dbname']) and !empty($this->dbinfo['dbname'])) {
             $retval .= 'dbname=' . $this->dbinfo['dbname'] . ';';
         } else {
-            $this->ErrorGen("undefined", 'dbname');
+            $this->genErrorMsg("undefined", 'dbname');
         }
 
         // ホスト名のセット
         if (isset($this->dbinfo['host']) and !empty($this->dbinfo['host'])) {
             $retval .= 'hostname=' . $this->dbinfo['host'] . ';';
         } else {
-            $this->ErrorGen("undefined", 'host');
+            $this->genErrorMsg("undefined", 'host');
         }
 
         // キャラクタセットのセット
         if (isset($this->dbinfo['charset']) and !empty($this->dbinfo['charset'])) {
             $retval .= 'charset=' . $this->dbinfo['charset'];
         } else {
-            $this->ErrorGen("undefined", 'charset');
+            $this->genErrorMsg("undefined", 'charset');
         }
 
         return $retval;
     }
 
     /**
-     * ErrorGen($key = '')
+     * genErrorMsg($key = '')
      *
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
@@ -429,7 +429,7 @@ class Db
      *
      * @return    string    エラーメッセージ
      */
-    private function ErrorGen($key = '', $optional_text = '')
+    private function genErrorMsg($key = '', $optional_text = '')
     {
         // 引数の値に応じてエラーメッセージをセットする
         switch ($key) {
@@ -451,7 +451,7 @@ class Db
         }
 
         // ログ出力しエラーメッセージを返却
-        $this->RisolutoErrorLog('error', $msg);
+        $this->risolutoErrorLog('error', $msg);
 
         return $msg;
     }

@@ -2,7 +2,7 @@
 /**
  * DbTest4ExecAndTransactions
  *
- * Db::Exec()/BeginTransaction()/InTransaction()/Commit()/RollBack()/LastInsertId()用テストケース
+ * Db::exec()/beginTransaction()/inTransaction()/commit()/rollBack()/lastInsertId()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -62,16 +62,16 @@ class DbTest4ExecAndTransactions extends \PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-     * getConnection()
+     * getconnection()
      *
      * DBテストに必要な接続を実施
      */
-    public function getConnection()
+    public function getconnection()
     {
         $dsn = $GLOBALS['DB_DRIVER'] . ':dbname=' . $GLOBALS['DB_DBNAME'] . ';host=' . $GLOBALS['DB_HOST'];
         $pdo = new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 
-        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        return $this->createDefaultDBconnection($pdo, $GLOBALS['DB_DBNAME']);
     }
 
     /**
@@ -91,13 +91,13 @@ class DbTest4ExecAndTransactions extends \PHPUnit_Extensions_Database_TestCase
      */
     public function testPreCondition()
     {
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
     }
 
     /**
      * test_ExecAndTransaction_ExecWithNoArgs()
      *
-     * Exec()のテスト（引数なし）
+     * exec()のテスト（引数なし）
      */
     public function test_ExecAndTransaction_ExecWithNoArgs()
     {
@@ -109,18 +109,18 @@ class DbTest4ExecAndTransactions extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
-        $this->assertFalse($instance->Exec(''));
+        $this->assertFalse($instance->exec(''));
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
      * test_ExecAndTransaction_ExecWithNoTrans()
      *
-     * Exec()のテスト（トランザクションなし）
+     * exec()のテスト（トランザクションなし）
      */
     public function test_ExecAndTransaction_ExecWithNoTrans()
     {
@@ -132,27 +132,27 @@ class DbTest4ExecAndTransactions extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
-        $this->assertFalse($instance->InTransaction());
+        $this->assertFalse($instance->inTransaction());
 
-        $this->assertEquals(1, $instance->Exec('INSERT INTO risoluto_db_test(id, column1, column2) values ("10", "TEST_A", "TEST_B");'));
-        $this->assertEquals(3, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('INSERT INTO risoluto_db_test(id, column1, column2) values ("10", "TEST_A", "TEST_B");'));
+        $this->assertEquals(3, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $this->assertEquals(10, $instance->LastInsertId());
-        $this->assertEquals(10, $instance->LastInsertId('id'));
+        $this->assertEquals(10, $instance->lastInsertId());
+        $this->assertEquals(10, $instance->lastInsertId('id'));
 
-        $this->assertEquals(1, $instance->Exec('DELETE FROM risoluto_db_test WHERE id="10";'));
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('DELETE FROM risoluto_db_test WHERE id="10";'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
      * test_ExecAndTransaction_ExecWithInTrans()
      *
-     * Exec()のテスト（トランザクションあり）
+     * exec()のテスト（トランザクションあり）
      */
     public function test_ExecAndTransaction_ExecWithInTrans()
     {
@@ -164,48 +164,48 @@ class DbTest4ExecAndTransactions extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
-        // Commit pattern
-        $this->assertTrue($instance->BeginTransaction());
-        $this->assertTrue($instance->InTransaction());
+        // commit pattern
+        $this->assertTrue($instance->beginTransaction());
+        $this->assertTrue($instance->inTransaction());
 
-        $this->assertEquals(1, $instance->Exec('INSERT INTO risoluto_db_test(id, column1, column2) values ("10", "TEST_A", "TEST_B");'));
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('INSERT INTO risoluto_db_test(id, column1, column2) values ("10", "TEST_A", "TEST_B");'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $this->assertEquals(10, $instance->LastInsertId());
-        $this->assertEquals(10, $instance->LastInsertId('id'));
+        $this->assertEquals(10, $instance->lastInsertId());
+        $this->assertEquals(10, $instance->lastInsertId('id'));
 
-        $this->assertTrue($instance->Commit());
-        $this->assertFalse($instance->InTransaction());
+        $this->assertTrue($instance->commit());
+        $this->assertFalse($instance->inTransaction());
 
-        $this->assertEquals(3, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(3, $this->getconnection()->getRowCount('risoluto_db_test'));
 
 
 
         // Rollback pattern
-        $before_val = $this->getConnection()->createQueryTable('risoluto_db_test', 'SELECT id, column1, column2 FROM risoluto_db_test WHERE id="10";');
-        $this->assertTrue($instance->BeginTransaction());
-        $this->assertTrue($instance->InTransaction());
+        $before_val = $this->getconnection()->createQueryTable('risoluto_db_test', 'SELECT id, column1, column2 FROM risoluto_db_test WHERE id="10";');
+        $this->assertTrue($instance->beginTransaction());
+        $this->assertTrue($instance->inTransaction());
 
-        $this->assertEquals(1, $instance->Exec('UPDATE risoluto_db_test SET column1="TEST_C", column2="TEST_C" WHERE id="10";'));
-        $this->assertEquals(3, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('UPDATE risoluto_db_test SET column1="TEST_C", column2="TEST_C" WHERE id="10";'));
+        $this->assertEquals(3, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $this->assertEquals(1, $instance->Exec('DELETE FROM risoluto_db_test WHERE id="10";'));
-        $this->assertEquals(3, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('DELETE FROM risoluto_db_test WHERE id="10";'));
+        $this->assertEquals(3, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $this->assertTrue($instance->RollBack());
-        $this->assertFalse($instance->InTransaction());
+        $this->assertTrue($instance->rollBack());
+        $this->assertFalse($instance->inTransaction());
 
-        $after_val  = $this->getConnection()->createQueryTable('risoluto_db_test', 'SELECT id, column1, column2 FROM risoluto_db_test WHERE id="10";');
-        $this->assertEquals(3, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $after_val  = $this->getconnection()->createQueryTable('risoluto_db_test', 'SELECT id, column1, column2 FROM risoluto_db_test WHERE id="10";');
+        $this->assertEquals(3, $this->getconnection()->getRowCount('risoluto_db_test'));
         $this->assertTablesEqual($before_val, $after_val);
 
         // Cleaning
-        $this->assertEquals(1, $instance->Exec('DELETE FROM risoluto_db_test WHERE id="10";'));
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(1, $instance->exec('DELETE FROM risoluto_db_test WHERE id="10";'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 }

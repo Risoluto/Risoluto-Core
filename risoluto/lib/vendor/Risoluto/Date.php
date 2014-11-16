@@ -30,7 +30,7 @@ class Date
     }
 
     /**
-     * CnvYear($year)
+     * cnvYear($year)
      *
      * 西暦に対応する和暦を取得する
      *
@@ -40,7 +40,7 @@ class Date
      *
      * @return    string  引数に指定された西暦年に対応する和暦年（変換に失敗した場合は空文字を返却）
      */
-    public static function CnvYear($year)
+    public static function cnvYear($year)
     {
         // 引数に指定された値が、1868年より以前か数字4桁でない場合は空文字を返却する
         if (!is_numeric($year) or strlen($year) != 4 or $year < 1868) {
@@ -48,31 +48,31 @@ class Date
         }
 
         // 明治（1868年1月25日〜1912年7月29日、明治45年まで）
-        if (Validate::IsBetween($year, 1868, 1912)) {
+        if (Validate::isBetween($year, 1868, 1912)) {
             // 算出する
-            $retval = self::GenEraName(($year - 1868) + 1, '明治', '大正', 45);
+            $retval = self::genEraName(($year - 1868) + 1, '明治', '大正', 45);
 
             // 大正（1912年7月30日〜1926年12月24日、大正15年まで）
-        } elseif (Validate::IsBetween($year, 1912, 1926)) {
+        } elseif (Validate::isBetween($year, 1912, 1926)) {
             // 算出する
-            $retval = self::GenEraName(($year - 1912) + 1, '大正', '昭和', 15);
+            $retval = self::genEraName(($year - 1912) + 1, '大正', '昭和', 15);
 
             // 昭和（1926年12月25日〜1989年1月7日、昭和64年まで）
-        } elseif (Validate::IsBetween($year, 1926, 1989)) {
+        } elseif (Validate::isBetween($year, 1926, 1989)) {
             // 算出する
-            $retval = self::GenEraName(($year - 1926) + 1, '昭和', '平成', 64);
+            $retval = self::genEraName(($year - 1926) + 1, '昭和', '平成', 64);
 
             // 平成（1989年1月8日〜）
         } else {
             // 算出する
-            $retval = self::GenEraName(($year - 1989) + 1, '平成');
+            $retval = self::genEraName(($year - 1989) + 1, '平成');
         }
 
         return $retval;
     }
 
     /**
-     * GenEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
+     * genEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
      *
      * @access private
      *
@@ -83,7 +83,7 @@ class Date
      *
      * @return string 生成された和暦年号表記
      */
-    private static function GenEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
+    private static function genEraName($year, $currentEraName, $nextEraName = '', $borderYear = '')
     {
         // 1年の場合は元年として表示する
         if ($year == '1') {
@@ -102,7 +102,7 @@ class Date
     }
 
     /**
-     * GenYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
+     * genYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
      *
      * 「年」の情報が格納された配列を生成する
      *
@@ -117,7 +117,7 @@ class Date
      *
      * @return    array     「年」の情報が格納された配列
      */
-    public static function GenYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
+    public static function genYear($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $base = null, $limit = null, $mode = 0)
     {
         // 配列を初期化
         $retVal = array();
@@ -164,7 +164,7 @@ class Date
     }
 
     /**
-     * GenMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
+     * genMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
      *
      * 「月」の情報が格納された配列を生成する
      *
@@ -176,16 +176,16 @@ class Date
      *
      * @return    array     「月」の情報が格納された配列
      */
-    public static function GenMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
+    public static function genMonth($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
     {
         // 配列を生成する
-        $retVal = self::GenNumberList(12, $firstType, $nonSelectedVal, $nonSelectedStr);
+        $retVal = self::genNumberList(12, $firstType, $nonSelectedVal, $nonSelectedStr);
 
         return $retVal;
     }
 
     /**
-     * GenDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
+     * genDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
      *
      * 「日」の情報が格納された配列を生成する
      *
@@ -198,7 +198,7 @@ class Date
      *
      * @return    array     「日」の情報が格納された配列
      */
-    public static function GenDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
+    public static function genDay($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $target = array('month' => '', 'year' => ''))
     {
         // 配列を初期化
         $retVal = array();
@@ -211,7 +211,7 @@ class Date
 
             // 2月はうるう年考慮し、28又は29日まで生成
             case 2:
-                $endDay = ((!empty($target['year']) and Validate::IsLeapYear($target['year'])) ? 29 : 28);
+                $endDay = ((!empty($target['year']) and Validate::isLeapYear($target['year'])) ? 29 : 28);
                 break;
 
             // 4,6,9,11月は30日まで生成
@@ -229,13 +229,13 @@ class Date
         }
 
         // 配列を生成する
-        $retVal = self::GenNumberList($endDay, $firstType, $nonSelectedVal, $nonSelectedStr);
+        $retVal = self::genNumberList($endDay, $firstType, $nonSelectedVal, $nonSelectedStr);
 
         return $retVal;
     }
 
     /**
-     * GenHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
+     * genHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
      *
      * 「時」の情報が格納された配列を生成する
      *
@@ -248,10 +248,10 @@ class Date
      *
      * @return    array     「時」の情報が格納された配列
      */
-    public static function GenHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
+    public static function genHour($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $hourType = true)
     {
         // 24時間表記の時はそのまま生成
-        $retVal = self::GenNumberList(23, $firstType, $nonSelectedVal, $nonSelectedStr, 0);
+        $retVal = self::genNumberList(23, $firstType, $nonSelectedVal, $nonSelectedStr, 0);
 
         //12時間表記の時は午前／午後表記に変更する
         if (!$hourType) {
@@ -266,7 +266,7 @@ class Date
     }
 
     /**
-     * GenMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
+     * genMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
      *
      * 「分」または「秒」の情報が格納された配列を生成する
      *
@@ -278,16 +278,16 @@ class Date
      *
      * @return    array     「分」の情報が格納された配列
      */
-    public static function GenMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
+    public static function genMinSec($firstType = false, $nonSelectedVal = '', $nonSelectedStr = '')
     {
         // 配列を生成する
-        $retVal = self::GenNumberList(59, $firstType, $nonSelectedVal, $nonSelectedStr, 0);
+        $retVal = self::genNumberList(59, $firstType, $nonSelectedVal, $nonSelectedStr, 0);
 
         return $retVal;
     }
 
     /**
-     * GenNumberList($limit, $firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $start = 1, $format = '%02d')
+     * genNumberList($limit, $firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $start = 1, $format = '%02d')
      *
      * 月、日、時、分、秒用の数字のリストを生成する
      *
@@ -302,7 +302,7 @@ class Date
      *
      * @return array 数値の配列
      */
-    private static function GenNumberList($limit, $firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $start = 1, $format = '%02d')
+    private static function genNumberList($limit, $firstType = false, $nonSelectedVal = '', $nonSelectedStr = '', $start = 1, $format = '%02d')
     {
         // 引数に応じて配列の先頭を制御
         $retVal = array();

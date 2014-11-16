@@ -24,7 +24,7 @@ class Sample2 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
     use \Risoluto\RisolutoViewTrait;
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *
@@ -34,14 +34,14 @@ class Sample2 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
      *
      * @return    void    なし
      */
-    public function Play()
+    public function play()
     {
         // ユーザ定義のライブラリコール例
-        \RisolutoUserLibs\SampleLibs::SampleMethod();
+        \RisolutoUserLibs\SampleLibs::sampleMethod();
 
         // ヘッダ情報のセット
-        $header = $this->GetDefaultHeader();
-        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->getDefaultHeader();
+        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
 
 
         // テンプレートエンジン関連の処理
@@ -52,6 +52,6 @@ class Sample2 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
             'post'   => $_POST,
             'server' => $_SERVER
         );
-        $this->RisolutoView($assign_value);
+        $this->risolutoView($assign_value);
     }
 }

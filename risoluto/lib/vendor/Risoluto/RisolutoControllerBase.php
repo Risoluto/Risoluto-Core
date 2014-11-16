@@ -42,7 +42,7 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * GetParam()
+     * getParam()
      *
      * コール時に渡されたパラメタ情報を取得する
      *
@@ -52,13 +52,13 @@ abstract class RisolutoControllerBase
      *
      * @return    array    パラメタ情報
      */
-    protected function GetParam()
+    protected function getParam()
     {
         return $this->__param;
     }
 
     /**
-     * Init($param = array())
+     * init($param = array())
      *
      * 初期化処理を行う
      *
@@ -68,14 +68,14 @@ abstract class RisolutoControllerBase
      *
      * @return    void     なし
      */
-    public function Init(array $param = array())
+    public function init(array $param = array())
     {
         // 取得したパラメタをクラス変数にセットする
         $this->__param = $param;
     }
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *
@@ -85,12 +85,12 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function Play()
+    public function play()
     {
     }
 
     /**
-     * PlayGet()
+     * playGet()
      *
      * GETメソッドでアクセスされた際の主処理を行う
      *
@@ -100,13 +100,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayGet()
+    public function playGet()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayPost()
+     * playPost()
      *
      * POSTメソッドでアクセスされた際の主処理を行う
      *
@@ -116,13 +116,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayPost()
+    public function playPost()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayPut()
+     * playPut()
      *
      * PUTメソッドでアクセスされた際の主処理を行う
      *
@@ -132,13 +132,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayPut()
+    public function playPut()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayDelete()
+     * playDelete()
      *
      * DELETEメソッドでアクセスされた際の主処理を行う
      *
@@ -148,13 +148,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayDelete()
+    public function playDelete()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayOption()
+     * playOption()
      *
      * OPTIONメソッドでアクセスされた際の主処理を行う
      *
@@ -164,13 +164,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayOption()
+    public function playOption()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayHead()
+     * playHead()
      *
      * HEADメソッドでアクセスされた際の主処理を行う
      *
@@ -180,13 +180,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayHead()
+    public function playHead()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayTrace()
+     * playTrace()
      *
      * TRACEメソッドでアクセスされた際の主処理を行う
      *
@@ -196,13 +196,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayTrace()
+    public function playTrace()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * PlayConnect()
+     * playConnect()
      *
      * CONNECTメソッドでアクセスされた際の主処理を行う
      *
@@ -212,13 +212,13 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function PlayConnect()
+    public function playConnect()
     {
-        $this->Play();
+        $this->play();
     }
 
     /**
-     * Error(\Exception $errobj = null)
+     * error(\Exception $errobj = null)
      *
      * エラー処理を行う
      *
@@ -228,7 +228,7 @@ abstract class RisolutoControllerBase
      *
      * @return    void      なし
      */
-    public function Error(\Exception $errobj = null)
+    public function error(\Exception $errobj = null)
     {
         // エラー情報をログに出力
         if ($errobj) {
@@ -236,14 +236,14 @@ abstract class RisolutoControllerBase
         } else {
             $msg = 'Unknown error occurred.';
         }
-        $this->RisolutoErrorLog('error', 'Class => ' . get_class($this) . ' / Error Message => ' . $msg);
+        $this->risolutoErrorLog('error', 'Class => ' . get_class($this) . ' / Error Message => ' . $msg);
 
         // エラー画面に遷移する
-        Url::RedirectTo('Error');
+        Url::redirectTo('Error');
     }
 
     /**
-     * Clean()
+     * clean()
      *
      * 後処理を行う
      *
@@ -253,7 +253,8 @@ abstract class RisolutoControllerBase
      *
      * @return    void    なし
      */
-    public function Clean()
+    public function clean()
     {
+        // Nothing to do...
     }
 }

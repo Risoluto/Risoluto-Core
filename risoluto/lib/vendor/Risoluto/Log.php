@@ -71,7 +71,7 @@ class Log
     }
 
     /**
-     * SetLogFile($path)
+     * setLogFile($path)
      *
      * ログ出力パスをセットする
      *
@@ -81,13 +81,13 @@ class Log
      *
      * @return    void
      */
-    public function SetLogFile($path)
+    public function setLogFile($path)
     {
         $this->logfile = $path;
     }
 
     /**
-     * SetCurrentLogLevel($loglevel)
+     * setCurrentLogLevel($loglevel)
      *
      * ログレベルをセットする
      *
@@ -97,13 +97,13 @@ class Log
      *
      * @return    void
      */
-    public function SetCurrentLogLevel($loglevel)
+    public function setCurrentLogLevel($loglevel)
     {
         $this->currentloglevel = $loglevel;
     }
 
     /**
-     * Log($loglvl, $logmes)
+     * log($loglvl, $logmes)
      *
      * 指定されたログレベルで指定された文字列を出力する
      *
@@ -112,7 +112,7 @@ class Log
      *
      * @return    boolean    出力結果（{書き込んだバイト数}：正常終了/false:異常終了）
      */
-    public function Log($loglvl, $logmes)
+    public function log($loglvl, $logmes)
     {
         //-- ローカル変数 --//
         $currentdate = date(\DateTime::W3C);

@@ -35,48 +35,48 @@ class ValidateTest4IsEmailAddr extends \PHPUnit_Framework_TestCase
     /**
      * test_IsEmailAddr_InvalidTextPart1()
      *
-     * IsEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その1）
+     * isEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その1）
      */
     public function test_IsEmailAddr_InvalidTextPart1()
     {
         $test = '@risoluto This is test!';
 
-        $this->assertFalse(Validate::IsEmailAddr($test));
+        $this->assertFalse(Validate::isEmailAddr($test));
     }
 
     /**
      * test_IsEmailAddr_InvalidText()
      *
-     * IsEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その2）
+     * isEmailAddr()の挙動をテストする（メールアドレスじゃない文字列その2）
      */
     public function test_IsEmailAddr_InvalidTextPart2()
     {
         $test = 'test+test-test.test@risoluto_test-test+test.jp';
 
-        $this->assertFalse(Validate::IsEmailAddr($test));
+        $this->assertFalse(Validate::isEmailAddr($test));
     }
 
     /**
      * test_IsEmailAddr_ValidTextPart1()
      *
-     * IsEmailAddr()の挙動をテストする（メールアドレスな文字列その1）
+     * isEmailAddr()の挙動をテストする（メールアドレスな文字列その1）
      */
     public function test_IsEmailAddr_ValidTextPart1()
     {
         $test = 'webmaster@example.net';
 
-        $this->assertTrue(Validate::IsEmailAddr($test));
+        $this->assertTrue(Validate::isEmailAddr($test));
     }
 
     /**
      * test_IsEmailAddr_ValidTextPart2()
      *
-     * IsEmailAddr()の挙動をテストする（メールアドレスな文字列その2）
+     * isEmailAddr()の挙動をテストする（メールアドレスな文字列その2）
      */
     public function test_IsEmailAddr_ValidTextPart2()
     {
         $test = 'web_master+test-test.test@example.gr.jp';
 
-        $this->assertTrue(Validate::IsEmailAddr($test));
+        $this->assertTrue(Validate::isEmailAddr($test));
     }
 }

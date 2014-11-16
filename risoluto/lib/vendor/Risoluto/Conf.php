@@ -41,7 +41,7 @@ class Conf
     // クラスメソッド定義
     //------------------------------------------------------//
     /**
-     * GetParseStatus()
+     * getParseStatus()
      *
      * パース状況を取得する
      *
@@ -51,13 +51,13 @@ class Conf
      *
      * @return    boolean パース状況（true：パース済み/false:未パース）
      */
-    public function GetParseStatus()
+    public function getParseStatus()
     {
         return $this->parsestatus;
     }
 
     /**
-     * Parse($path)
+     * parse($path)
      *
      * 引数で与えられたパスよりiniファイルを読み込みパースする
      *
@@ -67,7 +67,7 @@ class Conf
      *
      * @return    boolean    パース結果（true：正常終了/false:異常終了）
      */
-    public function Parse($path)
+    public function parse($path)
     {
         // ファイルが存在しているかをテスト
         clearstatcache();
@@ -88,7 +88,7 @@ class Conf
     }
 
     /**
-     * GetIni($section = '', $key = '')
+     * getIni($section = '', $key = '')
      *
      * パース済みiniファイルより、セクションのみが指定された場合はセクション内すべての値を配列を、
      * キーが指定された場合はキーが持つ値を返却する
@@ -102,7 +102,7 @@ class Conf
      *
      * @return    mixed    セクションに対応する配列、またはキーに対応する値。どちらも存在しない場合はnull
      */
-    public function GetIni($section = '', $key = '')
+    public function getIni($section = '', $key = '')
     {
         // 一度もパースされていない場合は、nullを返す
         if (!$this->parsestatus) {

@@ -22,7 +22,7 @@ trait SampleLibsTrait
     //------------------------------------------------------//
 
     /**
-     * SampleMethod()
+     * sampleMethod()
      *
      * サンプルメソッド
      *
@@ -32,7 +32,7 @@ trait SampleLibsTrait
      *
      * @return    void      なし
      */
-    public static function SampleMethod()
+    public static function sampleMethod()
     {
         // Nothing to do...
     }

@@ -47,12 +47,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithoutArgs()
      *
-     * RedirectTo()の挙動をテストする（引数無し）
+     * redirectTo()の挙動をテストする（引数無し）
      *
      */
     public function test_RedirectTo_WithoutArgs()
     {
-        Url::RedirectTo(null, array(), null, self::$default_server);
+        Url::redirectTo(null, array(), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/', $output_header);
@@ -61,12 +61,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTarget()
      *
-     * RedirectTo()の挙動をテストする（targetのみ指定）
+     * redirectTo()の挙動をテストする（targetのみ指定）
      *
      */
     public function test_RedirectTo_WithTarget()
     {
-        Url::RedirectTo('Top', array(), null, self::$default_server);
+        Url::redirectTo('Top', array(), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top', $output_header);
@@ -75,12 +75,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParam1()
      *
-     * RedirectTo()の挙動をテストする（targetとparamのみ指定その1）
+     * redirectTo()の挙動をテストする（targetとparamのみ指定その1）
      *
      */
     public function test_RedirectTo_WithTargetAndParam1()
     {
-        Url::RedirectTo('Top', array('Foo' => ''), null, self::$default_server);
+        Url::redirectTo('Top', array('Foo' => ''), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top.Foo', $output_header);
@@ -89,12 +89,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParam2()
      *
-     * RedirectTo()の挙動をテストする（targetとparamのみ指定その2）
+     * redirectTo()の挙動をテストする（targetとparamのみ指定その2）
      *
      */
     public function test_RedirectTo_WithTargetAndParam2()
     {
-        Url::RedirectTo('Top', array('Foo' => 'Bar'), null, self::$default_server);
+        Url::redirectTo('Top', array('Foo' => 'Bar'), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar', $output_header);
@@ -103,12 +103,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParam3()
      *
-     * RedirectTo()の挙動をテストする（targetとparamのみ指定その3）
+     * redirectTo()の挙動をテストする（targetとparamのみ指定その3）
      *
      */
     public function test_RedirectTo_WithTargetAndParam3()
     {
-        Url::RedirectTo('Top', array('Foo' => 'Bar', 'Hoge' => ''), null, self::$default_server);
+        Url::redirectTo('Top', array('Foo' => 'Bar', 'Hoge' => ''), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge', $output_header);
@@ -117,12 +117,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParam4()
      *
-     * RedirectTo()の挙動をテストする（targetとparamのみ指定その4）
+     * redirectTo()の挙動をテストする（targetとparamのみ指定その4）
      *
      */
     public function test_RedirectTo_WithTargetAndParam4()
     {
-        Url::RedirectTo('Top', array('Foo' => 'Bar', 'Hoge' => 'Fuga'), null, self::$default_server);
+        Url::redirectTo('Top', array('Foo' => 'Bar', 'Hoge' => 'Fuga'), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
@@ -131,12 +131,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParam5()
      *
-     * RedirectTo()の挙動をテストする（targetとparamのみ指定その5）
+     * redirectTo()の挙動をテストする（targetとparamのみ指定その5）
      *
      */
     public function test_RedirectTo_WithTargetAndParam5()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), null, self::$default_server);
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), null, self::$default_server);
         $output_header = xdebug_get_headers();
 
         $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
@@ -145,12 +145,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithTargetAndParamAndStatuscode()
      *
-     * RedirectTo()の挙動をテストする（targetとparamとstatuscodeのみ指定）
+     * redirectTo()の挙動をテストする（targetとparamとstatuscodeのみ指定）
      *
      */
     public function test_RedirectTo_WithTargetAndParamAndStatuscode()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', self::$default_server);
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', self::$default_server);
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }
@@ -158,12 +158,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithFullArgs1()
      *
-     * RedirectTo()の挙動をテストする（全引数を指定その1）
+     * redirectTo()の挙動をテストする（全引数を指定その1）
      *
      */
     public function test_RedirectTo_WithFullArgs1()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'));
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'));
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: http://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }
@@ -171,12 +171,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithFullArgs2()
      *
-     * RedirectTo()の挙動をテストする（全引数を指定その2）
+     * redirectTo()の挙動をテストする（全引数を指定その2）
      *
      */
     public function test_RedirectTo_WithFullArgs2()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '443', 'PHP_SELF' => '/'));
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '443', 'PHP_SELF' => '/'));
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: https://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }
@@ -184,12 +184,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithFullArgs3()
      *
-     * RedirectTo()の挙動をテストする（全引数を指定その3）
+     * redirectTo()の挙動をテストする（全引数を指定その3）
      *
      */
     public function test_RedirectTo_WithFullArgs3()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8080', 'PHP_SELF' => '/'));
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8080', 'PHP_SELF' => '/'));
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: http://example.com:8080/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }
@@ -197,12 +197,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithFullArgs4()
      *
-     * RedirectTo()の挙動をテストする（全引数を指定その4）
+     * redirectTo()の挙動をテストする（全引数を指定その4）
      *
      */
     public function test_RedirectTo_WithFullArgs4()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/'));
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/'));
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: https://example.com:8443/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }
@@ -210,12 +210,12 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     /**
      * test_RedirectTo_WithFullArgs5()
      *
-     * RedirectTo()の挙動をテストする（全引数を指定その5）
+     * redirectTo()の挙動をテストする（全引数を指定その5）
      *
      */
     public function test_RedirectTo_WithFullArgs5()
     {
-        Url::RedirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/extra/'));
+        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/extra/'));
         $output_header = xdebug_get_headers();
         $this->assertContains('Location: https://example.com:8443/extra/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
     }

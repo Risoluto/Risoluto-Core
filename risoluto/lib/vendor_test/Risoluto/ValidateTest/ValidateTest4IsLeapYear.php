@@ -35,48 +35,48 @@ class ValidateTest4IsLeapYear extends \PHPUnit_Framework_TestCase
     /**
      * test_IsLeapYear_InvalidArgPart1()
      *
-     * IsLeapYear()の挙動をテストする（数字2桁）
+     * isLeapYear()の挙動をテストする（数字2桁）
      */
     public function test_IsLeapYear_InvalidArgPart1()
     {
         $test = '13';
 
-        $this->assertFalse(Validate::IsLeapYear($test));
+        $this->assertFalse(Validate::isLeapYear($test));
     }
 
     /**
      * test_IsLeapYear_InvalidArgPart2()
      *
-     * IsLeapYear()の挙動をテストする（英字4桁）
+     * isLeapYear()の挙動をテストする（英字4桁）
      */
     public function test_IsLeapYear_InvalidArgPart2()
     {
         $test = 'AAAA';
 
-        $this->assertFalse(Validate::IsLeapYear($test));
+        $this->assertFalse(Validate::isLeapYear($test));
     }
 
     /**
      * test_IsLeapYear_ValidArgPart1()
      *
-     * IsLeapYear()の挙動をテストする（閏年である）
+     * isLeapYear()の挙動をテストする（閏年である）
      */
     public function test_IsLeapYear_ValidArgPart1()
     {
         $test = '2000';
 
-        $this->assertTrue(Validate::IsLeapYear($test));
+        $this->assertTrue(Validate::isLeapYear($test));
     }
 
     /**
      * test_IsLeapYear_ValidArgPart2()
      *
-     * IsLeapYear()の挙動をテストする（閏年でない）
+     * isLeapYear()の挙動をテストする（閏年でない）
      */
     public function test_IsLeapYear_ValidArgPart2()
     {
         $test = '2013';
 
-        $this->assertFalse(Validate::IsLeapYear($test));
+        $this->assertFalse(Validate::isLeapYear($test));
     }
 }

@@ -34,15 +34,15 @@ class ServiceStop extends \Risoluto\RisolutoControllerBase implements \Risoluto\
      *
      * @return    void    なし
      */
-    public function Play()
+    public function play()
     {
         // ヘッダ情報のセット
-        $header = $this->GetDefaultHeader();
-        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
-        $header = $this->ReplaceHeader($header, 'title', '現在サービスを停止しています');
+        $header = $this->getDefaultHeader();
+        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader($header, 'title', '現在サービスを停止しています');
 
         // テンプレートエンジン関連の処理
         $assign_value = array('header' => $header);
-        $this->RisolutoView($assign_value);
+        $this->risolutoView($assign_value);
     }
 }

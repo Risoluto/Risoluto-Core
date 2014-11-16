@@ -2,7 +2,7 @@
 /**
  * DbTest4DoQuery
  *
- * Db::DoQuery()用テストケース
+ * Db::doQuery()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -97,7 +97,7 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
     /**
      * test_DoQuery_NoArgs()
      *
-     * DoQuery()のテスト（引数なし）
+     * doQuery()のテスト（引数なし）
      */
     public function test_DoQuery_NoArgs()
     {
@@ -109,18 +109,18 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
-        $this->assertFalse($instance->DoQuery());
+        $this->assertFalse($instance->doQuery());
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
      * test_DoQuery_WithSql()
      *
-     * DoQuery()のテスト（SQLを指定）
+     * doQuery()のテスト（SQLを指定）
      */
     public function test_DoQuery_WithSql()
     {
@@ -139,12 +139,12 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
-        $tmp_result = $instance->DoQuery($sql);
+        $tmp_result = $instance->doQuery($sql);
         $this->assertEquals($want, $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
@@ -152,7 +152,7 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
     /**
      * test_DoQuery_WithSqlAndParam()
      *
-     * DoQuery()のテスト（SQLを指定）
+     * doQuery()のテスト（SQLを指定）
      */
     public function test_DoQuery_WithSqlAndParam()
     {
@@ -182,21 +182,21 @@ class DbTest4DoQuery extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $instance->Connect($params);
+        $instance->connect($params);
 
         // Begin, $sql and $param sets.
-        $tmp_result = $instance->DoQuery($sql, $param1);
+        $tmp_result = $instance->doQuery($sql, $param1);
         $this->assertEquals($want1, $tmp_result);
 
         // Next, only $param sets.
-        $tmp_result = $instance->DoQuery('', $param2);
+        $tmp_result = $instance->doQuery('', $param2);
         $this->assertEquals($want2, $tmp_result);
 
         // Final, $param and fetch_style set.
-        $tmp_result = $instance->DoQuery('', $param2, array(), \PDO::FETCH_BOTH);
+        $tmp_result = $instance->doQuery('', $param2, array(), \PDO::FETCH_BOTH);
         $this->assertEquals($want3, $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 }

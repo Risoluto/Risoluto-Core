@@ -22,7 +22,7 @@ trait RisolutoErrorLogTrait
     //------------------------------------------------------//
 
     /**
-     * RisolutoErrorLog($loglevel, $msg)
+     * risolutoErrorLog($loglevel, $msg)
      *
      * エラーログを出力する
      *
@@ -33,14 +33,14 @@ trait RisolutoErrorLogTrait
      *
      * @return    boolean 常にTrue
      */
-    private function RisolutoErrorLog($loglevel, $msg)
+    private function risolutoErrorLog($loglevel, $msg)
     {
         // ログ出力しエラーメッセージを返却
         $conf = new Conf;
-        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
 
         $log = new Log;
-        $log->SetCurrentLogLevel($conf->GetIni('LOGGING', 'loglevel'));
-        $log->Log($loglevel, $msg);
+        $log->setCurrentLogLevel($conf->getIni('LOGGING', 'loglevel'));
+        $log->log($loglevel, $msg);
     }
 }

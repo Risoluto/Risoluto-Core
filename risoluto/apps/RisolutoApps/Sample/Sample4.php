@@ -24,7 +24,7 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
     use \Risoluto\RisolutoViewTrait;
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *
@@ -34,10 +34,10 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
      *
      * @return    void    なし
      */
-    public function Play()
+    public function play()
     {
         // ユーザ定義のライブラリコール例
-        \RisolutoUserLibs\SampleLibs::SampleMethod();
+        \RisolutoUserLibs\SampleLibs::sampleMethod();
 
         //--- DB関連の操作（ここから）
         // モデルインスタンスを作成する
@@ -45,22 +45,22 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
 
         // モデルの初期処理を実行
         $dat = '';
-        if ($model->Begin()) {
+        if ($model->begin()) {
 
             // 全データを取得する
-            $dat = $model->GetAll();
+            $dat = $model->getAll();
 
             // モデルの最終処理を実行
-            $model->End();
+            $model->end();
         }
         //--- DB関連の操作（ここまで）
 
         // ヘッダ情報のセット
-        $header = $this->GetDefaultHeader();
-        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->getDefaultHeader();
+        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
 
         // テンプレートエンジン関連の処理
         $assign_value = array('header' => $header, 'dat' => $dat);
-        $this->RisolutoView($assign_value);
+        $this->risolutoView($assign_value);
     }
 }
