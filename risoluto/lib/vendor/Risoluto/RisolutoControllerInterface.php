@@ -17,11 +17,11 @@ namespace Risoluto;
 
 interface RisolutoControllerInterface
 {
-    public function Init(array $param);
+    public function init(array $param);
 
-    public function Play();
+    public function play();
 
-    public function Error(\Exception $errobj);
+    public function error(\Exception $errobj);
 
-    public function Clean();
+    public function clean();
 }

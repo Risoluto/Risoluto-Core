@@ -30,7 +30,7 @@ class Validate
     }
 
     /**
-     * IsEmailAddr($value)
+     * isEmailAddr($value)
      *
      * 引数で指定された値がメールアドレスのフォーマットと合致しているか判定する
      *
@@ -40,13 +40,13 @@ class Validate
      *
      * @return    boolean    判定結果（true/false）
      */
-    public static function IsEmailAddr($value)
+    public static function isEmailAddr($value)
     {
         return (preg_match('/^([a-z0-9_]|\-|\.|\+)+@(([a-z0-9_]|\-)+\.)+[a-z]{2,6}$/i', $value)) ? (true) : (false);
     }
 
     /**
-     * IsHalfWidth($value)
+     * isHalfWidth($value)
      *
      * 引数で指定された値が半角文字列のみで構成されているか判定する
      *
@@ -56,13 +56,13 @@ class Validate
      *
      * @return    boolean    判定結果（true/false）
      */
-    public static function IsHalfWidth($value)
+    public static function isHalfWidth($value)
     {
         return (strlen($value) == mb_strlen($value, 'UTF-8')) ? (true) : (false);
     }
 
     /**
-     * IsLeapYear($value)
+     * isLeapYear($value)
      *
      * 引数で指定された値が閏年であるか判定する
      *
@@ -72,7 +72,7 @@ class Validate
      *
      * @return    boolean    判定結果（true/false）
      */
-    public static function IsLeapYear($value)
+    public static function isLeapYear($value)
     {
         // 引数が4桁の整数値でなければ無条件でfalseを返却する
         if ((strlen($value) != 4) or (!is_numeric($value))) {
@@ -88,7 +88,7 @@ class Validate
     }
 
     /**
-     * IsBetween($value, $lowerval, $upperval)
+     * isBetween($value, $lowerval, $upperval)
      *
      * 引数で指定された値が引数で指定された下限値及び上限値の範囲内にあるかを判定する
      *
@@ -100,7 +100,7 @@ class Validate
      *
      * @return    boolean    判定結果（true/false）
      */
-    public static function IsBetween($value, $lowerval, $upperval)
+    public static function isBetween($value, $lowerval, $upperval)
     {
         // 下限値から上限値の範囲内ならtrueを返却（下限値／上限値自体も範囲に含む）
         if (($lowerval <= $value) and ($upperval >= $value)) {

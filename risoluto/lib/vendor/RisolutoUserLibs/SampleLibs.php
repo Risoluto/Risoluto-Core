@@ -17,5 +17,5 @@ namespace RisolutoUserLibs;
 
 class SampleLibs implements SampleLibsInterface
 {
-    use SampleLibsTrait;
+    use sampleLibsTrait;
 }

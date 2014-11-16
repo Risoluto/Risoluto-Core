@@ -30,7 +30,7 @@ class Text
     }
 
     /**
-     * AutoUrlLink($target, $newWindow = true, $extra = null)
+     * autoUrlLink($target, $newWindow = true, $extra = null)
      *
      * 引数で指定された文字列中の特定部分をリンクに変換する
      *
@@ -42,7 +42,7 @@ class Text
      *
      * @return    string    変換後の文字列
      */
-    public static function AutoUrlLink($target, $newWindow = true, $extra = null)
+    public static function autoUrlLink($target, $newWindow = true, $extra = null)
     {
         // 一度、一時変数へ格納する
         $tmp_target = $target;

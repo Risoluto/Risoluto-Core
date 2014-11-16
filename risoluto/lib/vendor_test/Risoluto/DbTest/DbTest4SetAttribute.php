@@ -1,8 +1,8 @@
 <?php
 /**
- * DbTest4SetAttribute
+ * DbTest4setAttribute
  *
- * Db::SetAttribute()用テストケース
+ * Db::setAttribute()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
+class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -62,16 +62,16 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-     * getConnection()
+     * getconnection()
      *
      * DBテストに必要な接続を実施
      */
-    public function getConnection()
+    public function getconnection()
     {
         $dsn = $GLOBALS['DB_DRIVER'] . ':dbname=' . $GLOBALS['DB_DBNAME'] . ';host=' . $GLOBALS['DB_HOST'];
         $pdo = new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 
-        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        return $this->createDefaultDBconnection($pdo, $GLOBALS['DB_DBNAME']);
     }
 
     /**
@@ -91,15 +91,15 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function testPreCondition()
     {
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
     }
 
     /**
-     * test_SetAttribute_EmptyBoth()
+     * test_setAttribute_EmptyBoth()
      *
-     * SetAttribute()のテスト（引数両方未指定時）
+     * setAttribute()のテスト（引数両方未指定時）
      */
-    public function test_SetAttribute_EmptyBoth()
+    public function test_setAttribute_EmptyBoth()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -109,21 +109,21 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->SetAttribute('', '');
+        $instance->connect($params);
+        $tmp_result = $instance->setAttribute('', '');
 
         $this->assertFalse($tmp_result);
 
-        $instance->DisConnect();
+        $instance->disconnect();
         unset($instance);
     }
 
     /**
-     * test_SetAttribute_Empty1st()
+     * test_setAttribute_Empty1st()
      *
-     * SetAttribute()のテスト（第1引数未指定時）
+     * setAttribute()のテスト（第1引数未指定時）
      */
-    public function test_SetAttribute_Empty1st()
+    public function test_setAttribute_Empty1st()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -133,21 +133,21 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->SetAttribute('', 'BAR');
+        $instance->connect($params);
+        $tmp_result = $instance->setAttribute('', 'BAR');
 
         $this->assertFalse($tmp_result);
 
-        $instance->DisConnect();
+        $instance->disconnect();
         unset($instance);
     }
 
     /**
-     * test_SetAttribute_Empty2nd()
+     * test_setAttribute_Empty2nd()
      *
-     * SetAttribute()のテスト（第2引数未指定時）
+     * setAttribute()のテスト（第2引数未指定時）
      */
-    public function test_SetAttribute_Empty2nd()
+    public function test_setAttribute_Empty2nd()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -157,21 +157,21 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->SetAttribute('FOO', '');
+        $instance->connect($params);
+        $tmp_result = $instance->setAttribute('FOO', '');
 
         $this->assertFalse($tmp_result);
 
-        $instance->DisConnect();
+        $instance->disconnect();
         unset($instance);
     }
 
     /**
-     * test_SetAttribute_withArgs()
+     * test_setAttribute_withArgs()
      *
-     * SetAttribute()のテスト（引数指定時）
+     * setAttribute()のテスト（引数指定時）
      */
-    public function test_SetAttribute_withArgs()
+    public function test_setAttribute_withArgs()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -181,16 +181,16 @@ class DbTest4SetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $before_val = $instance->GetAttribute('FETCH_MODE');
-        $tmp_result = $instance->SetAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
-        $after_val  = $instance->GetAttribute('FETCH_MODE');
+        $instance->connect($params);
+        $before_val = $instance->getAttribute('FETCH_MODE');
+        $tmp_result = $instance->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
+        $after_val  = $instance->getAttribute('FETCH_MODE');
 
         $this->assertTrue($tmp_result);
         $this->assertNotEquals($before_val, $after_val);
         $this->assertNotEquals(\PDO::FETCH_OBJ, $after_val);
 
-        $instance->DisConnect();
+        $instance->disconnect();
         unset($instance);
     }
 }

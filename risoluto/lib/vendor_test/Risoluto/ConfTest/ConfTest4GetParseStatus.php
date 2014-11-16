@@ -39,7 +39,7 @@ class ConfTest4GetParseStatus extends \PHPUnit_Framework_TestCase
     public function test_GetParseStatus_BeforeParsed()
     {
         $instance = new Conf;
-        $this->assertFalse($instance->GetParseStatus());
+        $this->assertFalse($instance->getParseStatus());
         unset($instance);
     }
 
@@ -51,8 +51,8 @@ class ConfTest4GetParseStatus extends \PHPUnit_Framework_TestCase
     public function test_GetParseStatus_AfterParsed()
     {
         $instance = new Conf;
-        $instance->Parse(RISOLUTO_CONF . 'risoluto.ini');
-        $this->assertTrue($instance->GetParseStatus());
+        $instance->parse(RISOLUTO_CONF . 'risoluto.ini');
+        $this->assertTrue($instance->getParseStatus());
         unset($instance);
     }
 }

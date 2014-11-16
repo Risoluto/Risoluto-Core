@@ -24,7 +24,7 @@ class Top extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risoluto
     use \Risoluto\RisolutoViewTrait;
 
     /**
-     * Play()
+     * play()
      *
      * 主処理を行う
      *
@@ -34,14 +34,14 @@ class Top extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risoluto
      *
      * @return    void    なし
      */
-    public function Play()
+    public function play()
     {
         // ヘッダ情報のセット
-        $header = $this->GetDefaultHeader();
-        $header = $this->ReplaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->getDefaultHeader();
+        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
 
         // テンプレートエンジン関連の処理
         $assign_value = array('header' => $header);
-        $this->RisolutoView($assign_value);
+        $this->risolutoView($assign_value);
     }
 }

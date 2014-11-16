@@ -35,72 +35,72 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     /**
      * test_IsHalfWidth_HalfNumeric()
      *
-     * IsHalfWidth()の挙動をテストする（半角数字）
+     * isHalfWidth()の挙動をテストする（半角数字）
      */
     public function test_IsHalfWidth_HalfNumeric()
     {
         $test = '0';
 
-        $this->assertTrue(Validate::IsHalfWidth($test));
+        $this->assertTrue(Validate::isHalfWidth($test));
     }
 
     /**
      * test_IsHalfWidth_HalfAlphabet()
      *
-     * IsHalfWidth()の挙動をテストする（半角英字）
+     * isHalfWidth()の挙動をテストする（半角英字）
      */
     public function test_IsHalfWidth_HalfAlphabet()
     {
         $test = 'A';
 
-        $this->assertTrue(Validate::IsHalfWidth($test));
+        $this->assertTrue(Validate::isHalfWidth($test));
     }
 
     /**
      * test_IsHalfWidth_HalfSymbol()
      *
-     * IsHalfWidth()の挙動をテストする（半角記号）
+     * isHalfWidth()の挙動をテストする（半角記号）
      */
     public function test_IsHalfWidth_HalfSymbol()
     {
         $test = '+';
 
-        $this->assertTrue(Validate::IsHalfWidth($test));
+        $this->assertTrue(Validate::isHalfWidth($test));
     }
 
     /**
      * test_IsHalfWidth_FullNumeric()
      *
-     * IsHalfWidth()の挙動をテストする（全角数字）
+     * isHalfWidth()の挙動をテストする（全角数字）
      */
     public function test_IsHalfWidth_FullNumeric()
     {
         $test = '０';
 
-        $this->assertFalse(Validate::IsHalfWidth($test));
+        $this->assertFalse(Validate::isHalfWidth($test));
     }
 
     /**
      * test_IsHalfWidth_FullAlphabet()
      *
-     * IsHalfWidth()の挙動をテストする（全角英字）
+     * isHalfWidth()の挙動をテストする（全角英字）
      */
     public function test_IsHalfWidth_FullAlphabet()
     {
         $test = 'Ａ';
 
-        $this->assertFalse(Validate::IsHalfWidth($test));
+        $this->assertFalse(Validate::isHalfWidth($test));
     }
 
     /**
      * test_IsHalfWidth_FullSymbol()
      *
-     * IsHalfWidth()の挙動をテストする（全角記号）
+     * isHalfWidth()の挙動をテストする（全角記号）
      */
     public function test_IsHalfWidth_FullSymbol()
     {
         $test = '＋';
 
-        $this->assertFalse(Validate::IsHalfWidth($test));
+        $this->assertFalse(Validate::isHalfWidth($test));
     }
 }

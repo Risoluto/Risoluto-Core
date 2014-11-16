@@ -23,7 +23,7 @@ class Core
     use RisolutoErrorLogTrait;
 
     /**
-     * Perform()
+     * perform()
      *
      * 指定されたアプリケーションを呼び出す
      *
@@ -33,7 +33,7 @@ class Core
      *
      * @return    void
      */
-    public function Perform()
+    public function perform()
     {
         //------------------------------------------------------//
         // アプリケーションクラスをロードし実行する
@@ -41,14 +41,14 @@ class Core
         // クラスインスタンスを生成し、実行する
         try {
             // 呼び出すクラスを決定する
-            $call = $this->FindCallClass();
+            $call = $this->findCallClass();
 
             // インスタンスの生成
             $targetInstance = new $call['load'];
 
             // イニシャライズメソッドをコール
-            if (method_exists($targetInstance, 'Init')) {
-                $targetInstance->Init($call['param']);
+            if (method_exists($targetInstance, 'init')) {
+                $targetInstance->init($call['param']);
             } else {
                 // メソッドが存在しなければ例外をThrow
                 throw new \Exception($this->coreError('error', 'notfound', 'Init()'));
@@ -58,86 +58,86 @@ class Core
             switch ($_SERVER['REQUEST_METHOD']) {
                 // GETの場合
                 case 'GET':
-                    if (method_exists($targetInstance, 'PlayGet')) {
-                        $targetInstance->PlayGet();
+                    if (method_exists($targetInstance, 'playGet')) {
+                        $targetInstance->playGet();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // POSTの場合
                 case 'POST':
-                    if (method_exists($targetInstance, 'PlayPost')) {
-                        $targetInstance->PlayPost();
+                    if (method_exists($targetInstance, 'playPost')) {
+                        $targetInstance->playPost();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // PUTの場合
                 case 'PUT':
-                    if (method_exists($targetInstance, 'PlayPut')) {
-                        $targetInstance->PlayPut();
+                    if (method_exists($targetInstance, 'playPut')) {
+                        $targetInstance->playPut();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // DELETEの場合
                 case 'DELETE':
-                    if (method_exists($targetInstance, 'PlayDelete')) {
-                        $targetInstance->PlayDelete();
+                    if (method_exists($targetInstance, 'playDelete')) {
+                        $targetInstance->playDelete();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // OPTIONの場合
                 case 'OPTION':
-                    if (method_exists($targetInstance, 'PlayOption')) {
-                        $targetInstance->PlayOption();
+                    if (method_exists($targetInstance, 'playOption')) {
+                        $targetInstance->playOption();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // HEADの場合
                 case 'HEAD':
-                    if (method_exists($targetInstance, 'PlayHead')) {
-                        $targetInstance->PlayHead();
+                    if (method_exists($targetInstance, 'playHead')) {
+                        $targetInstance->playHead();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // TRACEの場合
                 case 'TRACE':
-                    if (method_exists($targetInstance, 'PlayTrace')) {
-                        $targetInstance->PlayTrace();
+                    if (method_exists($targetInstance, 'playTrace')) {
+                        $targetInstance->playTrace();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // CONNECTの場合
                 case 'CONNECT':
-                    if (method_exists($targetInstance, 'PlayConnect')) {
-                        $targetInstance->PlayConnect();
+                    if (method_exists($targetInstance, 'playConnect')) {
+                        $targetInstance->playConnect();
                     } else {
-                        $this->PlayFuncCall($targetInstance);
+                        $this->playFuncCall($targetInstance);
                     }
                     break;
 
                 // デフォルトの場合
                 default:
-                    $this->PlayFuncCall($targetInstance);
+                    $this->playFuncCall($targetInstance);
                     break;
             }
         } catch (\Exception $e) {
             // エラーハンドリングメソッドをコール
             if (!empty($targetInstance)) {
-                if (method_exists($targetInstance, 'Error')) {
-                    $targetInstance->Error($e);
+                if (method_exists($targetInstance, 'error')) {
+                    $targetInstance->error($e);
                 } else {
                     // メソッドが存在しなければ強制終了
                     die($this->coreError('error', 'notfound', 'Error()'));
@@ -146,8 +146,8 @@ class Core
         } finally {
             // クリーニングメソッドをコール
             if (!empty($targetInstance)) {
-                if (method_exists($targetInstance, 'Clean')) {
-                    $targetInstance->Clean();
+                if (method_exists($targetInstance, 'clean')) {
+                    $targetInstance->clean();
                 } else {
                     // メソッドが存在しなければ強制終了
                     die($this->coreError('error', 'notfound', 'Clean()'));
@@ -157,7 +157,7 @@ class Core
     }
 
     /**
-     * PlayFuncCall($targetInstance)
+     * playFuncCall($targetInstance)
      *
      * Play()メソッドをコールする（存在しない場合は例外をThrow）
      *
@@ -169,7 +169,7 @@ class Core
      *
      * @throws \Exception
      */
-    private function PlayFuncCall($targetInstance)
+    private function playFuncCall($targetInstance)
     {
         if (method_exists($targetInstance, 'Play')) {
             $targetInstance->Play();
@@ -180,7 +180,7 @@ class Core
     }
 
     /**
-     * FixSeqParam($value = '')
+     * fixSeqParam($value = '')
      *
      * $_GET['seq']の値から不適切な文字を排除する
      *
@@ -190,7 +190,7 @@ class Core
      *
      * @return    String 適切な状態に加工した$_GET['seq']
      */
-    private function FixSeqParam($value = '')
+    private function fixSeqParam($value = '')
     {
         // 検出対象のリスト
         $searches = array('/\.+/', '/_+/', '/\//', '/\¥/', '/\\\\/', '/[[:blank:]]/', '/[[:cntrl:]]/');
@@ -205,7 +205,7 @@ class Core
     }
 
     /**
-     * IsDisabled($dirpath, $target)
+     * isDisabled($dirpath, $target)
      *
      * 無効指定されているかを判定する
      *
@@ -216,7 +216,7 @@ class Core
      *
      * @return    Boolean true：無効指定されている／false：無効指定されていない
      */
-    private function IsDisabled($dirpath, $target)
+    private function isDisabled($dirpath, $target)
     {
         // 変数の初期化
         $retval     = false;
@@ -238,7 +238,7 @@ class Core
     }
 
     /**
-     * FindCallClass()
+     * findCallClass()
      *
      * 呼び出すクラスを決定する
      *
@@ -248,18 +248,18 @@ class Core
      *
      * @return    array   呼び出すクラスの情報等
      */
-    private function FindCallClass()
+    private function findCallClass()
     {
         // コンフィグファイルの読み込み
         $conf = new Conf;
-        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
 
         // デフォルトの情報をセット
-        $load  = $conf->GetIni('SEQ', 'default');
+        $load  = $conf->getIni('SEQ', 'default');
         $param = array();
 
         // $_GET['seq']の値をチェックする
-        $seq = $this->FixSeqParam((isset($_GET['seq'])) ? $_GET['seq'] : '');
+        $seq = $this->fixSeqParam((isset($_GET['seq'])) ? $_GET['seq'] : '');
 
         // GETパラメタ中の情報（「seq」）が指定されていればそれを採用
         if (isset($seq) and !empty($seq)) {
@@ -286,24 +286,24 @@ class Core
             // 指定されたアプリケーションが存在していないか無効指定されていたらエラーとする
             $target = RISOLUTO_APPS . str_replace('\\', DIRECTORY_SEPARATOR, $load) . '.php';
             clearstatcache(true);
-            if (!file_exists($target) or !is_file($target) or !is_readable($target) or $this->IsDisabled(dirname($target), $load)) {
+            if (!file_exists($target) or !is_file($target) or !is_readable($target) or $this->isDisabled(dirname($target), $load)) {
                 // ログにも記録しておく
-                $this->CoreError('warn', 'classnotfound', $load . ' (Path: ' . $target . ' ) / Go to Error page.');
+                $this->coreError('warn', 'classnotfound', $load . ' (Path: ' . $target . ' ) / Go to Error page.');
 
-                $load  = $conf->GetIni('SEQ', 'error');
+                $load  = $conf->getIni('SEQ', 'error');
                 $param = array();
             }
         }
 
         // サービスストップファイルが存在するかロードアベレージが一定値以上ならサービスストップ
         $loadavg     = sys_getloadavg();
-        $max_loadavg = $conf->GetIni('LIMITS', 'max_loadavg');
+        $max_loadavg = $conf->getIni('LIMITS', 'max_loadavg');
         clearstatcache(true);
         if (file_exists(RISOLUTO_SYSROOT . 'ServiceStop') or (!empty($max_loadavg) and $loadavg[0] > $max_loadavg)) {
             // ログにも記録しておく
-            $this->CoreError('warn', 'servicestop', 'Current Loadavg: ' . $loadavg[0] . ' / Setting: ' . $max_loadavg);
+            $this->coreError('warn', 'servicestop', 'Current Loadavg: ' . $loadavg[0] . ' / Setting: ' . $max_loadavg);
 
-            $load  = $conf->GetIni('SEQ', 'servicestop');
+            $load  = $conf->getIni('SEQ', 'servicestop');
             $param = array();
         }
 
@@ -315,7 +315,7 @@ class Core
     }
 
     /**
-     * CoreError($error_level = 'error', $key = '', $optional_text = 'unknown')
+     * coreError($error_level = 'error', $key = '', $optional_text = 'unknown')
      *
      * クラス内で発生したエラーに対するエラーメッセージを生成する
      *
@@ -327,7 +327,7 @@ class Core
      *
      * @return    string    エラーメッセージ
      */
-    private function CoreError($error_level = 'error', $key = '', $optional_text = 'unknown')
+    private function coreError($error_level = 'error', $key = '', $optional_text = 'unknown')
     {
         // 引数の値に応じてエラーメッセージをセットする
         switch ($key) {
@@ -354,7 +354,7 @@ class Core
         }
 
         // ログ出力しエラーメッセージを返却
-        $this->RisolutoErrorLog($error_level, '[' . __CLASS__ . '/]' . $msg);
+        $this->risolutoErrorLog($error_level, '[' . __CLASS__ . '/]' . $msg);
 
         return $msg;
     }

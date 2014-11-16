@@ -1,8 +1,8 @@
 <?php
 /**
- * DbTest4GetAttribute
+ * DbTest4getAttribute
  *
- * Db::GetAttribute()用テストケース
+ * Db::getAttribute()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -18,7 +18,7 @@ namespace Risoluto;
 //------------------------------------------------------//
 // テストクラス定義
 //------------------------------------------------------//
-class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
+class DbTest4getAttribute extends \PHPUnit_Extensions_Database_TestCase
 {
     //------------------------------------------------------//
     // テストクラス変数定義
@@ -62,16 +62,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
     }
 
     /**
-     * getConnection()
+     * getconnection()
      *
      * DBテストに必要な接続を実施
      */
-    public function getConnection()
+    public function getconnection()
     {
         $dsn = $GLOBALS['DB_DRIVER'] . ':dbname=' . $GLOBALS['DB_DBNAME'] . ';host=' . $GLOBALS['DB_HOST'];
         $pdo = new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
 
-        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        return $this->createDefaultDBconnection($pdo, $GLOBALS['DB_DBNAME']);
     }
 
     /**
@@ -91,15 +91,15 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function testPreCondition()
     {
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
     }
 
     /**
-     * test_GetAttribute_NoArgs()
+     * test_getAttribute_NoArgs()
      *
-     * GetAttribute()のテスト（引数未指定時）
+     * getAttribute()のテスト（引数未指定時）
      */
-    public function test_GetAttribute_NoArgs()
+    public function test_getAttribute_NoArgs()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -109,8 +109,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute();
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute();
 
         $this->assertArrayHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayHasKey('PREFETCH', $tmp_result);
@@ -127,16 +127,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_ALL()
+     * test_getAttribute_ALL()
      *
-     * GetAttribute()のテスト（引数"ALL"指定時）
+     * getAttribute()のテスト（引数"ALL"指定時）
      */
-    public function test_GetAttribute_ALL()
+    public function test_getAttribute_ALL()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -146,8 +146,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('ALL');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('ALL');
 
         $this->assertArrayHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayHasKey('PREFETCH', $tmp_result);
@@ -164,16 +164,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_AUTOCOMMIT()
+     * test_getAttribute_AUTOCOMMIT()
      *
-     * GetAttribute()のテスト（引数"AUTOCOMMIT"指定時）
+     * getAttribute()のテスト（引数"AUTOCOMMIT"指定時）
      */
-    public function test_GetAttribute_AUTOCOMMIT()
+    public function test_getAttribute_AUTOCOMMIT()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -183,8 +183,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('AUTOCOMMIT');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('AUTOCOMMIT');
 
         $this->assertArrayHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -201,16 +201,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_PREFETCH()
+     * test_getAttribute_PREFETCH()
      *
-     * GetAttribute()のテスト（引数"PREFETCH"指定時）
+     * getAttribute()のテスト（引数"PREFETCH"指定時）
      */
-    public function test_GetAttribute_PREFETCH()
+    public function test_getAttribute_PREFETCH()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -220,8 +220,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('PREFETCH');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('PREFETCH');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayHasKey('PREFETCH', $tmp_result);
@@ -238,16 +238,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_TIMEOUT()
+     * test_getAttribute_TIMEOUT()
      *
-     * GetAttribute()のテスト（引数"TIMEOUT"指定時）
+     * getAttribute()のテスト（引数"TIMEOUT"指定時）
      */
-    public function test_GetAttribute_TIMEOUT()
+    public function test_getAttribute_TIMEOUT()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -257,8 +257,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('TIMEOUT');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('TIMEOUT');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -275,16 +275,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_ERRMODE()
+     * test_getAttribute_ERRMODE()
      *
-     * GetAttribute()のテスト（引数"ERRMODE"指定時）
+     * getAttribute()のテスト（引数"ERRMODE"指定時）
      */
-    public function test_GetAttribute_ERRMODE()
+    public function test_getAttribute_ERRMODE()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -294,8 +294,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('ERRMODE');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('ERRMODE');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -312,16 +312,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_SERVER_VERSION()
+     * test_getAttribute_SERVER_VERSION()
      *
-     * GetAttribute()のテスト（引数"SERVER_VERSION"指定時）
+     * getAttribute()のテスト（引数"SERVER_VERSION"指定時）
      */
-    public function test_GetAttribute_SERVER_VERSION()
+    public function test_getAttribute_SERVER_VERSION()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -331,8 +331,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('SERVER_VERSION');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('SERVER_VERSION');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -349,16 +349,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_CLIENT_VERSION()
+     * test_getAttribute_CLIENT_VERSION()
      *
-     * GetAttribute()のテスト（引数"CLIENT_VERSION"指定時）
+     * getAttribute()のテスト（引数"CLIENT_VERSION"指定時）
      */
-    public function test_GetAttribute_CLIENT_VERSION()
+    public function test_getAttribute_CLIENT_VERSION()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -368,8 +368,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('CLIENT_VERSION');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('CLIENT_VERSION');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -386,16 +386,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_SERVER_INFO()
+     * test_getAttribute_SERVER_INFO()
      *
-     * GetAttribute()のテスト（引数"SERVER_INFO"指定時）
+     * getAttribute()のテスト（引数"SERVER_INFO"指定時）
      */
-    public function test_GetAttribute_SERVER_INFO()
+    public function test_getAttribute_SERVER_INFO()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -405,8 +405,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('SERVER_INFO');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('SERVER_INFO');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -423,16 +423,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_CONNECTION_STATUS()
+     * test_getAttribute_CONNECTION_STATUS()
      *
-     * GetAttribute()のテスト（引数"CONNECTION_STATUS"指定時）
+     * getAttribute()のテスト（引数"CONNECTION_STATUS"指定時）
      */
-    public function test_GetAttribute_CONNECTION_STATUS()
+    public function test_getAttribute_CONNECTION_STATUS()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -442,8 +442,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('CONNECTION_STATUS');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('CONNECTION_STATUS');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -460,16 +460,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_CASE()
+     * test_getAttribute_CASE()
      *
-     * GetAttribute()のテスト（引数"CASE"指定時）
+     * getAttribute()のテスト（引数"CASE"指定時）
      */
-    public function test_GetAttribute_CASE()
+    public function test_getAttribute_CASE()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -479,8 +479,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('CASE');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('CASE');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -497,16 +497,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_DRIVER_NAME()
+     * test_getAttribute_DRIVER_NAME()
      *
-     * GetAttribute()のテスト（引数"DRIVER_NAME"指定時）
+     * getAttribute()のテスト（引数"DRIVER_NAME"指定時）
      */
-    public function test_GetAttribute_DRIVER_NAME()
+    public function test_getAttribute_DRIVER_NAME()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -516,8 +516,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('DRIVER_NAME');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('DRIVER_NAME');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -534,16 +534,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_ORACLE_NULLS()
+     * test_getAttribute_ORACLE_NULLS()
      *
-     * GetAttribute()のテスト（引数"ORACLE_NULLS"指定時）
+     * getAttribute()のテスト（引数"ORACLE_NULLS"指定時）
      */
-    public function test_GetAttribute_ORACLE_NULLS()
+    public function test_getAttribute_ORACLE_NULLS()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -553,8 +553,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('ORACLE_NULLS');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('ORACLE_NULLS');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -571,16 +571,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_PERSISTENT()
+     * test_getAttribute_PERSISTENT()
      *
-     * GetAttribute()のテスト（引数"PERSISTENT"指定時）
+     * getAttribute()のテスト（引数"PERSISTENT"指定時）
      */
-    public function test_GetAttribute_PERSISTENT()
+    public function test_getAttribute_PERSISTENT()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -590,8 +590,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('PERSISTENT');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('PERSISTENT');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -608,16 +608,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_STATEMENT_CLASS()
+     * test_getAttribute_STATEMENT_CLASS()
      *
-     * GetAttribute()のテスト（引数"STATEMENT_CLASS"指定時）
+     * getAttribute()のテスト（引数"STATEMENT_CLASS"指定時）
      */
-    public function test_GetAttribute_STATEMENT_CLASS()
+    public function test_getAttribute_STATEMENT_CLASS()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -627,8 +627,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('STATEMENT_CLASS');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('STATEMENT_CLASS');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -645,16 +645,16 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayNotHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 
     /**
-     * test_GetAttribute_DEFAULT_FETCH_MODE()
+     * test_getAttribute_DEFAULT_FETCH_MODE()
      *
-     * GetAttribute()のテスト（引数"DEFAULT_FETCH_MODE"指定時）
+     * getAttribute()のテスト（引数"DEFAULT_FETCH_MODE"指定時）
      */
-    public function test_GetAttribute_DEFAULT_FETCH_MODE()
+    public function test_getAttribute_DEFAULT_FETCH_MODE()
     {
         $params = array("driver"     => $GLOBALS['DB_DRIVER'],
                         "user"       => $GLOBALS['DB_USER'],
@@ -664,8 +664,8 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $tmp_result = $instance->GetAttribute('DEFAULT_FETCH_MODE');
+        $instance->connect($params);
+        $tmp_result = $instance->getAttribute('DEFAULT_FETCH_MODE');
 
         $this->assertArrayNotHasKey('AUTOCOMMIT', $tmp_result);
         $this->assertArrayNotHasKey('PREFETCH', $tmp_result);
@@ -682,7 +682,7 @@ class DbTest4GetAttribute extends \PHPUnit_Extensions_Database_TestCase
         $this->assertArrayNotHasKey('STATEMENT_CLASS', $tmp_result);
         $this->assertArrayHasKey('DEFAULT_FETCH_MODE', $tmp_result);
 
-        $instance->DisConnect();
+        $instance->disConnect();
         unset($instance);
     }
 }

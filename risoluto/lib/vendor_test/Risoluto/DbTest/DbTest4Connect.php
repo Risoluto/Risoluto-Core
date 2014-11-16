@@ -2,7 +2,7 @@
 /**
  * DbTest4Connect
  *
- * Db::Connect()用テストケース
+ * Db::connect()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -97,7 +97,7 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
     /**
      * test_Connect_Success1()
      *
-     * Connect()成功時のテスト（DSN未指定時）
+     * connect()成功時のテスト（DSN未指定時）
      */
     public function test_Connect_Success1()
     {
@@ -112,14 +112,14 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $this->assertTrue($instance->Connect($params));
+        $this->assertTrue($instance->connect($params));
         unset($instance);
     }
 
     /**
      * test_Connect_Success2()
      *
-     * Connect()成功時のテスト（DSN指定時）
+     * connect()成功時のテスト（DSN指定時）
      */
     public function test_Connect_Success2()
     {
@@ -134,14 +134,14 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $this->assertTrue($instance->Connect($params));
+        $this->assertTrue($instance->connect($params));
         unset($instance);
     }
 
     /**
      * test_Connect_Success3()
      *
-     * Connect()成功時のテスト（DSN未指定、オプション指定）
+     * connect()成功時のテスト（DSN未指定、オプション指定）
      */
     public function test_Connect_Success3()
     {
@@ -156,14 +156,14 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $this->assertTrue($instance->Connect($params, array(\PDO::ATTR_PERSISTENT => false)));
+        $this->assertTrue($instance->connect($params, array(\PDO::ATTR_PERSISTENT => false)));
         unset($instance);
     }
 
     /**
      * test_Connect_Failure()
      *
-     * Connect()失敗時のテスト
+     * connect()失敗時のテスト
      */
     public function test_Connect_Failure()
     {
@@ -178,7 +178,7 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
         );
 
         $instance = new Db;
-        $this->assertFalse($instance->Connect($params));
+        $this->assertFalse($instance->connect($params));
         unset($instance);
     }
 }

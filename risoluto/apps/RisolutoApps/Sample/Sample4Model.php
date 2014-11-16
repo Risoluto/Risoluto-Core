@@ -21,7 +21,7 @@ namespace RisolutoApps\Sample;
 class Sample4Model extends \Risoluto\RisolutoModelBase
 {
     /**
-     * Begin()
+     * begin()
      *
      * モデルの初期処理を行う
      *
@@ -31,18 +31,18 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
      *
      * @return    処理結果（true: 成功 / false: 失敗）
      */
-    public function Begin()
+    public function begin()
     {
         // コンフィグから接続情報を取得する
         $db_conf = new \Risoluto\Conf;
-        $db_conf->Parse(RISOLUTO_CONF . 'risoluto_db.ini');
+        $db_conf->parse(RISOLUTO_CONF . 'risoluto_db.ini');
 
         // DBへ接続する
-        return $this->db->Connect($db_conf->GetIni('DB'));
+        return $this->db->connect($db_conf->getIni('DB'));
     }
 
     /**
-     * GetAll()
+     * getAll()
      *
      * テーブル中の全データを取得する
      *
@@ -52,13 +52,13 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
      *
      * @return    string テーブル中の全データ
      */
-    public function GetAll()
+    public function getAll()
     {
-        return $this->db->DoQuery("SELECT id, column1, column2 FROM risoluto_db_test;");
+        return $this->db->doQuery("SELECT id, column1, column2 FROM risoluto_db_test;");
     }
 
     /**
-     * End()
+     * end()
      *
      * モデルの最終処理を行う
      *
@@ -68,9 +68,9 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
      *
      * @return    void    なし
      */
-    public function End()
+    public function end()
     {
         // DB接続を解除する
-        $this->db->DisConnect();
+        $this->db->disConnect();
     }
 }

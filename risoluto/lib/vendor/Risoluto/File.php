@@ -30,7 +30,7 @@ class File
     }
 
     /**
-     * StatChecker(array $target)
+     * statChecker(array $target)
      *
      * 指定されたファイルやディレクトリのステータスをチェックする
      *
@@ -40,7 +40,7 @@ class File
      *
      * @return    array    チェック結果が格納された連想配列
      */
-    public static function StatChecker(array $target)
+    public static function statChecker(array $target)
     {
         // ローカル変数の初期化
         $result = array(
@@ -91,7 +91,7 @@ class File
     }
 
     /**
-     * FileOperator($operation, $target, $destination = null, $prefix = null)
+     * fileOperator($operation, $target, $destination = null, $prefix = null)
      *
      * 指定されたファイルやディレクトリに対し、作成/コピー/移動/削除等を行う
      *
@@ -104,7 +104,7 @@ class File
      *
      * @return    boolean   処理結果（true:成功/false:失敗）
      */
-    public static function FileOperator($operation, $target, $destination = null, $prefix = null)
+    public static function fileOperator($operation, $target, $destination = null, $prefix = null)
     {
         // 処理結果の初期化
         $retVal = false;

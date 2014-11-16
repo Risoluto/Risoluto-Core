@@ -43,7 +43,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '0';
         $high = '0';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -57,7 +57,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1';
         $high = '9';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -71,7 +71,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1';
         $high = '9';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -85,7 +85,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9';
         $high = '-2';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -99,7 +99,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9';
         $high = '-2';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -113,7 +113,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1.0';
         $high = '9.0';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -127,7 +127,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1.0';
         $high = '9.0';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -141,7 +141,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9.0';
         $high = '-2.0';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -155,7 +155,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9.0';
         $high = '-2.0';
 
-        $this->assertTrue(Validate::IsBetween($test, $low, $high));
+        $this->assertTrue(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -169,7 +169,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1';
         $high = '9';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -183,7 +183,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1';
         $high = '9';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -197,7 +197,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9';
         $high = '-2';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -211,7 +211,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9';
         $high = '-2';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -225,7 +225,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1.0';
         $high = '9.0';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -239,7 +239,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '1.0';
         $high = '9.0';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -253,7 +253,7 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9.0';
         $high = '-2.0';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 
     /**
@@ -267,6 +267,6 @@ class ValidateTest4IsBetween extends \PHPUnit_Framework_TestCase
         $low  = '-9.0';
         $high = '-2.0';
 
-        $this->assertFalse(Validate::IsBetween($test, $low, $high));
+        $this->assertFalse(Validate::isBetween($test, $low, $high));
     }
 }

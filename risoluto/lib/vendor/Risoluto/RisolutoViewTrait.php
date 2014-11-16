@@ -18,34 +18,34 @@ namespace Risoluto;
 trait RisolutoViewTrait
 {
     /**
-     * RisolutoView($tmpl_path = '', array $assign_values, $tmpl_name = '', $mode = 'view')
+     * risolutoView($tmpl_path = '', array $assign_values, $tmpl_name = '', $mode = 'view')
      *
-     * Viewに関する処理を実行する（ヘルパークラス）
+     * Viewに関する処理を実行する（ヘルパーメソッド）
      *
      * @access    private
      *
-     * @param     array  $values テンプレートへのアサイン内容
-     * @param     string $mode   モード（view:そのまま表示/fetch:表示内容を取得）
+     * @param     array  $assign_values テンプレートへのアサイン内容
+     * @param     string $mode          モード（view:そのまま表示/fetch:表示内容を取得）
      *
      * @return    mixed     $mode=view:常にtrue / $mode=fetch:表示内容/想定外の場合：false
      */
-    private function RisolutoView(array $assign_values = array(), $mode = 'view')
+    private function risolutoView(array $assign_values = array(), $mode = 'view')
     {
         // 呼び出し元クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
 
         // テンプレートエンジンを初期設定してインスタンスを取得
-        $tmpl_instance = $this->InitTemplate(str_replace(array('RisolutoApps', '\\'), '', $called->getNamespaceName()) . DIRECTORY_SEPARATOR);
+        $tmpl_instance = $this->initTemplate(str_replace(array('RisolutoApps', '\\'), '', $called->getNamespaceName()) . DIRECTORY_SEPARATOR);
 
         // テンプレートに値をアサイン
-        $this->AssignTemplate($tmpl_instance, $assign_values);
+        $this->assignTemplate($tmpl_instance, $assign_values);
 
         // テンプレート処理を実行して結果を返す
-        return $this->DispTemplate($tmpl_instance, $called->getShortName() . '.tpl', $mode);
+        return $this->dispTemplate($tmpl_instance, $called->getShortName() . '.tpl', $mode);
     }
 
     /**
-     * InitTemplate($tmpl_path = '')
+     * initTemplate($tmpl_path = '')
      *
      * テンプレートエンジンのインスタンスを生成する
      *
@@ -55,7 +55,7 @@ trait RisolutoViewTrait
      *
      * @return    object    テンプレートエンジンのインスタンス
      */
-    private function InitTemplate($tmpl_path = '')
+    private function initTemplate($tmpl_path = '')
     {
         // テンプレートパスをアプリケーション格納フォルダ配下に限定
         $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace('../', '', $tmpl_path);
@@ -88,7 +88,7 @@ trait RisolutoViewTrait
     }
 
     /**
-     * AssignTemplate(\Smarty $tmpl_instance,array $values)
+     * assignTemplate(\Smarty $tmpl_instance,array $values)
      *
      * テンプレートに表示内容をアサインする
      *
@@ -99,7 +99,7 @@ trait RisolutoViewTrait
      *
      * @return    boolean   常にtrue
      */
-    private function AssignTemplate(\Smarty $tmpl_instance, array $values)
+    private function assignTemplate(\Smarty $tmpl_instance, array $values)
     {
         // デフォルトでテンプレートに引き渡す情報
         $tmpl_instance->assign('__RISOLUTO_APPS', RISOLUTO_APPS);
@@ -114,7 +114,7 @@ trait RisolutoViewTrait
     }
 
     /**
-     * DispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
+     * dispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
      *
      * テンプレートを表示または表示内容を取得する
      *
@@ -126,7 +126,7 @@ trait RisolutoViewTrait
      *
      * @return    mixed     $mode=view:常にtrue / $mode=fetch:表示内容/想定外の場合：false
      */
-    private function DispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
+    private function dispTemplate(\Smarty $tmpl_instance, $tmpl_name, $mode = 'view')
     {
         // $modeに応じて呼び出すメソッドを変更する
         switch ($mode) {
@@ -148,7 +148,7 @@ trait RisolutoViewTrait
     }
 
     /**
-     * GetDefaultHeader()
+     * getDefaultHeader()
      *
      * デフォルトのヘッダ情報が格納された配列を返却する
      *
@@ -158,52 +158,52 @@ trait RisolutoViewTrait
      *
      * @return    array   デフォルトのヘッダ
      */
-    private function GetDefaultHeader()
+    private function getDefaultHeader()
     {
         // Risolutoのコンフィグからテーマの情報を取得する
         $conf = new Conf();
         $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
-        $outboards = $conf->GetIni('THEME', 'outboards');
+        $outboards = $conf->getIni('THEME', 'outboards');
 
         return array(
-            'robots'      => $this->GetDefaultHeaderRobots(), // robots
-            'description' => $this->GetDefaultHeaderDescription(), // Description
-            'keywords'    => $this->GetDefaultHeaderKeywords(), // Keywords
-            'author'      => $this->GetDefaultHeaderAuthor(), // Author
-            'css'         => $this->GetDefaultHeaderCss($outboards), // CSS
-            'js'          => $this->GetDefaultHeaderJavaScript($outboards), // JavaScript
-            'favicon'     => $this->GetDefaultHeaderFavicon($outboards), // Favicon
-            'title'       => $this->GetDefaultHeaderTitle(), // Title
+            'robots'      => $this->getDefaultHeaderRobots(), // robots
+            'description' => $this->getDefaultHeaderDescription(), // Description
+            'keywords'    => $this->getDefaultHeaderKeywords(), // Keywords
+            'author'      => $this->getDefaultHeaderAuthor(), // Author
+            'css'         => $this->getDefaultHeaderCss($outboards), // CSS
+            'js'          => $this->getDefaultHeaderJavaScript($outboards), // JavaScript
+            'favicon'     => $this->getDefaultHeaderFavicon($outboards), // Favicon
+            'title'       => $this->getDefaultHeaderTitle(), // Title
             'outboards'   => $outboards, // テーマ格納ディレクトリ名
-            'mobile'      => $this->GetDefaultHeaderMobile() // モバイル判定情報
+            'mobile'      => $this->getDefaultHeaderMobile() // モバイル判定情報
         );
     }
 
 
     /**
-     * ReplaceHeader()
+     * replaceHeader()
      *
      * ヘッダ情報を置き換える
      *
      * @access    private
      *
      * @param     array  $target ヘッダ情報がセットされた配列(GetDefaultHeader()の戻り値など)
-     * @param     string $key 置き換えるヘッダのキー
-     * @param     string $val 置き換える値
+     * @param     string $key    置き換えるヘッダのキー
+     * @param     string $val    置き換える値
      *
      * @return    array   変更後のヘッダ情報がセットされた配列 / false: 変更失敗
      */
-    private function ReplaceHeader(array $target, $key, $val)
+    private function replaceHeader(array $target, $key, $val)
     {
         // ヘッダ情報の格納された配列が存在しなければ即時戻る
-        if (empty($target)){
+        if (empty($target)) {
             return false;
         }
 
         // 既存の項目が存在していたら置き換え、存在していなければ失敗とみなす
         if (array_key_exists($key, $target)) {
             $target[$key] = $val;
-        }else{
+        } else {
             return false;
         }
 
@@ -211,7 +211,7 @@ trait RisolutoViewTrait
     }
 
     /**
-     * GetDefaultHeaderRobots()
+     * getDefaultHeaderRobots()
      *
      * デフォルトのヘッダ情報（robots）を返却する
      *
@@ -221,23 +221,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(robots)
      */
-    private function GetDefaultHeaderRobots()
+    private function getDefaultHeaderRobots()
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderRobots')){
+        if (method_exists($parent->getName(), 'getUserHeaderRobots')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderRobots();
+            return parent::getUserHeaderRobots();
         } else {
             return 'INDEX,FOLLOW';
         }
     }
 
     /**
-     * GetDefaultHeaderDescription()
+     * getDefaultHeaderDescription()
      *
      * デフォルトのヘッダ情報（description）を返却する
      *
@@ -247,23 +247,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(description)
      */
-    private function GetDefaultHeaderDescription()
+    private function getDefaultHeaderDescription()
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderDescription')){
+        if (method_exists($parent->getName(), 'getUserHeaderDescription')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderDescription();
+            return parent::getUserHeaderDescription();
         } else {
             return 'Risoluto';
         }
     }
 
     /**
-     * GetDefaultHeaderKeywords()
+     * getDefaultHeaderKeywords()
      *
      * デフォルトのヘッダ情報（keywords）を返却する
      *
@@ -273,23 +273,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(keywords)
      */
-    private function GetDefaultHeaderKeywords()
+    private function getDefaultHeaderKeywords()
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderKeywords')){
+        if (method_exists($parent->getName(), 'getUserHeaderKeywords')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderKeywords();
+            return parent::getUserHeaderKeywords();
         } else {
             return 'Risoluto';
         }
     }
 
     /**
-     * GetDefaultHeaderAuthor()
+     * getDefaultHeaderAuthor()
      *
      * デフォルトのヘッダ情報（author）を返却する
      *
@@ -299,23 +299,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(author)
      */
-    private function GetDefaultHeaderAuthor()
+    private function getDefaultHeaderAuthor()
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderAuthor')){
+        if (method_exists($parent->getName(), 'getUserHeaderAuthor')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderAuthor();
+            return parent::getUserHeaderAuthor();
         } else {
             return 'Risoluto';
         }
     }
 
     /**
-     * GetDefaultHeaderCss()
+     * getDefaultHeaderCss()
      *
      * デフォルトのヘッダ情報（CSS）を返却する
      *
@@ -325,26 +325,27 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(CSS)
      */
-    private function GetDefaultHeaderCss($outboards)
+    private function getDefaultHeaderCss($outboards)
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderCss')){
+        if (method_exists($parent->getName(), 'getUserHeaderCss')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderCss();
+            return parent::getUserHeaderCss();
         } else {
             return array(
-                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css',
+                '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
+//                'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css',
                 '/outboards/' . $outboards . '/css/common.css'
             );
         }
     }
 
     /**
-     * GetDefaultHeaderJavaScript()
+     * getDefaultHeaderJavaScript()
      *
      * デフォルトのヘッダ情報（JavaScript）を返却する
      *
@@ -354,27 +355,27 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(JavaScript)
      */
-    private function GetDefaultHeaderJavaScript($outboards)
+    private function getDefaultHeaderJavaScript($outboards)
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderJs')){
+        if (method_exists($parent->getName(), 'getUserHeaderJs')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderJs();
+            return parent::getUserHeaderJs();
         } else {
             return array(
                 '//code.jquery.com/jquery-2.1.1.min.js',
-                '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
+                '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',
                 '/outboards/' . $outboards . '/js/common.js'
             );
         }
     }
 
     /**
-     * GetDefaultHeaderFavicon()
+     * getDefaultHeaderFavicon()
      *
      * デフォルトのヘッダ情報（favicon）を返却する
      *
@@ -384,23 +385,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(favicon)
      */
-    private function GetDefaultHeaderFavicon($outboards)
+    private function getDefaultHeaderFavicon($outboards)
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderFavicon')){
+        if (method_exists($parent->getName(), 'getUserHeaderFavicon')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderFavicon();
+            return parent::getUserHeaderFavicon();
         } else {
             return '/outboards/' . $outboards . '/img/favicon.ico';
         }
     }
 
     /**
-     * GetDefaultHeaderTitle()
+     * getDefaultHeaderTitle()
      *
      * デフォルトのヘッダ情報（title）を返却する
      *
@@ -410,23 +411,23 @@ trait RisolutoViewTrait
      *
      * @return    string   デフォルトのヘッダ(title)
      */
-    private function GetDefaultHeaderTitle()
+    private function getDefaultHeaderTitle()
     {
         // 親クラスの情報を取得
         $called = new \ReflectionClass(get_called_class());
         $parent = $called->getParentClass();
 
         // 基底クラスでオーバーライド用メソッドが定義されていたらそちらを優先する
-        if (method_exists($parent->getName(), 'GetUserHeaderTitle')){
+        if (method_exists($parent->getName(), 'getUserHeaderTitle')) {
             /** @noinspection PhpUndefinedMethodInspection */
-            return parent::GetUserHeaderTitle();
+            return parent::getUserHeaderTitle();
         } else {
             return 'ようこそ！Risolutoの世界へ！';
         }
     }
 
     /**
-     * GetDefaultHeaderMobile()
+     * getDefaultHeaderMobile()
      *
      * デフォルトのヘッダ情報（mobile）を返却する
      *
@@ -436,7 +437,7 @@ trait RisolutoViewTrait
      *
      * @return    array   デフォルトのヘッダ(mobile)
      */
-    private function GetDefaultHeaderMobile()
+    private function getDefaultHeaderMobile()
     {
         // Mobile Detectのインスタンスを作成
         $mb = new \Mobile_Detect;

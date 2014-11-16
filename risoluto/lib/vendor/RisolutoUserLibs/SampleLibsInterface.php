@@ -17,5 +17,5 @@ namespace RisolutoUserLibs;
 
 interface SampleLibsInterface
 {
-    public static function SampleMethod();
+    public static function sampleMethod();
 }

@@ -2,7 +2,7 @@
 /**
  * DbTest4DisConnect
  *
- * Db::DisConnect()用テストケース
+ * Db::disConnect()用テストケース
  *
  * @package           risoluto
  * @author            Risoluto Developers
@@ -97,7 +97,7 @@ class DbTest4DisConnect extends \PHPUnit_Extensions_Database_TestCase
     /**
      * test_DisConnect()
      *
-     * DisConnect()のテスト（force未設定時）
+     * disConnect()のテスト（force未設定時）
      */
     public function test_DisConnect()
     {
@@ -109,15 +109,15 @@ class DbTest4DisConnect extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $this->assertTrue($instance->DisConnect());
+        $instance->connect($params);
+        $this->assertTrue($instance->disConnect());
         unset($instance);
     }
 
     /**
      * test_DisConnect_with_force()
      *
-     * DisConnect()のテスト（force = true時）
+     * disConnect()のテスト（force = true時）
      */
     public function test_DisConnect_with_force()
     {
@@ -129,15 +129,15 @@ class DbTest4DisConnect extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $this->assertTrue($instance->DisConnect(true));
+        $instance->connect($params);
+        $this->assertTrue($instance->disConnect(true));
         unset($instance);
     }
 
     /**
      * test_DisConnect_without_force()
      *
-     * DisConnect()のテスト（force = false時）
+     * disConnect()のテスト（force = false時）
      */
     public function test_DisConnect_without_force()
     {
@@ -149,8 +149,8 @@ class DbTest4DisConnect extends \PHPUnit_Extensions_Database_TestCase
                         "persistent" => false);
 
         $instance = new Db;
-        $instance->Connect($params);
-        $this->assertTrue($instance->DisConnect(false));
+        $instance->connect($params);
+        $this->assertTrue($instance->disConnect(false));
         unset($instance);
     }
 }

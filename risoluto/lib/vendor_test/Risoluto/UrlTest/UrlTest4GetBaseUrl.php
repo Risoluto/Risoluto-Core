@@ -35,19 +35,19 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
     /**
      * test_GetBaseUrl_WithoutArg()
      *
-     * GetBaseUrl()の動作をテストする（引数なし）
+     * getBaseUrl()の動作をテストする（引数なし）
      */
     public function test_GetBaseUrl_WithoutArg()
     {
         $want = 'http://localhost/';
 
-        $this->assertEquals(Url::GetBaseUrl(), $want);
+        $this->assertEquals(Url::getBaseUrl(), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNormalPart1()
      *
-     * GetBaseUrl()の動作をテストする（ノーマルな指定その1）
+     * getBaseUrl()の動作をテストする（ノーマルな指定その1）
      */
     public function test_GetBaseUrl_WithNormalPart1()
     {
@@ -58,13 +58,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'http://example.com/index.html';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNormalPart2()
      *
-     * GetBaseUrl()の動作をテストする（ノーマルな指定その2）
+     * getBaseUrl()の動作をテストする（ノーマルな指定その2）
      */
     public function test_GetBaseUrl_WithNormalPart2()
     {
@@ -75,13 +75,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'http://example.com/test.php';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNormalPart3()
      *
-     * GetBaseUrl()の動作をテストする（ノーマルな指定その3）
+     * getBaseUrl()の動作をテストする（ノーマルな指定その3）
      */
     public function test_GetBaseUrl_WithNormalPart3()
     {
@@ -92,13 +92,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'http://example.com/';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithSslPart1()
      *
-     * GetBaseUrl()の動作をテストする（SSLな指定その1）
+     * getBaseUrl()の動作をテストする（SSLな指定その1）
      */
     public function test_GetBaseUrl_WithSslPart1()
     {
@@ -109,13 +109,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'https://example.com/index.html';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithSslPart2()
      *
-     * GetBaseUrl()の動作をテストする（SSLな指定その2）
+     * getBaseUrl()の動作をテストする（SSLな指定その2）
      */
     public function test_GetBaseUrl_WithSslPart2()
     {
@@ -126,13 +126,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'https://example.com/test.php';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNotStdPortPart1()
      *
-     * GetBaseUrl()の動作をテストする（8000ポートを指定）
+     * getBaseUrl()の動作をテストする（8000ポートを指定）
      */
     public function test_GetBaseUrl_WithNotStdPortPart1()
     {
@@ -143,13 +143,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'http://example.com:8080/index.html';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNotStdPortPart2()
      *
-     * GetBaseUrl()の動作をテストする（8443ポートを指定）
+     * getBaseUrl()の動作をテストする（8443ポートを指定）
      */
     public function test_GetBaseUrl_WithNotStdPortPart2()
     {
@@ -160,13 +160,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'https://example.com:8443/index.html';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 
     /**
      * test_GetBaseUrl_WithNotStdPortPart3()
      *
-     * GetBaseUrl()の動作をテストする（8888ポートを指定）
+     * getBaseUrl()の動作をテストする（8888ポートを指定）
      */
     public function test_GetBaseUrl_WithNotStdPortPart3()
     {
@@ -177,6 +177,6 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
         );
         $want = 'http://example.com:8888/index.html';
 
-        $this->assertEquals(Url::GetBaseUrl($test), $want);
+        $this->assertEquals(Url::getBaseUrl($test), $want);
     }
 }

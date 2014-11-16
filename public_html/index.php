@@ -110,4 +110,4 @@ EOD
 //------------------------------------------------------//
 /** @noinspection PhpUnnecessaryFullyQualifiedNameInspection */
 $risoluto_instance = new \Risoluto\Core;
-$risoluto_instance->Perform();
+$risoluto_instance->perform();
