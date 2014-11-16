@@ -33,7 +33,7 @@ class Auth
     }
 
     /**
-     * getEncPass()
+     * getEncPass($target)
      *
      * 引数で与えられた文字列をパスワード用にハッシュ化する
      *
@@ -63,10 +63,10 @@ class Auth
     {
         // コンフィグファイルの読み込み
         $conf = new Conf;
-        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
 
         // プロバイダ情報を取得
-        $tmp_provider = $conf->GetIni('AUTH', 'provider');
+        $tmp_provider = $conf->getIni('AUTH', 'provider');
         $provider     = !empty($tmp_provider) ? $tmp_provider : 'Risoluto\\AuthFile';
 
         // 取得したプロバイダのインスタンスを生成し返却する
@@ -125,9 +125,9 @@ class Auth
 
                 return false;
             } else {
-                // 認証に成功したらユーザIDとグループIDを返却
+                // 認証に成功したらユーザ情報を返却
                 /** @noinspection PhpUndefinedMethodInspection */
-                return $provider->getDetails($user);
+                return $provider->doOperation('showuser', array('userid' => $user));
             }
         }
 

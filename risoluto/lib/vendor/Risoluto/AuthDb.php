@@ -463,17 +463,17 @@ END_OF_SQL;
     {
         // コンフィグファイルの読み込み
         $conf = new Conf;
-        $conf->Parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
 
         // コンフィグファイルの読み込み
         $dbconf = new Conf;
-        $dbconf->Parse(RISOLUTO_CONF . 'risoluto_db.ini');
+        $dbconf->parse(RISOLUTO_CONF . 'risoluto_db.ini');
 
         // コンフィグからファイル名情報を取得する
         return array(
-            'usertable'  => $conf->GetIni("AUTH", "users"),
-            'grouptable' => $conf->GetIni("AUTH", "groups"),
-            'db'         => $dbconf->GetIni("DB")
+            'usertable'  => $conf->getIni("AUTH", "users"),
+            'grouptable' => $conf->getIni("AUTH", "groups"),
+            'db'         => $dbconf->getIni("DB")
         );
     }
 
@@ -496,17 +496,17 @@ END_OF_SQL;
         // DBインスタンスを生成してDBに接続
         $retval   = true;
         $instance = new \Risoluto\Db();
-        if ($instance->Connect($info['db'])) {
-            if (!$instance->Exec($this->getSqlInitUserTbl($info['usertable']))) {
+        if ($instance->connect($info['db'])) {
+            if (!$instance->exec($this->getSqlInitUserTbl($info['usertable']))) {
                 $retval = false;
             }
 
-            if (!$instance->Exec($this->getSqlInitGroupTbl($info['grouptable']))) {
+            if (!$instance->exec($this->getSqlInitGroupTbl($info['grouptable']))) {
                 $retval = false;
             }
 
             // DB接続のクローズ
-            if (!$instance->DisConnect(true)) {
+            if (!$instance->disConnect(true)) {
                 $retval = false;
             }
         } else {
@@ -561,48 +561,48 @@ END_OF_SQL;
 
         // DBインスタンスを生成してDBに接続
         $instance = new \Risoluto\Db();
-        if ($instance->Connect($info['db'])) {
+        if ($instance->connect($info['db'])) {
 
             // オペレーション識別子に応じて処理を行う
             switch ($operation) {
                 case 'addUser':
-                    $get_data = $instance->DoQuery($this->getSqlAddUser($info['usertable']), $this->getParams('UserAddMod', $option));
+                    $get_data = $instance->doQuery($this->getSqlAddUser($info['usertable']), $this->getParams('UserAddMod', $option));
                     break;
 
                 case 'addGroup':
-                    $get_data = $instance->DoQuery($this->getSqlAddGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
+                    $get_data = $instance->doQuery($this->getSqlAddGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
                     break;
 
                 case 'modUser':
-                    $get_data = $instance->DoQuery($this->getSqlModUser($info['usertable']), $this->getParams('UserAddMod', $option));
+                    $get_data = $instance->doQuery($this->getSqlModUser($info['usertable']), $this->getParams('UserAddMod', $option));
                     break;
 
                 case 'modGroup':
-                    $get_data = $instance->DoQuery($this->getSqlModGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
+                    $get_data = $instance->doQuery($this->getSqlModGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
                     break;
 
                 case 'delUser':
-                    $get_data = $instance->DoQuery($this->getSqlDelUser($info['usertable']), $this->getParams('UserID', $option));
+                    $get_data = $instance->doQuery($this->getSqlDelUser($info['usertable']), $this->getParams('UserID', $option));
                     break;
 
                 case 'delGroup':
-                    $get_data = $instance->DoQuery($this->getSqlDelGroup($info['grouptable']), $this->getParams('GroupID', $option));
+                    $get_data = $instance->doQuery($this->getSqlDelGroup($info['grouptable']), $this->getParams('GroupID', $option));
                     break;
 
                 case 'showUser':
-                    $get_data = $instance->DoQuery($this->getSqlShowUser($info['usertable']), $this->getParams('UserID', $option));
+                    $get_data = $instance->doQuery($this->getSqlShowUser($info['usertable']), $this->getParams('UserID', $option));
                     break;
 
                 case 'showGroup':
-                    $get_data = $instance->DoQuery($this->getSqlShowGroup($info['grouptable']), $this->getParams('GroupID', $option));
+                    $get_data = $instance->doQuery($this->getSqlShowGroup($info['grouptable']), $this->getParams('GroupID', $option));
                     break;
 
                 case 'showUserAll':
-                    $get_data = $instance->DoQuery($this->getSqlShowAllUser($info['usertable']));
+                    $get_data = $instance->doQuery($this->getSqlShowAllUser($info['usertable']));
                     break;
 
                 case 'showGroupAll':
-                    $get_data = $instance->DoQuery($this->getSqlShowAllGroup($info['grouptable']));
+                    $get_data = $instance->doQuery($this->getSqlShowAllGroup($info['grouptable']));
                     break;
 
                 // 未定義の識別子の場合は無条件でfalseを返す
@@ -630,7 +630,7 @@ END_OF_SQL;
             }
 
             // DB接続のクローズ
-            if (!$instance->DisConnect(true)) {
+            if (!$instance->disConnect(true)) {
                 $retval = false;
             }
         } else {
