@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/Risoluto/Risoluto-Core.svg?branch=master)](https://travis-ci.org/Risoluto/Risoluto-Core)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Risoluto/Risoluto-Core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Risoluto/Risoluto-Core/?branch=master)
 [![Code Climate](https://codeclimate.com/github/Risoluto/Risoluto-Core.png)](https://codeclimate.com/github/Risoluto/Risoluto-Core)
+[![Dependency Status](https://www.versioneye.com/user/projects/546848494de5ef46160000e3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546848494de5ef46160000e3)
 
 ## Risolutoとは
 
