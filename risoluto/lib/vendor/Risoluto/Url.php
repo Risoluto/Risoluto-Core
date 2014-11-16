@@ -90,7 +90,7 @@ class Url
     public static function redirectTo($target = '', array $param = array(), $status = '302', array $servinfo = array())
     {
         // ベースURLを取得する
-        $baseUrl = self::GetBaseUrl((!empty($servinfo) and is_array($servinfo)) ? $servinfo : $_SERVER) . (!empty($target) ? '?seq=' . $target : '');
+        $baseUrl = self::getBaseUrl((!empty($servinfo) and is_array($servinfo)) ? $servinfo : $_SERVER) . (!empty($target) ? '?seq=' . $target : '');
 
         // 他のパラメタが指定されていたら、それをGETパラメタの形に生成
         $otherParam = '';
