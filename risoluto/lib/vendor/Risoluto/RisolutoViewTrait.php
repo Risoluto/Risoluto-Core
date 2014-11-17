@@ -35,7 +35,7 @@ trait RisolutoViewTrait
         $called = new \ReflectionClass(get_called_class());
 
         // テンプレートエンジンを初期設定してインスタンスを取得
-        $tmpl_instance = $this->initTemplate(str_replace(array('RisolutoApps', '\\'), '', $called->getNamespaceName()) . DIRECTORY_SEPARATOR);
+        $tmpl_instance = $this->initTemplate(str_replace('RisolutoApps', '', str_replace('\\', DIRECTORY_SEPARATOR, $called->getNamespaceName()) . DIRECTORY_SEPARATOR));
 
         // テンプレートに値をアサイン
         $this->assignTemplate($tmpl_instance, $assign_values);
