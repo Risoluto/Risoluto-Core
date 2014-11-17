@@ -271,7 +271,7 @@ END_OF_SQL;
     }
 
     /**
-     * getSqlShowAllUser()
+     * getSqlShowUserAll()
      *
      * ユーザ情報表示のためのSQLを生成する
      *
@@ -281,7 +281,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowAllUser($tablename)
+    private function getSqlShowUserAll($tablename)
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -302,7 +302,7 @@ END_OF_SQL;
     }
 
     /**
-     * getSqlShowAllGroup()
+     * getSqlShowGroupAll()
      *
      * グループ情報表示のためのSQLを生成する
      *
@@ -312,7 +312,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowAllGroup($tablename)
+    private function getSqlShowGroupAll($tablename)
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -393,6 +393,36 @@ END_OF_SQL;
     }
 
     /**
+     * getSqlShowGroupByNo()
+     *
+     * グループ情報表示のためのSQLを生成する
+     *
+     * @access    private
+     *
+     * @param     string $tablename グループ情報テーブル名
+     *
+     * @return    SQL
+     */
+    private function getSqlShowGroupByNo($tablename)
+    {
+        $sql = <<<END_OF_SQL
+SELECT
+       `created_at`
+     , `created_by`
+     , `modified_at`
+     , `modified_by`
+     , `no`
+     , `groupid`
+     , `groupname`
+     , `status`
+ FROM $tablename
+WHERE `no` = :no
+END_OF_SQL;
+
+        return $sql;
+    }
+
+    /**
      * getParams()
      *
      * DBアクセス用のパラメタ情報を取得する
@@ -437,6 +467,13 @@ END_OF_SQL;
             case 'GroupID':
                 $retval = array(
                     array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
+                );
+                break;
+
+            // Noのみ
+            case 'No':
+                $retval = array(
+                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
                 );
                 break;
 
@@ -534,8 +571,15 @@ END_OF_SQL;
         // ユーザ情報を取得
         $get_user = $this->doOperation('showUser', array('userid' => $user));
 
+        // 複数権取得できた場合はエラー
+        if (count($get_user) > 1) {
+            return false;
+        } else {
+            $auth_user = $get_user[0];
+        }
+
         // DBから取得したユーザ情報のパスワードと引数で与えられたパスワードを比較する
-        if (password_verify($pass, $get_user[0]['password'])) {
+        if (password_verify($pass, $auth_user['password']) and $auth_user['status'] == 1) {
             return true;
         } else {
             return false;
@@ -598,11 +642,15 @@ END_OF_SQL;
                     break;
 
                 case 'showUserAll':
-                    $get_data = $instance->doQuery($this->getSqlShowAllUser($info['usertable']));
+                    $get_data = $instance->doQuery($this->getSqlShowUserAll($info['usertable']));
                     break;
 
                 case 'showGroupAll':
-                    $get_data = $instance->doQuery($this->getSqlShowAllGroup($info['grouptable']));
+                    $get_data = $instance->doQuery($this->getSqlShowGroupAll($info['grouptable']));
+                    break;
+
+                case 'showGroupByNo':
+                    $get_data = $instance->doQuery($this->getSqlShowGroupByNo($info['grouptable']), $this->getParams('No', $option));
                     break;
 
                 // 未定義の識別子の場合は無条件でfalseを返す
@@ -620,6 +668,7 @@ END_OF_SQL;
                     case 'showGroup':
                     case 'showUserAll':
                     case 'showGroupAll':
+                    case 'showGroupByNo':
                         $retval = $get_data;
                         break;
 

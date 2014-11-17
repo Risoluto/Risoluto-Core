@@ -224,12 +224,24 @@ class Auth
                 }
                 break;
 
+            // グループNo表示
+            case 'showGroupByNo':
+                // パラメタのチェック
+                if (isset($option['no'])) {
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $retval = $provider->doOperation($operation, $option);
+                } else {
+                    $retval = false;
+                }
+                break;
+
             // ユーザ／グループ情報全件表示
             case 'showUserAll': // FALL THRU
             case 'showGroupAll':
                 /** @noinspection PhpUndefinedMethodInspection */
                 $retval = $provider->doOperation($operation, array());
                 break;
+
             // 未定義の場合はfalseを返す
             default:
                 $retval = false;
