@@ -109,8 +109,8 @@ class Auth
     public static function basicAuth($realm = 'Authorization Required', $message = 'Authorization Required')
     {
         // ユーザ情報とパスワード情報を取得する
-        $user = isset($_SERVER['PHP_AUTH_USER']) and !empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
-        $pass = isset($_SERVER['PHP_AUTH_PW']) and !empty($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : null;
+        $user = (isset($_SERVER['PHP_AUTH_USER']) and !empty($_SERVER['PHP_AUTH_USER'])) ? $_SERVER['PHP_AUTH_USER'] : null;
+        $pass = (isset($_SERVER['PHP_AUTH_PW']) and !empty($_SERVER['PHP_AUTH_PW'])) ? $_SERVER['PHP_AUTH_PW'] : null;
 
         // 認証に必要な情報がセットされていれば認証ロジックをコール
         if ($user and $pass) {
