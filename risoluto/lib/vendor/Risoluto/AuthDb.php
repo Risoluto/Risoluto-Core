@@ -648,8 +648,8 @@ END_OF_SQL;
         // ユーザ情報を取得
         $get_user = $this->doOperation('showUser', array('userid' => $user));
 
-        // 複数権取得できた場合はエラー
-        if (count($get_user) > 1) {
+        // 複数権取得できた場合や無効なユーザの場合はエラー
+        if (count($get_user) > 1 or $get_user[0]['status'] != '1') {
             return false;
         } else {
             $auth_user = $get_user[0];
