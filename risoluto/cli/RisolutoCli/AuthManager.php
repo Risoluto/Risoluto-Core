@@ -133,6 +133,9 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function addUser()
     {
         // 登録に必要な情報を順番に取得していく
+        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option['status'] = 1;
+
         do {
             $option['userid'] = $this->readFromStdin("Enter user id: ");
         } while (empty($option['userid']));
@@ -174,6 +177,9 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function addGroup()
     {
         // 登録に必要な情報を順番に取得していく
+        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option['status'] = 1;
+
         do {
             $option['groupid'] = $this->readFromStdin("Enter group id: ");
         } while (empty($option['groupid']));
@@ -208,6 +214,8 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function modUser()
     {
         // 変更処理に必要な情報を順番に取得していく
+        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+
         do {
             $option['userid'] = $this->readFromStdin("Enter user id: ");
         } while (empty($option['userid']));
@@ -221,6 +229,9 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
         do {
             $option['groupno'] = $this->readFromStdin("Enter group no: ");
         } while (empty($option['groupno']) or !is_numeric($option['groupno']));
+        do {
+            $option['status'] = $this->readFromStdin("Enter status: ");
+        } while (!is_numeric($option['status']));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
         $enter = $this->readFromStdin("Modify this user data. Continue?[y/N]");
@@ -249,12 +260,17 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function modGroup()
     {
         // 変更処理に必要な情報を順番に取得していく
+        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+
         do {
             $option['groupid'] = $this->readFromStdin("Enter group id: ");
         } while (empty($option['groupid']));
         do {
             $option['groupname'] = $this->readFromStdin("Enter group name: ");
         } while (empty($option['groupname']));
+        do {
+            $option['status'] = $this->readFromStdin("Enter status: ");
+        } while (!is_numeric($option['status']));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
         $enter = $this->readFromStdin("Modify this group data. Continue?[y/N]");

@@ -224,7 +224,8 @@ class Auth
                 }
                 break;
 
-            // グループNo表示
+            // ユーザ／グループNo表示
+            case 'showUserByNo':
             case 'showGroupByNo':
                 // パラメタのチェック
                 if (isset($option['no'])) {

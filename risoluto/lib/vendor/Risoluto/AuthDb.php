@@ -54,6 +54,30 @@ CREATE TABLE IF NOT EXISTS $tablename
                      `no`
                    )
 ) ENGINE=InnoDB CHARACTER SET utf8;
+
+INSERT INTO $tablename(
+      `created_at`
+    , `created_by`
+    , `modified_at`
+    , `modified_by`
+    , `no`
+    , `userid`
+    , `username`
+    , `password`
+    , `groupno`
+    , `status`
+) VALUES (
+      now()
+    , 'Risoluto AuthDb Init'
+    , now()
+    , 'Risoluto AuthDb Init'
+    , 1
+    , 'admin'
+    , 'Risoluto Admin'
+    , '$2y$10\$Z.74cnnXxRHjlUfDaVA/5e9wCTG7DzZ1fRFJQPwHjQYdVInSB0eKO'
+    , 1
+    , 1
+);
 END_OF_SQL;
 
         return $sql;
@@ -88,6 +112,26 @@ CREATE TABLE IF NOT EXISTS $tablename
                      `no`
                    )
 ) ENGINE=InnoDB CHARACTER SET utf8;
+
+INSERT INTO $tablename (
+      `created_at`
+    , `created_by`
+    , `modified_at`
+    , `modified_by`
+    , `no`
+    , `groupid`
+    , `groupname`
+    , `status`
+) VALUES (
+      now()
+    , 'Risoluto AuthDb Init'
+    , now()
+    , 'Risoluto AuthDb Init'
+    , 1
+    , 'admin'
+    , 'Risoluto Admin Group'
+    , 1
+);
 END_OF_SQL;
 
         return $sql;
@@ -119,9 +163,9 @@ INSERT INTO $tablename (
     , `status`
 ) values (
       now()
-    , 'risoluto'
+    , :by_who
     , now()
-    , 'risoluto'
+    , :by_who
     , :userid
     , :username
     , :password
@@ -158,9 +202,9 @@ INSERT INTO $tablename (
     , `status`
 ) values (
       now()
-    , 'risoluto'
+    , :by_who
     , now()
-    , 'risoluto'
+    , :by_who
     , :groupid
     , :groupname
     , 1
@@ -186,10 +230,11 @@ END_OF_SQL;
         $sql = <<<END_OF_SQL
 UPDATE $tablename
    SET `modified_at` = now()
-     , `modified_by` = 'risoluto'
+     , `modified_by` = :by_who
      , `username`    = :username
      , `password`    = :password
      , `groupno`     = :groupno
+     , `status`      = :status
  WHERE `userid`      = :userid;
 END_OF_SQL;
 
@@ -213,8 +258,9 @@ END_OF_SQL;
         $sql = <<<END_OF_SQL
 UPDATE $tablename
    SET `modified_at` = now()
-     , `modified_by` = 'risoluto'
+     , `modified_by` = :by_who
      , `groupname`   = :groupname
+     , `status`      = :status
  WHERE `groupid`     = :groupid;
 END_OF_SQL;
 
@@ -235,11 +281,8 @@ END_OF_SQL;
     private function getSqlDelUser($tablename)
     {
         $sql = <<<END_OF_SQL
-UPDATE $tablename
-   SET `modified_at` = now()
-     , `modified_by` = 'risoluto'
-     , `status`      = 0
- WHERE `userid`      = :userid;
+DELETE FROM $tablename
+ WHERE `userid` = :userid;
 END_OF_SQL;
 
         return $sql;
@@ -260,11 +303,8 @@ END_OF_SQL;
     private function getSqlDelGroup($tablename)
     {
         $sql = <<<END_OF_SQL
-UPDATE $tablename
-   SET `modified_at` = now()
-     , `modified_by` = 'risoluto'
-     , `status`      = 0
- WHERE `groupid`     = :groupid;
+DELETE FROM $tablename
+ WHERE `groupid` = :groupid;
 END_OF_SQL;
 
         return $sql;
@@ -393,9 +433,42 @@ END_OF_SQL;
     }
 
     /**
+     * getSqlShowUserByNo()
+     *
+     * Noでのユーザ情報表示のためのSQLを生成する
+     *
+     * @access    private
+     *
+     * @param     string $tablename グループ情報テーブル名
+     *
+     * @return    SQL
+     */
+    private function getSqlShowUserByNo($tablename)
+    {
+        $sql = <<<END_OF_SQL
+SELECT
+SELECT
+       `created_at`
+     , `created_by`
+     , `modified_at`
+     , `modified_by`
+     , `no`
+     , `userid`
+     , `username`
+     , `password`
+     , `groupno`
+     , `status`
+ FROM $tablename
+WHERE `no` = :no
+END_OF_SQL;
+
+        return $sql;
+    }
+
+    /**
      * getSqlShowGroupByNo()
      *
-     * グループ情報表示のためのSQLを生成する
+     * noでのグループ情報表示のためのSQLを生成する
      *
      * @access    private
      *
@@ -441,18 +514,22 @@ END_OF_SQL;
             // ユーザ追加／更新向け
             case 'UserAddMod':
                 $retval = array(
+                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
                     array('id' => ':userid', 'value' => $option['userid'], 'type' => \PDO::PARAM_STR),
                     array('id' => ':username', 'value' => $option['username'], 'type' => \PDO::PARAM_STR),
                     array('id' => ':password', 'value' => $option['password'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupno', 'value' => $option['groupno'], 'type' => \PDO::PARAM_INT)
+                    array('id' => ':groupno', 'value' => $option['groupno'], 'type' => \PDO::PARAM_INT),
+                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
                 );
                 break;
 
             // グループ追加／更新向け
             case 'GroupAddMod':
                 $retval = array(
+                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
                     array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupname', 'value' => $option['groupname'], 'type' => \PDO::PARAM_STR)
+                    array('id' => ':groupname', 'value' => $option['groupname'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
                 );
                 break;
 
@@ -649,6 +726,10 @@ END_OF_SQL;
                     $get_data = $instance->doQuery($this->getSqlShowGroupAll($info['grouptable']));
                     break;
 
+                case 'showUserByNo':
+                    $get_data = $instance->doQuery($this->getSqlShowUserByNo($info['usertable']), $this->getParams('No', $option));
+                    break;
+
                 case 'showGroupByNo':
                     $get_data = $instance->doQuery($this->getSqlShowGroupByNo($info['grouptable']), $this->getParams('No', $option));
                     break;
@@ -668,6 +749,7 @@ END_OF_SQL;
                     case 'showGroup':
                     case 'showUserAll':
                     case 'showGroupAll':
+                    case 'showUserByNo':
                     case 'showGroupByNo':
                         $retval = $get_data;
                         break;
