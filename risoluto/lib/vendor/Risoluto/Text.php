@@ -62,4 +62,27 @@ class Text
 
         return $tmp_target;
     }
+
+    /**
+     * checkFalseVal($value, $default = '', $strict = false)
+     *
+     * 引数で指定された値がfalse判定されるか否かを判定し、判定される場合は引数で指定されたデフォルト値をそうでない場合は元の値を返す
+     *
+     * @access    public
+     *
+     * @param     string  $value   検査対象となる値
+     * @param     string  $default デフォルト値
+     * @param     boolean $strict  厳密な判定を行うか（falseと空文字列等を区別するか）
+     *
+     * @return    boolean    引数で指定された元の値または指定されたデフォルト値
+     */
+    public static function checkFalseVal($value, $default = '', $strict = false)
+    {
+        // 厳密判定を実施するかどうかでチェックを変える
+        if ($strict) {
+            return ($value !== false) ? $value : $default;
+        } else {
+            return (!empty($value)) ? $value : $default;
+        }
+    }
 }

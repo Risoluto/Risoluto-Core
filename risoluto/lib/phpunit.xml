@@ -48,6 +48,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         </testsuite>
         <testsuite name="RisolutoTextTest">
             <file>vendor_test/Risoluto/TextTest/TextTest4AutoUrlLink.php</file>
+            <file>vendor_test/Risoluto/TextTest/TextTest4CheckFalseVal.php</file>
         </testsuite>
         <testsuite name="RisolutoUrlTest">
             <file>vendor_test/Risoluto/UrlTest/UrlTest4GetBaseUrl.php</file>
