@@ -241,7 +241,6 @@ END_OF_SQL;
         return $sql;
     }
 
-
     /**
      * getSqlModGroup()
      *
@@ -268,6 +267,60 @@ END_OF_SQL;
     }
 
     /**
+     * getSqlModUserByNo()
+     *
+     * ユーザ情報変更のためのSQLを生成する（Noでの更新用）
+     *
+     * @access    private
+     *
+     * @param     string $tablename ユーザ情報テーブル名
+     *
+     * @return    SQL
+     */
+    private function getSqlModUserByNo($tablename)
+    {
+        $sql = <<<END_OF_SQL
+UPDATE $tablename
+   SET `modified_at` = now()
+     , `modified_by` = :by_who
+     , `userid`      = :userid
+     , `username`    = :username
+     , `password`    = :password
+     , `groupno`     = :groupno
+     , `status`      = :status
+ WHERE `no`          = :no;
+END_OF_SQL;
+
+        return $sql;
+    }
+
+    /**
+     * getSqlModGroupByNo()
+     *
+     * グループ情報変更のためのSQLを生成する（Noでの更新用）
+     *
+     * @access    private
+     *
+     * @param     string $tablename ユーザ情報テーブル名
+     *
+     * @return    初期化用SQL
+     */
+    private function getSqlModGroupByNo($tablename)
+    {
+        $sql = <<<END_OF_SQL
+UPDATE $tablename
+   SET `modified_at` = now()
+     , `modified_by` = :by_who
+     , `groupid`     = :groupid
+     , `groupname`   = :groupname
+     , `status`      = :status
+ WHERE `no`          = :no;
+END_OF_SQL;
+
+        return $sql;
+    }
+
+    /**
      * getSqlDelUser()
      *
      * ユーザ情報削除のためのSQLを生成する
@@ -288,11 +341,10 @@ END_OF_SQL;
         return $sql;
     }
 
-
     /**
      * getSqlDelGroup()
      *
-     * グループ情報削除のためのSQLを生成する
+     * グループ情報削除のためのSQLを生成する（Noでの削除用）
      *
      * @access    private
      *
@@ -305,6 +357,27 @@ END_OF_SQL;
         $sql = <<<END_OF_SQL
 DELETE FROM $tablename
  WHERE `groupid` = :groupid;
+END_OF_SQL;
+
+        return $sql;
+    }
+
+    /**
+     * getSqlDelUserGroupByNo()
+     *
+     * ユーザ／グループ情報削除のためのSQLを生成する（Noでの削除用）
+     *
+     * @access    private
+     *
+     * @param     string $tablename ユーザ情報テーブル名
+     *
+     * @return    初期化用SQL
+     */
+    private function getSqlDelUserGroupByNo($tablename)
+    {
+        $sql = <<<END_OF_SQL
+DELETE FROM $tablename
+ WHERE `no` = :no;
 END_OF_SQL;
 
         return $sql;
@@ -532,6 +605,30 @@ END_OF_SQL;
                 );
                 break;
 
+            // ユーザ更新（No使用）向け
+            case 'UserModByNo':
+                $retval = array(
+                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
+                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
+                    array('id' => ':userid', 'value' => $option['userid'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':username', 'value' => $option['username'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':password', 'value' => $option['password'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':groupno', 'value' => $option['groupno'], 'type' => \PDO::PARAM_INT),
+                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
+                );
+                break;
+
+            // グループ更新（No使用）向け
+            case 'GroupModByNo':
+                $retval = array(
+                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
+                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
+                    array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':groupname', 'value' => $option['groupname'], 'type' => \PDO::PARAM_STR),
+                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
+                );
+                break;
+
             // ユーザIDのみ
             case 'UserID':
                 $retval = array(
@@ -701,12 +798,28 @@ END_OF_SQL;
                     $get_data = $instance->doQuery($this->getSqlModGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
                     break;
 
+                case 'modUserByNo':
+                    $get_data = $instance->doQuery($this->getSqlModUserByNo($info['usertable']), $this->getParams('UserModByNo', $option));
+                    break;
+
+                case 'modGroupByNo':
+                    $get_data = $instance->doQuery($this->getSqlModGroupByNo($info['grouptable']), $this->getParams('GroupModByNo', $option));
+                    break;
+
                 case 'delUser':
                     $get_data = $instance->doQuery($this->getSqlDelUser($info['usertable']), $this->getParams('UserID', $option));
                     break;
 
                 case 'delGroup':
                     $get_data = $instance->doQuery($this->getSqlDelGroup($info['grouptable']), $this->getParams('GroupID', $option));
+                    break;
+
+                case 'delUserByNo':
+                    $get_data = $instance->doQuery($this->getSqlDelUserGroupByNo($info['usertable']), $this->getParams('No', $option));
+                    break;
+
+                case 'delGroupByNo':
+                    $get_data = $instance->doQuery($this->getSqlDelUserGroupByNo($info['grouptable']), $this->getParams('No', $option));
                     break;
 
                 case 'showUser':

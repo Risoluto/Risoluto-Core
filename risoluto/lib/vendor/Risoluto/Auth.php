@@ -188,11 +188,36 @@ class Auth
                 }
                 break;
 
+
+            // ユーザ変更（No使用）
+            case 'modUserByNo':
+                // パラメタのチェック
+                if (isset($option['no']) and isset($option['userid']) and isset($option['username']) and isset($option['password']) and isset($option['groupno'])) {
+                    // パスワードをハッシュ化したのちメソッドをコール
+                    $option['password'] = self::getEncPass($option['password']);
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $retval = $provider->doOperation($operation, $option);
+                } else {
+                    $retval = false;
+                }
+                break;
+
             // グループ追加／変更
             case 'addGroup': // FALL THRU
             case 'modGroup':
                 // パラメタのチェック
                 if (isset($option['groupid']) and isset($option['groupname'])) {
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $retval = $provider->doOperation($operation, $option);
+                } else {
+                    $retval = false;
+                }
+                break;
+
+            // グループ変更（No使用）
+            case 'modGroupByNo':
+                // パラメタのチェック
+                if (isset($option['no']) and isset($option['groupid']) and isset($option['groupname'])) {
                     /** @noinspection PhpUndefinedMethodInspection */
                     $retval = $provider->doOperation($operation, $option);
                 } else {
@@ -224,7 +249,9 @@ class Auth
                 }
                 break;
 
-            // ユーザ／グループNo表示
+            // ユーザ／グループNo削除／表示
+            case 'delUserByNo':
+            case 'delGroupByNo':
             case 'showUserByNo':
             case 'showGroupByNo':
                 // パラメタのチェック
