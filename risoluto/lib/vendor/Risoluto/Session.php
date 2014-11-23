@@ -76,17 +76,9 @@ class Session
 
         // セッションが存在しない場合の処理
         if (empty($_COOKIE[$this->sessname])) {
-            // システムよりマイクロセコンドの精度で時刻情報を取得し
-            // 乱数のシード（種）にする
-            list($usec, $sec) = explode(" ", microtime());
-            $seed = (double)$sec + ((double)$usec * 100000);
-
-            // 生成したシードを元に乱数を生成し、セッションIDを合成
-            mt_srand($seed);
-            $base = uniqid(mt_rand(), true);
-
             // 生成したセッションIDを付与する
-            session_id(sha1($base));
+            $base = $this->genRand();
+            session_id($base);
         } // end of if
 
         // セッションの開始
@@ -247,5 +239,34 @@ class Session
         }
 
         return true;
+    }
+
+    /**
+     * genRand()
+     *
+     * 乱数を生成する
+     *
+     * @access    public
+     *
+     * @param     void
+     *
+     * @return    string 生成された乱数値
+     */
+    public function genRand()
+    {
+        if (function_exists('openssl_random_pseudo_bytes')) {
+            // openssl_random_pseudo_bytes()が使用できない場合はそれを使って乱数を生成
+            $retval = bin2hex(openssl_random_pseudo_bytes(32));
+        } else {
+            // openssl_random_pseudo_bytes()が使用できない場合は
+            // システムよりマイクロセコンドの精度で時刻情報を取得し乱数を生成
+            list($usec, $sec) = explode(" ", microtime());
+            $seed = (double)$sec + ((double)$usec * 100000);
+
+            mt_srand($seed);
+            $retval = mt_rand();
+        }
+
+        return $retval;
     }
 }
