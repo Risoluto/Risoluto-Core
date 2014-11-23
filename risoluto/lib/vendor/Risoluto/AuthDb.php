@@ -170,7 +170,7 @@ INSERT INTO $tablename (
     , :username
     , :password
     , :groupno
-    , 1
+    , :status
 );
 END_OF_SQL;
 
@@ -207,7 +207,7 @@ INSERT INTO $tablename (
     , :by_who
     , :groupid
     , :groupname
-    , 1
+    , :status
 );
 END_OF_SQL;
 
