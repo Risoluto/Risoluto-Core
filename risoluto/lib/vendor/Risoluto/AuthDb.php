@@ -447,7 +447,6 @@ END_OF_SQL;
     {
         $sql = <<<END_OF_SQL
 SELECT
-SELECT
        `created_at`
      , `created_by`
      , `modified_at`
