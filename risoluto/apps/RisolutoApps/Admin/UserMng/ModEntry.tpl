@@ -52,7 +52,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
             <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_UserMng_ListUsers'">&lt;&nbsp;一覧へ戻る</button>
         </div>
         <div class="btn-group btn-group-lg pull-right">
-            <button type="submit" class="btn btn-default"">確認画面へ&nbsp;&gt;</button>
+            <button type="submit" class="btn btn-default">確認画面へ&nbsp;&gt;</button>
         </div>
     </div>
 </form>

@@ -118,7 +118,7 @@ class AdminCommon
             if (!empty($selfno)) {
                 // 自分自身のユーザnoがセットされている場合は、重複データにそれが含まれていないかを確認する
                 $retval['entered']['no'] = $selfno;
-                $dups = array();
+                $dups                    = array();
                 foreach ($dup_master as $dat) {
                     if ($dat['no'] != $selfno) {
                         $dups[] = $dat;
@@ -244,13 +244,13 @@ class AdminCommon
         $retval['error']['form_crit'] = array();
 
         //--- グループIDのチェック
-        $dup_master                  = \Risoluto\Auth::callProviderMethod('showGroup', array('groupid' => $target['groupid']));
+        $dup_master                   = \Risoluto\Auth::callProviderMethod('showGroup', array('groupid' => $target['groupid']));
         $retval['entered']['groupid'] = htmlentities($target['groupid'], ENT_QUOTES, 'UTF-8');
         if (isset($target['groupid']) and !empty($target['groupid'])) {
             if (!empty($selfno)) {
                 // 自分自身のユーザnoがセットされている場合は、重複データにそれが含まれていないかを確認する
                 $retval['entered']['no'] = $selfno;
-                $dups = array();
+                $dups                    = array();
                 foreach ($dup_master as $dat) {
                     if ($dat['no'] != $selfno) {
                         $dups[] = $dat;
@@ -269,7 +269,7 @@ class AdminCommon
             }
         } else {
             // 未入力の場合はエラーにする
-            $retval['entered']['groupid']    = '';
+            $retval['entered']['groupid']   = '';
             $retval['error']['msg'][]       = 'empty_groupid';
             $retval['error']['form_crit'][] = 'groupid';
         }
@@ -285,7 +285,7 @@ class AdminCommon
             }
         } else {
             // 未入力の場合はエラーにする
-            $retval['entered']['groupname']  = '';
+            $retval['entered']['groupname'] = '';
             $retval['error']['msg'][]       = 'empty_groupname';
             $retval['error']['form_crit'][] = 'groupname';
         }
@@ -304,6 +304,76 @@ class AdminCommon
             $retval['entered']['status']    = '';
             $retval['error']['msg'][]       = 'empty_status';
             $retval['error']['form_crit'][] = 'status';
+        }
+
+        //--- CSRFトークンのチェック
+        if ($target['csrf_token'] != $csrf_token) {
+            throw new \Exception('CSRF Check Error');
+        }
+
+        // エラー関係の配列から重複を排除する
+        $retval['error']['msg']       = array_unique($retval['error']['msg']);
+        $retval['error']['form_crit'] = array_unique($retval['error']['form_crit']);
+
+        // 処理結果を返却する
+        return $retval;
+    }
+
+    /**
+     * checkEnteredSelfData($target, $csrf_token)
+     *
+     * 入力内容のチェック処理を行う
+     *
+     * @access    public
+     *
+     * @param     array   $target     チェック対象となるデータが格納された配列
+     * @param     string  $csrf_token CSRF対策のためのトークン
+     * @param     integer $no         ユーザ識別用のNo
+     *
+     * @return    array      チェック結果
+     * @throws    \Exception CSRFトークンが一致しなかった場合はThrow
+     */
+    public function checkEnteredSelfData($target, $csrf_token, $no)
+    {
+        // 戻り値を初期化
+        $retval                       = array();
+        $retval['entered']            = array();
+        $retval['error']['msg']       = array();
+        $retval['error']['form_crit'] = array();
+
+        //--- 現在のパスワードのチェック
+        $retval['entered']['current_password'] = htmlentities($target['current_password'], ENT_QUOTES, 'UTF-8');
+        $current_pw_db                         = \Risoluto\Auth::callProviderMethod('showUserByNo', array('no' => $no));
+        if (isset($target['current_password']) and !empty($target['current_password'])) {
+            // フォーマットチェック
+            if (!password_verify($target['current_password'], $current_pw_db[0]['password'])) {
+                // フォーマットにそぐわない場合はエラーにする
+                $retval['error']['msg'][]       = 'invalid_current_password';
+                $retval['error']['form_crit'][] = 'current_password';
+            }
+        } else {
+            // 未入力の場合はエラーにする
+            $retval['entered']['current_password'] = '';
+            $retval['error']['msg'][]              = 'empty_current_password';
+            $retval['error']['form_crit'][]        = 'current_password';
+        }
+
+        //--- 変更後のパスワードのチェック
+        $retval['entered']['password']         = htmlentities($target['password'], ENT_QUOTES, 'UTF-8');
+        $retval['entered']['password_confirm'] = $retval['entered']['password'];
+        if (isset($target['password']) and !empty($target['password'])) {
+            // フォーマットチェック
+            if ($target['password'] != $target['password_confirm']) {
+                // フォーマットにそぐわない場合はエラーにする
+                $retval['error']['msg'][]       = 'invalid_password';
+                $retval['error']['form_crit'][] = 'password';
+            }
+        } else {
+            // 未入力の場合はエラーにする
+            $retval['entered']['password']         = '';
+            $retval['entered']['password_confirm'] = '';
+            $retval['error']['msg'][]              = 'empty_password';
+            $retval['error']['form_crit'][]        = 'password';
         }
 
         //--- CSRFトークンのチェック
