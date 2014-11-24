@@ -220,4 +220,102 @@ class AdminCommon
         // 処理結果を返却する
         return $retval;
     }
+
+    /**
+     * checkEnteredGroupData($target, $csrf_token)
+     *
+     * 入力内容のチェック処理を行う
+     *
+     * @access    public
+     *
+     * @param     array   $target     チェック対象となるデータが格納された配列
+     * @param     string  $csrf_token CSRF対策のためのトークン
+     * @param     integer $selfno     自分自身のユーザno（省略可、省略された場合はユーザIDの重複チェック時に考慮）
+     *
+     * @return    array      チェック結果
+     * @throws    \Exception CSRFトークンが一致しなかった場合はThrow
+     */
+    public function checkEnteredGroupData($target, $csrf_token, $selfno = '')
+    {
+        // 戻り値を初期化
+        $retval                       = array();
+        $retval['entered']            = array();
+        $retval['error']['msg']       = array();
+        $retval['error']['form_crit'] = array();
+
+        //--- グループIDのチェック
+        $dup_master                  = \Risoluto\Auth::callProviderMethod('showGroup', array('groupid' => $target['groupid']));
+        $retval['entered']['groupid'] = htmlentities($target['groupid'], ENT_QUOTES, 'UTF-8');
+        if (isset($target['groupid']) and !empty($target['groupid'])) {
+            if (!empty($selfno)) {
+                // 自分自身のユーザnoがセットされている場合は、重複データにそれが含まれていないかを確認する
+                $retval['entered']['no'] = $selfno;
+                $dups = array();
+                foreach ($dup_master as $dat) {
+                    if ($dat['no'] != $selfno) {
+                        $dups[] = $dat;
+                    }
+                }
+            } else {
+                // セットされていない場合は取得したものをそのまま使う
+                $dups = $dup_master;
+            }
+
+            // フォーマットチェック
+            if (!preg_match('/[[:alnum:]\_\-\@\.]{1,255}/', $target['groupid']) or count($dups) > 0) {
+                // フォーマットにそぐわない場合はエラーにする
+                $retval['error']['msg'][]       = 'invalid_groupid';
+                $retval['error']['form_crit'][] = 'groupid';
+            }
+        } else {
+            // 未入力の場合はエラーにする
+            $retval['entered']['groupid']    = '';
+            $retval['error']['msg'][]       = 'empty_groupid';
+            $retval['error']['form_crit'][] = 'groupid';
+        }
+
+        //--- グループ名のチェック
+        $retval['entered']['groupname'] = htmlentities($target['groupname'], ENT_QUOTES, 'UTF-8');
+        if (isset($target['groupname']) and !empty($target['groupname'])) {
+            // フォーマットチェック
+            if (strlen($target['groupname']) > 255) {
+                // フォーマットにそぐわない場合はエラーにする
+                $retval['error']['msg'][]       = 'invalid_groupname';
+                $retval['error']['form_crit'][] = 'groupname';
+            }
+        } else {
+            // 未入力の場合はエラーにする
+            $retval['entered']['groupname']  = '';
+            $retval['error']['msg'][]       = 'empty_groupname';
+            $retval['error']['form_crit'][] = 'groupname';
+        }
+
+        //--- ステータスのチェック
+        $retval['entered']['status'] = htmlentities($target['status'], ENT_QUOTES, 'UTF-8');
+        if (isset($target['status'])) {
+            // フォーマットチェック
+            if (!preg_match('/\d{1,}/', $target['status'])) {
+                // フォーマットにそぐわない場合はエラーにする
+                $retval['error']['msg'][]       = 'invalid_status';
+                $retval['error']['form_crit'][] = 'status';
+            }
+        } else {
+            // 未入力の場合はエラーにする
+            $retval['entered']['status']    = '';
+            $retval['error']['msg'][]       = 'empty_status';
+            $retval['error']['form_crit'][] = 'status';
+        }
+
+        //--- CSRFトークンのチェック
+        if ($target['csrf_token'] != $csrf_token) {
+            throw new \Exception('CSRF Check Error');
+        }
+
+        // エラー関係の配列から重複を排除する
+        $retval['error']['msg']       = array_unique($retval['error']['msg']);
+        $retval['error']['form_crit'] = array_unique($retval['error']['form_crit']);
+
+        // 処理結果を返却する
+        return $retval;
+    }
 }
