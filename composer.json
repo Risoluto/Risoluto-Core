@@ -1,0 +1,28 @@
+{
+  "name": "Risoluto/Risoluto-Core",
+  "type": "project",
+  "description": "Risoluto is a simple framework for PHP",
+  "keywords": [
+    "application",
+    "website",
+    "development",
+    "framework",
+    "PHP"
+  ],
+  "homepage": "http://www.risoluto.org/",
+  "authors": [
+    {
+      "name": "Risoluto Developers",
+      "homepage": "https://github.com/Risoluto/Risoluto-Core/blob/master/AUTHORS"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/Risoluto/Risoluto-Core/issues",
+    "wiki": "https://github.com/Risoluto/Risoluto-Core/wiki",
+    "source": "https://github.com/Risoluto/Risoluto-Core"
+  },
+  "license": "BSD-3-Clause",
+  "require": {
+    "php": ">=5.5.0"
+  }
+}
