@@ -5,6 +5,11 @@
 [![Code Climate](https://codeclimate.com/github/Risoluto/Risoluto-Core.png)](https://codeclimate.com/github/Risoluto/Risoluto-Core)
 [![Dependency Status](https://www.versioneye.com/user/projects/546848494de5ef46160000e3/badge.svg?style=flat)](https://www.versioneye.com/user/projects/546848494de5ef46160000e3)
 
+[![Latest Stable Version](https://poser.pugx.org/risoluto/risoluto-core/v/stable.svg)](https://packagist.org/packages/risoluto/risoluto-core)
+[![Total Downloads](https://poser.pugx.org/risoluto/risoluto-core/downloads.svg)](https://packagist.org/packages/risoluto/risoluto-core)
+[![Latest Unstable Version](https://poser.pugx.org/risoluto/risoluto-core/v/unstable.svg)](https://packagist.org/packages/risoluto/risoluto-core)
+[![License](https://poser.pugx.org/risoluto/risoluto-core/license.svg)](https://packagist.org/packages/risoluto/risoluto-core)
+
 ## Risolutoとは
 
 Risolutoは「シンプルで軽い」をコンセプトに開発されたPHPフレームワークです。既存のフレームワークは、その言語自体に加え、フレームワーク 自体について理解しなければいけないことが多くありますが、Risolutoは、極力「PHPを理解していればつかえる」ように作られていますので、初めてフレームワークを使う方や既存のフレームワークほどの機能が不要な方に最適です。
