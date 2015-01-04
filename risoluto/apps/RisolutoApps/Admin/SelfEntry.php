@@ -7,7 +7,7 @@
  * @package           risoluto
  * @author            Risoluto Developers
  * @license           http://opensource.org/licenses/bsd-license.php new BSD license
- * @copyright     (C) 2008-2014 Risoluto Developers / All Rights Reserved.
+ * @copyright     (C) 2008-2015 Risoluto Developers / All Rights Reserved.
  */
 
 //------------------------------------------------------//
@@ -45,6 +45,7 @@ class SelfEntry extends \Risoluto\RisolutoControllerBase implements \Risoluto\Ri
         $common = new \RisolutoApps\Admin\AdminCommon;
         $detail = $common->loginCheck($sess, true);
 
+        $entered = array();
         if ($sess->isThere('form')) {
             // セッションにフォーム入力情報が存在した場合は取得
             $entered = $sess->load('form');
