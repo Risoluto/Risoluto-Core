@@ -42,7 +42,7 @@ class SelfComplete extends \Risoluto\RisolutoControllerBase implements \Risoluto
 
         // 共通処理クラスを呼び出し
         $common  = new \RisolutoApps\Admin\AdminCommon;
-        $detail  = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck($sess, false);
         $entered = $common->checkEnteredSelfData($_POST, $sess->load('csrf_token'), $detail['no']);
 
         // エラー情報があった場合は入力画面に戻る

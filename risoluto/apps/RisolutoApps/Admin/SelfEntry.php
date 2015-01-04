@@ -43,7 +43,7 @@ class SelfEntry extends \Risoluto\RisolutoControllerBase implements \Risoluto\Ri
 
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck($sess, false);
 
         $entered = array();
         if ($sess->isThere('form')) {
