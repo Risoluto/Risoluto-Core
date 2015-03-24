@@ -207,26 +207,7 @@ class Date
         }
 
         // 月ごとに日数を決定する
-        switch ($target['month']) {
-
-            // 2月はうるう年考慮し、28又は29日まで生成
-            case 2:
-                $endDay = ((!empty($target['year']) and Validate::isLeapYear($target['year'])) ? 29 : 28);
-                break;
-
-            // 4,6,9,11月は30日まで生成
-            case 4: // FALL THRU
-            case 6: // FALL THRU
-            case 9: // FALL THRU
-            case 11: // FALL THRU
-                $endDay = 30;
-                break;
-
-            // 上記以外は31日まで生成するケース
-            default:
-                $endDay = 31;
-                break;
-        }
+        $endDay = date("t", mktime(0, 0, 0, $target['month'], $target['year']));
 
         // 配列を生成する
         $retVal = self::genNumberList($endDay, $firstType, $nonSelectedVal, $nonSelectedStr);
