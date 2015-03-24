@@ -27,7 +27,7 @@ class SampleCli extends \Risoluto\RisolutoCliBase implements \Risoluto\RisolutoC
      *
      * @access    public
      *
-     * @param     void
+     * @param     array $options オプション情報
      *
      * @return    void    なし
      */
