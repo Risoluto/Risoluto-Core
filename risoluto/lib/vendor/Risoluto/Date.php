@@ -207,7 +207,7 @@ class Date
         }
 
         // 月ごとに日数を決定する
-        $endDay = date("t", mktime(0, 0, 0, $target['month'], $target['year']));
+        $endDay = date("t", mktime(0, 0, 0, $target['month'], 1, $target['year']));
 
         // 配列を生成する
         $retVal = self::genNumberList($endDay, $firstType, $nonSelectedVal, $nonSelectedStr);
