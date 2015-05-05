@@ -336,7 +336,12 @@ class Db
 
         // SQLを判定し、SELECTだったときのみデータ取得モードにする
         $tmp_mode = false;
-        if (preg_match('/^SELECT/i', $sql)) {
+        if (!empty($sql) AND preg_match('/^SELECT/i', $sql)) {
+            $tmp_mode = true;
+        } elseif (
+            !empty($this->pdostatement_instance->queryString) AND
+            preg_match('/^SELECT/i', $this->pdostatement_instance->queryString)
+        ) {
             $tmp_mode = true;
         }
 
