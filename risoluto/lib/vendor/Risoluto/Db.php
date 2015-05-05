@@ -78,13 +78,15 @@ class Db
         try {
             if (empty($option)) {
                 // オプションが指定されていなければそのまま指定する
-                $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'], array(
-                    \PDO::ATTR_PERSISTENT => ($this->dbinfo['persistent'] ? true : false),
-                    \PDO::ATTR_ERRMODE    => \PDO::ERRMODE_EXCEPTION
-                ));
+                $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'],
+                    array(
+                        \PDO::ATTR_PERSISTENT => ($this->dbinfo['persistent'] ? true : false),
+                        \PDO::ATTR_ERRMODE    => \PDO::ERRMODE_EXCEPTION,
+                    ));
             } else {
                 // オプションが指定されていればそれを指定して接続する
-                $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'], $option);
+                $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'],
+                    $option);
             }
         } catch (\PDOException $e) {
             // 接続に失敗したらエラーメッセージを生成
@@ -323,8 +325,21 @@ class Db
      * @return    mixed   SQLの実行結果／false:異常終了
      *
      */
-    public function doQuery($sql = '', array $param = array(), array $query_options = array(), $fetch_style = \PDO::FETCH_ASSOC)
-    {
+    public function doQuery(
+        $sql = '',
+        array $param = array(),
+        array $query_options = array(),
+        $fetch_style = \PDO::FETCH_ASSOC
+    ) {
+        // SQLの前後についている余分な空白を排除
+        $sql = trim($sql);
+
+        // SQLを判定し、SELECTだったときのみデータ取得モードにする
+        $tmp_mode = false;
+        if (preg_match('/^SELECT/i', $sql)) {
+            $tmp_mode = true;
+        }
+
         // SQLが渡されたときはPDOStatementのインスタンスを更新する（既存のインスタンスがなくSQL未指定の場合はfalseを返す）
         try {
             if (strtolower($sql) == 'clear') {
@@ -354,9 +369,14 @@ class Db
                 // SQLを実行し結果を取得する
                 /** @noinspection PhpUndefinedMethodInspection */
                 $retval_execute = $this->pdostatement_instance->execute();
-                /** @noinspection PhpUndefinedMethodInspection */
-                $retval_fetch = (($fetch_dat = $this->pdostatement_instance->fetchAll($fetch_style)) === false ? false : true);
-
+                // データ取得モードの時のみfetchする
+                if ($tmp_mode) {
+                    /** @noinspection PhpUndefinedMethodInspection */
+                    $retval_fetch = (($fetch_dat = $this->pdostatement_instance->fetchAll($fetch_style)) === false ? false : true);
+                } else {
+                    $retval_fetch = true;
+                    $fetch_dat    = true;
+                }
                 $retval = (($retval_execute and $retval_fetch) ? $fetch_dat : false);
 
                 return $retval;
@@ -390,7 +410,9 @@ class Db
         $retval = '';
 
         // ドライバ名のセット
-        if (isset($this->dbinfo['driver']) and !empty($this->dbinfo['driver']) and in_array($this->dbinfo['driver'], \PDO::getAvailableDrivers())) {
+        if (isset($this->dbinfo['driver']) and !empty($this->dbinfo['driver']) and in_array($this->dbinfo['driver'],
+                \PDO::getAvailableDrivers())
+        ) {
             $retval .= $this->dbinfo['driver'] . ':';
         } else {
             $this->genErrorMsg("undefined", 'driver');
