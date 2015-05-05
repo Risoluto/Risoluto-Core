@@ -79,10 +79,11 @@ class Db
             if (empty($option)) {
                 // オプションが指定されていなければそのまま指定する
                 $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'], array(
-                    \PDO::ATTR_PERSISTENT => ($this->dbinfo['persistent'] ? true : false)
+                    \PDO::ATTR_PERSISTENT => ($this->dbinfo['persistent'] ? true : false),
+                    \PDO::ATTR_ERRMODE    => \PDO::ERRMODE_EXCEPTION
                 ));
             } else {
-                // オプションが指定されていなければそれを指定して接続する
+                // オプションが指定されていればそれを指定して接続する
                 $this->pdo_instance = new \PDO($this->dbinfo['dsn'], $this->dbinfo['user'], $this->dbinfo['pass'], $option);
             }
         } catch (\PDOException $e) {
@@ -326,45 +327,47 @@ class Db
     {
         // SQLが渡されたときはPDOStatementのインスタンスを更新する（既存のインスタンスがなくSQL未指定の場合はfalseを返す）
         try {
-            if (!empty($sql)) {
+            if (strtolower($sql) == 'clear') {
+                $this->pdostatement_instance = null;
+            } elseif (!empty($sql)) {
                 $this->pdostatement_instance = null;
                 $this->pdostatement_instance = $this->pdo_instance->prepare($sql, $query_options);
-            } elseif (strtolower($sql) == 'clear') {
-                $this->pdostatement_instance = null;
+            }
+
+            // PDOStatementクラスのインスタンスが生成済みの時だけSQLを実行
+            if (!empty($this->pdostatement_instance)) {
+                // パラメタが指定されている時はバインドする
+                if (!empty($param) and is_array($param)) {
+                    foreach ($param as $dat) {
+                        // lengthがセットされているかどうかでbindParam()のコールを変更する
+                        if (isset($dat['length']) and !empty($dat['length'])) {
+                            /** @noinspection PhpUndefinedMethodInspection */
+                            $this->pdostatement_instance->bindParam($dat['id'], $dat['value'], $dat['type'],
+                                $dat['length']);
+                        } else {
+                            /** @noinspection PhpUndefinedMethodInspection */
+                            $this->pdostatement_instance->bindParam($dat['id'], $dat['value'], $dat['type']);
+                        }
+                    }
+                }
+
+                // SQLを実行し結果を取得する
+                /** @noinspection PhpUndefinedMethodInspection */
+                $retval_execute = $this->pdostatement_instance->execute();
+                /** @noinspection PhpUndefinedMethodInspection */
+                $retval_fetch = (($fetch_dat = $this->pdostatement_instance->fetchAll($fetch_style)) === false ? false : true);
+
+                $retval = (($retval_execute and $retval_fetch) ? $fetch_dat : false);
+
+                return $retval;
+            } else {
+                $retval = false;
             }
         } catch (\PDOException $e) {
             // 取得に失敗したらエラーメッセージを生成
             $this->genErrorMsg('pdo', $e->getMessage());
 
             return false;
-        }
-
-        // PDOStatementクラスのインスタンスが生成済みの時だけSQLを実行
-        if (!empty($this->pdostatement_instance)) {
-            // パラメタが指定されている時はバインドする
-            if (!empty($param) and is_array($param)) {
-                foreach ($param as $dat) {
-                    // lengthがセットされているかどうかでbindParam()のコールを変更する
-                    if (isset($dat['length']) and !empty($dat['length'])) {
-                        /** @noinspection PhpUndefinedMethodInspection */
-                        $this->pdostatement_instance->bindParam($dat['id'], $dat['value'], $dat['type'], $dat['length']);
-                    } else {
-                        /** @noinspection PhpUndefinedMethodInspection */
-                        $this->pdostatement_instance->bindParam($dat['id'], $dat['value'], $dat['type']);
-                    }
-                }
-            }
-
-            // SQLを実行し結果を取得する
-            /** @noinspection PhpUndefinedMethodInspection */
-            $retval_execute = $this->pdostatement_instance->execute();
-            /** @noinspection PhpUndefinedMethodInspection */
-            $retval_fetch = (($fetch_dat = $this->pdostatement_instance->fetchAll($fetch_style)) === false ? false : true);
-
-            $retval = (($retval_execute and $retval_fetch) ? $fetch_dat : false);
-            return $retval;
-        } else {
-            $retval = false;
         }
 
         return $retval;
