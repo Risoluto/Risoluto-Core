@@ -339,6 +339,7 @@ class Db
         if (!empty($sql) AND preg_match('/^SELECT/i', $sql)) {
             $tmp_mode = true;
         } elseif (
+            empty($sql) AND
             !empty($this->pdostatement_instance->queryString) AND
             preg_match('/^SELECT/i', $this->pdostatement_instance->queryString)
         ) {
