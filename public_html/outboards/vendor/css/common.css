@@ -239,15 +239,16 @@ th {
     text-align: center;
 
     background-color: #5a49d9;
-    font: italic bolder 100%;
+
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 100%;
 
     padding: 1% 1% 1% 1%;
 }
 
 td {
     background-color: #ffffff;
-
-    font: normal 100%;
 
     padding: 1% 1% 1% 1%;
 
@@ -267,7 +268,9 @@ dl dt {
 
     text-align: left;
 
-    font: italic bold 100%;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 100%;
 }
 
 dl dd {
@@ -277,7 +280,8 @@ dl dd {
 pre {
     background-color: #fcfcfc;
 
-    font: lighter medium;
+    font-weight: lighter;
+    font-size: medium;
 
     border: #5a49d9 thin solid;
 
