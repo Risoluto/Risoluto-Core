@@ -16,6 +16,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     </div>
 </div>
 
+{nocache}
 {if $list}
     <div class="table-responsive">
         <table class="table">
@@ -59,4 +60,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {else}
     <div class="alert alert-warning" role="alert">グループが登録されていません</div>
 {/if}
+{/nocache}
+
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

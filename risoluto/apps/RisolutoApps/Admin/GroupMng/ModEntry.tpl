@@ -8,6 +8,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {include file="$__RISOLUTO_APPS/common/admin_headmenu.tpl"}
 
 <h1>グループ情報変更（入力）</h1>
+{nocache}
 {foreach $entered.error.msg as $dat}
     {if $dat == 'invalid_groupid'}
         <div class="alert alert-danger" role="alert">グループIDが不正かすでに存在しています</div>
@@ -28,12 +29,15 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <div class="alert alert-danger" role="alert">ステータスが入力されていません</div>
     {/if}
 {/foreach}
+{/nocache}
 
 <form action="?seq=Admin_GroupMng_ModConfirm" method="post" role="form">
     {include file="entrygroup_common.tpl"}
 
+    {nocache}
     <input type="hidden" id="no" name="no" value="{$entered.entered.no}">
     <input type="hidden" id="csrf_token" name="csrf_token" value="{$csrf_token}">
+    {/nocache}
 
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group btn-group-lg">

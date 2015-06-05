@@ -8,6 +8,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {include file="$__RISOLUTO_APPS/common/admin_headmenu.tpl"}
 
 <h1>ユーザ情報変更（入力）</h1>
+{nocache}
 {foreach $entered.error.msg as $dat}
     {if $dat == 'invalid_current_password'}
         <div class="alert alert-danger" role="alert">現在のパスワードが不正です</div>
@@ -22,9 +23,10 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <div class="alert alert-danger" role="alert">変更後のパスワードまたは変更後のパスワード（再入力）が入力されていません</div>
     {/if}
 {/foreach}
+{/nocache}
 
 <form action="?seq=Admin_SelfComplete" method="post" role="form">
-
+    {nocache}
     <div class="form-group{if in_array('current_password', $entered.error.form_crit)} has-error has-feedback{/if}">
         <label for="current_password">現在のパスワード&nbsp;<span class="label label-info">必須</span></label>
         <input type="password" class="form-control" id="current_password" name="current_password"
@@ -52,6 +54,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     </div>
 
     <input type="hidden" id="csrf_token" name="csrf_token" value="{$csrf_token}">
+    {/nocache}
 
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group btn-group-lg">

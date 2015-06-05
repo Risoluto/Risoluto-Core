@@ -3,6 +3,7 @@ This file is part of Risoluto( http://www.risoluto.org/ )
 Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
 (C) 2008-2015 Risoluto Developers / All Rights Reserved.
 *}
+{nocache}
 <div class="form-group{if in_array('userid', $entered.error.form_crit)} has-error has-feedback{/if}">
     <label for="userid">ユーザID&nbsp;<span class="label label-info">必須</span></label>
     <input type="text" class="form-control" id="userid" name="userid" placeholder="ユーザIDを入力してください"
@@ -60,3 +61,4 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <span class="glyphicon glyphicon-remove form-control-feedback"></span>
     {/if}
 </div>
+{/nocache}

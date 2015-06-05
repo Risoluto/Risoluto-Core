@@ -9,6 +9,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
 <h1>ユーザ情報削除（完了）</h1>
 
+{nocache}
 {if $result}
     <div class="alert alert-success" role="alert">
         ユーザ情報を削除しました（<a href="?seq=Admin_UserMng_ListUsers">ユーザ一覧画面はこちら</a>）
@@ -18,5 +19,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         ユーザ情報の削除に失敗しました（<a href="?seq=Admin_UserMng_ListUsers">ユーザ一覧画面はこちら</a>）
     </div>
 {/if}
+{/nocache}
 
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

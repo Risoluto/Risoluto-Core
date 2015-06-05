@@ -9,6 +9,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
 <h1>グループ情報変更（完了）</h1>
 
+{nocache}
 {if $result}
     <div class="alert alert-success" role="alert">
         グループ情報を変更しました（<a href="?seq=Admin_GroupMng_ListGroups">グループ一覧画面はこちら</a>）
@@ -18,5 +19,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         グループ情報の変更に失敗しました（<a href="?seq=Admin_GroupMng_ListGroups">グループ一覧画面はこちら</a>）
     </div>
 {/if}
+{/nocache}
 
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

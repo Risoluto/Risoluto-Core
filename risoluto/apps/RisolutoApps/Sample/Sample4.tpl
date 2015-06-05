@@ -16,6 +16,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     <li>動作させるにはrisoluto/conf/risoluto_db.iniに適切な情報がセットされている必要があります。</li>
 </ul>
 <h2>Dbの情報を出力</h2>
+{nocache}
 {if !empty($dat)}
     <table>
         <thead>
@@ -52,4 +53,5 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <li>「risoluto_db_test」というテーブルには「id」、「column1」、「column2」の3つのカラムが存在していること</li>
     </ul>
 {/if}
+{/nocache}
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

@@ -6,11 +6,13 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 {include file="$__RISOLUTO_APPS/common/header.tpl"}
 <h1>Risolutoへのログイン</h1>
 
+{nocache}
 {if $autherr == 'auth_failure'}
     <div class="alert alert-danger" role="alert">入力されたユーザIDとパスワードではログインできませんでした</div>
 {elseif $autherr == 'invalid_access'}
     <div class="alert alert-info" role="alert">ユーザIDとパスワードを入力し、ログインボタンをクリックしてください</div>
 {/if}
+{/nocache}
 
 <form action="?seq=Admin_Auth" method="post" role="form">
     <div class="form-group">

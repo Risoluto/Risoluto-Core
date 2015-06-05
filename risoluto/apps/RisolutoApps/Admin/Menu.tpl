@@ -9,6 +9,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
 {include file="$__RISOLUTO_APPS/common/admin_headtabs.tpl"}
 
+{nocache}
 {if $active_tab == 'user'}
     <h1>ユーザメニュー</h1>
     <h2>ユーザ情報管理</h2>
@@ -25,5 +26,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
             onclick="location.href='?seq=Admin_GroupMng_ListGroups'">グループ管理
     </button>
 {/if}
+{/nocache}
 
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

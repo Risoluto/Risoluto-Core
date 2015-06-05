@@ -54,6 +54,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <button type="submit" class="btn btn-default">Postする</button>
     </div>
 </form>
+{nocache}
 {if !empty($post)}
     <ol>
         {foreach $post as $key => $val}
@@ -61,9 +62,10 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         {/foreach}
     </ol>
 {/if}
-
+{/nocache}
 
 <h3>その他取得可能な情報の表示（$_SERVER）</h3>
+{nocache}
 {if !empty($server)}
     <ol>
         {foreach $server as $key => $val}
@@ -75,5 +77,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         このアプリケーションが取得可能な情報はありません。
     </p>
 {/if}
+{/nocache}
 
 {include file="$__RISOLUTO_APPS/common/footer.tpl"}

@@ -3,6 +3,7 @@ This file is part of Risoluto( http://www.risoluto.org/ )
 Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
 (C) 2008-2015 Risoluto Developers / All Rights Reserved.
 *}
+{nocache}
 <div class="table-responsive">
     <table class="table">
         <tr>
@@ -27,4 +28,4 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         </tr>
     </table>
 </div>
-
+{/nocache}
