@@ -3,11 +3,23 @@
 # Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-license.php )
 # (C) 2008-2015 Risoluto Developers / All Rights Reserved.# If you want to use "STATIC URL".
 ###############################################################################################
+<IfModule mod_rewrite.c>
+    # Enable mod_rewrite
+    RewriteEngine On
 
-# Note: If you want to use "STATIC URL", please uncomment the following.
-#<IfModule mod_rewrite.c>
-#    RewriteEngine On
-#    RewriteBase /
-#    RewriteRule ^tone/(.*)/$ /index.php?seq=$1 [L]
-#</IfModule>
-# Note: If you want to use "STATIC URL", please uncomment above.
+    # Define base url(If you install to sub directory, change here)
+    RewriteBase /
+
+    # Do redirect if found slash on the last of url
+    RewriteCond %{REQUEST_URI} /$
+    RewriteRule ^(.*)/$ $1 [L,R=301]
+
+    # Do rewrite if real directories/files are not requested
+    RewriteCond %{QUERY_STRING} !^$
+    RewriteRule . ?%{QUERY_STRING} [L,R=301]
+
+    RewriteCond %{QUERY_STRING} ^$
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ ?seq=$1 [L]
+</IfModule>

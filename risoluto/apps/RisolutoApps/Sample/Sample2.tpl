@@ -7,9 +7,9 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <h1>Risolutoサンプル #2</h1>
 <h2>アプリケーションへの値の受け渡し方法について</h2>
 <ul>
-    <li>アプリケーションに値を渡す際には「.」を使用し、「http://example.com/?seq=Foo_Bar.param1.param2」のように指定します。</li>
+    <li>アプリケーションに値を渡す際には「.」を使用し、「http://example.com/Foo_Bar.param1.param2」または「http://example.com/?seq=Foo_Bar.param1.param2」のように指定します。</li>
 
-    <li>もちろん「http://example.com/?seq=Foo_Bar.param1.param2&amp;param3=param4」のような指定も可能です。</li>
+    <li>もちろん「http://example.com/Foo_Bar.param1.param2&amp;param3=param4」または「http://example.com/?seq=Foo_Bar.param1.param2&amp;param3=param4」のような指定も可能です。</li>
 
     <li>GETだけではなくPOSTで値を渡すことももちろん可能です。
 
@@ -47,7 +47,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <p>
     下のフォームからこのアプリケーションにPOSTすると、ここにその内容が表示されます。
 </p>
-<form action="?seq=Sample_Sample2" method="POST" class="form-inline" role="form">
+<form action="Sample_Sample2" method="POST" class="form-inline" role="form">
     <div class="form-group">
         <label for="form_1">アプリケーションに渡す文字列の指定</label>
         <input type="text" class="form-control" id="post_sample" name="post_sample" placeholder="POSTしたい値を入力">
