@@ -14,6 +14,10 @@
     RewriteCond %{REQUEST_URI} /$
     RewriteRule ^(.*)/$ $1 [L,R=301]
 
+    # Call Pages::View method if requested
+    RewriteCond %{REQUEST_URI} Pages/(.*)$
+    RewriteRule Pages/(.*)$ ?seq=Pages_View.$1 [L]
+
     # Do rewrite if real directories/files are not requested
     RewriteCond %{QUERY_STRING} !^$
     RewriteRule . ?%{QUERY_STRING} [L,R=301]
