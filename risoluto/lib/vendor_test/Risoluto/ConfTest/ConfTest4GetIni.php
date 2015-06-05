@@ -52,7 +52,7 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
     {
         $want = [
             "SEQ" => [
-                "default" => "RisolutoApps\\Top",
+                "default" => "RisolutoApps\\Pages\\View",
                 "error" => "RisolutoApps\\Error",
                 "servicestop" => "RisolutoApps\\ServiceStop"
             ],
@@ -89,7 +89,7 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
     public function test_getIni_WithOneArgs()
     {
         $want = [
-            "default" => "RisolutoApps\\Top",
+            "default" => "RisolutoApps\\Pages\\View",
             "error" => "RisolutoApps\\Error",
             "servicestop" => "RisolutoApps\\ServiceStop"
         ];
@@ -107,7 +107,7 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
      */
     public function test_getIni_WithTwoArgs()
     {
-        $want = "RisolutoApps\\Top";
+        $want = "RisolutoApps\\Pages\\View";
 
         $instance = new Conf;
         $instance->parse( RISOLUTO_CONF . 'risoluto.ini' );
