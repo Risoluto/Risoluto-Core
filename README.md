@@ -37,8 +37,6 @@ Risoluto2は下記の環境で動作します
 
 * Composer（ http://getcomposer.org/ ）
 * Smarty（ http://www.smarty.net/ ）
-* Mobile-Detect（ http://mobiledetect.net/ ）
-* PHPoAuthLib（ https://github.com/Lusitanian/PHPoAuthLib ）
 * PHP Markdown Lib（ http://michelf.ca/projects/php-markdown/ ）
 * PHPMailer（ https://github.com/PHPMailer/PHPMailer ）
 * PHPUnit（ http://www.phpunit.de/ ）

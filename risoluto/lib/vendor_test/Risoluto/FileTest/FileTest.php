@@ -49,6 +49,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testDummy()
     {
-        $this->markTestIncomplete('We have no idea for this test... I need your help...');
+        $this->markTestIncomplete( 'We have no idea for this test... I need your help...' );
     }
 }

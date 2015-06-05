@@ -41,17 +41,17 @@ class Sample2 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
+        $assign_value = [
             'header' => $header,
-            'param'  => $this->GetParam(),
-            'get'    => $_GET,
-            'post'   => $_POST,
+            'param' => $this->GetParam(),
+            'get' => $_GET,
+            'post' => $_POST,
             'server' => $_SERVER
-        );
-        $this->risolutoView($assign_value);
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

@@ -41,41 +41,41 @@ class SelfComplete extends \Risoluto\RisolutoControllerBase implements \Risoluto
         $sess->start();
 
         // 共通処理クラスを呼び出し
-        $common  = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, false);
-        $entered = $common->checkEnteredSelfData($_POST, $sess->load('csrf_token'), $detail['no']);
+        $common = new \RisolutoApps\Admin\AdminCommon;
+        $detail = $common->loginCheck( $sess, false );
+        $entered = $common->checkEnteredSelfData( $_POST, $sess->load( 'csrf_token' ), $detail[ 'no' ] );
 
         // エラー情報があった場合は入力画面に戻る
-        if (!empty($entered['error']['msg']) or !empty($entered['error']['form_crit'])) {
+        if (!empty( $entered[ 'error' ][ 'msg' ] ) or !empty( $entered[ 'error' ][ 'form_crit' ] )) {
             // 入力情報はセッションに保存
-            $sess->store('form', $entered);
+            $sess->store( 'form', $entered );
 
-            \Risoluto\Url::redirectTo('Admin_SelfEntry');
+            \Risoluto\Url::redirectTo( 'Admin_SelfEntry' );
             exit;
         }
 
         // DBへの登録を行う
-        $options = array(
-            'by_who'   => $detail['no'] . ':' . $detail['userid'],
-            'no'       => $detail['no'],
-            'userid'   => $detail['userid'],
-            'username' => $detail['username'],
-            'password' => $entered['entered']['password'],
-            'groupno'  => $detail['groupno'],
-            'status'   => $detail['status']
-        );
-        $result  = \Risoluto\Auth::callProviderMethod('modUserByNo', $options);
+        $options = [
+            'by_who' => $detail[ 'no' ] . ':' . $detail[ 'userid' ],
+            'no' => $detail[ 'no' ],
+            'userid' => $detail[ 'userid' ],
+            'username' => $detail[ 'username' ],
+            'password' => $entered[ 'entered' ][ 'password' ],
+            'groupno' => $detail[ 'groupno' ],
+            'status' => $detail[ 'status' ]
+        ];
+        $result = \Risoluto\Auth::callProviderMethod( 'modUserByNo', $options );
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
+        $assign_value = [
             'header' => $header,
             'detail' => $detail,
             'result' => $result
-        );
-        $this->risolutoView($assign_value);
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

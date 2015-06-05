@@ -39,8 +39,8 @@ class ConfTest4Parse extends \PHPUnit_Framework_TestCase
     public function test_ParseSet_InvalidFile()
     {
         $instance = new Conf;
-        $this->assertFalse($instance->parse('/dev/null'));
-        unset($instance);
+        $this->assertFalse( $instance->parse( '/dev/null' ) );
+        unset( $instance );
     }
 
     /**
@@ -51,7 +51,7 @@ class ConfTest4Parse extends \PHPUnit_Framework_TestCase
     public function test_ParseSet_ValidFile()
     {
         $instance = new Conf;
-        $this->assertTrue($instance->parse(RISOLUTO_CONF . 'risoluto.ini'));
-        unset($instance);
+        $this->assertTrue( $instance->parse( RISOLUTO_CONF . 'risoluto.ini' ) );
+        unset( $instance );
     }
 }

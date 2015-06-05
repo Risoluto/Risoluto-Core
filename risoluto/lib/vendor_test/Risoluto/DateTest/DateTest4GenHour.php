@@ -39,7 +39,7 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
      */
     public function test_GenHour_NoArgs()
     {
-        $want = array(
+        $want = [
             '00' => '00',
             '01' => '01',
             '02' => '02',
@@ -63,10 +63,10 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
             '20' => '20',
             '21' => '21',
             '22' => '22',
-            '23' => '23'
-        );
+            '23' => '23',
+        ];
 
-        $this->assertEquals(Date::genHour(), $want);
+        $this->assertEquals( Date::genHour(), $want );
     }
 
     /**
@@ -76,8 +76,8 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
      */
     public function test_GenHour_Args1()
     {
-        $want = array(
-            ''   => '',
+        $want = [
+            '' => '',
             '00' => '00',
             '01' => '01',
             '02' => '02',
@@ -101,10 +101,10 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
             '20' => '20',
             '21' => '21',
             '22' => '22',
-            '23' => '23'
-        );
+            '23' => '23',
+        ];
 
-        $this->assertEquals(Date::genHour(true), $want);
+        $this->assertEquals( Date::genHour( true ), $want );
     }
 
     /**
@@ -114,7 +114,7 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
      */
     public function test_GenHour_Args2()
     {
-        $want = array(
+        $want = [
             '--' => '',
             '00' => '00',
             '01' => '01',
@@ -139,10 +139,10 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
             '20' => '20',
             '21' => '21',
             '22' => '22',
-            '23' => '23'
-        );
+            '23' => '23',
+        ];
 
-        $this->assertEquals(Date::genHour(true, '--'), $want);
+        $this->assertEquals( Date::genHour( true, '--' ), $want );
     }
 
     /**
@@ -152,7 +152,7 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
      */
     public function test_GenHour_Args3()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '00' => '00',
             '01' => '01',
@@ -177,10 +177,10 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
             '20' => '20',
             '21' => '21',
             '22' => '22',
-            '23' => '23'
-        );
+            '23' => '23',
+        ];
 
-        $this->assertEquals(Date::genHour(true, '--', '--'), $want);
+        $this->assertEquals( Date::genHour( true, '--', '--' ), $want );
     }
 
     /**
@@ -190,7 +190,7 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
      */
     public function test_GenHour_Args4()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '00' => '午前00',
             '01' => '午前01',
@@ -215,9 +215,9 @@ class DateTest4GenHour extends \PHPUnit_Framework_TestCase
             '20' => '午後08',
             '21' => '午後09',
             '22' => '午後10',
-            '23' => '午後11'
-        );
+            '23' => '午後11',
+        ];
 
-        $this->assertEquals(Date::genHour(true, '--', '--', false), $want);
+        $this->assertEquals( Date::genHour( true, '--', '--', false ), $want );
     }
 }

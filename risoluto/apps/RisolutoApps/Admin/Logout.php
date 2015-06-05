@@ -40,24 +40,24 @@ class Logout extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risol
         $sess = new \Risoluto\Session();
         $sess->start();
 
-        if (!$sess->isThere('Auth')) {
+        if (!$sess->isThere( 'Auth' )) {
             // 認証情報がない場合は、ログイン画面へ遷移する
-            $sess->store('AuthError', 'invalid_access');
-            \Risoluto\Url::redirectTo('Admin_Login');
+            $sess->store( 'AuthError', 'invalid_access' );
+            \Risoluto\Url::redirectTo( 'Admin_Login' );
             exit;
         }
 
-        if ($sess->isThere('Auth')) {
+        if ($sess->isThere( 'Auth' )) {
             // セッション情報を破棄する
-            $sess->revoke('Auth');
+            $sess->revoke( 'Auth' );
         }
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array('header' => $header);
-        $this->risolutoView($assign_value);
+        $assign_value = [ 'header' => $header ];
+        $this->risolutoView( $assign_value );
     }
 }

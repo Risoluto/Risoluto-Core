@@ -52,33 +52,33 @@ class Session
      *
      * @return    boolean    セッション開始結果（true：正常終了/false:異常終了）
      */
-    public function start($path = '', $name = '')
+    public function start( $path = '', $name = '' )
     {
         // セッション保存ディレクトリが指定されていたらその値を採用
-        if (!empty($path)) {
+        if (!empty( $path )) {
             $this->sesspath = $path;
         }
         // セッション名が指定されていたらその値を採用
-        if (!empty($name)) {
+        if (!empty( $name )) {
             $this->sessname = $name;
         }
 
         // セッション保存ディレクトリをセット
-        if (!empty($this->sesspath) and is_writable($this->sesspath)) {
-            session_save_path($this->sesspath);
+        if (!empty( $this->sesspath ) and is_writable( $this->sesspath )) {
+            session_save_path( $this->sesspath );
             // 指定されていないか書き込めないならfalseを返す
         } else {
             return false;
         }
 
         // セッション名の指定
-        session_name($this->sessname);
+        session_name( $this->sessname );
 
         // セッションが存在しない場合の処理
-        if (empty($_COOKIE[$this->sessname])) {
+        if (empty( $_COOKIE[ $this->sessname ] )) {
             // 生成したセッションIDを付与する
             $base = $this->genRand();
-            session_id($base);
+            session_id( $base );
         } // end of if
 
         // セッションの開始
@@ -97,12 +97,12 @@ class Session
      *
      * @return    boolean    セッション再開始結果（true：正常終了/false:異常終了）
      */
-    public function restart($path = '', $name = '')
+    public function restart( $path = '', $name = '' )
     {
         // セッションを終了してスタートさせる
         $this->end();
 
-        return $this->start($path, $name);
+        return $this->start( $path, $name );
     }
 
     /**
@@ -119,20 +119,20 @@ class Session
     public function end()
     {
         // クッキーを削除
-        if (isset($_COOKIE[$this->sessname])) {
-            setcookie($this->sessname, '', time() - 42000, '/');
+        if (isset( $_COOKIE[ $this->sessname ] )) {
+            setcookie( $this->sessname, '', time() - 42000, '/' );
         }
 
         // スーパーグローバルな$_COOKIEと$_SESSIONをクリア
-        $_COOKIE[$this->sessname] = array();
-        $_SESSION                 = array();
+        $_COOKIE[ $this->sessname ] = [ ];
+        $_SESSION = [ ];
 
         // セッションファイルを削除
         $target = $this->sesspath . 'sess_' . session_id();
 
-        clearstatcache(true);
-        if (file_exists($target) and is_file($target) and is_writeable($target)) {
-            unlink($target);
+        clearstatcache( true );
+        if (file_exists( $target ) and is_file( $target ) and is_writeable( $target )) {
+            unlink( $target );
         }
 
         return session_destroy();
@@ -147,14 +147,14 @@ class Session
      * @access    public
      *
      * @param     string $destination 格納先セッション変数名
-     * @param     mixed  $val         格納する値（number or string）
+     * @param     mixed  $val 格納する値（number or string）
      *
      * @return    boolean    常にtrue
      */
-    public function store($destination, $val)
+    public function store( $destination, $val )
     {
-        if (isset($destination) and isset($val)) {
-            $_SESSION[$destination] = $val;
+        if (isset( $destination ) and isset( $val )) {
+            $_SESSION[ $destination ] = $val;
         }
 
         return true;
@@ -172,10 +172,10 @@ class Session
      *
      * @return    mixed     取得した値
      */
-    public function load($from)
+    public function load( $from )
     {
-        if (isset($from) and isset($_SESSION[$from])) {
-            return $_SESSION[$from];
+        if (isset( $from ) and isset( $_SESSION[ $from ] )) {
+            return $_SESSION[ $from ];
         } else {
             return null;
         }
@@ -192,9 +192,9 @@ class Session
      *
      * @return    boolean    存在状況(true:存在する/false:存在しない)
      */
-    public function isThere($chkName)
+    public function isThere( $chkName )
     {
-        return isset($_SESSION[$chkName]);
+        return isset( $_SESSION[ $chkName ] );
     }
 
     /**
@@ -208,10 +208,10 @@ class Session
      *
      * @return    boolean    常にtrue
      */
-    public function revoke($chkName)
+    public function revoke( $chkName )
     {
-        if (isset($_SESSION[$chkName])) {
-            unset($_SESSION[$chkName]);
+        if (isset( $_SESSION[ $chkName ] )) {
+            unset( $_SESSION[ $chkName ] );
         }
 
         return true;
@@ -231,10 +231,10 @@ class Session
     public function revokeAll()
     {
         // セッション変数が存在するかをチェック
-        if (isset($_SESSION)) {
+        if (isset( $_SESSION )) {
             // すべての値を抹消する
             foreach ($_SESSION as $key) {
-                $this->revoke($key);
+                $this->revoke( $key );
             }
         }
 
@@ -254,16 +254,16 @@ class Session
      */
     public function genRand()
     {
-        if (function_exists('openssl_random_pseudo_bytes')) {
+        if (function_exists( 'openssl_random_pseudo_bytes' )) {
             // openssl_random_pseudo_bytes()が使用できない場合はそれを使って乱数を生成
-            $retval = bin2hex(openssl_random_pseudo_bytes(32));
+            $retval = bin2hex( openssl_random_pseudo_bytes( 32 ) );
         } else {
             // openssl_random_pseudo_bytes()が使用できない場合は
             // システムよりマイクロセコンドの精度で時刻情報を取得し乱数を生成
-            list($usec, $sec) = explode(" ", microtime());
-            $seed = (double)$sec + ((double)$usec * 100000);
+            list( $usec, $sec ) = explode( " ", microtime() );
+            $seed = (double)$sec + ( (double)$usec * 100000 );
 
-            mt_srand($seed);
+            mt_srand( $seed );
             $retval = mt_rand();
         }
 

@@ -31,17 +31,17 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
      *
      * @return    void    なし
      */
-    public function run(array $options)
+    public function run( array $options )
     {
         // 引数がなければ使用方法を表示する
-        if (empty($options) or (count($options) > 1)) {
+        if (empty( $options ) or ( count( $options ) > 1 )) {
             $this->usage();
             exit;
         }
 
         // 引数を分解し適切な処理を行う
-        $operations = $this->separateOptions($options[0]);
-        switch (strtolower($operations['command'])) {
+        $operations = $this->separateOptions( $options[ 0 ] );
+        switch (strtolower( $operations[ 'command' ] )) {
             case 'init':
                 $this->init();
                 break;
@@ -107,9 +107,9 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function init()
     {
         // 警告メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Delete all user/group data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('init', array())) {
+        $enter = $this->readFromStdin( "Delete all user/group data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'init', [ ] )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -133,27 +133,27 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function addUser()
     {
         // 登録に必要な情報を順番に取得していく
-        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
-        $option['status'] = 1;
+        $option[ 'by_who' ] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option[ 'status' ] = 1;
 
         do {
-            $option['userid'] = $this->readFromStdin("Enter user id: ");
-        } while (empty($option['userid']));
+            $option[ 'userid' ] = $this->readFromStdin( "Enter user id: " );
+        } while (empty( $option[ 'userid' ] ));
         do {
-            $option['username'] = $this->readFromStdin("Enter user name: ");
-        } while (empty($option['username']));
+            $option[ 'username' ] = $this->readFromStdin( "Enter user name: " );
+        } while (empty( $option[ 'username' ] ));
         do {
-            $option['password']       = $this->readFromStdin("Enter user password: ", false);
-            $option['password_again'] = $this->readFromStdin("Enter user password again: ", false);
-        } while (empty($option['password']) or $option['password'] != $option['password_again']);
+            $option[ 'password' ] = $this->readFromStdin( "Enter user password: ", false );
+            $option[ 'password_again' ] = $this->readFromStdin( "Enter user password again: ", false );
+        } while (empty( $option[ 'password' ] ) or $option[ 'password' ] != $option[ 'password_again' ]);
         do {
-            $option['groupno'] = $this->readFromStdin("Enter group no: ");
-        } while (empty($option['groupno']) or !is_numeric($option['groupno']));
+            $option[ 'groupno' ] = $this->readFromStdin( "Enter group no: " );
+        } while (empty( $option[ 'groupno' ] ) or !is_numeric( $option[ 'groupno' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Add this user data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('addUser', $option)) {
+        $enter = $this->readFromStdin( "Add this user data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'addUser', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -177,20 +177,20 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function addGroup()
     {
         // 登録に必要な情報を順番に取得していく
-        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
-        $option['status'] = 1;
+        $option[ 'by_who' ] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option[ 'status' ] = 1;
 
         do {
-            $option['groupid'] = $this->readFromStdin("Enter group id: ");
-        } while (empty($option['groupid']));
+            $option[ 'groupid' ] = $this->readFromStdin( "Enter group id: " );
+        } while (empty( $option[ 'groupid' ] ));
         do {
-            $option['groupname'] = $this->readFromStdin("Enter group name: ");
-        } while (empty($option['groupname']));
+            $option[ 'groupname' ] = $this->readFromStdin( "Enter group name: " );
+        } while (empty( $option[ 'groupname' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Add this group data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('addGroup', $option)) {
+        $enter = $this->readFromStdin( "Add this group data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'addGroup', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -214,29 +214,29 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function modUser()
     {
         // 変更処理に必要な情報を順番に取得していく
-        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option[ 'by_who' ] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
 
         do {
-            $option['userid'] = $this->readFromStdin("Enter user id: ");
-        } while (empty($option['userid']));
+            $option[ 'userid' ] = $this->readFromStdin( "Enter user id: " );
+        } while (empty( $option[ 'userid' ] ));
         do {
-            $option['username'] = $this->readFromStdin("Enter user name: ");
-        } while (empty($option['username']));
+            $option[ 'username' ] = $this->readFromStdin( "Enter user name: " );
+        } while (empty( $option[ 'username' ] ));
         do {
-            $option['password']       = $this->readFromStdin("Enter user password: ", false);
-            $option['password_again'] = $this->readFromStdin("Enter user password again: ", false);
-        } while (empty($option['password']) or $option['password'] != $option['password_again']);
+            $option[ 'password' ] = $this->readFromStdin( "Enter user password: ", false );
+            $option[ 'password_again' ] = $this->readFromStdin( "Enter user password again: ", false );
+        } while (empty( $option[ 'password' ] ) or $option[ 'password' ] != $option[ 'password_again' ]);
         do {
-            $option['groupno'] = $this->readFromStdin("Enter group no: ");
-        } while (empty($option['groupno']) or !is_numeric($option['groupno']));
+            $option[ 'groupno' ] = $this->readFromStdin( "Enter group no: " );
+        } while (empty( $option[ 'groupno' ] ) or !is_numeric( $option[ 'groupno' ] ));
         do {
-            $option['status'] = $this->readFromStdin("Enter status: ");
-        } while (!is_numeric($option['status']));
+            $option[ 'status' ] = $this->readFromStdin( "Enter status: " );
+        } while (!is_numeric( $option[ 'status' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Modify this user data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('modUser', $option)) {
+        $enter = $this->readFromStdin( "Modify this user data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'modUser', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -260,22 +260,22 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function modGroup()
     {
         // 変更処理に必要な情報を順番に取得していく
-        $option['by_who'] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
+        $option[ 'by_who' ] = 'Risoluto CLI - ' . RISOLUTOCLI_SELF;
 
         do {
-            $option['groupid'] = $this->readFromStdin("Enter group id: ");
-        } while (empty($option['groupid']));
+            $option[ 'groupid' ] = $this->readFromStdin( "Enter group id: " );
+        } while (empty( $option[ 'groupid' ] ));
         do {
-            $option['groupname'] = $this->readFromStdin("Enter group name: ");
-        } while (empty($option['groupname']));
+            $option[ 'groupname' ] = $this->readFromStdin( "Enter group name: " );
+        } while (empty( $option[ 'groupname' ] ));
         do {
-            $option['status'] = $this->readFromStdin("Enter status: ");
-        } while (!is_numeric($option['status']));
+            $option[ 'status' ] = $this->readFromStdin( "Enter status: " );
+        } while (!is_numeric( $option[ 'status' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Modify this group data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('modGroup', $option)) {
+        $enter = $this->readFromStdin( "Modify this group data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'modGroup', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -300,13 +300,13 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     {
         // 削除に必要な情報を順番に取得していく
         do {
-            $option['userid'] = $this->readFromStdin("Enter user id: ");
-        } while (empty($option['userid']));
+            $option[ 'userid' ] = $this->readFromStdin( "Enter user id: " );
+        } while (empty( $option[ 'userid' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Delete this user data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('delUser', $option)) {
+        $enter = $this->readFromStdin( "Delete this user data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'delUser', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -331,13 +331,13 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     {
         // ユーザ登録に必要な情報を順番に取得していく
         do {
-            $option['groupid'] = $this->readFromStdin("Enter group id: ");
-        } while (empty($option['groupid']));
+            $option[ 'groupid' ] = $this->readFromStdin( "Enter group id: " );
+        } while (empty( $option[ 'groupid' ] ));
 
         // 確認メッセージを表示し、承諾した場合のみ処理を実行する
-        $enter = $this->readFromStdin("Delete this group data. Continue?[y/N]");
-        if (strtolower($enter) == 'y') {
-            if (\Risoluto\Auth::callProviderMethod('delGroup', $option)) {
+        $enter = $this->readFromStdin( "Delete this group data. Continue?[y/N]" );
+        if (strtolower( $enter ) == 'y') {
+            if (\Risoluto\Auth::callProviderMethod( 'delGroup', $option )) {
                 echo "All OK!" . PHP_EOL;
             } else {
                 echo "Oops! Error happened." . PHP_EOL;
@@ -362,11 +362,11 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     {
         // 表示に必要な情報を順番に取得していく
         do {
-            $option['userid'] = $this->readFromStdin("Enter user id: ");
-        } while (empty($option['userid']));
+            $option[ 'userid' ] = $this->readFromStdin( "Enter user id: " );
+        } while (empty( $option[ 'userid' ] ));
 
         // 表示処理を呼び出す
-        print_r(\Risoluto\Auth::callProviderMethod('showUser', $option));
+        print_r( \Risoluto\Auth::callProviderMethod( 'showUser', $option ) );
     }
 
     /**
@@ -384,11 +384,11 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     {
         // 表示に必要な情報を順番に取得していく
         do {
-            $option['groupid'] = $this->readFromStdin("Enter group id: ");
-        } while (empty($option['groupid']));
+            $option[ 'groupid' ] = $this->readFromStdin( "Enter group id: " );
+        } while (empty( $option[ 'groupid' ] ));
 
         // 表示処理を呼び出す
-        print_r(\Risoluto\Auth::callProviderMethod('showGroup', $option));
+        print_r( \Risoluto\Auth::callProviderMethod( 'showGroup', $option ) );
     }
 
 
@@ -406,7 +406,7 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function showUserAll()
     {
         // 表示処理を呼び出す
-        print_r(\Risoluto\Auth::callProviderMethod('showUserAll'));
+        print_r( \Risoluto\Auth::callProviderMethod( 'showUserAll' ) );
     }
 
     /**
@@ -423,7 +423,7 @@ class AuthManager extends \Risoluto\RisolutoCliBase implements \Risoluto\Risolut
     private function showGroupAll()
     {
         // 表示処理を呼び出す
-        print_r(\Risoluto\Auth::callProviderMethod('showGroupAll'));
+        print_r( \Risoluto\Auth::callProviderMethod( 'showGroupAll' ) );
     }
 
     /**

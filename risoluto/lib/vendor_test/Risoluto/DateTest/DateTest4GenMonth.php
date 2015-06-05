@@ -39,7 +39,7 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMonth_NoArgs()
     {
-        $want = array(
+        $want = [
             '01' => '01',
             '02' => '02',
             '03' => '03',
@@ -51,10 +51,10 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
-        );
+            '12' => '12',
+        ];
 
-        $this->assertEquals(Date::genMonth(), $want);
+        $this->assertEquals( Date::genMonth(), $want );
     }
 
     /**
@@ -64,8 +64,8 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMonth_Args1()
     {
-        $want = array(
-            ''   => '',
+        $want = [
+            '' => '',
             '01' => '01',
             '02' => '02',
             '03' => '03',
@@ -77,10 +77,10 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
-        );
+            '12' => '12',
+        ];
 
-        $this->assertEquals(Date::genMonth(true), $want);
+        $this->assertEquals( Date::genMonth( true ), $want );
     }
 
     /**
@@ -90,7 +90,7 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMonth_Args2()
     {
-        $want = array(
+        $want = [
             '--' => '',
             '01' => '01',
             '02' => '02',
@@ -103,10 +103,10 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
-        );
+            '12' => '12',
+        ];
 
-        $this->assertEquals(Date::genMonth(true, '--'), $want);
+        $this->assertEquals( Date::genMonth( true, '--' ), $want );
     }
 
     /**
@@ -116,7 +116,7 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMonth_Args3()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -129,9 +129,9 @@ class DateTest4GenMonth extends \PHPUnit_Framework_TestCase
             '09' => '09',
             '10' => '10',
             '11' => '11',
-            '12' => '12'
-        );
+            '12' => '12',
+        ];
 
-        $this->assertEquals(Date::genMonth(true, '--', '--'), $want);
+        $this->assertEquals( Date::genMonth( true, '--', '--' ), $want );
     }
 }

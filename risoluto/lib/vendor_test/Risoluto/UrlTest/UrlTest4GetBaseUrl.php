@@ -41,7 +41,7 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
     {
         $want = 'http://localhost/';
 
-        $this->assertEquals(Url::getBaseUrl(), $want);
+        $this->assertEquals( Url::getBaseUrl(), $want );
     }
 
     /**
@@ -51,14 +51,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNormalPart1()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '80',
-            'PHP_SELF'    => '/index.html'
-        );
+            'PHP_SELF' => '/index.html',
+        ];
         $want = 'http://example.com/index.html';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -68,14 +68,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNormalPart2()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '80',
-            'PHP_SELF'    => '/test.php'
-        );
+            'PHP_SELF' => '/test.php',
+        ];
         $want = 'http://example.com/test.php';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -85,14 +85,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNormalPart3()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '80',
-            'PHP_SELF'    => '/index.php'
-        );
+            'PHP_SELF' => '/index.php',
+        ];
         $want = 'http://example.com/';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -102,14 +102,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithSslPart1()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '443',
-            'PHP_SELF'    => '/index.html'
-        );
+            'PHP_SELF' => '/index.html',
+        ];
         $want = 'https://example.com/index.html';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -119,14 +119,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithSslPart2()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '443',
-            'PHP_SELF'    => '/test.php'
-        );
+            'PHP_SELF' => '/test.php',
+        ];
         $want = 'https://example.com/test.php';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -136,14 +136,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNotStdPortPart1()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '8080',
-            'PHP_SELF'    => '/index.html'
-        );
+            'PHP_SELF' => '/index.html',
+        ];
         $want = 'http://example.com:8080/index.html';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -153,14 +153,14 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNotStdPortPart2()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '8443',
-            'PHP_SELF'    => '/index.html'
-        );
+            'PHP_SELF' => '/index.html',
+        ];
         $want = 'https://example.com:8443/index.html';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 
     /**
@@ -170,13 +170,13 @@ class UrlTest4GetBaseUrl extends \PHPUnit_Framework_TestCase
      */
     public function test_GetBaseUrl_WithNotStdPortPart3()
     {
-        $test = array(
-            'HTTP_HOST'   => 'example.com',
+        $test = [
+            'HTTP_HOST' => 'example.com',
             'SERVER_PORT' => '8888',
-            'PHP_SELF'    => '/index.html'
-        );
+            'PHP_SELF' => '/index.html',
+        ];
         $want = 'http://example.com:8888/index.html';
 
-        $this->assertEquals(Url::getBaseUrl($test), $want);
+        $this->assertEquals( Url::getBaseUrl( $test ), $want );
     }
 }

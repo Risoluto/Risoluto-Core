@@ -28,7 +28,7 @@ class Conf
      * @access private
      * @var    array    パース済みコンフィグ情報
      */
-    private $parsedconf = array();
+    private $parsedconf = [ ];
 
     /**
      * $parsestatus
@@ -67,14 +67,14 @@ class Conf
      *
      * @return    boolean    パース結果（true：正常終了/false:異常終了）
      */
-    public function parse($path)
+    public function parse( $path )
     {
         // ファイルが存在しているかをテスト
         clearstatcache();
-        if (is_file($path)) {
+        if (is_file( $path )) {
             // ファイルが存在していれば、
             // 指定されたiniファイルをロードし、パースする
-            $this->parsedconf  = parse_ini_file($path, true);
+            $this->parsedconf = parse_ini_file( $path, true );
             $this->parsestatus = true;
 
             return true;
@@ -98,11 +98,11 @@ class Conf
      * @access    public
      *
      * @param     string $section 検索対象のセクション
-     * @param     string $key     検索対象のキー
+     * @param     string $key 検索対象のキー
      *
      * @return    mixed    セクションに対応する配列、またはキーに対応する値。どちらも存在しない場合はnull
      */
-    public function getIni($section = '', $key = '')
+    public function getIni( $section = '', $key = '' )
     {
         // 一度もパースされていない場合は、nullを返す
         if (!$this->parsestatus) {
@@ -110,13 +110,13 @@ class Conf
         }
 
         // セクションが指定されている場合
-        if (!empty($section)) {
+        if (!empty( $section )) {
             // キーが指定されていればキーに対応する値を取得
-            if (!empty($key)) {
-                $gotDat = $this->parsedconf[$section][$key];
+            if (!empty( $key )) {
+                $gotDat = $this->parsedconf[ $section ][ $key ];
                 // キーが指定されていなければセクション内すべての値を取得
             } else {
-                $gotDat = $this->parsedconf[$section];
+                $gotDat = $this->parsedconf[ $section ];
             }
             // セクションが指定されていない場合はparseしたコンフィグ丸ごと取得
         } else {
@@ -124,7 +124,7 @@ class Conf
         }
 
         // 取得する値があればそのまま返却し、無ければnullを返却
-        if (!empty($gotDat)) {
+        if (!empty( $gotDat )) {
             return $gotDat;
         } else {
             return null;

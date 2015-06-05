@@ -34,7 +34,7 @@ class AuthDb implements \Risoluto\AuthProviderInterface
      *
      * @return    SQL
      */
-    private function getSqlInitUserTbl($tablename)
+    private function getSqlInitUserTbl( $tablename )
     {
         $sql = <<<END_OF_SQL
 DROP TABLE IF EXISTS $tablename;
@@ -94,7 +94,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlInitGroupTbl($tablename)
+    private function getSqlInitGroupTbl( $tablename )
     {
         $sql = <<<END_OF_SQL
 DROP TABLE IF EXISTS $tablename;
@@ -148,7 +148,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlAddUser($tablename)
+    private function getSqlAddUser( $tablename )
     {
         $sql = <<<END_OF_SQL
 INSERT INTO $tablename (
@@ -189,7 +189,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlAddGroup($tablename)
+    private function getSqlAddGroup( $tablename )
     {
         $sql = <<<END_OF_SQL
 INSERT INTO $tablename (
@@ -225,7 +225,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlModUser($tablename)
+    private function getSqlModUser( $tablename )
     {
         $sql = <<<END_OF_SQL
 UPDATE $tablename
@@ -252,7 +252,7 @@ END_OF_SQL;
      *
      * @return    初期化用SQL
      */
-    private function getSqlModGroup($tablename)
+    private function getSqlModGroup( $tablename )
     {
         $sql = <<<END_OF_SQL
 UPDATE $tablename
@@ -277,7 +277,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlModUserByNo($tablename)
+    private function getSqlModUserByNo( $tablename )
     {
         $sql = <<<END_OF_SQL
 UPDATE $tablename
@@ -305,7 +305,7 @@ END_OF_SQL;
      *
      * @return    初期化用SQL
      */
-    private function getSqlModGroupByNo($tablename)
+    private function getSqlModGroupByNo( $tablename )
     {
         $sql = <<<END_OF_SQL
 UPDATE $tablename
@@ -331,7 +331,7 @@ END_OF_SQL;
      *
      * @return    初期化用SQL
      */
-    private function getSqlDelUser($tablename)
+    private function getSqlDelUser( $tablename )
     {
         $sql = <<<END_OF_SQL
 DELETE FROM $tablename
@@ -352,7 +352,7 @@ END_OF_SQL;
      *
      * @return    初期化用SQL
      */
-    private function getSqlDelGroup($tablename)
+    private function getSqlDelGroup( $tablename )
     {
         $sql = <<<END_OF_SQL
 DELETE FROM $tablename
@@ -373,7 +373,7 @@ END_OF_SQL;
      *
      * @return    初期化用SQL
      */
-    private function getSqlDelUserGroupByNo($tablename)
+    private function getSqlDelUserGroupByNo( $tablename )
     {
         $sql = <<<END_OF_SQL
 DELETE FROM $tablename
@@ -394,7 +394,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowUserAll($tablename)
+    private function getSqlShowUserAll( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -425,7 +425,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowGroupAll($tablename)
+    private function getSqlShowGroupAll( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -454,7 +454,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowUser($tablename)
+    private function getSqlShowUser( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -486,7 +486,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowGroup($tablename)
+    private function getSqlShowGroup( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -516,7 +516,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowUserByNo($tablename)
+    private function getSqlShowUserByNo( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -548,7 +548,7 @@ END_OF_SQL;
      *
      * @return    SQL
      */
-    private function getSqlShowGroupByNo($tablename)
+    private function getSqlShowGroupByNo( $tablename )
     {
         $sql = <<<END_OF_SQL
 SELECT
@@ -574,85 +574,117 @@ END_OF_SQL;
      *
      * @access    private
      *
-     * @param     string $type   識別子
+     * @param     string $type 識別子
      * @param     string $option オプション情報
      *
      * @return    array パラメタ情報が格納された配列
      */
-    private function getParams($type, $option)
+    private function getParams( $type, $option )
     {
         // 識別子に応じて戻す配列を変更する
         switch ($type) {
             // ユーザ追加／更新向け
             case 'UserAddMod':
-                $retval = array(
-                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
-                    array('id' => ':userid', 'value' => $option['userid'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':username', 'value' => $option['username'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':password', 'value' => $option['password'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupno', 'value' => $option['groupno'], 'type' => \PDO::PARAM_INT),
-                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
-                );
+                $retval = [
+                    [
+                        'id' => ':by_who',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'by_who' ], 'Risoluto' ),
+                        'type' => \PDO::PARAM_STR
+                    ],
+                    [ 'id' => ':userid', 'value' => $option[ 'userid' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':username', 'value' => $option[ 'username' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':password', 'value' => $option[ 'password' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':groupno', 'value' => $option[ 'groupno' ], 'type' => \PDO::PARAM_INT ],
+                    [
+                        'id' => ':status',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'status' ], 1, true ),
+                        'type' => \PDO::PARAM_INT
+                    ],
+                ];
                 break;
 
             // グループ追加／更新向け
             case 'GroupAddMod':
-                $retval = array(
-                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupname', 'value' => $option['groupname'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
-                );
+                $retval = [
+                    [
+                        'id' => ':by_who',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'by_who' ], 'Risoluto' ),
+                        'type' => \PDO::PARAM_STR
+                    ],
+                    [ 'id' => ':groupid', 'value' => $option[ 'groupid' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':groupname', 'value' => $option[ 'groupname' ], 'type' => \PDO::PARAM_STR ],
+                    [
+                        'id' => ':status',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'status' ], 1, true ),
+                        'type' => \PDO::PARAM_INT
+                    ],
+                ];
                 break;
 
             // ユーザ更新（No使用）向け
             case 'UserModByNo':
-                $retval = array(
-                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
-                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
-                    array('id' => ':userid', 'value' => $option['userid'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':username', 'value' => $option['username'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':password', 'value' => $option['password'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupno', 'value' => $option['groupno'], 'type' => \PDO::PARAM_INT),
-                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
-                );
+                $retval = [
+                    [
+                        'id' => ':by_who',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'by_who' ], 'Risoluto' ),
+                        'type' => \PDO::PARAM_STR
+                    ],
+                    [ 'id' => ':no', 'value' => $option[ 'no' ], 'type' => \PDO::PARAM_INT ],
+                    [ 'id' => ':userid', 'value' => $option[ 'userid' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':username', 'value' => $option[ 'username' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':password', 'value' => $option[ 'password' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':groupno', 'value' => $option[ 'groupno' ], 'type' => \PDO::PARAM_INT ],
+                    [
+                        'id' => ':status',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'status' ], 1, true ),
+                        'type' => \PDO::PARAM_INT
+                    ],
+                ];
                 break;
 
             // グループ更新（No使用）向け
             case 'GroupModByNo':
-                $retval = array(
-                    array('id' => ':by_who', 'value' => \Risoluto\Text::checkFalseVal($option['by_who'], 'Risoluto'), 'type' => \PDO::PARAM_STR),
-                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
-                    array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':groupname', 'value' => $option['groupname'], 'type' => \PDO::PARAM_STR),
-                    array('id' => ':status', 'value' => \Risoluto\Text::checkFalseVal($option['status'], 1, true), 'type' => \PDO::PARAM_INT)
-                );
+                $retval = [
+                    [
+                        'id' => ':by_who',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'by_who' ], 'Risoluto' ),
+                        'type' => \PDO::PARAM_STR
+                    ],
+                    [ 'id' => ':no', 'value' => $option[ 'no' ], 'type' => \PDO::PARAM_INT ],
+                    [ 'id' => ':groupid', 'value' => $option[ 'groupid' ], 'type' => \PDO::PARAM_STR ],
+                    [ 'id' => ':groupname', 'value' => $option[ 'groupname' ], 'type' => \PDO::PARAM_STR ],
+                    [
+                        'id' => ':status',
+                        'value' => \Risoluto\Text::checkFalseVal( $option[ 'status' ], 1, true ),
+                        'type' => \PDO::PARAM_INT
+                    ],
+                ];
                 break;
 
             // ユーザIDのみ
             case 'UserID':
-                $retval = array(
-                    array('id' => ':userid', 'value' => $option['userid'], 'type' => \PDO::PARAM_STR)
-                );
+                $retval = [
+                    [ 'id' => ':userid', 'value' => $option[ 'userid' ], 'type' => \PDO::PARAM_STR ],
+                ];
                 break;
 
             // グループIDのみ
             case 'GroupID':
-                $retval = array(
-                    array('id' => ':groupid', 'value' => $option['groupid'], 'type' => \PDO::PARAM_STR),
-                );
+                $retval = [
+                    [ 'id' => ':groupid', 'value' => $option[ 'groupid' ], 'type' => \PDO::PARAM_STR ],
+                ];
                 break;
 
             // Noのみ
             case 'No':
-                $retval = array(
-                    array('id' => ':no', 'value' => $option['no'], 'type' => \PDO::PARAM_INT),
-                );
+                $retval = [
+                    [ 'id' => ':no', 'value' => $option[ 'no' ], 'type' => \PDO::PARAM_INT ],
+                ];
                 break;
 
             // デフォルトの場合は空配列を返す
             default:
-                $retval = array();
+                $retval = [ ];
         }
 
         return $retval;
@@ -673,18 +705,18 @@ END_OF_SQL;
     {
         // コンフィグファイルの読み込み
         $conf = new Conf;
-        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse( RISOLUTO_CONF . 'risoluto.ini' );
 
         // コンフィグファイルの読み込み
         $dbconf = new Conf;
-        $dbconf->parse(RISOLUTO_CONF . 'risoluto_db.ini');
+        $dbconf->parse( RISOLUTO_CONF . 'risoluto_db.ini' );
 
         // コンフィグからファイル名情報を取得する
-        return array(
-            'usertable'  => $conf->getIni("AUTH", "users"),
-            'grouptable' => $conf->getIni("AUTH", "groups"),
-            'db'         => $dbconf->getIni("DB")
-        );
+        return [
+            'usertable' => $conf->getIni( "AUTH", "users" ),
+            'grouptable' => $conf->getIni( "AUTH", "groups" ),
+            'db' => $dbconf->getIni( "DB" )
+        ];
     }
 
     /**
@@ -704,19 +736,19 @@ END_OF_SQL;
         $info = $this->getInfoFromConf();
 
         // DBインスタンスを生成してDBに接続
-        $retval   = true;
+        $retval = true;
         $instance = new \Risoluto\Db();
-        if ($instance->connect($info['db'])) {
-            if (!$instance->exec($this->getSqlInitUserTbl($info['usertable']))) {
+        if ($instance->connect( $info[ 'db' ] )) {
+            if (!$instance->exec( $this->getSqlInitUserTbl( $info[ 'usertable' ] ) )) {
                 $retval = false;
             }
 
-            if (!$instance->exec($this->getSqlInitGroupTbl($info['grouptable']))) {
+            if (!$instance->exec( $this->getSqlInitGroupTbl( $info[ 'grouptable' ] ) )) {
                 $retval = false;
             }
 
             // DB接続のクローズ
-            if (!$instance->disConnect(true)) {
+            if (!$instance->disConnect( true )) {
                 $retval = false;
             }
         } else {
@@ -727,32 +759,32 @@ END_OF_SQL;
     }
 
     /**
-     * doAuth($user, $pass, array $option = array())
+     * doAuth($user, $pass, array $option = [])
      *
      * 認証を行う
      *
      * @access    public
      *
-     * @param     string $user   ユーザID
-     * @param     string $pass   パスワード
+     * @param     string $user ユーザID
+     * @param     string $pass パスワード
      * @param     array  $option オプション情報（省略可）
      *
      * @return    boolean true:認証成功/false:認証失敗
      */
-    public function doAuth($user, $pass, array $option = array())
+    public function doAuth( $user, $pass, array $option = [ ] )
     {
         // ユーザ情報を取得
-        $get_user = $this->doOperation('showUser', array('userid' => $user));
+        $get_user = $this->doOperation( 'showUser', [ 'userid' => $user ] );
 
         // 複数権取得できた場合や無効なユーザの場合はエラー
-        if (count($get_user) > 1 or $get_user[0]['status'] != '1') {
+        if (count( $get_user ) > 1 or $get_user[ 0 ][ 'status' ] != '1') {
             return false;
         } else {
-            $auth_user = $get_user[0];
+            $auth_user = $get_user[ 0 ];
         }
 
         // DBから取得したユーザ情報のパスワードと引数で与えられたパスワードを比較する
-        if (password_verify($pass, $auth_user['password']) and $auth_user['status'] == 1) {
+        if (password_verify( $pass, $auth_user[ 'password' ] ) and $auth_user[ 'status' ] == 1) {
             return true;
         } else {
             return false;
@@ -760,90 +792,104 @@ END_OF_SQL;
     }
 
     /**
-     * doOperation(array $option = array())
+     * doOperation(array $option = [])
      *
      * 認証情報操作に関する処理を行う
      *
      * @access    public
      *
      * @param     string $operation オペレーション識別子（addUser/addGroup/modUser/modGroup/delUser/delGroup/showUser/showGroup/showUserAll/showGroupAll）
-     * @param     array  $option    オプション情報（省略可）
+     * @param     array  $option オプション情報（省略可）
      *
      * @return    mixed trueまたは取得内容:成功/false:失敗
      */
-    public function doOperation($operation, array $option = array())
+    public function doOperation( $operation, array $option = [ ] )
     {
         // 情報を取得
         $info = $this->getInfoFromConf();
 
         // DBインスタンスを生成してDBに接続
         $instance = new \Risoluto\Db();
-        if ($instance->connect($info['db'])) {
+        if ($instance->connect( $info[ 'db' ] )) {
 
             // オペレーション識別子に応じて処理を行う
             switch ($operation) {
                 case 'addUser':
-                    $get_data = $instance->doQuery($this->getSqlAddUser($info['usertable']), $this->getParams('UserAddMod', $option));
+                    $get_data = $instance->doQuery( $this->getSqlAddUser( $info[ 'usertable' ] ),
+                        $this->getParams( 'UserAddMod', $option ) );
                     break;
 
                 case 'addGroup':
-                    $get_data = $instance->doQuery($this->getSqlAddGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
+                    $get_data = $instance->doQuery( $this->getSqlAddGroup( $info[ 'grouptable' ] ),
+                        $this->getParams( 'GroupAddMod', $option ) );
                     break;
 
                 case 'modUser':
-                    $get_data = $instance->doQuery($this->getSqlModUser($info['usertable']), $this->getParams('UserAddMod', $option));
+                    $get_data = $instance->doQuery( $this->getSqlModUser( $info[ 'usertable' ] ),
+                        $this->getParams( 'UserAddMod', $option ) );
                     break;
 
                 case 'modGroup':
-                    $get_data = $instance->doQuery($this->getSqlModGroup($info['grouptable']), $this->getParams('GroupAddMod', $option));
+                    $get_data = $instance->doQuery( $this->getSqlModGroup( $info[ 'grouptable' ] ),
+                        $this->getParams( 'GroupAddMod', $option ) );
                     break;
 
                 case 'modUserByNo':
-                    $get_data = $instance->doQuery($this->getSqlModUserByNo($info['usertable']), $this->getParams('UserModByNo', $option));
+                    $get_data = $instance->doQuery( $this->getSqlModUserByNo( $info[ 'usertable' ] ),
+                        $this->getParams( 'UserModByNo', $option ) );
                     break;
 
                 case 'modGroupByNo':
-                    $get_data = $instance->doQuery($this->getSqlModGroupByNo($info['grouptable']), $this->getParams('GroupModByNo', $option));
+                    $get_data = $instance->doQuery( $this->getSqlModGroupByNo( $info[ 'grouptable' ] ),
+                        $this->getParams( 'GroupModByNo', $option ) );
                     break;
 
                 case 'delUser':
-                    $get_data = $instance->doQuery($this->getSqlDelUser($info['usertable']), $this->getParams('UserID', $option));
+                    $get_data = $instance->doQuery( $this->getSqlDelUser( $info[ 'usertable' ] ),
+                        $this->getParams( 'UserID', $option ) );
                     break;
 
                 case 'delGroup':
-                    $get_data = $instance->doQuery($this->getSqlDelGroup($info['grouptable']), $this->getParams('GroupID', $option));
+                    $get_data = $instance->doQuery( $this->getSqlDelGroup( $info[ 'grouptable' ] ),
+                        $this->getParams( 'GroupID', $option ) );
                     break;
 
                 case 'delUserByNo':
-                    $get_data = $instance->doQuery($this->getSqlDelUserGroupByNo($info['usertable']), $this->getParams('No', $option));
+                    $get_data = $instance->doQuery( $this->getSqlDelUserGroupByNo( $info[ 'usertable' ] ),
+                        $this->getParams( 'No', $option ) );
                     break;
 
                 case 'delGroupByNo':
-                    $get_data = $instance->doQuery($this->getSqlDelUserGroupByNo($info['grouptable']), $this->getParams('No', $option));
+                    $get_data = $instance->doQuery( $this->getSqlDelUserGroupByNo( $info[ 'grouptable' ] ),
+                        $this->getParams( 'No', $option ) );
                     break;
 
                 case 'showUser':
-                    $get_data = $instance->doQuery($this->getSqlShowUser($info['usertable']), $this->getParams('UserID', $option));
+                    $get_data = $instance->doQuery( $this->getSqlShowUser( $info[ 'usertable' ] ),
+                        $this->getParams( 'UserID', $option ) );
                     break;
 
                 case 'showGroup':
-                    $get_data = $instance->doQuery($this->getSqlShowGroup($info['grouptable']), $this->getParams('GroupID', $option));
+                    $get_data = $instance->doQuery( $this->getSqlShowGroup( $info[ 'grouptable' ] ),
+                        $this->getParams( 'GroupID', $option ) );
                     break;
 
                 case 'showUserAll':
-                    $get_data = $instance->doQuery($this->getSqlShowUserAll($info['usertable']));
+                    $get_data = $instance->doQuery( $this->getSqlShowUserAll( $info[ 'usertable' ] ) );
                     break;
 
                 case 'showGroupAll':
-                    $get_data = $instance->doQuery($this->getSqlShowGroupAll($info['grouptable']));
+                    $get_data = $instance->doQuery( $this->getSqlShowGroupAll( $info[ 'grouptable' ] ) );
                     break;
 
                 case 'showUserByNo':
-                    $get_data = $instance->doQuery($this->getSqlShowUserByNo($info['usertable']), $this->getParams('No', $option));
+                    $get_data = $instance->doQuery( $this->getSqlShowUserByNo( $info[ 'usertable' ] ),
+                        $this->getParams( 'No', $option ) );
                     break;
 
                 case 'showGroupByNo':
-                    $get_data = $instance->doQuery($this->getSqlShowGroupByNo($info['grouptable']), $this->getParams('No', $option));
+                    $get_data = $instance->doQuery( $this->getSqlShowGroupByNo( $info[ 'grouptable' ] ),
+                        $this->getParams( 'No', $option ) );
                     break;
 
                 // 未定義の識別子の場合は無条件でfalseを返す
@@ -873,7 +919,7 @@ END_OF_SQL;
             }
 
             // DB接続のクローズ
-            if (!$instance->disConnect(true)) {
+            if (!$instance->disConnect( true )) {
                 $retval = false;
             }
         } else {

@@ -688,27 +688,32 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <div class="alert alert-warning" role="alert">alert warning <a href="#" class="alert-link">alert link</a></div>
 <div class="alert alert-danger" role="alert">alert danger <a href="#" class="alert-link">alert link</a></div>
 <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                class="sr-only">Close</span></button>
     alert which can close <a href="#" class="alert-link">alert link</a>
 </div>
 
 <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+         aria-valuemax="100">
         0%
     </div>
 </div>
 <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="2" aria-valuemin="0"
+         aria-valuemax="100" style="width: 2%;">
         2%
     </div>
 </div>
 <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+         aria-valuemax="100" style="width: 60%;">
         60%
     </div>
 </div>
 <div class="progress">
-    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+         aria-valuemax="100" style="width: 100%;">
         100%
     </div>
 </div>

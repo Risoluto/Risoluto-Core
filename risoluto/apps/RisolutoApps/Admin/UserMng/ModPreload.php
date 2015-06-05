@@ -41,33 +41,33 @@ class ModPreload extends \Risoluto\RisolutoControllerBase implements \Risoluto\R
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
         /** @noinspection PhpUnusedLocalVariableInspection */
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck( $sess, true );
 
-        $param  = $this->getParam();
-        if (is_numeric($param[0])) {
+        $param = $this->getParam();
+        if (is_numeric( $param[ 0 ] )) {
             // 引数値がセットされていれば、それを元に登録情報を呼び出す
-            $target = \Risoluto\Auth::callProviderMethod('showUserByNo', array('no' => $param[0]));
-            if (empty($target)) {
+            $target = \Risoluto\Auth::callProviderMethod( 'showUserByNo', [ 'no' => $param[ 0 ] ] );
+            if (empty( $target )) {
                 // 情報が取得できなかった場合も例外をThrow
-                Throw new \Exception('Cannot load user data');
+                Throw new \Exception( 'Cannot load user data' );
             }
         } else {
             // 指定されていなければ例外をThrowする
-            Throw new \Exception('Require args not found');
+            Throw new \Exception( 'Require args not found' );
         }
 
         // 情報が取得できたら整形してセッションに保存、入力画面へ遷移する
-        $getVals['entered'] = array(
-            'no'               => $target[0]['no'],
-            'userid'           => $target[0]['userid'],
-            'username'         => $target[0]['username'],
-            'password'         => '',
+        $getVals[ 'entered' ] = [
+            'no' => $target[ 0 ][ 'no' ],
+            'userid' => $target[ 0 ][ 'userid' ],
+            'username' => $target[ 0 ][ 'username' ],
+            'password' => '',
             'password_confirm' => '',
-            'groupno'          => $target[0]['groupno'],
-            'status'           => $target[0]['status']
-        );
-        $sess->store('form', $getVals);
-        \Risoluto\Url::redirectTo('Admin_UserMng_ModEntry');
+            'groupno' => $target[ 0 ][ 'groupno' ],
+            'status' => $target[ 0 ][ 'status' ]
+        ];
+        $sess->store( 'form', $getVals );
+        \Risoluto\Url::redirectTo( 'Admin_UserMng_ModEntry' );
         exit;
     }
 }

@@ -17,5 +17,5 @@ namespace Risoluto;
 
 interface RisolutoCliInterface
 {
-    public function run(array $param);
+    public function run( array $param );
 }

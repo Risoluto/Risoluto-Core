@@ -42,37 +42,37 @@ class ModComplete extends \Risoluto\RisolutoControllerBase implements \Risoluto\
 
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck( $sess, true );
 
         // セッションにフォーム入力情報が存在した場合は取得
-        $entered = array();
-        if ($sess->isThere('form')) {
-            $entered = $sess->load('form');
-            $sess->revoke('form');
+        $entered = [ ];
+        if ($sess->isThere( 'form' )) {
+            $entered = $sess->load( 'form' );
+            $sess->revoke( 'form' );
         }
 
         // DBへの登録を行う
-        $options = array(
-            'by_who'   => $detail['no'] . ':' . $detail['userid'],
-            'no'       => $entered['entered']['no'],
-            'userid'   => $entered['entered']['userid'],
-            'username' => $entered['entered']['username'],
-            'password' => $entered['entered']['password'],
-            'groupno'  => $entered['entered']['groupno'],
-            'status'   => $entered['entered']['status']
-        );
-        $result  = \Risoluto\Auth::callProviderMethod('modUserByNo', $options);
+        $options = [
+            'by_who' => $detail[ 'no' ] . ':' . $detail[ 'userid' ],
+            'no' => $entered[ 'entered' ][ 'no' ],
+            'userid' => $entered[ 'entered' ][ 'userid' ],
+            'username' => $entered[ 'entered' ][ 'username' ],
+            'password' => $entered[ 'entered' ][ 'password' ],
+            'groupno' => $entered[ 'entered' ][ 'groupno' ],
+            'status' => $entered[ 'entered' ][ 'status' ]
+        ];
+        $result = \Risoluto\Auth::callProviderMethod( 'modUserByNo', $options );
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
+        $assign_value = [
             'header' => $header,
             'detail' => $detail,
             'result' => $result
-        );
-        $this->risolutoView($assign_value);
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

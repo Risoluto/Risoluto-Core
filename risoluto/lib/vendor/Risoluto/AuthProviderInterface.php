@@ -19,7 +19,7 @@ interface AuthProviderInterface
 {
     public function init();
 
-    public function doAuth($user, $pass, array $option = array());
+    public function doAuth( $user, $pass, array $option = [ ] );
 
-    public function doOperation($operation, array $option = array());
+    public function doOperation( $operation, array $option = [ ] );
 }

@@ -40,25 +40,25 @@ class Login extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risolu
         $sess = new \Risoluto\Session();
         $sess->start();
 
-        if ($sess->isThere('Auth')) {
+        if ($sess->isThere( 'Auth' )) {
             // 認証情報がある場合は、メニュー画面へ遷移する
-            \Risoluto\Url::redirectTo('Admin_Menu');
+            \Risoluto\Url::redirectTo( 'Admin_Menu' );
             exit;
         }
 
         $auth_error = '';
-        if ($sess->isThere('AuthError')) {
+        if ($sess->isThere( 'AuthError' )) {
             // 認証エラー情報がある場合は取得する
-            $auth_error = $sess->load('AuthError');
-            $sess->revoke('AuthError');
+            $auth_error = $sess->load( 'AuthError' );
+            $sess->revoke( 'AuthError' );
         }
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array('header' => $header, 'autherr' => $auth_error);
-        $this->risolutoView($assign_value);
+        $assign_value = [ 'header' => $header, 'autherr' => $auth_error ];
+        $this->risolutoView( $assign_value );
     }
 }

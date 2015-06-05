@@ -38,11 +38,11 @@ class ServiceStop extends \Risoluto\RisolutoControllerBase implements \Risoluto\
     {
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
-        $header = $this->replaceHeader($header, 'title', '現在サービスを停止しています');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
+        $header = $this->replaceHeader( $header, 'title', '現在サービスを停止しています' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array('header' => $header);
-        $this->risolutoView($assign_value);
+        $assign_value = [ 'header' => $header ];
+        $this->risolutoView( $assign_value );
     }
 }

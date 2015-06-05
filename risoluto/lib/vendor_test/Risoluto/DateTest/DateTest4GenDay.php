@@ -39,7 +39,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_NoArgs()
     {
-        $want = array(
+        $want = [
             '01' => '01',
             '02' => '02',
             '03' => '03',
@@ -70,10 +70,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '28' => '28',
             '29' => '29',
             '30' => '30',
-            '31' => '31'
-        );
+            '31' => '31',
+        ];
 
-        $this->assertEquals(Date::genDay(), $want);
+        $this->assertEquals( Date::genDay(), $want );
     }
 
     /**
@@ -83,8 +83,8 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args1()
     {
-        $want = array(
-            ''   => '',
+        $want = [
+            '' => '',
             '01' => '01',
             '02' => '02',
             '03' => '03',
@@ -115,10 +115,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '28' => '28',
             '29' => '29',
             '30' => '30',
-            '31' => '31'
-        );
+            '31' => '31',
+        ];
 
-        $this->assertEquals(Date::genDay(true), $want);
+        $this->assertEquals( Date::genDay( true ), $want );
     }
 
     /**
@@ -128,7 +128,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args2()
     {
-        $want = array(
+        $want = [
             '--' => '',
             '01' => '01',
             '02' => '02',
@@ -160,10 +160,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '28' => '28',
             '29' => '29',
             '30' => '30',
-            '31' => '31'
-        );
+            '31' => '31',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--'), $want);
+        $this->assertEquals( Date::genDay( true, '--' ), $want );
     }
 
     /**
@@ -173,7 +173,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args3()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -205,10 +205,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '28' => '28',
             '29' => '29',
             '30' => '30',
-            '31' => '31'
-        );
+            '31' => '31',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--'), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--' ), $want );
     }
 
     /**
@@ -218,7 +218,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_January()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -250,10 +250,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '28' => '28',
             '29' => '29',
             '30' => '30',
-            '31' => '31'
-        );
+            '31' => '31',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 1, 'year' => '')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 1, 'year' => '' ] ), $want );
     }
 
     /**
@@ -263,7 +263,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_February()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -292,10 +292,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '25' => '25',
             '26' => '26',
             '27' => '27',
-            '28' => '28'
-        );
+            '28' => '28',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 2, 'year' => '2014')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 2, 'year' => '2014' ] ), $want );
     }
 
     /**
@@ -305,7 +305,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_February_LY()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -335,10 +335,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '26' => '26',
             '27' => '27',
             '28' => '28',
-            '29' => '29'
-        );
+            '29' => '29',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 2, 'year' => '2012')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 2, 'year' => '2012' ] ), $want );
     }
 
     /**
@@ -348,7 +348,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_April()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -379,10 +379,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '27' => '27',
             '28' => '28',
             '29' => '29',
-            '30' => '30'
-        );
+            '30' => '30',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 4, 'year' => '')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 4, 'year' => '' ] ), $want );
     }
 
     /**
@@ -392,7 +392,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_June()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -423,10 +423,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '27' => '27',
             '28' => '28',
             '29' => '29',
-            '30' => '30'
-        );
+            '30' => '30',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 6, 'year' => '')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 6, 'year' => '' ] ), $want );
     }
 
     /**
@@ -436,7 +436,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_September()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -467,10 +467,10 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '27' => '27',
             '28' => '28',
             '29' => '29',
-            '30' => '30'
-        );
+            '30' => '30',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 9, 'year' => '')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 9, 'year' => '' ] ), $want );
     }
 
     /**
@@ -480,7 +480,7 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
      */
     public function test_genDay_Args4_November()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '01' => '01',
             '02' => '02',
@@ -511,9 +511,9 @@ class DateTest4genDay extends \PHPUnit_Framework_TestCase
             '27' => '27',
             '28' => '28',
             '29' => '29',
-            '30' => '30'
-        );
+            '30' => '30',
+        ];
 
-        $this->assertEquals(Date::genDay(true, '--', '--', array('month' => 11, 'year' => '')), $want);
+        $this->assertEquals( Date::genDay( true, '--', '--', [ 'month' => 11, 'year' => '' ] ), $want );
     }
 }

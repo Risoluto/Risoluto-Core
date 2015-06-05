@@ -41,7 +41,7 @@ class ValidateTest4IsLeapYear extends \PHPUnit_Framework_TestCase
     {
         $test = '13';
 
-        $this->assertFalse(Validate::isLeapYear($test));
+        $this->assertFalse( Validate::isLeapYear( $test ) );
     }
 
     /**
@@ -53,7 +53,7 @@ class ValidateTest4IsLeapYear extends \PHPUnit_Framework_TestCase
     {
         $test = 'AAAA';
 
-        $this->assertFalse(Validate::isLeapYear($test));
+        $this->assertFalse( Validate::isLeapYear( $test ) );
     }
 
     /**
@@ -65,7 +65,7 @@ class ValidateTest4IsLeapYear extends \PHPUnit_Framework_TestCase
     {
         $test = '2000';
 
-        $this->assertTrue(Validate::isLeapYear($test));
+        $this->assertTrue( Validate::isLeapYear( $test ) );
     }
 
     /**
@@ -77,6 +77,6 @@ class ValidateTest4IsLeapYear extends \PHPUnit_Framework_TestCase
     {
         $test = '2013';
 
-        $this->assertFalse(Validate::isLeapYear($test));
+        $this->assertFalse( Validate::isLeapYear( $test ) );
     }
 }

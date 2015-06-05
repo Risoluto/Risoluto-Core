@@ -26,7 +26,7 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     //------------------------------------------------------//
     // テストプロパティ定義
     //------------------------------------------------------//
-    private static $default_server = array('HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/');
+    private static $default_server = [ 'HTTP_HOST' => 'localhost', 'SERVER_PORT' => '80', 'PHP_SELF' => '/' ];
 
     //------------------------------------------------------//
     // テストメソッド定義
@@ -39,8 +39,8 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // 拡張モジュールがロードされているかをチェック
-        if (!extension_loaded('xdebug')) {
-            $this->markTestSkipped('Cannot use xdebug expansion module.');
+        if (!extension_loaded( 'xdebug' )) {
+            $this->markTestSkipped( 'Cannot use xdebug expansion module.' );
         }
     }
 
@@ -52,10 +52,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithoutArgs()
     {
-        Url::redirectTo(null, array(), null, self::$default_server);
+        Url::redirectTo( null, [ ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/', $output_header);
+        $this->assertContains( 'Location: http://localhost/', $output_header );
     }
 
     /**
@@ -66,10 +66,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTarget()
     {
-        Url::redirectTo('Top', array(), null, self::$default_server);
+        Url::redirectTo( 'Top', [ ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top', $output_header );
     }
 
     /**
@@ -80,10 +80,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParam1()
     {
-        Url::redirectTo('Top', array('Foo' => ''), null, self::$default_server);
+        Url::redirectTo( 'Top', [ 'Foo' => '' ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo', $output_header );
     }
 
     /**
@@ -94,10 +94,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParam2()
     {
-        Url::redirectTo('Top', array('Foo' => 'Bar'), null, self::$default_server);
+        Url::redirectTo( 'Top', [ 'Foo' => 'Bar' ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo=Bar', $output_header );
     }
 
     /**
@@ -108,10 +108,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParam3()
     {
-        Url::redirectTo('Top', array('Foo' => 'Bar', 'Hoge' => ''), null, self::$default_server);
+        Url::redirectTo( 'Top', [ 'Foo' => 'Bar', 'Hoge' => '' ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo=Bar.Hoge', $output_header );
     }
 
     /**
@@ -122,10 +122,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParam4()
     {
-        Url::redirectTo('Top', array('Foo' => 'Bar', 'Hoge' => 'Fuga'), null, self::$default_server);
+        Url::redirectTo( 'Top', [ 'Foo' => 'Bar', 'Hoge' => 'Fuga' ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -136,10 +136,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParam5()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), null, self::$default_server);
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], null, self::$default_server );
         $output_header = xdebug_get_headers();
 
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -150,9 +150,9 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithTargetAndParamAndStatuscode()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', self::$default_server);
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303', self::$default_server );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: http://localhost/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -163,9 +163,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithFullArgs1()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '80', 'PHP_SELF' => '/'));
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303',
+            [ 'HTTP_HOST' => 'example.com', 'SERVER_PORT' => '80', 'PHP_SELF' => '/' ] );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: http://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: http://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -176,9 +177,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithFullArgs2()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '443', 'PHP_SELF' => '/'));
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303',
+            [ 'HTTP_HOST' => 'example.com', 'SERVER_PORT' => '443', 'PHP_SELF' => '/' ] );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: https://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: https://example.com/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -189,9 +191,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithFullArgs3()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8080', 'PHP_SELF' => '/'));
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303',
+            [ 'HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8080', 'PHP_SELF' => '/' ] );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: http://example.com:8080/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: http://example.com:8080/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -202,9 +205,10 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithFullArgs4()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/'));
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303',
+            [ 'HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/' ] );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: https://example.com:8443/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: https://example.com:8443/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 
     /**
@@ -215,8 +219,9 @@ class UrlTest4RedirectTo extends \PHPUnit_Framework_TestCase
      */
     public function test_RedirectTo_WithFullArgs5()
     {
-        Url::redirectTo('Top', array('Hoge' => 'Fuga','Foo' => 'Bar'), '303', array('HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/extra/'));
+        Url::redirectTo( 'Top', [ 'Hoge' => 'Fuga', 'Foo' => 'Bar' ], '303',
+            [ 'HTTP_HOST' => 'example.com', 'SERVER_PORT' => '8443', 'PHP_SELF' => '/extra/' ] );
         $output_header = xdebug_get_headers();
-        $this->assertContains('Location: https://example.com:8443/extra/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header);
+        $this->assertContains( 'Location: https://example.com:8443/extra/?seq=Top.Foo=Bar.Hoge=Fuga', $output_header );
     }
 }

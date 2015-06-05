@@ -38,40 +38,40 @@ abstract class RisolutoCliBase
      *
      * @access    protected
      *
-     * @param     string  $message  ブラウザ側に出力するメッセージ（省略可、デフォルトは'Authorization Required'）
+     * @param     string  $message ブラウザ側に出力するメッセージ（省略可、デフォルトは'Authorization Required'）
      * @param     boolean $echoback true:エコーバックする/false:エコーバックしない
      *
      * @return    string 入力された内容
      */
-    protected function readFromStdin($prompt = 'Enter: ', $echoback = true)
+    protected function readFromStdin( $prompt = 'Enter: ', $echoback = true )
     {
         // 入出力のファイルハンドラをオープン
-        $in  = fopen('php://stdin', 'r');
-        $out = fopen('php://stderr', 'w');
+        $in = fopen( 'php://stdin', 'r' );
+        $out = fopen( 'php://stderr', 'w' );
 
         // プロンプトを出力し、エコーバックオフが指示されていれば止める
-        fwrite($out, $prompt);
+        fwrite( $out, $prompt );
         if (!$echoback) {
-            system('stty -echo');
+            system( 'stty -echo' );
         }
 
         // 入力をロックし、キー入力を取得する
-        flock($in, LOCK_EX);
-        $readtext = fgets($in);
-        flock($in, LOCK_UN);
+        flock( $in, LOCK_EX );
+        $readtext = fgets( $in );
+        flock( $in, LOCK_UN );
 
         // エコーバックオフが指示されていれば再開し、PHP_EOLを出力
         if (!$echoback) {
-            system('stty echo');
+            system( 'stty echo' );
         }
-        fwrite($out, PHP_EOL);
+        fwrite( $out, PHP_EOL );
 
         // 入出力のファイルハンドラをクローズ
-        fclose($in);
-        fclose($out);
+        fclose( $in );
+        fclose( $out );
 
         // 取得内容を返却する
-        return trim($readtext);
+        return trim( $readtext );
     }
 
     /**
@@ -85,20 +85,20 @@ abstract class RisolutoCliBase
      *
      * @return    string 検出した分割文字
      */
-    private function detectSeparator($target)
+    private function detectSeparator( $target )
     {
         // 分割文字列として許容する文字列
-        $allow_sepchars = array('=', ',', ':');
+        $allow_sepchars = [ '=', ',', ':' ];
 
         // 分割文字を検出する
-        $retval          = '';
+        $retval = '';
         $before_position = PHP_INT_MAX;
         foreach ($allow_sepchars as $test) {
-            $current_position = strpos($target, $test);
+            $current_position = strpos( $target, $test );
 
             // 1つ前に検出した分割文字よりも先に存在する場合はそちらを採用
             if ($current_position !== false and $current_position < $before_position) {
-                $retval          = $test;
+                $retval = $test;
                 $before_position = $current_position;
             }
         }
@@ -118,33 +118,33 @@ abstract class RisolutoCliBase
      *
      * @return    array 分割後のオプション
      */
-    protected function separateOptions($target)
+    protected function separateOptions( $target )
     {
         // 分割文字を取得する
-        $sepchar = $this->detectSeparator($target);
+        $sepchar = $this->detectSeparator( $target );
 
         // 分割文字列が存在しているかをチェック
         if ($sepchar) {
             // 分割文字が存在した場合はそれで分割する
-            $sep = explode($sepchar, $target);
+            $sep = explode( $sepchar, $target );
 
-            if (count($sep) > 2) {
+            if (count( $sep ) > 2) {
 
                 // 2つより多く分割された場合は最初の1つと残りの全部に再構築する
-                $command = array_shift($sep);
-                $param   = $this->separateOptions(implode($sepchar, $sep));
+                $command = array_shift( $sep );
+                $param = $this->separateOptions( implode( $sepchar, $sep ) );
             } else {
                 // 2つ以下ならそのまま（$param側に分割文字がさらに含まれている場合は再帰的に分割する）
-                $command = $sep[0];
-                $param   = (isset($sep[1]) ? ($this->detectSeparator($sep[1]) ? $this->separateOptions($sep[1]) : $sep[1]) : '');
+                $command = $sep[ 0 ];
+                $param = ( isset( $sep[ 1 ] ) ? ( $this->detectSeparator( $sep[ 1 ] ) ? $this->separateOptions( $sep[ 1 ] ) : $sep[ 1 ] ) : '' );
             }
         } else {
             //存在しない場合はそのまま
             $command = $target;
-            $param   = '';
+            $param = '';
         }
 
         // 分割したものを返却する
-        return array('command' => $command, 'param' => $param);
+        return [ 'command' => $command, 'param' => $param ];
     }
 }

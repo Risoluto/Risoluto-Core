@@ -40,35 +40,36 @@ class Menu extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risolut
         $sess = new \Risoluto\Session();
         $sess->start();
 
-        if ($sess->isThere('Auth')) {
+        if ($sess->isThere( 'Auth' )) {
             // 認証情報がある場合は取得する
-            $detail = $sess->Load('Auth');
+            $detail = $sess->Load( 'Auth' );
         } else {
             // 認証情報がない場合はログイン画面へ遷移する
-            $sess->store('AuthError', 'invalid_access');
-            \Risoluto\Url::redirectTo('Admin_Login');
+            $sess->store( 'AuthError', 'invalid_access' );
+            \Risoluto\Url::redirectTo( 'Admin_Login' );
             exit;
         }
 
         // メニュータブ制御
         $params = $this->GetParam();
-        if (!empty($params)) {
-            $active_tab = htmlentities($params[0], ENT_QUOTES, 'UTF-8');
+        if (!empty( $params )) {
+            $active_tab = htmlentities( $params[ 0 ], ENT_QUOTES, 'UTF-8' );
         } else {
             $active_tab = 'user';
         }
-        $allow_admintab = ($detail['groupno'] == 1) ? true : false;
+        $allow_admintab = ( $detail[ 'groupno' ] == 1 ) ? true : false;
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
-            'header'         => $header,
-            'detail'         => $detail,
-            'active_tab'     => $active_tab,
-            'allow_admintab' => $allow_admintab);
-        $this->risolutoView($assign_value);
+        $assign_value = [
+            'header' => $header,
+            'detail' => $detail,
+            'active_tab' => $active_tab,
+            'allow_admintab' => $allow_admintab
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

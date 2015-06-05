@@ -41,20 +41,20 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
     protected function setUp()
     {
         // 拡張モジュールがロードされているかをチェック
-        if (!extension_loaded('mysqli')) {
-            $this->markTestSkipped('Cannot use mysqli expansion module.');
+        if (!extension_loaded( 'mysqli' )) {
+            $this->markTestSkipped( 'Cannot use mysqli expansion module.' );
         }
 
-        if (!isset($GLOBALS['DB_DRIVER'])) {
-            $this->markTestSkipped('DB_DRIVER was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_USER'])) {
-            $this->markTestSkipped('DB_USER was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_PASSWORD'])) {
-            $this->markTestSkipped('DB_PASSWORD was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_DBNAME'])) {
-            $this->markTestSkipped('DB_DBNAME was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_HOST'])) {
-            $this->markTestSkipped('DB_HOST was not defined. Check phpunit.xml');
+        if (!isset( $GLOBALS[ 'DB_DRIVER' ] )) {
+            $this->markTestSkipped( 'DB_DRIVER was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_USER' ] )) {
+            $this->markTestSkipped( 'DB_USER was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_PASSWORD' ] )) {
+            $this->markTestSkipped( 'DB_PASSWORD was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_DBNAME' ] )) {
+            $this->markTestSkipped( 'DB_DBNAME was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_HOST' ] )) {
+            $this->markTestSkipped( 'DB_HOST was not defined. Check phpunit.xml' );
         }
 
         // DB周りの初期化を行う為に元々のsetUp()をコールする
@@ -68,10 +68,10 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getconnection()
     {
-        $dsn = $GLOBALS['DB_DRIVER'] . ':dbname=' . $GLOBALS['DB_DBNAME'] . ';host=' . $GLOBALS['DB_HOST'];
-        $pdo = new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
+        $dsn = $GLOBALS[ 'DB_DRIVER' ] . ':dbname=' . $GLOBALS[ 'DB_DBNAME' ] . ';host=' . $GLOBALS[ 'DB_HOST' ];
+        $pdo = new \PDO( $dsn, $GLOBALS[ 'DB_USER' ], $GLOBALS[ 'DB_PASSWORD' ] );
 
-        return $this->createDefaultDBconnection($pdo, $GLOBALS['DB_DBNAME']);
+        return $this->createDefaultDBconnection( $pdo, $GLOBALS[ 'DB_DBNAME' ] );
     }
 
     /**
@@ -81,7 +81,7 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getDataSet()
     {
-        return $this->createXMLDataSet(dirname(__FILE__) . '/../../../risoluto_db_test.xml');
+        return $this->createXMLDataSet( dirname( __FILE__ ) . '/../../../risoluto_db_test.xml' );
     }
 
     /**
@@ -91,7 +91,7 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function testPreCondition()
     {
-        $this->assertEquals(2, $this->getconnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals( 2, $this->getconnection()->getRowCount( 'risoluto_db_test' ) );
     }
 
     /**
@@ -101,21 +101,23 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_setAttribute_EmptyBoth()
     {
-        $params = array("driver"     => $GLOBALS['DB_DRIVER'],
-                        "user"       => $GLOBALS['DB_USER'],
-                        "pass"       => $GLOBALS['DB_PASSWORD'],
-                        "dbname"     => $GLOBALS['DB_DBNAME'],
-                        "host"       => $GLOBALS['DB_HOST'],
-                        "persistent" => false);
+        $params = [
+            "driver" => $GLOBALS[ 'DB_DRIVER' ],
+            "user" => $GLOBALS[ 'DB_USER' ],
+            "pass" => $GLOBALS[ 'DB_PASSWORD' ],
+            "dbname" => $GLOBALS[ 'DB_DBNAME' ],
+            "host" => $GLOBALS[ 'DB_HOST' ],
+            "persistent" => false,
+        ];
 
         $instance = new Db;
-        $instance->connect($params);
-        $tmp_result = $instance->setAttribute('', '');
+        $instance->connect( $params );
+        $tmp_result = $instance->setAttribute( '', '' );
 
-        $this->assertFalse($tmp_result);
+        $this->assertFalse( $tmp_result );
 
         $instance->disconnect();
-        unset($instance);
+        unset( $instance );
     }
 
     /**
@@ -125,21 +127,23 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_setAttribute_Empty1st()
     {
-        $params = array("driver"     => $GLOBALS['DB_DRIVER'],
-                        "user"       => $GLOBALS['DB_USER'],
-                        "pass"       => $GLOBALS['DB_PASSWORD'],
-                        "dbname"     => $GLOBALS['DB_DBNAME'],
-                        "host"       => $GLOBALS['DB_HOST'],
-                        "persistent" => false);
+        $params = [
+            "driver" => $GLOBALS[ 'DB_DRIVER' ],
+            "user" => $GLOBALS[ 'DB_USER' ],
+            "pass" => $GLOBALS[ 'DB_PASSWORD' ],
+            "dbname" => $GLOBALS[ 'DB_DBNAME' ],
+            "host" => $GLOBALS[ 'DB_HOST' ],
+            "persistent" => false,
+        ];
 
         $instance = new Db;
-        $instance->connect($params);
-        $tmp_result = $instance->setAttribute('', 'BAR');
+        $instance->connect( $params );
+        $tmp_result = $instance->setAttribute( '', 'BAR' );
 
-        $this->assertFalse($tmp_result);
+        $this->assertFalse( $tmp_result );
 
         $instance->disconnect();
-        unset($instance);
+        unset( $instance );
     }
 
     /**
@@ -149,21 +153,23 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_setAttribute_Empty2nd()
     {
-        $params = array("driver"     => $GLOBALS['DB_DRIVER'],
-                        "user"       => $GLOBALS['DB_USER'],
-                        "pass"       => $GLOBALS['DB_PASSWORD'],
-                        "dbname"     => $GLOBALS['DB_DBNAME'],
-                        "host"       => $GLOBALS['DB_HOST'],
-                        "persistent" => false);
+        $params = [
+            "driver" => $GLOBALS[ 'DB_DRIVER' ],
+            "user" => $GLOBALS[ 'DB_USER' ],
+            "pass" => $GLOBALS[ 'DB_PASSWORD' ],
+            "dbname" => $GLOBALS[ 'DB_DBNAME' ],
+            "host" => $GLOBALS[ 'DB_HOST' ],
+            "persistent" => false,
+        ];
 
         $instance = new Db;
-        $instance->connect($params);
-        $tmp_result = $instance->setAttribute('FOO', '');
+        $instance->connect( $params );
+        $tmp_result = $instance->setAttribute( 'FOO', '' );
 
-        $this->assertFalse($tmp_result);
+        $this->assertFalse( $tmp_result );
 
         $instance->disconnect();
-        unset($instance);
+        unset( $instance );
     }
 
     /**
@@ -173,24 +179,26 @@ class DbTest4setAttribute extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_setAttribute_withArgs()
     {
-        $params = array("driver"     => $GLOBALS['DB_DRIVER'],
-                        "user"       => $GLOBALS['DB_USER'],
-                        "pass"       => $GLOBALS['DB_PASSWORD'],
-                        "dbname"     => $GLOBALS['DB_DBNAME'],
-                        "host"       => $GLOBALS['DB_HOST'],
-                        "persistent" => false);
+        $params = [
+            "driver" => $GLOBALS[ 'DB_DRIVER' ],
+            "user" => $GLOBALS[ 'DB_USER' ],
+            "pass" => $GLOBALS[ 'DB_PASSWORD' ],
+            "dbname" => $GLOBALS[ 'DB_DBNAME' ],
+            "host" => $GLOBALS[ 'DB_HOST' ],
+            "persistent" => false,
+        ];
 
         $instance = new Db;
-        $instance->connect($params);
-        $before_val = $instance->getAttribute('FETCH_MODE');
-        $tmp_result = $instance->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
-        $after_val  = $instance->getAttribute('FETCH_MODE');
+        $instance->connect( $params );
+        $before_val = $instance->getAttribute( 'FETCH_MODE' );
+        $tmp_result = $instance->setAttribute( \PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ );
+        $after_val = $instance->getAttribute( 'FETCH_MODE' );
 
-        $this->assertTrue($tmp_result);
-        $this->assertNotEquals($before_val, $after_val);
-        $this->assertNotEquals(\PDO::FETCH_OBJ, $after_val);
+        $this->assertTrue( $tmp_result );
+        $this->assertNotEquals( $before_val, $after_val );
+        $this->assertNotEquals( \PDO::FETCH_OBJ, $after_val );
 
         $instance->disconnect();
-        unset($instance);
+        unset( $instance );
     }
 }

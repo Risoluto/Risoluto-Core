@@ -43,28 +43,28 @@ class ModEntry extends \Risoluto\RisolutoControllerBase implements \Risoluto\Ris
 
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck( $sess, true );
 
-        if ($sess->isThere('form')) {
+        if ($sess->isThere( 'form' )) {
             // セッションにフォーム入力情報が存在した場合は取得
-            $entered = $sess->load('form');
-            $sess->revoke('form');
+            $entered = $sess->load( 'form' );
+            $sess->revoke( 'form' );
         } else {
             // 存在しない場合は例外をThrow
-            throw new \Exception('Cannot get form data.');
+            throw new \Exception( 'Cannot get form data.' );
         }
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
-            'header'     => $header,
-            'detail'     => $detail,
-            'entered'    => $entered,
-            'csrf_token' => $sess->load('csrf_token')
-        );
-        $this->risolutoView($assign_value);
+        $assign_value = [
+            'header' => $header,
+            'detail' => $detail,
+            'entered' => $entered,
+            'csrf_token' => $sess->load( 'csrf_token' )
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

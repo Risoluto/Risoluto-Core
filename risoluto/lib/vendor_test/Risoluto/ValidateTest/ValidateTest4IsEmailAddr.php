@@ -41,7 +41,7 @@ class ValidateTest4IsEmailAddr extends \PHPUnit_Framework_TestCase
     {
         $test = '@risoluto This is test!';
 
-        $this->assertFalse(Validate::isEmailAddr($test));
+        $this->assertFalse( Validate::isEmailAddr( $test ) );
     }
 
     /**
@@ -53,7 +53,7 @@ class ValidateTest4IsEmailAddr extends \PHPUnit_Framework_TestCase
     {
         $test = 'test+test-test.test@risoluto_test-test+test.jp';
 
-        $this->assertFalse(Validate::isEmailAddr($test));
+        $this->assertFalse( Validate::isEmailAddr( $test ) );
     }
 
     /**
@@ -65,7 +65,7 @@ class ValidateTest4IsEmailAddr extends \PHPUnit_Framework_TestCase
     {
         $test = 'webmaster@example.net';
 
-        $this->assertTrue(Validate::isEmailAddr($test));
+        $this->assertTrue( Validate::isEmailAddr( $test ) );
     }
 
     /**
@@ -77,6 +77,6 @@ class ValidateTest4IsEmailAddr extends \PHPUnit_Framework_TestCase
     {
         $test = 'web_master+test-test.test@example.gr.jp';
 
-        $this->assertTrue(Validate::isEmailAddr($test));
+        $this->assertTrue( Validate::isEmailAddr( $test ) );
     }
 }

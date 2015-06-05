@@ -41,20 +41,20 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
     protected function setUp()
     {
         // 拡張モジュールがロードされているかをチェック
-        if (!extension_loaded('mysqli')) {
-            $this->markTestSkipped('Cannot use mysqli expansion module.');
+        if (!extension_loaded( 'mysqli' )) {
+            $this->markTestSkipped( 'Cannot use mysqli expansion module.' );
         }
 
-        if (!isset($GLOBALS['DB_DRIVER'])) {
-            $this->markTestSkipped('DB_DRIVER was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_USER'])) {
-            $this->markTestSkipped('DB_USER was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_PASSWORD'])) {
-            $this->markTestSkipped('DB_PASSWORD was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_DBNAME'])) {
-            $this->markTestSkipped('DB_DBNAME was not defined. Check phpunit.xml');
-        } elseif (!isset($GLOBALS['DB_HOST'])) {
-            $this->markTestSkipped('DB_HOST was not defined. Check phpunit.xml');
+        if (!isset( $GLOBALS[ 'DB_DRIVER' ] )) {
+            $this->markTestSkipped( 'DB_DRIVER was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_USER' ] )) {
+            $this->markTestSkipped( 'DB_USER was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_PASSWORD' ] )) {
+            $this->markTestSkipped( 'DB_PASSWORD was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_DBNAME' ] )) {
+            $this->markTestSkipped( 'DB_DBNAME was not defined. Check phpunit.xml' );
+        } elseif (!isset( $GLOBALS[ 'DB_HOST' ] )) {
+            $this->markTestSkipped( 'DB_HOST was not defined. Check phpunit.xml' );
         }
 
         // DB周りの初期化を行う為に元々のsetUp()をコールする
@@ -68,10 +68,10 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getConnection()
     {
-        $dsn = $GLOBALS['DB_DRIVER'] . ':dbname=' . $GLOBALS['DB_DBNAME'] . ';host=' . $GLOBALS['DB_HOST'];
-        $pdo = new \PDO($dsn, $GLOBALS['DB_USER'], $GLOBALS['DB_PASSWORD']);
+        $dsn = $GLOBALS[ 'DB_DRIVER' ] . ':dbname=' . $GLOBALS[ 'DB_DBNAME' ] . ';host=' . $GLOBALS[ 'DB_HOST' ];
+        $pdo = new \PDO( $dsn, $GLOBALS[ 'DB_USER' ], $GLOBALS[ 'DB_PASSWORD' ] );
 
-        return $this->createDefaultDBConnection($pdo, $GLOBALS['DB_DBNAME']);
+        return $this->createDefaultDBConnection( $pdo, $GLOBALS[ 'DB_DBNAME' ] );
     }
 
     /**
@@ -81,7 +81,7 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function getDataSet()
     {
-        return $this->createXMLDataSet(dirname(__FILE__) . '/../../../risoluto_db_test.xml');
+        return $this->createXMLDataSet( dirname( __FILE__ ) . '/../../../risoluto_db_test.xml' );
     }
 
     /**
@@ -91,7 +91,7 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function testPreCondition()
     {
-        $this->assertEquals(2, $this->getConnection()->getRowCount('risoluto_db_test'));
+        $this->assertEquals( 2, $this->getConnection()->getRowCount( 'risoluto_db_test' ) );
     }
 
     /**
@@ -101,19 +101,19 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_Connect_Success1()
     {
-        $params = array(
-            'dsn'        => '',
-            'driver'     => $GLOBALS['DB_DRIVER'],
-            'user'       => $GLOBALS['DB_USER'],
-            'pass'       => $GLOBALS['DB_PASSWORD'],
-            'dbname'     => $GLOBALS['DB_DBNAME'],
-            'host'       => $GLOBALS['DB_HOST'],
-            'persistent' => false
-        );
+        $params = [
+            'dsn' => '',
+            'driver' => $GLOBALS[ 'DB_DRIVER' ],
+            'user' => $GLOBALS[ 'DB_USER' ],
+            'pass' => $GLOBALS[ 'DB_PASSWORD' ],
+            'dbname' => $GLOBALS[ 'DB_DBNAME' ],
+            'host' => $GLOBALS[ 'DB_HOST' ],
+            'persistent' => false,
+        ];
 
         $instance = new Db;
-        $this->assertTrue($instance->connect($params));
-        unset($instance);
+        $this->assertTrue( $instance->connect( $params ) );
+        unset( $instance );
     }
 
     /**
@@ -123,19 +123,19 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_Connect_Success2()
     {
-        $params = array(
-            'dsn'        => $GLOBALS['DB_DSN'],
-            'driver'     => $GLOBALS['DB_DRIVER'],
-            'user'       => $GLOBALS['DB_USER'],
-            'pass'       => $GLOBALS['DB_PASSWORD'],
-            'dbname'     => $GLOBALS['DB_DBNAME'],
-            'host'       => $GLOBALS['DB_HOST'],
-            'persistent' => false
-        );
+        $params = [
+            'dsn' => $GLOBALS[ 'DB_DSN' ],
+            'driver' => $GLOBALS[ 'DB_DRIVER' ],
+            'user' => $GLOBALS[ 'DB_USER' ],
+            'pass' => $GLOBALS[ 'DB_PASSWORD' ],
+            'dbname' => $GLOBALS[ 'DB_DBNAME' ],
+            'host' => $GLOBALS[ 'DB_HOST' ],
+            'persistent' => false,
+        ];
 
         $instance = new Db;
-        $this->assertTrue($instance->connect($params));
-        unset($instance);
+        $this->assertTrue( $instance->connect( $params ) );
+        unset( $instance );
     }
 
     /**
@@ -145,19 +145,19 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_Connect_Success3()
     {
-        $params = array(
-            'dsn'        => '',
-            'driver'     => $GLOBALS['DB_DRIVER'],
-            'user'       => $GLOBALS['DB_USER'],
-            'pass'       => $GLOBALS['DB_PASSWORD'],
-            'dbname'     => $GLOBALS['DB_DBNAME'],
-            'host'       => $GLOBALS['DB_HOST'],
-            'persistent' => false
-        );
+        $params = [
+            'dsn' => '',
+            'driver' => $GLOBALS[ 'DB_DRIVER' ],
+            'user' => $GLOBALS[ 'DB_USER' ],
+            'pass' => $GLOBALS[ 'DB_PASSWORD' ],
+            'dbname' => $GLOBALS[ 'DB_DBNAME' ],
+            'host' => $GLOBALS[ 'DB_HOST' ],
+            'persistent' => false,
+        ];
 
         $instance = new Db;
-        $this->assertTrue($instance->connect($params, array(\PDO::ATTR_PERSISTENT => false)));
-        unset($instance);
+        $this->assertTrue( $instance->connect( $params, [ \PDO::ATTR_PERSISTENT => false ] ) );
+        unset( $instance );
     }
 
     /**
@@ -167,18 +167,18 @@ class DbTest4Connect extends \PHPUnit_Extensions_Database_TestCase
      */
     public function test_Connect_Failure()
     {
-        $params = array(
-            'dsn'        => '',
-            'driver'     => '',
-            'user'       => '',
-            'pass'       => '',
-            'dbname'     => '',
-            'host'       => '',
-            'persistent' => false
-        );
+        $params = [
+            'dsn' => '',
+            'driver' => '',
+            'user' => '',
+            'pass' => '',
+            'dbname' => '',
+            'host' => '',
+            'persistent' => false,
+        ];
 
         $instance = new Db;
-        $this->assertFalse($instance->connect($params));
-        unset($instance);
+        $this->assertFalse( $instance->connect( $params ) );
+        unset( $instance );
     }
 }

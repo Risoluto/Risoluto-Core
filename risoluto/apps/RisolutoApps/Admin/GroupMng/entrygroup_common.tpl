@@ -8,7 +8,7 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
     <input type="text" class="form-control" id="groupid" name="groupid" placeholder="グループIDを入力してください"
            value="{$entered.entered.groupid}">
     {if in_array('userid', $entered.error.form_crit)}
-    <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
     {/if}
 </div>
 

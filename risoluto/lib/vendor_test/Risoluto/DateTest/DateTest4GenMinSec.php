@@ -39,7 +39,7 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
      */
     public function test_MinSec_NoArgs()
     {
-        $want = array(
+        $want = [
             '00' => '00',
             '01' => '01',
             '02' => '02',
@@ -99,10 +99,10 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
             '56' => '56',
             '57' => '57',
             '58' => '58',
-            '59' => '59'
-        );
+            '59' => '59',
+        ];
 
-        $this->assertEquals(Date::genMinSec(), $want);
+        $this->assertEquals( Date::genMinSec(), $want );
     }
 
     /**
@@ -112,8 +112,8 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMinSec_Args1()
     {
-        $want = array(
-            ''   => '',
+        $want = [
+            '' => '',
             '00' => '00',
             '01' => '01',
             '02' => '02',
@@ -173,10 +173,10 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
             '56' => '56',
             '57' => '57',
             '58' => '58',
-            '59' => '59'
-        );
+            '59' => '59',
+        ];
 
-        $this->assertEquals(Date::genMinSec(true), $want);
+        $this->assertEquals( Date::genMinSec( true ), $want );
     }
 
     /**
@@ -186,7 +186,7 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMinSec_Args2()
     {
-        $want = array(
+        $want = [
             '--' => '',
             '00' => '00',
             '01' => '01',
@@ -247,10 +247,10 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
             '56' => '56',
             '57' => '57',
             '58' => '58',
-            '59' => '59'
-        );
+            '59' => '59',
+        ];
 
-        $this->assertEquals(Date::genMinSec(true, '--'), $want);
+        $this->assertEquals( Date::genMinSec( true, '--' ), $want );
     }
 
     /**
@@ -260,7 +260,7 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
      */
     public function test_GenMinSec_Args3()
     {
-        $want = array(
+        $want = [
             '--' => '--',
             '00' => '00',
             '01' => '01',
@@ -321,9 +321,9 @@ class DateTest4GenMinSec extends \PHPUnit_Framework_TestCase
             '56' => '56',
             '57' => '57',
             '58' => '58',
-            '59' => '59'
-        );
+            '59' => '59',
+        ];
 
-        $this->assertEquals(Date::genMinSec(true, '--', '--'), $want);
+        $this->assertEquals( Date::genMinSec( true, '--', '--' ), $want );
     }
 }

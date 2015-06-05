@@ -25,7 +25,7 @@ abstract class RisolutoModelBase
      * @access protected
      * @var    object    Dbクラスのオブジェクト
      */
-    protected  $db;
+    protected $db;
 
     /**
      * __construct()
@@ -44,6 +44,6 @@ abstract class RisolutoModelBase
      */
     public function __destruct()
     {
-        unset($this->db);
+        unset( $this->db );
     }
 }

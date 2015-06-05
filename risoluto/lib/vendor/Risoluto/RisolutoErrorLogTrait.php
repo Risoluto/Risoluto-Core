@@ -29,18 +29,18 @@ trait RisolutoErrorLogTrait
      * @access    private
      *
      * @param     string $loglevel 出力するメッセージのログレベル
-     * @param     string $msg      出力するメッセージ
+     * @param     string $msg 出力するメッセージ
      *
      * @return    boolean 常にTrue
      */
-    private function risolutoErrorLog($loglevel, $msg)
+    private function risolutoErrorLog( $loglevel, $msg )
     {
         // ログ出力しエラーメッセージを返却
         $conf = new Conf;
-        $conf->parse(RISOLUTO_CONF . 'risoluto.ini');
+        $conf->parse( RISOLUTO_CONF . 'risoluto.ini' );
 
         $log = new Log;
-        $log->setCurrentLogLevel($conf->getIni('LOGGING', 'loglevel'));
-        $log->log($loglevel, $msg);
+        $log->setCurrentLogLevel( $conf->getIni( 'LOGGING', 'loglevel' ) );
+        $log->log( $loglevel, $msg );
     }
 }

@@ -20,7 +20,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_ModEntry'">&lt;&nbsp;入力画面へ戻る</button>
     </div>
     <div class="btn-group btn-group-lg pull-right">
-        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_ModComplete'">この内容に変更する&nbsp;&gt;</button>
+        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_ModComplete'">
+            この内容に変更する&nbsp;&gt;</button>
     </div>
 </div>
 

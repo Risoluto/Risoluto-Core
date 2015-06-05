@@ -11,7 +11,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
 <div class="btn-toolbar" role="toolbar">
     <div class="btn-group btn-group-lg pull-right">
-        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_AddEntry'">新規グループ追加</button>
+        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_AddEntry'">新規グループ追加
+        </button>
     </div>
 </div>
 

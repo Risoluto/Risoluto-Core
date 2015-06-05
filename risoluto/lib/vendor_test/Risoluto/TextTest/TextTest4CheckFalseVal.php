@@ -42,7 +42,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = 'abcde';
         $want = 'abcde';
 
-        $this->assertEquals(Text::checkFalseVal($test), $want);
+        $this->assertEquals( Text::checkFalseVal( $test ), $want );
     }
 
     /**
@@ -55,7 +55,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = 'abcde';
         $want = 'abcde';
 
-        $this->assertEquals(Text::checkFalseVal($test, 'test'), $want);
+        $this->assertEquals( Text::checkFalseVal( $test, 'test' ), $want );
     }
 
     /**
@@ -68,7 +68,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = 'abcde';
         $want = 'abcde';
 
-        $this->assertEquals(Text::checkFalseVal($test, 'test', true), $want);
+        $this->assertEquals( Text::checkFalseVal( $test, 'test', true ), $want );
     }
 
     /**
@@ -81,7 +81,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = '0';
         $want = '';
 
-        $this->assertEquals(Text::checkFalseVal($test), $want);
+        $this->assertEquals( Text::checkFalseVal( $test ), $want );
     }
 
     /**
@@ -94,7 +94,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = '0';
         $want = 'test';
 
-        $this->assertEquals(Text::checkFalseVal($test, 'test'), $want);
+        $this->assertEquals( Text::checkFalseVal( $test, 'test' ), $want );
     }
 
     /**
@@ -107,7 +107,7 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = '0';
         $want = '0';
 
-        $this->assertEquals(Text::checkFalseVal($test, 'test', true), $want);
+        $this->assertEquals( Text::checkFalseVal( $test, 'test', true ), $want );
     }
 
     /**
@@ -120,6 +120,6 @@ class TextTest4CheckFalseVal extends \PHPUnit_Framework_TestCase
         $test = false;
         $want = 'test';
 
-        $this->assertEquals(Text::checkFalseVal($test, 'test', true), $want);
+        $this->assertEquals( Text::checkFalseVal( $test, 'test', true ), $want );
     }
 }

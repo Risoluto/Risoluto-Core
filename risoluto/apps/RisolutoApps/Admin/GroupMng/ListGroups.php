@@ -42,18 +42,18 @@ class ListGroups extends \Risoluto\RisolutoControllerBase implements \Risoluto\R
 
         // 共通処理クラスを呼び出し、必要な情報の取得等を行う
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck( $sess, true );
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
+        $assign_value = [
             'header' => $header,
             'detail' => $detail,
-            'list'   => \Risoluto\Auth::callProviderMethod('showGroupAll'),
-        );
-        $this->risolutoView($assign_value);
+            'list' => \Risoluto\Auth::callProviderMethod( 'showGroupAll' ),
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

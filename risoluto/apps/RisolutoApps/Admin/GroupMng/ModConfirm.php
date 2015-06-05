@@ -41,30 +41,31 @@ class ModConfirm extends \Risoluto\RisolutoControllerBase implements \Risoluto\R
         $sess->start();
 
         // 共通処理クラスを呼び出し
-        $common  = new \RisolutoApps\Admin\AdminCommon;
-        $detail  = $common->loginCheck($sess, true);
-        $entered = $common->checkEnteredGroupData($_POST, $sess->load('csrf_token'), htmlentities($_POST['no'], ENT_QUOTES, 'UTF-8'));
+        $common = new \RisolutoApps\Admin\AdminCommon;
+        $detail = $common->loginCheck( $sess, true );
+        $entered = $common->checkEnteredGroupData( $_POST, $sess->load( 'csrf_token' ),
+            htmlentities( $_POST[ 'no' ], ENT_QUOTES, 'UTF-8' ) );
 
         // 入力情報はセッションに保存
-        $sess->store('form', $entered);
+        $sess->store( 'form', $entered );
 
         // エラー情報があった場合は入力画面に戻る
-        if (!empty($entered['error']['msg']) or !empty($entered['error']['form_crit'])) {
-            \Risoluto\Url::redirectTo('Admin_GroupMng_ModEntry');
+        if (!empty( $entered[ 'error' ][ 'msg' ] ) or !empty( $entered[ 'error' ][ 'form_crit' ] )) {
+            \Risoluto\Url::redirectTo( 'Admin_GroupMng_ModEntry' );
             exit;
         }
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
-            'header'     => $header,
-            'detail'     => $detail,
-            'entered'    => $entered,
-            'csrf_token' => $sess->load('csrf_token')
-        );
-        $this->risolutoView($assign_value);
+        $assign_value = [
+            'header' => $header,
+            'detail' => $detail,
+            'entered' => $entered,
+            'csrf_token' => $sess->load( 'csrf_token' )
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

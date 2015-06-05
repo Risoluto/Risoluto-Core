@@ -31,8 +31,8 @@ class SampleCli extends \Risoluto\RisolutoCliBase implements \Risoluto\RisolutoC
      *
      * @return    void    なし
      */
-    public function run(array $options)
+    public function run( array $options )
     {
-        var_dump($options);
+        var_dump( $options );
     }
 }

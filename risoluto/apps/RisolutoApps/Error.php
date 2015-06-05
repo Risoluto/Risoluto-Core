@@ -38,11 +38,11 @@ class Error extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risolu
     {
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
-        $header = $this->replaceHeader($header, 'title', 'エラーが発生しました');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
+        $header = $this->replaceHeader( $header, 'title', 'エラーが発生しました' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array('header' => $header);
-        $this->risolutoView($assign_value);
+        $assign_value = [ 'header' => $header ];
+        $this->risolutoView( $assign_value );
     }
 }

@@ -42,41 +42,41 @@ class DelConfirm extends \Risoluto\RisolutoControllerBase implements \Risoluto\R
 
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, true);
+        $detail = $common->loginCheck( $sess, true );
 
         $param = $this->getParam();
-        if (is_numeric($param[0])) {
+        if (is_numeric( $param[ 0 ] )) {
             // 引数値がセットされていれば、それを元に登録情報を呼び出す
-            $target = \Risoluto\Auth::callProviderMethod('showGroupByNo', array('no' => $param[0]));
-            if (empty($target)) {
+            $target = \Risoluto\Auth::callProviderMethod( 'showGroupByNo', [ 'no' => $param[ 0 ] ] );
+            if (empty( $target )) {
                 // 情報が取得できなかった場合も例外をThrow
-                Throw new \Exception('Cannot load user data');
+                Throw new \Exception( 'Cannot load user data' );
             }
         } else {
             // 指定されていなければ例外をThrowする
-            Throw new \Exception('Require args not found');
+            Throw new \Exception( 'Require args not found' );
         }
 
         // 情報が取得できたら整形してセッションに保存する
-        $getVals['entered'] = array(
-            'no'        => $target[0]['no'],
-            'groupid'   => $target[0]['groupid'],
-            'groupname' => $target[0]['groupname'],
-            'status'    => $target[0]['status']
-        );
-        $sess->store('form', $getVals);
+        $getVals[ 'entered' ] = [
+            'no' => $target[ 0 ][ 'no' ],
+            'groupid' => $target[ 0 ][ 'groupid' ],
+            'groupname' => $target[ 0 ][ 'groupname' ],
+            'status' => $target[ 0 ][ 'status' ]
+        ];
+        $sess->store( 'form', $getVals );
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
-            'header'     => $header,
-            'detail'     => $detail,
-            'entered'    => $getVals,
-            'csrf_token' => $sess->load('csrf_token')
-        );
-        $this->risolutoView($assign_value);
+        $assign_value = [
+            'header' => $header,
+            'detail' => $detail,
+            'entered' => $getVals,
+            'csrf_token' => $sess->load( 'csrf_token' )
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

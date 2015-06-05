@@ -42,7 +42,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>Risoluto is PHP Framework.</p>';
         $want = '<p>Risoluto is PHP Framework.</p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -55,7 +55,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\' target=\'_blank\'>http://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -68,7 +68,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: https://www.example.com/</p>';
         $want = '<p>See: <a href=\'https://www.example.com/\' target=\'_blank\'>https://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -81,7 +81,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/ and http://www.example.org/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\' target=\'_blank\'>http://www.example.com/</a> and <a href=\'http://www.example.org/\' target=\'_blank\'>http://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -94,7 +94,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: https://www.example.com/ and https://www.example.org/</p>';
         $want = '<p>See: <a href=\'https://www.example.com/\' target=\'_blank\'>https://www.example.com/</a> and <a href=\'https://www.example.org/\' target=\'_blank\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -107,7 +107,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/ and https://www.example.org/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\' target=\'_blank\'>http://www.example.com/</a> and <a href=\'https://www.example.org/\' target=\'_blank\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test), $want);
+        $this->assertEquals( Text::autoUrlLink( $test ), $want );
     }
 
     /**
@@ -120,7 +120,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>Risoluto is PHP Framework.</p>';
         $want = '<p>Risoluto is PHP Framework.</p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -133,7 +133,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\'>http://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -146,7 +146,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: https://www.example.com/</p>';
         $want = '<p>See: <a href=\'https://www.example.com/\'>https://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -159,7 +159,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/ and http://www.example.org/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\'>http://www.example.com/</a> and <a href=\'http://www.example.org/\'>http://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -172,7 +172,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: https://www.example.com/ and https://www.example.org/</p>';
         $want = '<p>See: <a href=\'https://www.example.com/\'>https://www.example.com/</a> and <a href=\'https://www.example.org/\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -185,7 +185,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $test = '<p>See: http://www.example.com/ and https://www.example.org/</p>';
         $want = '<p>See: <a href=\'http://www.example.com/\'>http://www.example.com/</a> and <a href=\'https://www.example.org/\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false ), $want );
     }
 
     /**
@@ -199,7 +199,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>Risoluto is PHP Framework.</p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 
     /**
@@ -213,7 +213,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>See: <a href=\'http://www.example.com/\' class=\'dummy\'>http://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 
     /**
@@ -227,7 +227,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>See: <a href=\'https://www.example.com/\' class=\'dummy\'>https://www.example.com/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 
     /**
@@ -241,7 +241,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>See: <a href=\'http://www.example.com/\' class=\'dummy\'>http://www.example.com/</a> and <a href=\'http://www.example.org/\' class=\'dummy\'>http://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 
     /**
@@ -255,7 +255,7 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>See: <a href=\'https://www.example.com/\' class=\'dummy\'>https://www.example.com/</a> and <a href=\'https://www.example.org/\' class=\'dummy\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 
     /**
@@ -269,6 +269,6 @@ class TextTest4AutoUrlLink extends \PHPUnit_Framework_TestCase
         $attr = 'class=\'dummy\'';
         $want = '<p>See: <a href=\'http://www.example.com/\' class=\'dummy\'>http://www.example.com/</a> and <a href=\'https://www.example.org/\' class=\'dummy\'>https://www.example.org/</a></p>';
 
-        $this->assertEquals(Text::autoUrlLink($test, false, $attr), $want);
+        $this->assertEquals( Text::autoUrlLink( $test, false, $attr ), $want );
     }
 }

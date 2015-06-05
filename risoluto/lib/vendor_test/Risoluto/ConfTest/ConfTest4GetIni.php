@@ -39,8 +39,8 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
     public function test_getIni_Beforeparsed()
     {
         $instance = new Conf;
-        $this->assertNull($instance->getIni());
-        unset($instance);
+        $this->assertNull( $instance->getIni() );
+        unset( $instance );
     }
 
     /**
@@ -50,41 +50,35 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
      */
     public function test_getIni_NoArgs()
     {
-        $want = array(
-            "SEQ"     => array(
-                "default"     => "RisolutoApps\\Top",
-                "error"       => "RisolutoApps\\Error",
+        $want = [
+            "SEQ" => [
+                "default" => "RisolutoApps\\Top",
+                "error" => "RisolutoApps\\Error",
                 "servicestop" => "RisolutoApps\\ServiceStop"
-            ),
-
-            "LOGGING" => array(
+            ],
+            "LOGGING" => [
                 "loglevel" => "warn"
-            ),
-
-            "SESSION" => array(
+            ],
+            "SESSION" => [
                 "timeout" => 3600
-            ),
-
-            "LIMITS"  => array(
+            ],
+            "LIMITS" => [
                 "max_loadavg" => 3
-            ),
-
-
-            "THEME"   => array(
+            ],
+            "THEME" => [
                 "outboards" => "vendor"
-            ),
-
-            "AUTH"    => array(
+            ],
+            "AUTH" => [
                 "provider" => "Risoluto\\AuthDb",
-                "users"    => "risoluto_users",
-                "groups"   => "risoluto_groups"
-            )
-        );
+                "users" => "risoluto_users",
+                "groups" => "risoluto_groups"
+            ],
+        ];
 
         $instance = new Conf;
-        $instance->parse(RISOLUTO_CONF . 'risoluto.ini');
-        $this->assertEquals($instance->getIni(), $want);
-        unset($instance);
+        $instance->parse( RISOLUTO_CONF . 'risoluto.ini' );
+        $this->assertEquals( $instance->getIni(), $want );
+        unset( $instance );
     }
 
     /**
@@ -94,16 +88,16 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
      */
     public function test_getIni_WithOneArgs()
     {
-        $want = array(
-            "default"     => "RisolutoApps\\Top",
-            "error"       => "RisolutoApps\\Error",
+        $want = [
+            "default" => "RisolutoApps\\Top",
+            "error" => "RisolutoApps\\Error",
             "servicestop" => "RisolutoApps\\ServiceStop"
-        );
+        ];
 
         $instance = new Conf;
-        $instance->parse(RISOLUTO_CONF . 'risoluto.ini');
-        $this->assertEquals($instance->getIni('SEQ'), $want);
-        unset($instance);
+        $instance->parse( RISOLUTO_CONF . 'risoluto.ini' );
+        $this->assertEquals( $instance->getIni( 'SEQ' ), $want );
+        unset( $instance );
     }
 
     /**
@@ -116,8 +110,8 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
         $want = "RisolutoApps\\Top";
 
         $instance = new Conf;
-        $instance->parse(RISOLUTO_CONF . 'risoluto.ini');
-        $this->assertEquals($instance->getIni('SEQ', 'default'), $want);
-        unset($instance);
+        $instance->parse( RISOLUTO_CONF . 'risoluto.ini' );
+        $this->assertEquals( $instance->getIni( 'SEQ', 'default' ), $want );
+        unset( $instance );
     }
 }

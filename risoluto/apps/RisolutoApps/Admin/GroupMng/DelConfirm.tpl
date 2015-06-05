@@ -21,7 +21,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
         <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_ListGroups'">&lt;&nbsp;一覧へ戻る</button>
     </div>
     <div class="btn-group btn-group-lg pull-right">
-        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_DelComplete'">この内容を削除する&nbsp;&gt;</button>
+        <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_GroupMng_DelComplete'">
+            この内容を削除する&nbsp;&gt;</button>
     </div>
 </div>
 

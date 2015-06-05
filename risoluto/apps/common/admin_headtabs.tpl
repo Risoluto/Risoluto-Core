@@ -6,6 +6,6 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 <ul class="nav nav-tabs nav-justified">
     <li {if $active_tab == 'user'}class="active"{/if}><a href="?seq=Admin_Menu.user">ユーザメニュー</a></li>
     {if $allow_admintab}
-    <li {if $active_tab == 'admin'}class="active"{/if}><a href="?seq=Admin_Menu.admin">管理者メニュー</a></li>
+        <li {if $active_tab == 'admin'}class="active"{/if}><a href="?seq=Admin_Menu.admin">管理者メニュー</a></li>
     {/if}
 </ul>

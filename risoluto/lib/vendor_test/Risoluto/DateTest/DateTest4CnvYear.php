@@ -42,7 +42,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = 'AAAA';
         $want = '';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -55,7 +55,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '13';
         $want = '';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -68,7 +68,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1867';
         $want = '';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -81,7 +81,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1868';
         $want = '明治元年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -94,7 +94,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1869';
         $want = '明治2年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -107,7 +107,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1912';
         $want = '明治45年 / 大正元年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -120,7 +120,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1913';
         $want = '大正2年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -133,7 +133,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1926';
         $want = '大正15年 / 昭和元年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -146,7 +146,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1927';
         $want = '昭和2年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -159,7 +159,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1989';
         $want = '昭和64年 / 平成元年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -172,7 +172,7 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '1990';
         $want = '平成2年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 
     /**
@@ -185,6 +185,6 @@ class DateTest4cnvYear extends \PHPUnit_Framework_TestCase
         $test = '2013';
         $want = '平成25年';
 
-        $this->assertEquals(Date::cnvYear($test), $want);
+        $this->assertEquals( Date::cnvYear( $test ), $want );
     }
 }

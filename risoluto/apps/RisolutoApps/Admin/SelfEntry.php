@@ -43,26 +43,26 @@ class SelfEntry extends \Risoluto\RisolutoControllerBase implements \Risoluto\Ri
 
         // 共通処理クラスを呼び出し
         $common = new \RisolutoApps\Admin\AdminCommon;
-        $detail = $common->loginCheck($sess, false);
+        $detail = $common->loginCheck( $sess, false );
 
-        $entered = array();
-        if ($sess->isThere('form')) {
+        $entered = [ ];
+        if ($sess->isThere( 'form' )) {
             // セッションにフォーム入力情報が存在した場合は取得
-            $entered = $sess->load('form');
-            $sess->revoke('form');
+            $entered = $sess->load( 'form' );
+            $sess->revoke( 'form' );
         }
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array(
-            'header'     => $header,
-            'detail'     => $detail,
-            'entered'    => $entered,
-            'csrf_token' => $sess->load('csrf_token')
-        );
-        $this->risolutoView($assign_value);
+        $assign_value = [
+            'header' => $header,
+            'detail' => $detail,
+            'entered' => $entered,
+            'csrf_token' => $sess->load( 'csrf_token' )
+        ];
+        $this->risolutoView( $assign_value );
     }
 }

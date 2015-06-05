@@ -39,8 +39,8 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
      */
     public function test_GenYear_NoArgs()
     {
-        $tmpYear = date('Y') - 5;
-        $want    = array(
+        $tmpYear = date( 'Y' ) - 5;
+        $want = [
             $tmpYear + 0 => $tmpYear + 0,
             $tmpYear + 1 => $tmpYear + 1,
             $tmpYear + 2 => $tmpYear + 2,
@@ -50,10 +50,10 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
             $tmpYear + 6 => $tmpYear + 6,
             $tmpYear + 7 => $tmpYear + 7,
             $tmpYear + 8 => $tmpYear + 8,
-            $tmpYear + 9 => $tmpYear + 9
-        );
+            $tmpYear + 9 => $tmpYear + 9,
+        ];
 
-        $this->assertEquals(Date::genYear(), $want);
+        $this->assertEquals( Date::genYear(), $want );
     }
 
     /**
@@ -63,9 +63,9 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
      */
     public function test_GenYear_Args1()
     {
-        $tmpYear = date('Y') - 5;
-        $want    = array(
-            ''           => '',
+        $tmpYear = date( 'Y' ) - 5;
+        $want = [
+            '' => '',
             $tmpYear + 0 => $tmpYear + 0,
             $tmpYear + 1 => $tmpYear + 1,
             $tmpYear + 2 => $tmpYear + 2,
@@ -75,10 +75,10 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
             $tmpYear + 6 => $tmpYear + 6,
             $tmpYear + 7 => $tmpYear + 7,
             $tmpYear + 8 => $tmpYear + 8,
-            $tmpYear + 9 => $tmpYear + 9
-        );
+            $tmpYear + 9 => $tmpYear + 9,
+        ];
 
-        $this->assertEquals(Date::genYear(true), $want);
+        $this->assertEquals( Date::genYear( true ), $want );
     }
 
     /**
@@ -88,9 +88,9 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
      */
     public function test_GenYear_Args2()
     {
-        $tmpYear = date('Y') - 5;
-        $want    = array(
-            '----'       => '',
+        $tmpYear = date( 'Y' ) - 5;
+        $want = [
+            '----' => '',
             $tmpYear + 0 => $tmpYear + 0,
             $tmpYear + 1 => $tmpYear + 1,
             $tmpYear + 2 => $tmpYear + 2,
@@ -100,10 +100,10 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
             $tmpYear + 6 => $tmpYear + 6,
             $tmpYear + 7 => $tmpYear + 7,
             $tmpYear + 8 => $tmpYear + 8,
-            $tmpYear + 9 => $tmpYear + 9
-        );
+            $tmpYear + 9 => $tmpYear + 9,
+        ];
 
-        $this->assertEquals(Date::genYear(true, '----'), $want);
+        $this->assertEquals( Date::genYear( true, '----' ), $want );
     }
 
 
@@ -114,21 +114,21 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
      */
     public function test_GenYear_Args4()
     {
-        $want = array(
+        $want = [
             '----' => '----',
-            2000   => '2000',
-            2001   => '2001',
-            2002   => '2002',
-            2003   => '2003',
-            2004   => '2004',
-            2005   => '2005',
-            2006   => '2006',
-            2007   => '2007',
-            2008   => '2008',
-            2009   => '2009'
-        );
+            2000 => '2000',
+            2001 => '2001',
+            2002 => '2002',
+            2003 => '2003',
+            2004 => '2004',
+            2005 => '2005',
+            2006 => '2006',
+            2007 => '2007',
+            2008 => '2008',
+            2009 => '2009',
+        ];
 
-        $this->assertEquals(Date::genYear(true, '----', '----', 2000), $want);
+        $this->assertEquals( Date::genYear( true, '----', '----', 2000 ), $want );
     }
 
     /**
@@ -138,12 +138,12 @@ class DateTest4GenYear extends \PHPUnit_Framework_TestCase
      */
     public function test_GenYear_Args5()
     {
-        $want = array(
+        $want = [
             '----' => '----',
-            2000   => '2000(平成12年)',
-            2001   => '2001(平成13年)'
-        );
+            2000 => '2000(平成12年)',
+            2001 => '2001(平成13年)',
+        ];
 
-        $this->assertEquals(Date::genYear(true, '----', '----', 2000, 2, 2), $want);
+        $this->assertEquals( Date::genYear( true, '----', '----', 2000, 2, 2 ), $want );
     }
 }

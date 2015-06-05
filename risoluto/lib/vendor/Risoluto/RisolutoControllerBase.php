@@ -58,7 +58,7 @@ abstract class RisolutoControllerBase
     }
 
     /**
-     * init($param = array())
+     * init($param = [])
      *
      * 初期化処理を行う
      *
@@ -68,7 +68,7 @@ abstract class RisolutoControllerBase
      *
      * @return    void     なし
      */
-    public function init(array $param = array())
+    public function init( array $param = [ ] )
     {
         // 取得したパラメタをクラス変数にセットする
         $this->__param = $param;
@@ -228,7 +228,7 @@ abstract class RisolutoControllerBase
      *
      * @return    void      なし
      */
-    public function error(\Exception $errobj = null)
+    public function error( \Exception $errobj = null )
     {
         // エラー情報をログに出力
         if ($errobj) {
@@ -236,10 +236,10 @@ abstract class RisolutoControllerBase
         } else {
             $msg = 'Unknown error occurred.';
         }
-        $this->risolutoErrorLog('error', 'Class => ' . get_class($this) . ' / Error Message => ' . $msg);
+        $this->risolutoErrorLog( 'error', 'Class => ' . get_class( $this ) . ' / Error Message => ' . $msg );
 
         // エラー画面に遷移する
-        Url::redirectTo('Error');
+        Url::redirectTo( 'Error' );
     }
 
     /**

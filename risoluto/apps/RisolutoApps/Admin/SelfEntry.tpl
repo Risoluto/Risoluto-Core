@@ -27,7 +27,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
     <div class="form-group{if in_array('current_password', $entered.error.form_crit)} has-error has-feedback{/if}">
         <label for="current_password">現在のパスワード&nbsp;<span class="label label-info">必須</span></label>
-        <input type="password" class="form-control" id="current_password" name="current_password" placeholder="現在のパスワードを入力してください">
+        <input type="password" class="form-control" id="current_password" name="current_password"
+               placeholder="現在のパスワードを入力してください">
         {if in_array('current_password', $entered.error.form_crit)}
             <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         {/if}
@@ -54,7 +55,8 @@ Risoluto is released under New BSD License( http://opensource.org/licenses/bsd-l
 
     <div class="btn-toolbar" role="toolbar">
         <div class="btn-group btn-group-lg">
-            <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_Menu'">&lt;&nbsp;メニューへ戻る</button>
+            <button type="button" class="btn btn-default" onclick="location.href='?seq=Admin_Menu'">&lt;&nbsp;メニューへ戻る
+            </button>
         </div>
         <div class="btn-group btn-group-lg pull-right">
             <button type="submit" class="btn btn-default">変更する&nbsp;&gt;</button>

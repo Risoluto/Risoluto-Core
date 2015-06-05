@@ -57,10 +57,10 @@ class Sample4 extends \Risoluto\RisolutoControllerBase implements \Risoluto\Riso
 
         // ヘッダ情報のセット
         $header = $this->getDefaultHeader();
-        $header = $this->replaceHeader($header, 'robots', 'NOINDEX,NOFOLLOW');
+        $header = $this->replaceHeader( $header, 'robots', 'NOINDEX,NOFOLLOW' );
 
         // テンプレートエンジン関連の処理
-        $assign_value = array('header' => $header, 'dat' => $dat);
-        $this->risolutoView($assign_value);
+        $assign_value = [ 'header' => $header, 'dat' => $dat ];
+        $this->risolutoView( $assign_value );
     }
 }

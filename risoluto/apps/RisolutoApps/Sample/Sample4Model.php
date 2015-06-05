@@ -35,10 +35,10 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
     {
         // コンフィグから接続情報を取得する
         $db_conf = new \Risoluto\Conf;
-        $db_conf->parse(RISOLUTO_CONF . 'risoluto_db.ini');
+        $db_conf->parse( RISOLUTO_CONF . 'risoluto_db.ini' );
 
         // DBへ接続する
-        return $this->db->connect($db_conf->getIni('DB'));
+        return $this->db->connect( $db_conf->getIni( 'DB' ) );
     }
 
     /**
@@ -54,7 +54,7 @@ class Sample4Model extends \Risoluto\RisolutoModelBase
      */
     public function getAll()
     {
-        return $this->db->doQuery("SELECT id, column1, column2 FROM risoluto_db_test;");
+        return $this->db->doQuery( "SELECT id, column1, column2 FROM risoluto_db_test;" );
     }
 
     /**

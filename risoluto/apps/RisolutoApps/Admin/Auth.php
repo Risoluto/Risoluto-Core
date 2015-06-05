@@ -37,41 +37,41 @@ class Auth extends \Risoluto\RisolutoControllerBase implements \Risoluto\Risolut
         $sess = new \Risoluto\Session();
         $sess->start();
 
-        if ($sess->isThere('Auth')) {
+        if ($sess->isThere( 'Auth' )) {
             // 認証情報がある場合は、メニュー画面へ遷移する
-            \Risoluto\Url::redirectTo('Admin_Menu');
+            \Risoluto\Url::redirectTo( 'Admin_Menu' );
             exit;
-        } elseif (isset($_POST['userid']) and isset($_POST['password'])) {
+        } elseif (isset( $_POST[ 'userid' ] ) and isset( $_POST[ 'password' ] )) {
             // 入力値を処理
-            $option = array(
-                'userid'   => htmlentities($_POST['userid'], ENT_QUOTES, 'UTF-8'),
-                'password' => htmlentities($_POST['password'], ENT_QUOTES, 'UTF-8')
-            );
+            $option = [
+                'userid' => htmlentities( $_POST[ 'userid' ], ENT_QUOTES, 'UTF-8' ),
+                'password' => htmlentities( $_POST[ 'password' ], ENT_QUOTES, 'UTF-8' )
+            ];
 
             // POSTでユーザIDとパスワードが渡ってきた場合は認証処理を行う
-            $auth_result = \Risoluto\Auth::callProviderMethod('doAuth', $option);
+            $auth_result = \Risoluto\Auth::callProviderMethod( 'doAuth', $option );
             if ($auth_result) {
                 // 認証に成功した場合は詳細情報を取得
-                $detail                = \Risoluto\Auth::callProviderMethod('showUser', $option);
-                $detail[0]['password'] = '********';
-                $group                 = \Risoluto\Auth::callProviderMethod('showGroupByNo', array('no' => $detail[0]['groupno']));
-                $detail[0]['group']    = $group[0];
+                $detail = \Risoluto\Auth::callProviderMethod( 'showUser', $option );
+                $detail[ 0 ][ 'password' ] = '********';
+                $group = \Risoluto\Auth::callProviderMethod( 'showGroupByNo', [ 'no' => $detail[ 0 ][ 'groupno' ] ] );
+                $detail[ 0 ][ 'group' ] = $group[ 0 ];
 
                 // 認証情報をセッションに追加してメニュー画面へ遷移する
-                $sess->store('Auth', $detail[0]);
-                $sess->store('csrf_token', $sess->genRand());
-                \Risoluto\Url::redirectTo('Admin_Menu');
+                $sess->store( 'Auth', $detail[ 0 ] );
+                $sess->store( 'csrf_token', $sess->genRand() );
+                \Risoluto\Url::redirectTo( 'Admin_Menu' );
                 exit;
             } else {
                 // 認証に失敗した場合はエラー情報をセッションに追加してログイン画面に戻る
-                $sess->store('AuthError', 'auth_failure');
-                \Risoluto\Url::redirectTo('Admin_Login');
+                $sess->store( 'AuthError', 'auth_failure' );
+                \Risoluto\Url::redirectTo( 'Admin_Login' );
                 exit;
             }
         } else {
             // それ以外の時はエラー情報をセッションに追加してログイン画面に戻る
-            $sess->store('AuthError', 'invalid_access');
-            \Risoluto\Url::redirectTo('Admin_Login');
+            $sess->store( 'AuthError', 'invalid_access' );
+            \Risoluto\Url::redirectTo( 'Admin_Login' );
             exit;
         }
     }

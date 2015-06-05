@@ -41,7 +41,7 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = '0';
 
-        $this->assertTrue(Validate::isHalfWidth($test));
+        $this->assertTrue( Validate::isHalfWidth( $test ) );
     }
 
     /**
@@ -53,7 +53,7 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = 'A';
 
-        $this->assertTrue(Validate::isHalfWidth($test));
+        $this->assertTrue( Validate::isHalfWidth( $test ) );
     }
 
     /**
@@ -65,7 +65,7 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = '+';
 
-        $this->assertTrue(Validate::isHalfWidth($test));
+        $this->assertTrue( Validate::isHalfWidth( $test ) );
     }
 
     /**
@@ -77,7 +77,7 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = '０';
 
-        $this->assertFalse(Validate::isHalfWidth($test));
+        $this->assertFalse( Validate::isHalfWidth( $test ) );
     }
 
     /**
@@ -89,7 +89,7 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = 'Ａ';
 
-        $this->assertFalse(Validate::isHalfWidth($test));
+        $this->assertFalse( Validate::isHalfWidth( $test ) );
     }
 
     /**
@@ -101,6 +101,6 @@ class ValidateTest4IsHalfWidth extends \PHPUnit_Framework_TestCase
     {
         $test = '＋';
 
-        $this->assertFalse(Validate::isHalfWidth($test));
+        $this->assertFalse( Validate::isHalfWidth( $test ) );
     }
 }
