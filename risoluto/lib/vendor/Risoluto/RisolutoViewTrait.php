@@ -44,7 +44,7 @@ trait RisolutoViewTrait
         // 呼び出し元クラスの情報を取得
         $called = new \ReflectionClass( get_called_class() );
         if ($path) {
-            $tmpl_path = 'RisolutoApps' . DS . str_replace( '../', '', $path ) . DS;
+            $tmpl_path = str_replace( DS . DS, DS, DS . str_replace( '../', '', $path ) . DS );
         } else {
             $tmpl_path = str_replace( 'RisolutoApps', '', str_replace( '\\', DS, $called->getNamespaceName() ) . DS );
         }
@@ -53,7 +53,7 @@ trait RisolutoViewTrait
         } else {
             $tmpl_name = $called->getShortName() . '.tpl';
         }
-var_dump($tmpl_path . $tmpl_name);exit;
+
         // テンプレートエンジンを初期設定してインスタンスを取得
         $tmpl_instance = $this->initTemplate( $tmpl_path, $options, $extres );
 
@@ -97,7 +97,7 @@ var_dump($tmpl_path . $tmpl_name);exit;
         array $extres = [ ]
     ) {
         // テンプレートパスをアプリケーション格納フォルダ配下に限定
-        $tmpl_path = RISOLUTO_APPS . 'RisolutoApps/' . str_replace( '../', '', $tmpl_path );
+        $tmpl_path = str_replace( DS . DS, DS, RISOLUTO_APPS . 'RisolutoApps/' . str_replace( '../', '', $tmpl_path ));
 
         // テンプレートエンジン関連定義（Smartyを使用）
         $tmpl = new \Smarty;
