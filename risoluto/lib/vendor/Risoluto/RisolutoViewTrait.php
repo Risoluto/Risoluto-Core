@@ -81,9 +81,7 @@ trait RisolutoViewTrait
         $tmpl_path = '',
         array $options = [
             'cache' => [
-                'mode' => \Smarty::CACHING_LIFETIME_SAVED,
                 'lifetime' => 3600,
-                'modified_check' => true,
             ],
             'compile' => [
                 'check' => true,
@@ -104,9 +102,7 @@ trait RisolutoViewTrait
 
         //--- テンプレートキャッシュの設定
         $tmpl->setCacheDir( RISOLUTO_CACHE );
-        $tmpl->caching = ( isset( $options[ 'cache' ][ 'mode' ] ) ? $options[ 'cache' ][ 'mode' ] : \Smarty::CACHING_LIFETIME_SAVED );
         $tmpl->cache_lifetime = ( isset( $options[ 'cache' ][ 'lifetime' ] ) ? $options[ 'cache' ][ 'lifetime' ] : 3600 );
-        $tmpl->cache_modified_check = ( isset( $options[ 'cache' ][ 'modified_check' ] ) ? $options[ 'cache' ][ 'modified_check' ] : true );
 
         //--- コンパイル済みテンプレートの設定
         $tmpl->setCompileDir( RISOLUTO_CACHE );
