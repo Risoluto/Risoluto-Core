@@ -60,7 +60,7 @@ class ConfTest4getIni extends \PHPUnit_Framework_TestCase
                 "loglevel" => "warn"
             ],
             "SESSION" => [
-                "timeout" => 3600
+                "timeout" => 86400
             ],
             "LIMITS" => [
                 "max_loadavg" => 3
